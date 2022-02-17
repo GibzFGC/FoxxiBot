@@ -1,6 +1,6 @@
 # <img alt="FoxxiBot" src="https://gibzfgc.github.io/FoxxiBot/assets/img/FoxxiLogo_Full.svg" width="600px"/>
 
-[![GitHub license](https://img.shields.io/github/license/GibzFGC/FoxxiBot)](https://github.com/GibzFGC/FoxxiBot/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/GibzFGC/FoxxiBot)](https://github.com/GibzFGC/FoxxiBot/blob/main/LICENSE)
 [<img src="https://discordapp.com/api/guilds/941648989437198346/widget.png?style=shield">](https://discord.gg/TeRCVh2xBQ)
 
 [**FoxxiBot**](https://gibzfgc.github.io/FoxxiBot/) is a Twitch & Discord Bot powered by C#. FoxxiBot has been built with ease-of-use in mind, so has a full web-panel allowing users to create custom commands, add sounds to their streams, handle Discord Promo Notifications and so much more. Right now, FoxxiBot only works with Twitch & Discord but in future there could be Twitter, Steam and maybe more along the way!
