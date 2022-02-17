@@ -25,7 +25,7 @@ FoxxiBot requires the following software to be installed:
 
 FoxxiBot requires that you set up a Twitch Account for it to use (if you don't have a bot account already). You can do this via a private browser window if you don't want to be logged out of your main account.
 
-The Bot also requires both:
+The Bot also requires both a:
 - [Twitch Developer Application](https://dev.twitch.tv) 
 - [Discord Developer Application](https://discord.com/developers/applications)
 
