@@ -75,78 +75,76 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <main id="main">
 
-      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container-fluid">
 
-      <div class="carousel-inner" role="listbox">
-
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <img class="animated fadeInDown" src="assets/img/FoxxiLogo_Full.svg" width="50%" alt="" />
-              <p class="animated fadeInUp">
-                FoxxiBot is an in-development, all-purpose Twitch & Discord Bot which is fully featured and works straight out of the box.<br />Instructions for setting up can be found in the Documentation<br /><br />
-
-                You'll be able to control your bot via a web panel with the ability to add your own Twitch & Discord commands, Moderation, add custom Plugins<br />to extend the system or even write your own!                
-              </p>
-
-              <a href="https://github.com/GibzFGC/FoxxiBot/releases" class="btn-get-started animated fadeInUp">Releases</a>
-              <a href="https://github.com/GibzFGC/FoxxiBot" class="btn-second animated fadeInUp">Github</a>
-            </div>
+        <div class="row justify-content-center">
+          <div class="col-xl-10">
+            <ol>
+              <li><a href="index.html">Home</a></li>
+              <li>Twitch Commands</li>
+            </ol>
+            <h2>Twitch Commands</h2>
           </div>
         </div>
 
       </div>
-
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
+    </section><!-- End Breadcrumbs -->
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <section id="twitch_commands">
       <div class="container-fluid">
 
         <div class="row justify-content-center">
-          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-            <a href="#" class="glightbox play-btn mb-4"></a>
-          </div>
+          <div class="col-auto">
 
-          <div class="col-xl-5 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-            <h3>FoxxiBot is an all-purpose Twitch &amp; Discord Bot</h3>
-            <p>Through FoxxiBot, the aim was to create a bot that's easy to use but also extendable via Javascript-powered .NET plugins via JINT (a .NET Javascript Interpreter) allowing new features to be coded and added on the fly.</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Command</th>
+                  <th scope="col">Alias</th>
+                  <th scope="col">Response</th>
+                  <th scope="col">Scope</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-fingerprint"></i></div>
-              <h4 class="title">Created to be Simple to Use</h4>
-              <p class="description">The aim was to make sure that anyone could use FoxxiBot, out of the box it will have ways to add commands for both Twitch and Discord easily.</p>
-            </div>
+                <tr>
+                  <th scope="row">!age</th>
+                  <th></th>
+                  <td>Returns the age of the users account</td>
+                  <td>Everyone</td>
+                </tr>
 
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title">Extensive for Bigger Streams</h4>
-              <p class="description">For those who need more, there's ways to write your own plugins and add to the bot's web panel for more specialized features you may need.</p>
-            </div>
+                <tr>
+                  <th scope="row">!quote [argument]</th>
+                  <th></th>
+                  <td>Returns a random quote or if there's an argument, it'll look for that one in the database</td>
+                  <td>Everyone</td>
+                </tr>
+              
+                <tr>
+                  <th scope="row">!so [argument]</th>
+                  <th scope="row"></th>
+                  <td>Will shout-out a user you've mentioned (great for promoting streamers who raid!)</td>
+                  <td>Broadcaster, Moderator</td>
+                </tr>
 
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title">Plugins to Add More Experiences</h4>
-              <p class="description">Through the Plugins system, you'll be able to extend the bot via scripts written my the creator(s) and community. The sky's the limit!</p>
-            </div>
+                <tr>
+                  <th scope="row">!sound [argument]</th>
+                  <th scope="row">!audio, !play</th>
+                  <td>Will shout-out a user you've mentioned (great for promoting streamers who raid!)</td>
+                  <td>Broadcaster, Moderator</td>
+                </tr>
 
-          </div>
+              </tbody>
+          </table>
+
         </div>
+      </div>
 
       </div>
     </section><!-- End About Section -->

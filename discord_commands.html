@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>FoxxiBot - All-Purpose Twitch &amp; Discord Bot</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Hidayah - v4.7.0
+  * Template URL: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-inner-pages">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- <h1 class="logo"><a href="index.html">Hidayah</a></h1> -->
+      <a href="index.html" class="logo"><img src="assets/img/FoxxiLogo.svg" width="200" height="200" alt="" class="img-fluid"></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link" href="#hero">Home</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          
+          <li class="dropdown"><a href="#"><span>Commands</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="twitch_commands.html">Twitch</a></li>
+              <li><a href="discord_commands.html">Discord</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown"><a href="#"><span>Plugins</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="twitch_plugins.html">Twitch</a></li>
+              <li><a href="twitch_discord.html">Discord</a></li>
+            </ul>
+          </li>
+          
+          <li class="li-separator">|</li>
+          
+          <li><a class="nav-link" href="#">Documentation</a></li>
+          <li><a class="nav-link" target="_blank" href="https://github.com/GibzFGC/FoxxiBot/blob/main/LICENSE">License</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container-fluid">
+
+        <div class="row justify-content-center">
+          <div class="col-xl-10">
+            <ol>
+              <li><a href="index.html">Home</a></li>
+              <li>Discord Commands</li>
+            </ol>
+            <h2>Discord Commands</h2>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= About Section ======= -->
+    <section id="twitch_commands">
+      <div class="container-fluid">
+
+        <div class="row justify-content-center">
+          <div class="col-auto">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Command</th>
+                  <th scope="col">Alias</th>
+                  <th scope="col">Response</th>
+                  <th scope="col">Scope</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <th scope="row">!avatar [argument]</th>
+                  <th scope="row"></th>
+                  <td>The bot will return the specified users avatar image</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!prefix</th>
+                  <th scope="row"></th>
+                  <td>Returns the current bot's prefix</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!prefix set [argument]</th>
+                  <th scope="row"></th>
+                  <td>Sets the bots prefix if you wish to change it</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!promo</th>
+                  <th scope="row"></th>
+                  <td>Returns the status of the Promo System</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!promo add [argument]</th>
+                  <th scope="row"></th>
+                  <td>Will add a users Twitch stream to the system if given a valid username</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!promo remove [argument]</th>
+                  <th scope="row"></th>
+                  <td>Will remove a users Twitch stream from the system if given a valid username</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!purge [argument]</th>
+                  <th scope="row"></th>
+                  <td>The bot will attempt to delete the number of messages specified (messages older than 2 weeks cannot be deleted)</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!say [argument]</th>
+                  <th scope="row"></th>
+                  <td>The bot will say whatever you want</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!userinfo [optional argument]</th>
+                  <th scope="row"></th>
+                  <td>The bot will send back information on the current user or a specified user</td>
+                  <td>Everyone</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!status [type] [link] [text]</th>
+                  <th scope="row"></th>
+                  <td>Sets the bots status to whatever you'd like! (for more info, join the Discord)</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system serverid</th>
+                  <th></th>
+                  <td>Registers the Discord Server ID with the bot if not done on first run (needed for web panel integration)</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system syncchannels</th>
+                  <th></th>
+                  <td>Will re-sync all channels into the database if they're not up-to-date (if the bot is running when changes are made, you won't need to do this)</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system syncroles</th>
+                  <th></th>
+                  <td>Will re-sync all roles into the database if they're not up-to-date (if the bot is running when changes are made, you won't need to do this)</td>
+                  <td>Administrator</td>
+                </tr>                
+
+                <tr>
+                  <th scope="row">!system botchannel</th>
+                  <th></th>
+                  <td>Sets the channel you're currently in as the Bot Channel (not recommended if using plugins)</td>
+                  <td>Administrator</td>
+                </tr>
+              
+                <tr>
+                  <th scope="row">!system botchannel [on/off]</th>
+                  <th scope="row"></th>
+                  <td>Will activate or de-activate the Bot Channel limitation</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system greetingchannel</th>
+                  <th></th>
+                  <td>Sets the channel you're currently in as the Greeting Channel</td>
+                  <td>Administrator</td>
+                </tr>
+              
+                <tr>
+                  <th scope="row">!system greetingchannel [on/off]</th>
+                  <th scope="row"></th>
+                  <td>Will activate or de-activate the Bot Greeting System</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system promochannel</th>
+                  <th></th>
+                  <td>Sets the channel you're currently in as the Stream Promo Channel</td>
+                  <td>Administrator</td>
+                </tr>
+              
+                <tr>
+                  <th scope="row">!system promochannel [on/off]</th>
+                  <th scope="row"></th>
+                  <td>Will activate or de-activate the Stream Promo Notifications System</td>
+                  <td>Administrator</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">!system autorole [role]</th>
+                  <th></th>
+                  <td>Sets the channel you're currently in as the Stream Promo Channel</td>
+                  <td>Administrator</td>
+                </tr>
+              
+                <tr>
+                  <th scope="row">!system autorole [on/off]</th>
+                  <th scope="row"></th>
+                  <td>Will activate or de-activate the Auto-Role System</td>
+                  <td>Administrator</td>
+                </tr>
+
+              </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>We hope you enjoy using FoxxiBot!</h4>
+            <p>Show us your streams & servers powered by FoxxiBot and give us feedback too.</p>
+          </div>
+          <div class="col-lg-6">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        Copyright &copy; 2020-2022 <strong><span>FoxxiBot</span></strong><br />All Rights Reserved
+      </div>
+
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
