@@ -1210,15 +1210,24 @@ section {
 --------------------------------------------------------------*/
 .breadcrumbs {
   padding: 15px 0;
-  background: #f7f8f8;
+  background: #14151C;
   min-height: 40px;
   margin-top: 70px;
+  color: #fff;
 }
 @media (max-width: 992px) {
   .breadcrumbs {
     margin-top: 58px;
   }
 }
+.breadcrumbs a {
+  color: #fff;
+}
+
+.breadcrumbs a:hover {
+  color: #ED7B29;
+}
+
 .breadcrumbs h2 {
   font-size: 28px;
   font-weight: 600;
@@ -1237,7 +1246,7 @@ section {
 .breadcrumbs ol li + li::before {
   display: inline-block;
   padding-right: 10px;
-  color: #505a63;
+  color: #fff;
   content: "/";
 }
 
@@ -1387,4 +1396,11 @@ section {
   text-align: center;
   font-size: 13px;
   color: #fff;
+}
+
+/*--------------------------------------------------------------
+# Table
+--------------------------------------------------------------*/
+table {
+  color: #999 !important;
 }
