@@ -21,6 +21,16 @@ FoxxiBot requires the following software to be installed:
 - .NET 6.0 (or newer)
 - Visual Studio Community 2022 (if you're looking to modify / build it yourself)
 
+## Starting with FoxxiBot
+
+FoxxiBot requires that you set up a Twitch Account for it to use (if you don't have a bot account already). You can do this via a private browser window if you don't want to be logged out of your main account.
+
+The Bot also requires both:
+- [Twitch Developer Application](https://dev.twitch.tv) 
+- [Discord Developer Application](https://discord.com/developers/applications)
+
+If you are unsure on how to do any of this, join the Discord for help!
+
 ## Upgrading FoxxiBot
 
 Upgrading FoxxiBot is super easy, just backup your "Data", "Files" & "Scripts" folders (and any folders you've created for custom modules, web panel additions, etc). Then download the most recent release and copy your stuff back in.
