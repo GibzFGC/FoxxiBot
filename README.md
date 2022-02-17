@@ -21,7 +21,7 @@ FoxxiBot requires the following software to be installed:
 
 ## Upgrading FoxxiBot
 
-Upgrading FoxxiBot is super easy, just backup your "Data", "Files" & "Scripts" folders (and any folders you've created for custom moduels, web panel additions, etc). Then download the most recent release and copy your stuff back in.
+Upgrading FoxxiBot is super easy, just backup your "Data", "Files" & "Scripts" folders (and any folders you've created for custom modules, web panel additions, etc). Then download the most recent release and copy your stuff back in.
 
 ## License
 
