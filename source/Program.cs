@@ -42,7 +42,14 @@ namespace FoxxiBot
             WebServer.WebServer myServer;
 
             //Creating server with specified port
-            myServer = new WebServer.WebServer(myFolder, Convert.ToInt32(Config.WebserverPort));
+            if (Config.WebserverPort.Length > 0 || Config.WebserverPort != null)
+            {
+                myServer = new WebServer.WebServer(myFolder, Int32.Parse(Config.WebserverPort));
+            }
+            else
+            {
+                myServer = new WebServer.WebServer(myFolder, 25000);
+            }
         }
 
         static void Main(string[] args)
@@ -85,17 +92,6 @@ namespace FoxxiBot
                 Console.WriteLine("Welcome to FoxxiBot.  Loading your Settings...");
                 Console.WriteLine("");
 
-                // Start Web Server
-                Server();
-                Console.WriteLine("Server Layer: Server Started!");
-
-                // Create WS Server
-                Websocket mySocket = new Websocket();
-                mySocket.Start();
-
-                Console.WriteLine("Server Layer: WebSocket Started!");
-                Console.WriteLine("");
-
                 // Load from JSON
                 using (StreamReader reader = File.OpenText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json"))
                 {
@@ -125,6 +121,17 @@ namespace FoxxiBot
                     // Close the File
                     reader.Close();
                 }
+
+                // Start Web Server
+                Server();
+                Console.WriteLine("Server Layer: Server Started!");
+
+                // Create WS Server
+                Websocket mySocket = new Websocket();
+                mySocket.Start();
+
+                Console.WriteLine("Server Layer: WebSocket Started!");
+                Console.WriteLine("");
 
                 // Start Twitch Bot
                 if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
