@@ -42,7 +42,7 @@ namespace FoxxiBot
             WebServer.WebServer myServer;
 
             //Creating server with specified port
-            myServer = new WebServer.WebServer(myFolder, 25000);
+            myServer = new WebServer.WebServer(myFolder, Convert.ToInt32(Config.WebserverPort));
         }
 
         static void Main(string[] args)
@@ -103,6 +103,7 @@ namespace FoxxiBot
 
                     // Set needed Values Internally
                     Config.Debug = (string)o["Debug"];
+                    Config.WebserverPort = (string)o["WebserverPort"];
                     Config.TwitchBotName = (string)o["BotName"];
                     Config.TwitchClientId = (string)o["TwitchClientID"];
                     Config.TwitchClientSecret = (string)o["TwitchClientSecret"];
@@ -309,6 +310,7 @@ namespace FoxxiBot
             // Save the Settings
             Settings.Settings objSettings = new Settings.Settings();
             objSettings.Debug = Config.Debug;
+            objSettings.WebserverPort = Config.WebserverPort;
             objSettings.BotName = Config.TwitchBotName;
             objSettings.TwitchClientID = Config.TwitchClientId;
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;

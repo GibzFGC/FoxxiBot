@@ -21,6 +21,9 @@ namespace FoxxiBot
         // Debug
         public static string Debug = "false";
 
+        // Webserver
+        public static string WebserverPort = "25000";
+
         // Twitch - Bot Parameters
         public static string TwitchClientId = "";
         public static string TwitchRedirectUri = "http://localhost:8080/redirect/";
