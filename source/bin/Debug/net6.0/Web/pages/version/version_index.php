@@ -13,8 +13,6 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
-
-$result = $PDO->query("SELECT * FROM gb_commands");
 ?>
 
   <!-- Content Wrapper. Contains page content -->
