@@ -269,6 +269,15 @@ foreach($result as $row)
           <li class="li_header">HELP & SUPPORT</li>
 
           <li class="nav-item">
+            <a target="_blank" href="https://github.com/GibzFGC/FoxxiBot" class="nav-link">
+              <i class="nav-icon fab fa-github"></i>
+              <p>
+                Github
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a target="_blank" href="https://discord.gg/TeRCVh2xBQ" class="nav-link">
               <i class="nav-icon fab fa-discord"></i>
               <p>

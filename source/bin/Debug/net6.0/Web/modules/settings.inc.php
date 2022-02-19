@@ -34,9 +34,9 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 // Set Website Path, Title and Description:-
     /* (edit these settings as needed) */
 	if ($bot_obj->TwitchClientID) {
-		$gfw['site_url'] = "http://localhost:" . $bot_obj->WebserverPort;             	      			// Set the url for the website (NO TRAILING SLASH!)
+		$gfw['site_url'] = "http://localhost:" . $bot_obj->WebserverPort;             	      				// Set the url for the website (NO TRAILING SLASH!)
 	} else {
-		$gfw['site_url'] = "http://localhost:25000";       	      										// Set the url for the website (NO TRAILING SLASH!)
+		$gfw['site_url'] = "http://localhost:25000";       	      											// Set the url for the website (NO TRAILING SLASH!)
 	}
 
 // Advanced Website Settings:-
