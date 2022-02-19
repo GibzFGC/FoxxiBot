@@ -11,6 +11,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -70,7 +71,7 @@ namespace FoxxiBot.WebServer
             process.StartInfo.EnvironmentVariables.Add("TEMP", tempPath);
         }
 
-        public string getPHPOutput(byte[] requestBody, HttpListenerContext httpListenerContext)
+        public void getPHPOutput(string filePath, byte[] requestBody, HttpListenerContext httpListenerContext, HttpListenerResponse httpListenerResponse)
         {
 
             process.Start();
@@ -108,18 +109,34 @@ namespace FoxxiBot.WebServer
                     }
                     else
                     {
-                        byte[] byteArray = Encoding.UTF8.GetBytes(line);
-                        output.Write(byteArray);
+                        using (Stream input = GenerateStreamFromString(process.StandardOutput.ReadToEnd()))
+                        {
+                            WriteInputStreamToResponse(input, httpListenerResponse.OutputStream);
+                        }
                     }
                 }
             }
 
-            string sOutput = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
             process.Close();
+        }
 
-            //Console.WriteLine(sOutput);
-            return sOutput;
+        public Stream GenerateStreamFromString(string s)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        private void WriteInputStreamToResponse(Stream inputStream, Stream outputStream)
+        {
+            byte[] buffer = new byte[1024 * 16];
+            int nbytes;
+            while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
+                outputStream.Write(buffer, 0, nbytes);
         }
 
     }

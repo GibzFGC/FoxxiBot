@@ -238,22 +238,11 @@ namespace FoxxiBot.WebServer
                 // View Headers (For Testing)
                 // Console.WriteLine(Encoding.UTF8.GetString(requestBody));
 
-                PHP php = new PHP(filePath, queryString, requestBody, httpListenerContext);
-                string data = php.getPHPOutput(requestBody, httpListenerContext);
-
-                byte[] buffer = Encoding.UTF8.GetBytes(data);
-                httpListenerResponse.ContentLength64 = buffer.Length;
-
                 if (_AllowCors)
                     AddCorsHeaders(httpListenerResponse);
 
-                // convert string to stream
-                byte[] byteArray = Encoding.UTF8.GetBytes(data);
-                MemoryStream stream = new MemoryStream(byteArray);
-
-                WriteInputStreamToResponse(stream, httpListenerResponse.OutputStream);
-                httpListenerResponse.StatusCode = (int)HttpStatusCode.OK;
-                httpListenerResponse.OutputStream.Flush();
+                PHP php = new PHP(filePath, queryString, requestBody, httpListenerContext);
+                php.getPHPOutput(filePath, requestBody, httpListenerContext, httpListenerResponse);
             }
             else
             {
