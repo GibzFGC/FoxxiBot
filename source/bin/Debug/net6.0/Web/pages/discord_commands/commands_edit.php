@@ -68,16 +68,16 @@ foreach($data as $edit)
 
                   <div class="form-group">
                   <label>Permission</label>
-                  <select class="form-control select2" id="commandPermissions" name="commandPermissions" style="width: 100%;">
+                  <select class="form-control select2" multiple id="commandPermissions" name="commandPermissions[]" style="width: 100%;">
 
                   <?php
-                  $result = $PDO->query("SELECT * FROM gb_twitch_perms");
+                  $result = $PDO->query("SELECT * FROM gb_discord_roles ORDER BY role_name ASC");
                   foreach($result as $row)
                   {
-                      if ($edit["active"] == $row["value"]) {
-                        print '<option value="'. $row['value'] .'">'. $row['name'] .'</option>';
+                      if ($edit["permission"] == $row["role_id"]) {
+                        print '<option value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';
                       } else {
-                        print '<option value="'. $row['value'] .'">'. $row['name'] .'</option>';  
+                        print '<option value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';  
                       }
                   }
                   ?>
@@ -120,13 +120,19 @@ foreach($data as $edit)
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Useful Variables</h3>
+                
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
-                  <div class="form-group">
-
+                <div class="form-group">
+                    Here is a list of internal variables:<br /><br />
+                    {1} - A custom argument for whatever you want<br />
+                    {2} - A custom argument for whatever you want (only works if the first is set)<br />
+                    {8ball} - Creates an 8ball with responses<br />
+                    {dice} - rolls a dice and returns a random value<br />
+                    {sender} - returns the command users display name<br />
                   </div>
 
                 </div>

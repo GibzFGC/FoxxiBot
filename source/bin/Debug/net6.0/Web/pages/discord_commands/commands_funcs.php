@@ -29,12 +29,18 @@ if ($_REQUEST["v"] == "save") {
 
     } else {
     
+        if (isset($_POST["commandPermissions"])) {
+            $permissions = json_encode($_POST["commandPermissions"]); 
+        } else {
+            $permissions = "";
+        }
+
         $sql = 'INSERT INTO gb_discord_commands (name, response, permission, active) VALUES (:commandName, :commandResponse, :commandPermissions, :commandActive)' or die(print_r($PDO->errorInfo(), true));
         $stmt = $PDO->prepare($sql);
         
         $stmt->bindValue(':commandName', $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
-        $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
+        $stmt->bindValue(':commandPermissions', $permissions);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();
     
@@ -56,13 +62,19 @@ if ($_REQUEST["v"] == "edit") {
 
     } else {
 
+        if (isset($_POST["commandPermissions"])) {
+            $permissions = json_encode($_POST["commandPermissions"]); 
+        } else {
+            $permissions = "";
+        }
+
         $sql = "UPDATE gb_discord_commands SET name = :commandName, response = :commandResponse, permission = :commandPermissions, active = :commandActive WHERE id = :commandID";
         $stmt = $PDO->prepare($sql);
 
         $stmt->bindValue(':commandID', $_POST["commandID"]);
         $stmt->bindValue(':commandName', $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
-        $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
+        $stmt->bindValue(':commandPermissions', $permissions);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();
 
