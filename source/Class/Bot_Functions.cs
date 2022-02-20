@@ -39,7 +39,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_discord_channels (channel_id INTEGER PRIMARY KEY, channel_name TEXT, channel_type TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission INTEGER, active INTEGER)";
+            cmd.CommandText = @"CREATE TABLE gb_discord_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE gb_discord_options (parameter TEXT UNIQUE, value TEXT)";
