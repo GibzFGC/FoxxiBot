@@ -15,6 +15,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -155,6 +156,14 @@ namespace FoxxiBot.DiscordBot
 
             // Create a number to track where the prefix ends and the command begins
             int pos = 0;
+
+            // User Perms BOOL (initial state is false)
+            bool perms_validated = false;
+
+            // Get Bot Channel Status
+            SQLite.discordSQL discordSQL = new SQLite.discordSQL();
+            var bot_channel = discordSQL.getOptions("BotChannel_Status");
+
             // Gets the bots current prefix and uses it
             // Can be changed with the "prefix set" command
             if (msg.HasCharPrefix(char.Parse(Config.DiscordPrefix), ref pos) || msg.HasMentionPrefix(client.CurrentUser, ref pos))
@@ -186,6 +195,9 @@ namespace FoxxiBot.DiscordBot
                     {
                         Discord_Variables variables = new Discord_Variables();
 
+                        // Get User Roles
+                        var user = (msg.Author as SocketGuildUser);
+
                         // Get users nickname
                         var nickname = (msg.Author as SocketGuildUser).Nickname;
 
@@ -195,25 +207,53 @@ namespace FoxxiBot.DiscordBot
                             nickname = msg.Author.Username;
                         }
 
-                        // Parse the variables
-                        var var_string = variables.convertVariables(msg.Content.ToString(), (string)rdr["response"], nickname.ToString());
+                        // Get the Users Roles (JSON)
+                        string perm_json = rdr["permission"].ToString();
+                        dynamic perm_roles = JsonConvert.DeserializeObject(perm_json);
 
-                        // Reply on Discord
-                        SQLite.discordSQL discordSQL = new SQLite.discordSQL();
-                        var active = discordSQL.getOptions("BotChannel_Status");
-
-                        if (active == "off")
+                        // Check if the user has the requried role
+                        foreach (var item in perm_roles)
                         {
-                            await context.Message.ReplyAsync(var_string);
+                            if (user.Roles.Any(r => r.Id == Convert.ToUInt64(item)))
+                            {
+                                perms_validated = true;
+                            }
+                        }
+
+                        // If Perms valid, fire command
+                        if (perms_validated == true)
+                        {
+                            // Parse the variables
+                            var var_string = variables.convertVariables(msg.Content.ToString(), (string)rdr["response"], nickname.ToString());
+
+                            // Reply on Discord
+                            if (bot_channel == "off")
+                            {
+                                await context.Message.ReplyAsync(var_string);
+                            }
+                            else
+                            {
+                                var channel = discordSQL.getOptions("BotChannel");
+                                await client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
+                                .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync(var_string);
+                            }
                         }
                         else
                         {
-                            var channel = discordSQL.getOptions("BotChannel");
-                            await client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
-                                .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync(var_string);
+                            // Reply on Discord
+                            if (bot_channel == "off")
+                            {
+                                await context.Message.ReplyAsync("Sorry, you do not have permission to use that command");
+                            }
+                            else
+                            {
+                                var channel = discordSQL.getOptions("BotChannel");
+                                await client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
+                                .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync("Sorry, you do not have permission to use that command");
+                            }
                         }
+
                     }
-                
                 }
                 else
                 {
