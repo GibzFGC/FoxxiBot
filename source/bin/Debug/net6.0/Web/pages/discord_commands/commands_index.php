@@ -68,7 +68,21 @@ $result = $PDO->query("SELECT * FROM gb_discord_commands");
                   <tr>
                     <td>". $row["name"] ."</td>
                     <td>". $row["response"] ."</td>
-                    <td>". twitchPerms($row["permission"]) ."</td>
+
+                    <td>
+              ";
+
+              foreach(json_decode($row["permission"]) as $role) {
+                  $roles_sql = $PDO->query("SELECT role_name FROM gb_discord_roles WHERE role_id='$role'");
+                  foreach($roles_sql as $role_id)
+                  {
+                      print $role_id["role_name"] . "<br />";
+                  }
+              }
+             
+              print "
+                    </td>
+
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
                       <a href=\"$gfw[site_url]/index.php?p=discord_commands&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>
