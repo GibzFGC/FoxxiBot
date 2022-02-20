@@ -71,14 +71,19 @@ foreach($data as $edit)
                   <select class="form-control select2" multiple id="commandPermissions" name="commandPermissions[]" style="width: 100%;">
 
                   <?php
-                  $result = $PDO->query("SELECT * FROM gb_discord_roles ORDER BY role_name ASC");
-                  foreach($result as $row)
+                  $result = $PDO->prepare("SELECT * FROM gb_discord_roles ORDER BY role_name ASC");
+                  $result->execute();
+
+                  while ($row = $result->fetch(PDO::FETCH_ASSOC))
                   {
-                      if ($edit["permission"] == $row["role_id"]) {
-                        print '<option value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';
-                      } else {
-                        print '<option value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';  
+                  
+                    foreach(json_decode($edit["permission"]) as $role) {
+                      if ($role == $row["role_id"]) {
+                        print '<option SELECTED value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';
                       }
+                    }
+                    
+                    print '<option value="'. $row['role_id'] .'">'. $row['role_name'] .'</option>';
                   }
                   ?>
                   </select>
@@ -86,7 +91,7 @@ foreach($data as $edit)
 
                 <div class="form-group">
                   <label>Active</label>
-                  <select class="form-control select2" id="commandActive" name="commandActive" style="width: 100%;">
+                  <select class="form-control select" id="commandActive" name="commandActive" style="width: 100%;">
                   <?php if($edit["active"] == 0) {
                       print "<option value=\"0\" SELECTED>No</option>";
                       print "<option value=\"1\">Yes</option>";
