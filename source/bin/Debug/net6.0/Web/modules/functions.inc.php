@@ -38,7 +38,7 @@ function Redirect($url, $permanent = false)
 
 function twitchPerms($input) {
     global $PDO;
-    $result = $PDO->query("SELECT * FROM gb_twitch_perms LIMIT 1");
+    $result = $PDO->query("SELECT * FROM gb_twitch_perms WHERE value='$input' LIMIT 1");
     foreach($result as $row)
     {
         return $row["name"];

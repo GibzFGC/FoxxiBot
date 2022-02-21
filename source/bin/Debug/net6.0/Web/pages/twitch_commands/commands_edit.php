@@ -43,7 +43,7 @@ foreach($data as $edit)
     </div>
     <!-- /.content-header -->
 
-    <form method="post" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=commands&a=funcs&v=edit">
+    <form method="post" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=twitch_commands&a=funcs&v=edit">
 
     <!-- Main content -->
     <section class="content">
