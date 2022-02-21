@@ -96,22 +96,22 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_twitch_perms (name TEXT, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Viewer','Viewer')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Viewer','0')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Moderator','Moderator')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Moderator','1')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Global Moderator','Global Moderator')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Global Moderator','2')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Broadcaster','Broadcaster')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Broadcaster','3')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Admin','Twitch Admin')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Admin','4')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Staff','Twitch Staff')";
+            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Staff','5')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE gb_twitch_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
