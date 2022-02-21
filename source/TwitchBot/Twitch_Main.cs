@@ -340,7 +340,6 @@ namespace FoxxiBot.TwitchBot
                 con.Close();
             }
 
-
             if (e.ChatMessage.Message.Contains("!"))
             {
                 using var con = new SQLiteConnection(cs);
@@ -353,15 +352,15 @@ namespace FoxxiBot.TwitchBot
 
                 if (rdr.HasRows == true)
                 {
-
                     while (rdr.Read())
                     {
-                        Twitch_Variables variables = new Twitch_Variables();
-                        var var_string = variables.convertVariables(e.ChatMessage.Message, (string)rdr["response"], e.ChatMessage.DisplayName);
-                        client.SendMessage(e.ChatMessage.Channel, var_string);
-
+                        if (e.ChatMessage.UserType >= (UserType)Enum.Parse(typeof(UserType), rdr["permission"].ToString()))
+                        {
+                            Twitch_Variables variables = new Twitch_Variables();
+                            var var_string = variables.convertVariables(e.ChatMessage.Message, (string)rdr["response"], e.ChatMessage.DisplayName);
+                            client.SendMessage(e.ChatMessage.Channel, var_string);
+                        }
                     }
-
                 }
                 else
                 {              
