@@ -109,7 +109,6 @@ namespace FoxxiBot
                     Config.TwitchClientOAuth = (string)o["TwitchClientOAuth"];
                     Config.TwitchClientRefresh = (string)o["TwitchClientRefresh"];
 
-                    Config.TwitchMC_DisplayName = (string)o["TwitchBroadcastDisplayName"];
                     Config.TwitchMC_ClientOAuth = (string)o["TwitchBroadcasterOAuth"];
                     Config.TwitchMC_ClientRefresh = (string)o["TwitchBroadcasterRefresh"];
                     Config.TwitchMC_Id = (string)o["TwitchBroadcasterId"];
@@ -141,18 +140,6 @@ namespace FoxxiBot
 
                     // Start the Twitch Bot
                     Twitch_Main bot = new Twitch_Main();
-
-                    try
-                    {
-                        // Get User Information
-                        getInitalInfoAsync().GetAwaiter().GetResult();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("");
-                        Console.WriteLine("Error: Getting User Information " + ex.Message);
-                        Console.WriteLine("");
-                    }
                 }
                 else
                 {
@@ -326,10 +313,8 @@ namespace FoxxiBot
             objSettings.TwitchClientUser = Config.TwitchClientUser;
             objSettings.TwitchClientOAuth = Config.TwitchClientOAuth;
             objSettings.TwitchClientRefresh = Config.TwitchClientRefresh;
-            objSettings.TwitchClientDisplayName = Config.TwitchClientDisplayName;
 
             objSettings.TwitchBroadcasterId = Config.TwitchMC_Id;
-            objSettings.TwitchBroadcasterDisplayName = Config.TwitchMC_DisplayName;
             objSettings.TwitchBroadcasterOAuth = Config.TwitchMC_ClientOAuth;
             objSettings.TwitchBroadcasterRefresh = Config.TwitchMC_ClientRefresh;
 
@@ -349,10 +334,8 @@ namespace FoxxiBot
             // Start Twitch Bot
             if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null) {
                 Twitch_Main bot = new Twitch_Main();
-
-                // Get User Information
-                getInitalInfoAsync().GetAwaiter().GetResult();
-            } else
+            }
+            else
             {
                 Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
             }
@@ -414,43 +397,6 @@ namespace FoxxiBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
-        }
-
-        private static async Task getInitalInfoAsync()
-        {
-
-            // create twitch api instance
-            var api = new TwitchLib.Api.TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
-            api.Settings.AccessToken = Config.TwitchClientOAuth;
-
-            var user = await api.Helix.Users.GetUsersAsync(ids: new List<string> { Config.TwitchMC_Id }, null, Config.TwitchClientOAuth);
-            var follows = await api.Helix.Users.GetUsersFollowsAsync(toId: Config.TwitchMC_Id);
-
-            // Save to SQLite
-            string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
-
-            using var con = new SQLiteConnection(cs);
-            con.Open();
-
-            using var cmd = new SQLiteCommand(con);
-
-            cmd.CommandText = "INSERT or REPLACE INTO gb_user(displayName, profileIcon, viewCount, followCount, currentViewers)" +
-                "VALUES(@displayName, @profileIcon, @viewCount, @followCount, @currentViewers)";
-
-            cmd.Parameters.AddWithValue("@displayName", user.Users[0].DisplayName);
-            cmd.Parameters.AddWithValue("@profileIcon", user.Users[0].ProfileImageUrl);
-            cmd.Parameters.AddWithValue("@viewCount", user.Users[0].ViewCount);
-            cmd.Parameters.AddWithValue("@followCount", follows.TotalFollows);
-            cmd.Parameters.AddWithValue("@currentViewers", 0);
-
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-
-            Config.TwitchClientDisplayName = user.Users[0].DisplayName;
-
-            con.Close();
-
         }
 
     }

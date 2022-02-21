@@ -120,9 +120,6 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_twitch_timers (id INTEGER PRIMARY KEY, name TEXT, response TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_user (displayName TEXT UNIQUE, profileIcon TEXT, viewCount INTEGER, followCount INTEGER, currentViewers INTEGER)";
-            cmd.ExecuteNonQuery();
-
             con.Close();
             return Task.CompletedTask;
         }
@@ -142,7 +139,6 @@ namespace FoxxiBot.Class
             objSettings.TwitchClientRefresh = Config.TwitchClientRefresh;
 
             objSettings.TwitchBroadcasterId = Config.TwitchMC_Id;
-            objSettings.TwitchBroadcasterDisplayName = Config.TwitchMC_DisplayName;
             objSettings.TwitchBroadcasterOAuth = Config.TwitchMC_ClientOAuth;
             objSettings.TwitchBroadcasterRefresh = Config.TwitchMC_ClientRefresh;
 
