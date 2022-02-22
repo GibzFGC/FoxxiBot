@@ -93,6 +93,30 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_twitch_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Blacklist_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Whitelist_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('LinkFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('CapsFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SymbolsFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SpamFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('MeFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SystemFilter_Status','off')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE gb_twitch_perms (name TEXT, value TEXT)";
             cmd.ExecuteNonQuery();
 

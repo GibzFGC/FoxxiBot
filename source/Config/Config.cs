@@ -35,13 +35,10 @@ namespace FoxxiBot
         public static string TwitchClientOAuth = "";
         public static string TwitchClientRefresh = "";
 
-        public static string TwitchClientDisplayName = "";
-
         // Twitch - User Parameters
         public static string TwitchMC_Id = "";
         public static string TwitchMC_ClientOAuth = "";
         public static string TwitchMC_ClientRefresh = "";
-        public static string TwitchMC_DisplayName = "";
 
         // Discord Parameters
         public static string DiscordServerId = "";

@@ -33,7 +33,7 @@ namespace FoxxiBot.TwitchBot
                 // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Offline");
                 
                 SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
-                discordSQL.SetOption("stream_status", "0");
+                discordSQL.updateOptions("stream_status", "0");
 
                 return false;
             }
@@ -42,7 +42,7 @@ namespace FoxxiBot.TwitchBot
                 // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Live");
 
                 SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
-                discordSQL.SetOption("stream_status", "1");
+                discordSQL.updateOptions("stream_status", "1");
 
                 return true;
             }

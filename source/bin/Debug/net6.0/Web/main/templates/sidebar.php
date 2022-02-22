@@ -120,6 +120,33 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Moderation
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=modlist" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Whitelist / Blacklist</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=moderation" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Moderation Settings</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chalkboard"></i>
               <p>
                 Ticker
@@ -208,7 +235,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                 Promo / Streamers
               </p>
             </a>
-          </li>          
+          </li>
 
           <li class="li_header">GLOBAL FEATURES</li>
 

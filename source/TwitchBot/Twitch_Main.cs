@@ -260,6 +260,103 @@ namespace FoxxiBot.TwitchBot
             // split into args
             var twitchMsg = e.ChatMessage.Message.Split(" ");
 
+            // Manage Moderation
+            Twitch_Moderation moderation = new Twitch_Moderation();
+            SQLite.twitchSQL twitchSQL = new SQLite.twitchSQL();
+
+            // Check Blacklist
+            if (twitchSQL.getOptions("Blacklist_Status") == "on")
+            {
+                if (moderation.checkBlacklist(e.ChatMessage.Message) == true)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                    client.SendMessage(e.ChatMessage.Channel, "This message contains a word that is blocked on this channel.");
+                    return;
+                }
+            }
+
+            // Check Caps
+            if (twitchSQL.getOptions("CapsFilter_Status") == "on")
+            {
+                if (moderation.checkCaps(e.ChatMessage.Message) == true)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", Please don't over-use CAPS in chat. Thank you!");
+                    return;
+                }
+            }
+
+            // Check Symbols
+            if (twitchSQL.getOptions("SymbolsFilter_Status") == "on")
+            {
+                if (moderation.checkSymbols(e.ChatMessage.Message) == true)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", Please don't over-use Symbols in chat. Thank you!");
+                    return;
+                }
+            }
+
+            // Check URL
+            if (twitchSQL.getOptions("LinkFilter_Status") == "on")
+            {
+
+                if (twitchSQL.getOptions("Whitelist_Status") == "on")
+                {
+                    if (moderation.checkWhitelist(e.ChatMessage.Message) == true)
+                    {
+                        return;
+                    } else
+                    {
+                        client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                        client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", We don't allow links in chat right now. Sorry!");
+                        return;
+                    }
+                }
+                else
+                {
+
+                    if (moderation.checkURL(e.ChatMessage.Message) == true)
+                    {
+                        client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                        client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", We don't allow links in chat right now. Sorry!");
+                        return;
+                    }
+                }
+            }
+
+            // Check Spam
+            if (twitchSQL.getOptions("SpamFilter_Status") == "on")
+            {
+                if (moderation.checkSpam(e.ChatMessage.Message) == true)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                    client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", Please don't spam in the chat. Thank you!");
+                    return;
+                }
+            }
+
+            // Check /Me
+            if (twitchSQL.getOptions("MeFilter_Status") == "on")
+            {
+                if (e.ChatMessage.IsMe)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                    client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", We have /me commands turned off. Sorry!");
+                    return;
+                }
+            }
+
+            // Check System Messages
+            if (twitchSQL.getOptions("SystemFilter_Status") == "on")
+            {
+                if (moderation.checkSystemMsg(e.ChatMessage.Message) == true)
+                {
+                    client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                    client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", Please don't fake moderation/system messages in the chat. Thank you!");
+                    return;
+                }
+            }
+
+            // Check if IsBroadcaster / IsModerator for Admin Commands
             if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
             {
                 if (twitchMsg[0].Equals("!command"))

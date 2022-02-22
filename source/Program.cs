@@ -292,12 +292,10 @@ namespace FoxxiBot
 
             // Set Internal Values
             Config.TwitchClientUser = bot_user.Login;
-            Config.TwitchClientDisplayName = bot_user.DisplayName;
             Config.TwitchClientOAuth = bot_refresh.AccessToken;
             Config.TwitchClientRefresh = bot_refresh.RefreshToken;
             
             Config.TwitchMC_Id = broadcast_user.Id;
-            Config.TwitchMC_DisplayName = broadcast_user.DisplayName;
             Config.TwitchMC_ClientOAuth = broadcast_refresh.AccessToken;
             Config.TwitchMC_ClientRefresh = broadcast_refresh.RefreshToken;
 

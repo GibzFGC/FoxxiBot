@@ -20,8 +20,12 @@ if (isset($_REQUEST['a'])) {
         include("twitch/twitch_moderation.php");
     }
 
+    if ($_REQUEST['a'] == "modlist") {
+        include("twitch/twitch_modlist.php");
+    }
+
     if ($_REQUEST['a'] == "funcs") {
         include("twitch/twitch_funcs.php");
-    }    
+    }
 
 }
