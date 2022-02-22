@@ -20,7 +20,6 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
 	$gfw["Twitch_ClientID"] = $bot_obj->TwitchClientID;
 	$gfw["Twitch_ClientOAuth"] = $bot_obj->TwitchClientOAuth;
-	$gfw["Twitch_ClientUser"] = $bot_obj->TwitchClientUser;
 	$gfw["Twitch_BroadcasterId"] = $bot_obj->TwitchBroadcasterId;
 	$gfw["Twitch_BroadcasterChannel"] = $bot_obj->TwitchClientChannel;
 

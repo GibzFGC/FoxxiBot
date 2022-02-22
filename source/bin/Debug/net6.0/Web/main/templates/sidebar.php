@@ -13,13 +13,6 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
-
-$result = $PDO->query("SELECT * FROM gb_user");
-foreach($result as $row)
-{
-    $channel_name = $row['displayName'];
-    $channel_icon = $row['profileIcon'];
-}
 ?>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -34,13 +27,13 @@ foreach($result as $row)
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-        <a target="_blank" href="https://www.twitch.tv/<?php print $channel_name; ?>">
-          <img src="<?php print $channel_icon; ?>" class="img-circle elevation-2" alt="User Image">
+        <a target="_blank" href="https://www.twitch.tv/<?php print $gfw["Twitch_BroadcasterChannel"]; ?>">
+          <img id="twitch_profile_sidebar" src="<?php print $gfw['template_path']; ?>/img/default_profile.png" class="img-circle elevation-2" alt="User Image">
         </a>
         </div>
         <div class="info">
-          <a target="_blank" href="https://www.twitch.tv/<?php print $channel_name; ?>" class="d-block">
-            <?php print $channel_name; ?>
+          <a id="twitch_profile_name" target="_blank" href="https://www.twitch.tv/<?php print $gfw["Twitch_BroadcasterChannel"]; ?>" class="d-block">
+          Loading...
           </a>
         </div>
       </div>
@@ -310,3 +303,18 @@ foreach($result as $row)
     </div>
     <!-- /.sidebar -->
   </aside>
+  
+  <script type="text/javascript">
+    <?php if (isset($_REQUEST["p"])) { ?>   
+      const clientId = "<?php print $gfw["Twitch_ClientID"]; ?>";
+      const token = "<?php print $gfw["Twitch_ClientOAuth"]; ?>";
+      const { api } = new TwitchJs({ clientId, token })
+      
+      // Get Users Profile Image & View Count
+      api.get('users', { search: { id: <?php print $gfw["Twitch_BroadcasterId"]; ?> } })
+      .then(response => {
+        document.getElementById("twitch_profile_sidebar").src = response["data"][0].profileImageUrl;
+        document.getElementById("twitch_profile_name").innerHTML = response["data"][0].displayName;
+      })
+    <?php } ?>
+  </script>

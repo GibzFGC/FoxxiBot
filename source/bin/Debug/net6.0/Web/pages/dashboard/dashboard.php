@@ -45,11 +45,11 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <div class="card card-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-primary">
-                  <h3 class="widget-user-username"><?php print $channel_name; ?></h3>
+                  <h3 id="dashboard_displayname" class="widget-user-username">Loading...</h3>
                   <h5 class="widget-user-desc">BROADCASTER</h5>
                 </div>
 
-                <a target="_blank" href="https://www.twitch.tv/<?php print $channel_name; ?>">
+                <a target="_blank" href="https://www.twitch.tv/<?php print $gfw["Twitch_BroadcasterChannel"]; ?>">
                 <div class="widget-user-image">
                     <img id="twitch_profile_url" class="img-circle elevation-2" src="<?php print $gfw['template_path']; ?>/img/default_profile.png" alt="User Avatar">
                 </div>
@@ -289,9 +289,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
   <script type="text/javascript">
     var TwitchClientID = "<?php print $gfw["Twitch_ClientID"]; ?>";
     var TwitchClientOAuth = "<?php print $gfw["Twitch_ClientOAuth"]; ?>";
-    var TwitchClientUser = "<?php print $gfw["Twitch_ClientUser"]; ?>";
     var TwitchChannelID = "<?php print $gfw["Twitch_BroadcasterId"]; ?>";
-    var TwitchBroadcasterChannel = "<?php print $gfw["Twitch_BroadcasterChannel"]; ?>";
   </script>
   
   <script src="<?php print $gfw['template_path']; ?>/plugins/jquery/jquery.min.js"></script>

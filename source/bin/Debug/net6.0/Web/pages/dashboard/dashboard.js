@@ -153,6 +153,9 @@ var twitch = window.setInterval(function() {
   api.get('users', { search: { id: TwitchChannelID } })
   .then(response => {
       document.getElementById("twitch_profile_url").src = response["data"][0].profileImageUrl;
+      document.getElementById("twitch_profile_sidebar").src = response["data"][0].profileImageUrl;
+      document.getElementById("dashboard_displayname").innerHTML = response["data"][0].displayName;
+      document.getElementById("twitch_profile_name").innerHTML = response["data"][0].displayName;
       document.getElementById("total_views").innerHTML = response["data"][0].viewCount;
   })
 
