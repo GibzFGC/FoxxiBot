@@ -366,9 +366,12 @@ namespace FoxxiBot.TwitchBot
                 if (twitchMsg[0].Equals("!command"))
                 {
                     // Should I Implement???
+                    return;
                 }
+
             }
 
+            // Do Shout Out!
             if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
             {
                 if (twitchMsg[0].Equals("!so"))
@@ -395,14 +398,63 @@ namespace FoxxiBot.TwitchBot
                         Console.WriteLine("!so user not found!");
                     }
                 }
+            }
 
+
+            // Death Counter
+            if (twitchMsg[0].Equals("!deaths"))
+            {
+
+                if (twitchMsg.Length == 1)
+                {
+                    int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
+                    client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {deaths} time(s)");
+                    return;
+                }
+
+                if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
+                {
+                    if (twitchMsg.Length > 1)
+                    {
+                        if (twitchMsg[1].Equals("add"))
+                        {
+                            int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
+                            var update = deaths + 1;
+
+                            twitchSQL.updateOptions("deathCounter", update.ToString());
+                            client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {update} time(s)");
+                            return;
+                        }
+
+                        if (twitchMsg[1].Equals("sub"))
+                        {
+                            int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
+                            int update = deaths - 1;
+
+                            twitchSQL.updateOptions("deathCounter", update.ToString());
+                            client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {update} time(s)");
+                            return;
+                        }
+
+                        if (twitchMsg[1].Equals("reset"))
+                        {
+                            int update = 0;
+
+                            twitchSQL.updateOptions("deathCounter", update.ToString());
+                            client.SendMessage(e.ChatMessage.Channel, $"The death counter has been reset");
+                            return;
+                        }
+                    }
+                }
             }
 
             // Get Users Age
             if (twitchMsg[0].Equals("!age"))
             {
-               var data = Twitch_GetData.getAccountAge(e.ChatMessage.UserId).GetAwaiter().GetResult();
-               client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago");
+                var data = Twitch_GetData.getAccountAge(e.ChatMessage.UserId).GetAwaiter().GetResult();
+                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago");
+
+                return;
             }
 
             // Play Sound File

@@ -117,6 +117,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SystemFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('deathCounter','0')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE gb_twitch_perms (name TEXT, value TEXT)";
             cmd.ExecuteNonQuery();
 

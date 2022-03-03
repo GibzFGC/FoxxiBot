@@ -54,7 +54,7 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
-
+            // If Plugins SQLite doesn't exist
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db"))
             {
                 // Create the Database File
@@ -62,6 +62,7 @@ namespace FoxxiBot
                 pnFile.Close();
             }
 
+            // If Bot SQLite doesn't exist
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db"))
             {
                 Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Database file found. Continuing Launch...");
@@ -82,6 +83,7 @@ namespace FoxxiBot
                 Console.WriteLine("");
             }
 
+            // If config JSON doesn't exist
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/config.json"))
             {
                 // SQLite Backup
@@ -89,7 +91,7 @@ namespace FoxxiBot
                 File.Copy(@AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db", @AppDomain.CurrentDomain.BaseDirectory + "Data/Backups/bot.backup." + localDate.ToString("ddMMyyyy.HHmmss") + ".db", true);
 
                 // Initialize Twitch
-                Console.WriteLine("Welcome to FoxxiBot.  Loading your Settings...");
+                Console.WriteLine("Welcome to FoxxiBot. Loading your Settings...");
                 Console.WriteLine("");
 
                 // Load from JSON

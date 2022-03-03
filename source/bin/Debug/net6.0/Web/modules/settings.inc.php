@@ -57,14 +57,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 	$gfw['admin_path'] = $gfw['site_url'] ."/". $gfw['base_admin'];											// Sets the path to the admin panel (uses parameters above)
     
 // Extra Website Settings
-	$cms['current_year'] = date("Y");																		// Gets the current year from the server
-	
+	$gfw['current_year'] = date("Y");																		// Gets the current year from the server
+	$gfw['current_version'] = "1.0.1r2";																	// Current Bot Version
 
 // Website Timezone
     date_default_timezone_set('Europe/London');																// Sets the default timezone for your website (change if needed)
     
-    
 // Define any custom constant parameters under here:-
-    $cms['base_message'] = "";
+    $gfw['base_message'] = "";
     
 /* End of file */

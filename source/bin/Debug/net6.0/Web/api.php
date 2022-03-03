@@ -1,3 +1,5 @@
+<!-- Don't edit the following file if you don't know what you're doing! -->
+
 <?php
 // Copyright (C) 2020-2022 FoxxiBot
 // This program is free software: you can redistribute it and/or modify
@@ -10,6 +12,9 @@
 // GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+// Set Header Type
+header('Content-Type: application/json; charset=UTF-8');
 
 // Define Secure Connection
 define("G_FW", true);
@@ -27,8 +32,6 @@ catch (PDOException $e) {
 }
 
 // Begin API Constructor
-$age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
-
 if (isset($_REQUEST["state"])) {
 
     if ($_REQUEST["state"] == "get") {
@@ -91,3 +94,4 @@ if (isset($_REQUEST["state"])) {
 } else {
     print "Error: No valid state given";
 }
+?>
