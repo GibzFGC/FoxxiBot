@@ -10,6 +10,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -98,6 +99,61 @@ namespace FoxxiBot.SQLite
             insertCmd.ExecuteNonQuery();
 
             con.Close();
+        }
+
+        public void giveawayContestant(string uid, string username, string displayName)
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var insertCmd = new SQLiteCommand(con);
+
+            insertCmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_giveaway(uid, username, display_name) VALUES (@uid, @username, @display_name)";
+
+            insertCmd.Parameters.AddWithValue("@uid", uid);
+            insertCmd.Parameters.AddWithValue("@username", username);
+            insertCmd.Parameters.AddWithValue("@display_name", displayName);
+
+            insertCmd.Prepare();
+            insertCmd.ExecuteNonQuery();
+
+            con.Close();
+        }
+
+        public string giveawayWinner()
+        {
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+            var stm = $"SELECT * FROM gb_twitch_giveaway ORDER BY RANDOM() LIMIT 1";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows == true)
+            {
+                while (rdr.Read())
+                {
+
+                // Set a JSON Array
+                JArray array = new JArray();
+
+                // Encode as JSON
+                array.Add(new JObject()
+                {
+                    { "uid", rdr["uid"].ToString() },
+                    { "username", rdr["username"].ToString() },
+                    { "display_name", rdr["display_name"].ToString() }
+                });
+
+                JObject o = new JObject();
+                o["data"] = array;
+
+                return o.ToString();
+                }
+            }
+
+            con.Close();
+            return "No participants found";
         }
 
     }

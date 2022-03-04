@@ -53,12 +53,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <label for="commandName">Name</label>
-                    <input type="text" class="form-control" id="soundName" name="soundName" placeholder="Enter Sound Name">
+                    <input type="text" class="form-control" id="soundName" name="soundName" placeholder="Enter Sound Name" required>
                   </div>
 
                   <div class="form-group">
                     <label for="soundUpload">File Upload (Supported: *.wav)</label><br />
-                    <input type="file" name="soundUpload" />
+                    <input type="file" name="soundUpload" required />
                   </div>
 
                   <div class="form-group">

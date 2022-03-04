@@ -61,12 +61,12 @@ foreach($data as $edit)
 
                   <div class="form-group">
                     <label for="exampleInputEmail1">Name (without !)</label>
-                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" value="<?php print $command_name; ?>">
+                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" value="<?php print $command_name; ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Response</label>
-                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..."><?php print $edit["response"]; ?></textarea>
+                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..." required><?php print $edit["response"]; ?></textarea>
                   </div>
 
                   <div class="form-group">

@@ -27,6 +27,7 @@ using System.Data.SQLite;
 using System.Threading;
 using System.Media;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json.Linq;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -371,9 +372,87 @@ namespace FoxxiBot.TwitchBot
 
             }
 
-            // Do Shout Out!
-            if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
+            // Do Giveaway!
+            if (twitchMsg[0].Equals("!gw") || twitchMsg[0].Equals("!giveaway"))
             {
+
+                if (twitchMsg.Length == 1)
+                {
+
+                    // Is Giveaway Active?
+                    if (twitchSQL.getOptions("Giveaway_Status") == "on")
+                    {
+
+                        if (e.ChatMessage.IsBroadcaster)
+                        {
+                            client.SendMessage(e.ChatMessage.Channel, twitchSQL.getOptions("Giveaway_Details"));
+                            return;
+                        }
+
+
+                        if (e.ChatMessage.IsStaff)
+                        {
+                            if (twitchSQL.getOptions("Giveaway_AllowTwitchStaff") == "on")
+                            {
+                                twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
+                                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
+                            }
+                            else
+                            {
+                                client.SendMessage(e.ChatMessage.Channel, "Sorry, Twitch Staff are excempt from this giveaway");
+                            }
+
+                            return;
+                        }
+
+                        if (e.ChatMessage.IsModerator)
+                        {
+                            if (twitchSQL.getOptions("Giveaway_AllowMods") == "on")
+                            {
+                                twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
+                                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
+                            }
+                            else
+                            {
+                                client.SendMessage(e.ChatMessage.Channel, "Sorry, Channel Moderators are excempt from this giveaway");
+                            }
+
+                            return;
+                        }
+
+                        twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
+                        client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
+                        return;
+                    }
+                    else
+                    {
+                        client.SendMessage(e.ChatMessage.Channel, "All recent giveaways have ended");
+                        return;
+                    }
+                
+                }
+
+                if (twitchMsg.Length > 1)
+                {
+                    if (twitchMsg[1].Equals("winner"))
+                    {
+                        if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
+                        {
+                            var giveaway_winner = twitchSQL.giveawayWinner();
+                            JObject o = (JObject)JToken.Parse(giveaway_winner);
+
+                            client.SendMessage(e.ChatMessage.Channel, o["data"][0]["display_name"] + ", you have won the giveaway!!");
+                            twitchSQL.updateOptions("Giveaway_Winner", giveaway_winner);
+                        }
+                    }                          
+                }
+            
+            }
+   
+
+            // Do Shout Out!
+                if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
+                {
                 if (twitchMsg[0].Equals("!so"))
                 {
                     // split into args

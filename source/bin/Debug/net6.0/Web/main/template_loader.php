@@ -45,6 +45,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/discord_commands_loader.php";
             }
 
+            if ($page_loader == 'giveaway') {
+                $cpage = "pages/giveaway_loader.php";
+            }
+
             if ($page_loader == 'promo') {
                 $cpage = "pages/promo_loader.php";
             }

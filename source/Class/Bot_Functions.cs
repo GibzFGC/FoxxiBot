@@ -87,6 +87,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE gb_twitch_giveaway (uid TEXT UNIQUE, username TEXT, display_name TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE gb_twitch_notifications (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT, date TEXT)";
             cmd.ExecuteNonQuery();
 
@@ -118,6 +121,24 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('deathCounter','0')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Name','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Details','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowTwitchStaff','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowMods','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Winner','')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE gb_twitch_perms (name TEXT, value TEXT)";

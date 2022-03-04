@@ -53,13 +53,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <label for="commandName">Name (without prefix)</label>
-                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name">
+                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" required>
                     <span style="margin-top: 10px; background: #FF0000; padding: 10px; visibility: hidden;" id="commandNameError"></span>
                   </div>
 
                   <div class="form-group">
                     <label for="commandResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..."></textarea>
+                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..." required></textarea>
                   </div>
 
                   <div class="form-group">

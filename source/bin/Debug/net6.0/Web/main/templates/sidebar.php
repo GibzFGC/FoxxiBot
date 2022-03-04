@@ -120,6 +120,33 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-award"></i>
+              <p>
+                Giveaway
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=giveaway&a=create" class="nav-link">  
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create a Giveaway</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=giveaway" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Giveaway Details</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i>
               <p>
                 Moderation
@@ -252,7 +279,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=quotes&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add an Audio / Sound</p>
+                  <p>Add a Quote</p>
                 </a>
               </li>
 

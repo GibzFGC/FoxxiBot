@@ -53,12 +53,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <label for="quoteName">Name</label>
-                    <input type="text" class="form-control" id="quoteName" name="quoteName" placeholder="Enter Quote Name">
+                    <input type="text" class="form-control" id="quoteName" name="quoteName" placeholder="Enter Quote Name" required>
                   </div>
 
                   <div class="form-group">
                     <label for="quoteText">Text</label>
-                    <textarea class="form-control" rows="3" id="quoteText" name="quoteText" placeholder="Enter the bot response here..."></textarea>
+                    <textarea class="form-control" rows="3" id="quoteText" name="quoteText" placeholder="Enter the bot response here..." required></textarea>
                   </div>
 
                   <div class="form-group">

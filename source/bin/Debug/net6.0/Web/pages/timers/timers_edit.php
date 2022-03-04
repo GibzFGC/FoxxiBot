@@ -58,12 +58,12 @@ foreach($data as $edit)
 
                   <div class="form-group">
                     <label for="timerName">Name</label>
-                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="Enter Timer Name" value="<?php print $edit["name"]; ?>">
+                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="Enter Timer Name" value="<?php print $edit["name"]; ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="timerResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="Enter the response text here..."><?php print $edit["response"]; ?></textarea>
+                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="Enter the response text here..." required><?php print $edit["response"]; ?></textarea>
                   </div>
 
                   <div class="form-group">
