@@ -6,30 +6,56 @@
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body onLoad="loadTicks()">
+    <body onLoad="init()">
         <div class="ticker-wrap">
             <div id="ticker" class="ticker">
                 <!-- Ticker Items go Here! -->
             </div>
         </div>
 
+        <div style="visibility:hidden;" id="json"></div>
+
         <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
 
         <script type="text/javascript">    
+		    var xmlhttp = new XMLHttpRequest();	
+		
+            var animating = false;
+            var doUpdate = false;
+        
+            function init() {
+
+                xmlhttp.overrideMimeType('application/json');
+            
+                var timeout = this.window.setInterval(function() {
+                    pollHandler();
+                }, 250);
+
+            }
+        
+            function pollHandler()
+            {
+            doUpdate = true;
+            if (!animating && doUpdate) {
+                loadTicks();
+              }
+            }
+
             function loadTicks() {
-                // Items from JSON Array
-                var old_data = [];
-                var items = [];
-    
                 // Load Data
                 $.getJSON('/api.php?state=get&table=gb_ticker', function(data) {
-                    for (items of data) {
-                        var div = document.getElementById('ticker');
-                        div.innerHTML += "<div class='ticker__item'>" + items['response'] + "</div>";
+                    var ticker = document.getElementById('ticker');
+
+                    if (document.getElementById('json').innerHTML != data) {
+                        for (items of data) {
+                            ticker.innerHTML += "<div class='ticker__item'>" + items['response'] + "</div>";
+                        }
+                        
+                        document.getElementById('json').innerHTML = data;
                     }
                 });
             }
-            </script>        
+        </script>        
     </body>
 
 </html>
