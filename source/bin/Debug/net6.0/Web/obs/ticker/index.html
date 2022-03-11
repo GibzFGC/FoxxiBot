@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>FoxxiBot Ticker Widget</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body onLoad="loadTicks()">
+        <div class="ticker-wrap">
+            <div id="ticker" class="ticker">
+                <!-- Ticker Items go Here! -->
+            </div>
+        </div>
+
+        <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
+
+        <script type="text/javascript">    
+            function loadTicks() {
+                // Items from JSON Array
+                var old_data = [];
+                var items = [];
+    
+                // Load Data
+                $.getJSON('/api.php?state=get&table=gb_ticker', function(data) {
+                    for (items of data) {
+                        var div = document.getElementById('ticker');
+                        div.innerHTML += "<div class='ticker__item'>" + items['response'] + "</div>";
+                    }
+                });
+            }
+            </script>        
+    </body>
+
+</html>
