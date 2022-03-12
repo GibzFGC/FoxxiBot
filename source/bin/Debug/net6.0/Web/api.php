@@ -63,11 +63,11 @@ if (isset($_REQUEST["state"])) {
         }
 
         if (isset($_REQUEST["order"])) {
-            $limit = "ORDER BY" . $_REQUEST["order"];
+            $order = "ORDER BY" . $_REQUEST["order"];
         }
 
         if (isset($_REQUEST["order_state"])) {
-            $limit = $_REQUEST["order_state"];
+            $order_state = $_REQUEST["order_state"];
         }        
 
         if (isset($_REQUEST["limit"])) {
@@ -80,6 +80,7 @@ if (isset($_REQUEST["state"])) {
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $json = json_encode($results);
 
+        // var_dump($statement);
         print $json;
     }
 
