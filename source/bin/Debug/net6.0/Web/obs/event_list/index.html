@@ -45,7 +45,7 @@
             $.getJSON('/api.php?state=get&table=gb_twitch_notifications&order="id"&order_state=desc&limit=6', function(data) {
                 var event = document.getElementById('events');
 
-                if (document.getElementById('json').innerHTML !== data[0]["user"]) {
+                if (document.getElementById('json').innerHTML !== data[0]["type"] + " - " + data[0]["user"]) {
                     // Clear Div
                     event.innerHTML = "";    
 
@@ -61,7 +61,7 @@
                         }
                     }
 
-                    document.getElementById('json').innerHTML = data[0]["user"];
+                    document.getElementById('json').innerHTML = data[0]["type"] + " - " + data[0]["user"];
                 }
         
             });
