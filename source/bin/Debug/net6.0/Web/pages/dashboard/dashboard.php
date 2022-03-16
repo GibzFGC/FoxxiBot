@@ -113,11 +113,17 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">
-                      Tags: <span id="stream_tags" class="float-right">Loading...</span>
+                      Viewer(s): <span id="stream_viewers" class="float-right">Loading...</span>
+                    </span>
+                  </li>
+
+                  <li class="nav-item">
+                    <span class="nav-link">
+                      Uptime: <span id="stream_uptime" class="float-right">Loading...</span>
                     </span>
                   </li>
                   
-                  <a href="#" class="btn btn-block btn-primary btn-sm float-right" data-toggle="modal" data-target="#streamModal">Edit Stream Info</a>
+                  <!-- <a href="#" class="btn btn-block btn-primary btn-sm float-right" data-toggle="modal" data-target="#streamModal">Edit Stream Info</a> -->
                 </ul>
               </div>
             </div>

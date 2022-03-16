@@ -177,13 +177,40 @@ var twitch = window.setInterval(function() {
 
   })
 
+  // Milliseconds to Time
+  function msToTime(duration) {
+    var milliseconds = Math.floor((duration % 1000) / 100),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+  
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+  
+    return hours + " hours, " + minutes + " mins, " + seconds + " secs";
+  }
+
   // Get Stream Status
   api.get('streams', { search: { user_id: TwitchChannelID } })
   .then(response => {
+    console.log(response);
+
+
       if (response["data"].length == 0) {
         document.getElementById("stream_status").innerHTML = "Offline";
+        document.getElementById("stream_uptime").innerHTML = "Waiting for next stream!";
       } else {
         document.getElementById("stream_status").innerHTML = "Live!";
+        document.getElementById("stream_viewers").innerHTML = response["data"][0].viewerCount;
+
+        // Convert time to milliseconds from current date & start time
+        var prevTime = new Date(response["data"][0].startedAt);
+        var thisTime = new Date();
+        var diff = thisTime.getTime() - prevTime.getTime();
+
+        //document.getElementById("stream_uptime").innerHTML = response["data"][0].startedAt;
+        document.getElementById("stream_uptime").innerHTML = msToTime(diff);
       }
   })
 
