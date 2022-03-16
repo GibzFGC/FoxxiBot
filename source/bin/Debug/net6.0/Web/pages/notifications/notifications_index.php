@@ -51,6 +51,7 @@ $result = $PDO->query("SELECT * FROM gb_twitch_notifications");
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Type</th>
                     <th>Viewers (if raid / host)</th>
@@ -65,6 +66,7 @@ $result = $PDO->query("SELECT * FROM gb_twitch_notifications");
   {
               print "
                   <tr>
+                    <td>". $row["id"] ."</td>
                     <td>". $row["user"] ."</td>
                     <td>". $row["type"] ."</td>
                     <td>". $row["viewers"] ."</td>
