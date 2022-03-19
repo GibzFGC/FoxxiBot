@@ -59,7 +59,7 @@ if (isset($_REQUEST["state"])) {
         }
 
         if (isset($_REQUEST["where"])) {
-            $where = "WHERE " . $_REQUEST["select"];
+            $where = "WHERE " . $_REQUEST["where"];
         }
 
         if (isset($_REQUEST["order"])) {
