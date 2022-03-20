@@ -443,16 +443,17 @@ namespace FoxxiBot.TwitchBot
 
                             client.SendMessage(e.ChatMessage.Channel, o["data"][0]["display_name"] + ", you have won the giveaway!!");
                             twitchSQL.updateOptions("Giveaway_Winner", giveaway_winner);
+                            return;
                         }
                     }                          
                 }
             
             }
-   
+
 
             // Do Shout Out!
-                if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
-                {
+            if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
+            {
                 if (twitchMsg[0].Equals("!so"))
                 {
                     // split into args

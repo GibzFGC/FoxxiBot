@@ -71,6 +71,7 @@ namespace FoxxiBot.WebServer
             {".jpeg", "image/jpeg"},
             {".jpg", "image/jpeg"},
             {".js", "application/x-javascript"},
+            {".json", "application/json"},
             {".mml", "text/mathml"},
             {".mng", "video/x-mng"},
             {".mov", "video/quicktime"},
