@@ -1,0 +1,50 @@
+body {
+    overflow: hidden;
+    color: #fff;
+}
+
+#user {
+    opacity: 0;
+    position: absolute;
+    display: block;
+
+    width: 525px;
+
+    font-family: "a Arang";
+    font-size: 30px;
+
+    line-height:30px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left:160px;
+    margin-top:127px;
+}
+
+#char {
+    opacity: 0;
+    position: absolute;
+    display: block;
+    margin-top: 0px;
+    margin-left: 800px;
+}
+
+.follow {
+    opacity: 0;
+    background-image: url("../img/Follower.png");
+    background-repeat: no-repeat;
+    height: 282px;
+}
+
+.host {
+    opacity: 0;
+    background-image: url("../img/Host.png");
+    background-repeat: no-repeat;
+    height: 282px;
+}
+
+.raid {
+    opacity: 0;
+    background-image: url("../img/Raid.png");
+    background-repeat: no-repeat;
+    height: 282px;
+}
