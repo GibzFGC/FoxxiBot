@@ -13,9 +13,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// Set Header Type
-header('Content-Type: application/json; charset=UTF-8');
-
 // Define Secure Connection
 define("G_FW", true);
 
@@ -35,6 +32,9 @@ catch (PDOException $e) {
 if (isset($_REQUEST["state"])) {
 
     if ($_REQUEST["state"] == "get") {
+
+        // Set Header Type
+        header('Content-Type: application/json; charset=UTF-8');
 
         $select = "*";
         $table = null;
@@ -90,6 +90,29 @@ if (isset($_REQUEST["state"])) {
 
     if ($_REQUEST["state"] == "delete") {
 
+        if (!isset($_REQUEST["table"])) {
+            print "Error: Please profile a table to access.";
+            return;
+        }
+        else
+        {
+            $table = $_REQUEST["table"];
+        }
+
+        if (isset($_REQUEST["column"])) {
+            $column = $_REQUEST["column"];
+        }
+
+        if (isset($_REQUEST["value"])) {
+            $value = $_REQUEST["value"];
+        }
+
+        $statement = $PDO->prepare("DELETE FROM $table WHERE $column = :value");
+        $statement->bindValue(':value', $value);
+        $statement->execute();
+
+        // var_dump($statement);
+        print "Deleted " . $table . " Column " . $column . " value " . $value;
     }
 
 } else {
