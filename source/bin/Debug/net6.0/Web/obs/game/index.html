@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>FoxxiBot: Current Game Widget</title>
+        <style>
+            body {
+                font-family: "Danley Regular";
+                font-size: 20px;
+                color: #000;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+
+    <!-- Main body -->
+    <body>
+        <span id="game_title"><!-- Game title goes here --></span>
+        <div style="visibility:hidden;" id="json"></div>
+
+        <!-- jQuery -->
+        <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
+        <!-- Files that handles sockets -->
+        <script src="js/reconnecting-websocket.min.js"></script>
+		<script src="js/game.js"></script>
+    </body>
+</html>
