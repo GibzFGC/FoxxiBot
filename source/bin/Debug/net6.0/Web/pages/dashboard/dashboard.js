@@ -87,14 +87,19 @@ socket.onopen = function(e) {
       });
   }
 
-// This handles EVERYTHING!
-var sysinfo = window.setInterval(function() {
+	// this is the id of the form
+	$(".follow-sync" ).click(function(e) {
+		e.preventDefault();
+  });
+
+  // This handles EVERYTHING!
+  var sysinfo = window.setInterval(function() {
     socket.send("GetCPUUsage end");
     socket.send("GetRAMUsage end");
 
     // Check Server Status
     serverCheck();
-}, 1000);
+  }, 1000);
 
 
 // Twitch Handler
@@ -113,33 +118,6 @@ api.get('channels', { search: { broadcaster_id: TwitchChannelID } })
     document.getElementById("setTitle").value = response["data"][0].title;
   }
 })
-
-// Twitch Game Search
-$("#searchGame").change(function() {
-
-  // Encode String
-  var encodedString = encodeURIComponent(document.getElementById("searchGame").value);
-  $("#setGame").empty();
-
-  // Get Users Channel Info
-  api.get('search/categories', { search: { query: document.getElementById("searchGame").value } })
-  .then(response => {
-    var data = $.map(response["data"], function (obj) {
-      obj.id = obj.id;
-      obj.text = obj.name;
-
-      return obj;
-    });
-
-    $('#setGame').select2({data: data });
-
-  })
-
-})
-
-$('#setGame').on("select2:select", function(e) { 
-  console.log(e);
-});
 
 var twitch = window.setInterval(function() {
   // Get Users Channel Info
@@ -160,7 +138,7 @@ var twitch = window.setInterval(function() {
   })
 
   // Get Users Total Followers
-  api.get('users/follows', { search: { to_id: TwitchChannelID, first: 9 } })
+  api.get('users/follows', { search: { to_id: TwitchChannelID, first: 8 } })
   .then(response => {
       document.getElementById("total_follows").innerHTML = response.total;
 
@@ -172,7 +150,7 @@ var twitch = window.setInterval(function() {
         var output = date.getDate() + "\\" +  (date.getMonth()+1) + "\\" + date.getFullYear();
 
         // Final List Send
-        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link">' + response["data"][follow_list].fromName +'<span class="float-right">'+ output +'</span></span></li>';
+        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=follower&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> ' + response["data"][follow_list].fromName +'<span class="float-right">'+ output +'</span></span></li>';
       }
 
   })
@@ -194,12 +172,10 @@ var twitch = window.setInterval(function() {
   // Get Stream Status
   api.get('streams', { search: { user_id: TwitchChannelID } })
   .then(response => {
-    console.log(response);
-
-
       if (response["data"].length == 0) {
         document.getElementById("stream_status").innerHTML = "Offline";
         document.getElementById("stream_uptime").innerHTML = "Waiting for next stream!";
+        document.getElementById("stream_viewers").innerHTML = 0;
       } else {
         document.getElementById("stream_status").innerHTML = "Live!";
         document.getElementById("stream_viewers").innerHTML = response["data"][0].viewerCount;

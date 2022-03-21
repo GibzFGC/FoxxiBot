@@ -14,6 +14,23 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+if ($_REQUEST["v"] == "follower") {
+    
+     // Save to Events
+    $sql = 'INSERT INTO gb_twitch_events (type, user, viewers) VALUES (:type, :user, :viewers)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+    
+    $stmt->bindValue(':type', "Follower");
+    $stmt->bindValue(':user', $_REQUEST["name"]);
+    $stmt->bindValue(':viewers', 0);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';    
+}
+
 if ($_REQUEST["v"] == "play") {
 
     // Get the Event Data
