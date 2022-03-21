@@ -210,12 +210,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                 <ul class="nav flex-column">
 
                 <?php
-                  $n_result = $PDO->query("SELECT * FROM gb_twitch_notifications WHERE type IS NOT 'Follower' ORDER BY id DESC LIMIT 6");
+                  $n_result = $PDO->query("SELECT * FROM gb_twitch_notifications WHERE type IS NOT 'Follower' ORDER BY id DESC LIMIT 8");
                   foreach($n_result as $n_row)
                   {
                     print '
                     <li class="nav-item">
-                      <span class="nav-link">'.$n_row["type"] .': '. $n_row["user"] .'
+                      <span class="nav-link"><a style="margin-right: 10px;" href="'. $gfw['site_url'] .'/index.php?p=notifications&a=funcs&v=event&type='. $n_row["type"] .'&name='. $n_row["user"] .'&views='. $n_row["viewers"] .'" class="btn btn-primary btn-sm">Play</a>'.$n_row["type"] .': '. $n_row["user"] .'
                         <span class="float-right">'. $n_row["viewers"] .' viewer(s)</span>
                       </span>
                     </li>
@@ -233,7 +233,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
           <?php print '
             <iframe frameBorder="0" src="https://www.twitch.tv/embed/'. $gfw["Twitch_BroadcasterChannel"] .'/chat?darkpopout&parent=localhost"
               width="100%",
-              height="420",
+              height="440",
               sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals">
             </iframe>
           </div>';

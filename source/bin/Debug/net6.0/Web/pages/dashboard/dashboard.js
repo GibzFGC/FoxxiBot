@@ -150,7 +150,7 @@ var twitch = window.setInterval(function() {
         var output = date.getDate() + "\\" +  (date.getMonth()+1) + "\\" + date.getFullYear();
 
         // Final List Send
-        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=follower&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> ' + response["data"][follow_list].fromName +'<span class="float-right">'+ output +'</span></span></li>';
+        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=event&type=Follower&views=0&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> ' + response["data"][follow_list].fromName +'<span class="float-right">'+ output +'</span></span></li>';
       }
 
   })
@@ -190,4 +190,4 @@ var twitch = window.setInterval(function() {
       }
   })
 
-}, 5000);
+}, 1000);
