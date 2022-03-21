@@ -22,6 +22,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 <script src="<?php print $gfw['template_path']; ?>/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="<?php print $gfw['template_path']; ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php print $gfw['template_path']; ?>/plugins/bootstrap/js/bootstrap.autocomplete.min.js"></script>
 <!-- Select2 -->
 <script src="<?php print $gfw['template_path']; ?>/plugins/select2/js/select2.full.min.js"></script>
 <!-- overlayScrollbars -->
