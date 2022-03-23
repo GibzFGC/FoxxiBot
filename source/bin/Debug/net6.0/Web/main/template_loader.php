@@ -49,6 +49,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/giveaway_loader.php";
             }
 
+            if ($page_loader == 'points') {
+                $cpage = "pages/points_loader.php";
+            }
+
             if ($page_loader == 'promo') {
                 $cpage = "pages/promo_loader.php";
             }
@@ -64,6 +68,10 @@ if ($gfw["site_active"] == true) {
             if ($page_loader == 'twitch_commands') {
                 $cpage = "pages/twitch_commands_loader.php";
             }
+
+            if ($page_loader == 'tournament') {
+                $cpage = "pages/tournament_loader.php";
+            }            
 
             if ($page_loader == 'notifications') {
                 $cpage = "pages/notifications_loader.php";

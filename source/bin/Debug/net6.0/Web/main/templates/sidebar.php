@@ -62,6 +62,44 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             </a>
           </li>
 
+          <li class="li_header">TOURNAMENT FEATURES</li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament" class="nav-link">
+              <i class="nav-icon fas fa-award"></i>
+              <p>
+              Scoreboard
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=top8" class="nav-link">
+              <i class="nav-icon fas fa-award"></i>
+              <p>
+              Top 8
+              </p>
+            </a>
+          </li> 
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=players" class="nav-link">
+              <i class="nav-icon fas fa-award"></i>
+              <p>
+              Player Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=games" class="nav-link">
+              <i class="nav-icon fas fa-award"></i>
+              <p>
+              Game Management
+              </p>
+            </a>
+          </li> 
+
           <li class="li_header">TWITCH FEATURES</li>
 
           <li class="nav-item">
@@ -247,6 +285,33 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
           </li>
 
           <li class="li_header">GLOBAL FEATURES</li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Points
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=listing" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Point Rankings</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Management</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

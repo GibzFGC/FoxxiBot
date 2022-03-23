@@ -11,6 +11,10 @@ $(document).ready(function() {
     }
   });
 
+  $('#gb_notifications').DataTable( {
+        "order": [[ 0, "desc" ]]
+  });
+
   //Initialize Select2 Elements
   $('.select2').select2();
 
