@@ -24,6 +24,19 @@ namespace FoxxiBot.SQLite
     {
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
 
+        public void eraseWatchlist()
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var deleteCmd = new SQLiteCommand(con);
+
+            deleteCmd.CommandText = "DELETE FROM gb_twitch_watchlist";
+            deleteCmd.ExecuteNonQuery();
+
+            con.Close();
+        }
+
         public string getOptions(string parameter)
         {
             using var con = new SQLiteConnection(cs);

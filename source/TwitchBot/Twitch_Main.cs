@@ -88,6 +88,10 @@ namespace FoxxiBot.TwitchBot
             timer.Elapsed += timer_Elapsed;
             timer.Start();
 
+            // Erase Watchlist
+            SQLite.twitchSQL TwitchSQl = new SQLite.twitchSQL();
+            TwitchSQl.eraseWatchlist();
+
             // Start Live Check Timer
             liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
