@@ -168,6 +168,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE gb_twitch_timers (id INTEGER PRIMARY KEY, name TEXT, response TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE gb_twitch_watchlist (username TEXT UNIQUE)";
+            cmd.ExecuteNonQuery();
+
             con.Close();
             return Task.CompletedTask;
         }
