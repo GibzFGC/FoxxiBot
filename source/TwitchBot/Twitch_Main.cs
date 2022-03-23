@@ -66,6 +66,8 @@ namespace FoxxiBot.TwitchBot
             client.OnConnected += Client_OnConnected;
             client.OnIncorrectLogin += Client_OnIncorrectLogin;
             client.OnRaidNotification += Client_OnRaidNotification;
+            client.OnUserJoined += Client_UserJoined;
+            client.OnUserLeft += Client_UserLeft;
 
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
             pubsub.OnListenResponse += Pubsub_OnListenResponse;
@@ -617,6 +619,36 @@ namespace FoxxiBot.TwitchBot
         public void SendChatMessage(string message)
         {
             client.SendMessage(Config.TwitchClientChannel, message);
+        }
+
+        private void Client_UserJoined(object sender, OnUserJoinedArgs e)
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var insertCmd = new SQLiteCommand(con);
+
+            insertCmd.CommandText = "INSERT or IGNORE INTO gb_twitch_watchlist(username) VALUES (@username)";
+            insertCmd.Parameters.AddWithValue("@username", e.Username);
+
+            insertCmd.Prepare();
+            insertCmd.ExecuteNonQuery();
+
+            con.Close();
+        }
+
+        private void Client_UserLeft(object sender, OnUserLeftArgs e)
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var deleteCmd = new SQLiteCommand(con);
+
+            deleteCmd.CommandText = "DELETE FROM gb_twitch_watchlist WHERE username=@username";
+            deleteCmd.Parameters.AddWithValue("@username", e.Username);
+            deleteCmd.ExecuteNonQuery();
+
+            con.Close();
         }
 
     }
