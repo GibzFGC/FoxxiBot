@@ -48,7 +48,7 @@ $result = $PDO->query("SELECT * FROM gb_twitch_notifications");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="gb_datatable" class="table table-bordered table-hover">
+                <table id="gb_notifications" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>ID</th>
