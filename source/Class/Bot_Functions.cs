@@ -75,6 +75,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('stream_status',0)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('tournament_features',0)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 

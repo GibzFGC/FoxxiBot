@@ -13,6 +13,14 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
+
+$options = array();
+
+$result = $PDO->query("SELECT * FROM gb_options");
+foreach($result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
 ?>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -62,6 +70,10 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             </a>
           </li>
 
+          <?php
+          if ($options["tournament_features"] == "1") {
+          ?>
+
           <li class="li_header">TOURNAMENT FEATURES</li>
 
           <li class="nav-item">
@@ -99,6 +111,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               </p>
             </a>
           </li> 
+          <?php } ?>
 
           <li class="li_header">TWITCH FEATURES</li>
 
