@@ -111,6 +111,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_notifications (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT, date TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_modlist (item TEXT UNIQUE, allowed TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
