@@ -33,142 +33,157 @@ namespace FoxxiBot.Class
             
             using var cmd = new SQLiteCommand(con);
             
-            cmd.CommandText = @"CREATE TABLE gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission INTEGER, active INTEGER)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_channels (channel_id INTEGER PRIMARY KEY, channel_name TEXT, channel_type TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_channels (channel_id INTEGER PRIMARY KEY, channel_name TEXT, channel_type TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission TEXT, active INTEGER)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, permission TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_discord_options (parameter, value) VALUES('BotChannel_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('BotChannel_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_discord_options (parameter, value) VALUES('GreetingChannel_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('GreetingChannel_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_discord_options (parameter, value) VALUES('StreamChannel_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('StreamChannel_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_discord_options (parameter, value) VALUES('AutoRole_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AutoRole_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_roles (role_id TEXT PRIMARY KEY, role_name TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_roles (role_id TEXT PRIMARY KEY, role_name TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_discord_streamers (username TEXT UNIQUE, live TEXT DEFAULT 0)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_streamers (username TEXT UNIQUE, live TEXT DEFAULT 0)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_options (parameter, value) VALUES('timer_mins',15)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('timer_mins',15)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_options (parameter, value) VALUES('stream_status',0)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('stream_status',0)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_quotes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, text TEXT, source TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_sounds (id INTEGER PRIMARY KEY AUTOINCREMENT, value TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_ticker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, response TEXT, active INTEGER)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_name', 'Bot Points')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_short', 'BP')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_giveaway (uid TEXT UNIQUE, username TEXT, display_name TEXT)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_increment', '10')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_notifications (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT, date TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_quotes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, text TEXT, source TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_sounds (id INTEGER PRIMARY KEY AUTOINCREMENT, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Blacklist_Status','off')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_ticker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, response TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Whitelist_Status','off')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('LinkFilter_Status','off')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_giveaway (uid TEXT UNIQUE, username TEXT, display_name TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('CapsFilter_Status','off')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_notifications (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT, date TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SymbolsFilter_Status','off')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SpamFilter_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Blacklist_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('MeFilter_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Whitelist_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('SystemFilter_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('LinkFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('deathCounter','0')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('CapsFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Name','')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('SymbolsFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Details','')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('SpamFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Status','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('MeFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowTwitchStaff','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('SystemFilter_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowMods','off')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('deathCounter','0')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Winner','')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Name','')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_perms (name TEXT, value TEXT)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Details','')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Viewer','0')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Status','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Moderator','1')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowTwitchStaff','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Global Moderator','2')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_AllowMods','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Broadcaster','3')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Giveaway_Winner','')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Admin','4')";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_perms (name TEXT, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO gb_twitch_perms (name, value) VALUES('Twitch Staff','5')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Viewer','0')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Moderator','1')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_timers (id INTEGER PRIMARY KEY, name TEXT, response TEXT, active INTEGER)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Global Moderator','2')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE gb_twitch_watchlist (username TEXT UNIQUE)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Broadcaster','3')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Twitch Admin','4')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Twitch Staff','5')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_timers (id INTEGER PRIMARY KEY, name TEXT, response TEXT, active INTEGER)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
             cmd.ExecuteNonQuery();
 
             con.Close();
