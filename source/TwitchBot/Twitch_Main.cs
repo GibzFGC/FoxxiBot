@@ -268,7 +268,11 @@ namespace FoxxiBot.TwitchBot
             SQLite.twitchSQL twitchSQL = new SQLite.twitchSQL();
 
             // Will skip if the user is Twitch Staff, the Broadcaster, a Moderator or VIP
-            if (!e.ChatMessage.IsBroadcaster || !e.ChatMessage.IsModerator || !e.ChatMessage.IsVip || !e.ChatMessage.IsStaff)
+            if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip || e.ChatMessage.IsStaff)
+            {
+                // Skip These!!
+            }
+            else
             {
                 // Check Blacklist
                 if (twitchSQL.getOptions("Blacklist_Status") == "on")
