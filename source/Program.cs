@@ -65,7 +65,13 @@ namespace FoxxiBot
             // If Bot SQLite doesn't exist
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db"))
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Database file found. Continuing Launch...");
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Database file found. Checking for Updates...");
+                
+                // Update the Tables & Default Data
+                Class.Bot_Functions functions = new Class.Bot_Functions();
+                functions.CreateTables().GetAwaiter().GetResult();
+
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Bot Starting...");
                 Console.WriteLine("");
             } else
             {
