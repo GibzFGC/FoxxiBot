@@ -69,7 +69,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('debug',off)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('debug','off')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('timer_mins',15)";
@@ -78,13 +78,13 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('stream_status',0)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('discord_features',on)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('discord_features','on')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitch_features',on)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitch_features','on')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('tournament_features',off)";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('tournament_features','off')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value TEXT)";
