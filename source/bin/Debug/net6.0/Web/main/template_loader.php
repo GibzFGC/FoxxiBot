@@ -53,6 +53,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/points_loader.php";
             }
 
+            if ($page_loader == 'options') {
+                $cpage = "pages/options_loader.php";
+            }            
+
             if ($page_loader == 'promo') {
                 $cpage = "pages/promo_loader.php";
             }

@@ -70,10 +70,7 @@ foreach($result as $row)
             </a>
           </li>
 
-          <?php
-          if ($options["tournament_features"] == "1") {
-          ?>
-
+          <?php if ($options["tournament_features"] == "on") { ?>
           <li class="li_header">TOURNAMENT FEATURES</li>
 
           <li class="nav-item">
@@ -113,6 +110,7 @@ foreach($result as $row)
           </li> 
           <?php } ?>
 
+          <?php if ($options["twitch_features"] == "on") { ?>
           <li class="li_header">TWITCH FEATURES</li>
 
           <li class="nav-item">
@@ -258,7 +256,9 @@ foreach($result as $row)
 
             </ul>
           </li>
+          <?php } ?>
 
+          <?php if ($options["discord_features"] == "on") { ?>
           <li class="li_header">DISCORD FEATURES</li>
 
           <li class="nav-item">
@@ -296,6 +296,7 @@ foreach($result as $row)
               </p>
             </a>
           </li>
+          <?php } ?>
 
           <li class="li_header">GLOBAL FEATURES</li>
 
@@ -354,6 +355,15 @@ foreach($result as $row)
           </li>
 
           <li class="li_header">BOT MANAGEMENT</li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=options&a=settings" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Bot Settings
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord&a=settings" class="nav-link">

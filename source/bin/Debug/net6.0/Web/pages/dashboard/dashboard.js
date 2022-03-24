@@ -87,10 +87,19 @@ socket.onopen = function(e) {
       });
   }
 
-	// this is the id of the form
-	$(".follow-sync" ).click(function(e) {
-		e.preventDefault();
-  });
+  // Milliseconds to Time
+  function msToTime(duration) {
+    var milliseconds = Math.floor((duration % 1000) / 100),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+  
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+  
+    return hours + " hours, " + minutes + " mins, " + seconds + " secs";
+  }
 
   // This handles EVERYTHING!
   var sysinfo = window.setInterval(function() {
@@ -154,20 +163,6 @@ var twitch = window.setInterval(function() {
       }
 
   })
-
-  // Milliseconds to Time
-  function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-      seconds = Math.floor((duration / 1000) % 60),
-      minutes = Math.floor((duration / (1000 * 60)) % 60),
-      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-  
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
-    return hours + " hours, " + minutes + " mins, " + seconds + " secs";
-  }
 
   // Get Stream Status
   api.get('streams', { search: { user_id: TwitchChannelID } })
