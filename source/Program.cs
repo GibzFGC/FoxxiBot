@@ -89,7 +89,7 @@ namespace FoxxiBot
                 Console.WriteLine("");
             }
 
-            // If config JSON doesn't exist
+            // If config JSON exists
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/config.json"))
             {
                 // SQLite Backup
@@ -128,6 +128,10 @@ namespace FoxxiBot
                     // Close the File
                     reader.Close();
                 }
+
+                // Check & Set Debug Mode
+                SQLite.botSQL botSQL = new SQLite.botSQL();
+                botSQL.debugMode();
 
                 // Start Web Server
                 Server();
