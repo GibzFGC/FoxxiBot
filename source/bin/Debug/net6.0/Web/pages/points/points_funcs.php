@@ -43,3 +43,15 @@ if ($_REQUEST["v"] == "update_user") {
     $stmt->execute();
 
 }
+
+if ($_REQUEST["v"] == "rain") {
+
+}
+
+if ($_REQUEST["v"] == "give") {
+
+}
+
+if ($_REQUEST["v"] == "take") {
+    
+}

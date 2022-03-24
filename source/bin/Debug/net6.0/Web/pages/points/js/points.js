@@ -26,24 +26,11 @@ $(document).ready(function() {
 	});
 
 	 // Save Main Points Settings
-	 $( "#update_settings" ).click(function(e) {
+	 $( "#points_settings" ).submit(function(e) {
 
 		e.preventDefault(); // avoid to execute the actual submit of the form.
 
-        var points_name = document.getElementById("points_name").value;
-        var points_shortname = document.getElementById("points_shortname").value;
-		var points_increment = document.getElementById("points_shortname").value;
-
-		if (points_name === "" || points_shortname === "" || points_increment === "") {
-			Toast.fire({
-				icon: 'error',
-				title: 'An error occured, please check you\'ve filled all fields'
-			})
-
-			return;
-		}
-
-		var form = $("#points_settings");
+		var form = $(this);
 		var actionUrl = form.attr('action');
 
 		$.ajax({
@@ -62,22 +49,10 @@ $(document).ready(function() {
 	 });
 
 	 // Save User Management
-	 $( "#update_user" ).click(function(e) {
+	 $( "#user_points" ).submit(function(e) {
 		e.preventDefault(); // avoid to execute the actual submit of the form.
 
-        var username = document.getElementById("points_username").value;
-        var points = document.getElementById("points_current").value;
-
-		if (username === "" || points === "") {
-			Toast.fire({
-				icon: 'error',
-				title: 'An error occured, please check you\'ve filled all fields'
-			})
-
-			return;
-		}
-
-		var form = $("#user_points");
+		var form = $(this);
 		var actionUrl = form.attr('action');
 
 		$.ajax({
