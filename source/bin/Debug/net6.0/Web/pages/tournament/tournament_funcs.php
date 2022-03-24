@@ -14,6 +14,71 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+if ($_REQUEST["v"] == "save_player") {
+
+    // Check if Player Exists
+    $sql = "SELECT COUNT(*) FROM gb_tournament_players WHERE name='$_POST[modal_player_name]'";
+    $res = $PDO->query($sql);
+    $count = $res->fetchColumn();
+
+    if ($count > 0) {
+        throw new Exception('Player Name is already taken!');
+        return;
+    }
+
+    // Player Save Data
+    $sql = 'INSERT OR IGNORE INTO gb_tournament_players (tag, name, country, country_code) VALUES (:tag, :name, :country, :country_code)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+    
+    $stmt->bindValue(':tag', $_POST["modal_player_tag"]);
+    $stmt->bindValue(':name', $_POST["modal_player_name"]);
+    $stmt->bindValue(':country', $_POST["modal_player_country"]);
+    $stmt->bindValue(':country_code', $_POST["modal_player_country_code"]);
+    $stmt->execute();
+
+}
+
+if ($_REQUEST["v"] == "edit_player1") {
+
+    $sql = "UPDATE gb_tournament_players SET tag = :tag, country = :country, country_code = :country_code WHERE name = :commandID";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':commandID', $_POST["modal_edit_player1_name"]);
+    $stmt->bindValue(':tag', $_POST["modal_edit_player1_tag"]);
+    $stmt->bindValue(':country', $_POST["modal_edit_player1_country"]);
+    $stmt->bindValue(':country_code', $_POST["modal_edit_player1_country_code"]);
+    $stmt->execute();
+
+}
+
+if ($_REQUEST["v"] == "edit_player2") {
+
+    $sql = "UPDATE gb_tournament_players SET tag = :tag, country = :country, country_code = :country_code WHERE name = :commandID";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':commandID', $_POST["modal_edit_player2_name"]);
+    $stmt->bindValue(':tag', $_POST["modal_edit_player2_tag"]);
+    $stmt->bindValue(':country', $_POST["modal_edit_player2_country"]);
+    $stmt->bindValue(':country_code', $_POST["modal_edit_player2_country_code"]);
+    $stmt->execute();
+
+}
+
+if ($_REQUEST["v"] == "delete_player") {
+
+    $sql = 'DELETE FROM gb_tournament_players WHERE id = :commandID';
+    $stmt = $PDO->prepare($sql);
+    
+    $stmt->bindValue(':commandID', $_REQUEST["id"]);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=tournament&a=players&s=success";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+}
+
 if ($_REQUEST["v"] == "scoreboard_save") {
 
     $sql = 'INSERT OR REPLACE INTO gb_tournament_scoreboard (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
@@ -30,6 +95,10 @@ if ($_REQUEST["v"] == "scoreboard_save") {
 
     $stmt->bindValue(':parameter', "p1Country");
     $stmt->bindValue(':value', $_POST["p1_country"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "p1CountryCode");
+    $stmt->bindValue(':value', $_POST["p1_country_code"]);
     $stmt->execute();
 
     $stmt->bindValue(':parameter', "p1Status");
@@ -57,6 +126,10 @@ if ($_REQUEST["v"] == "scoreboard_save") {
     $stmt->bindValue(':value', $_POST["p2_country"]);
     $stmt->execute();
 
+    $stmt->bindValue(':parameter', "p2CountryCode");
+    $stmt->bindValue(':value', $_POST["p2_country_code"]);
+    $stmt->execute();
+
     $stmt->bindValue(':parameter', "p2Status");
     $stmt->bindValue(':value', $_POST["p2_status"]);
     $stmt->execute();
@@ -78,8 +151,4 @@ if ($_REQUEST["v"] == "scoreboard_save") {
     $stmt->bindValue(':value', $_POST["tournament-round-extra"]);
     $stmt->execute();
 
-    // Redirect
-    $URL="$gfw[site_url]/index.php?p=tournament";
-    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
-    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 }

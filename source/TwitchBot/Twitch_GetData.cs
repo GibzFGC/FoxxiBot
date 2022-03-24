@@ -16,11 +16,13 @@ using System.Threading.Tasks;
 
 using TwitchLib.Api;
 using Newtonsoft.Json.Linq;
+using System.Data.SQLite;
 
 namespace FoxxiBot.TwitchBot
 {
     public class Twitch_GetData
     {
+
         public static async Task<bool> streamStatus()
         {
             // create twitch api instance
@@ -191,6 +193,30 @@ namespace FoxxiBot.TwitchBot
 
             var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
             return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: "+ channel.Data[0].GameName  + " @ http://twitch.tv/" + user.Users[0].Login;
+        }
+
+        public static string userPoints(string userId)
+        {
+
+            string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+
+            string stm = "SELECT * FROM gb_points WHERE username = '" + userId + "' LIMIT 1";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows == true)
+            {
+                while (rdr.Read())
+                {
+                    return rdr["value"].ToString();
+                }
+            }
+
+            con.Close();
+            return "0";
         }
 
     }

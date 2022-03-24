@@ -4,6 +4,15 @@ $(document).ready(function() {
 	$('#p1_name').autoComplete({
 		resolver: 'custom',
 		formatResult: function (item) {
+			$('#p1_tag').val(item.tag);
+			$('#p1_country').val(item.country);
+			$('#p1_country_code').val(item.country_code);
+
+			$('#modal_edit_player1_tag').val(item.tag);
+			$('#modal_edit_player1_name').val(item.name);
+			$('#modal_edit_player1_country').val(item.country);
+			$('#modal_edit_player1_country_code').val(item.country_code);
+
 			return {
 				value: item.name,
 				text: item.name,
@@ -27,6 +36,15 @@ $(document).ready(function() {
 	$('#p2_name').autoComplete({
 		resolver: 'custom',
 		formatResult: function (item) {
+			$('#p2_tag').val(item.tag);
+			$('#p2_country').val(item.country);
+			$('#p2_country_code').val(item.country_code);
+
+			$('#modal_edit_player2_tag').val(item.tag);
+			$('#modal_edit_player2_name').val(item.name);
+			$('#modal_edit_player2_country').val(item.country);
+			$('#modal_edit_player2_country_code').val(item.country_code);
+
 			return {
 				value: item.name,
 				text: item.name,
@@ -46,10 +64,55 @@ $(document).ready(function() {
 		}
 	});
 
+	// Modal Edit Name
+	$('#modal_edit_player_name').autoComplete({
+		resolver: 'custom',
+		formatResult: function (item) {
+			$('#modal_edit_player_tag').val(item.tag);
+			$('#modal_edit_player_country').val(item.country);
+			$('#modal_edit_player_country_code').val(item.country_code);
+
+			return {
+				value: item.name,
+				text: item.name,
+			};
+		},
+		events: {
+			search: function (qry, callback) {
+			$.ajax(
+				'/api.php?state=get&table=gb_tournament_players&where=name LIKE "' + $('#modal_edit_player_name').val() + '%"',
+				{
+					data: { 'name': qry}
+				}
+				).done(function (res) {
+					callback(res)
+				});
+			}
+		}
+	});
+
+	// Clear Edit Modal 1
+	$("#edit_modal1_close").click(function() {
+		$('#modal_edit_player1_tag').val("");
+		$('#modal_edit_player1_name').val("");
+		$('#modal_edit_player1_country').val("");
+		$('#modal_edit_player1_country_code').val("");
+	});
+
+	// Clear Edit Modal 2
+	$("#edit_modal1_close").click(function() {
+		$('#modal_edit_player2_tag').val("");
+		$('#modal_edit_player2_name').val("");
+		$('#modal_edit_player2_country').val("");
+		$('#modal_edit_player2_country_code').val("");
+	});
+
 	// Player 1 Country Loader
 	$('#p1_country').autoComplete({
 		resolver: 'custom',
 		formatResult: function (item) {
+			$('#p1_country_code').val(item.code);
+
 			return {
 				value: item.code,
 				text: item.name,
@@ -63,11 +126,115 @@ $(document).ready(function() {
 					data: { 'name': qry}
 				}
 				).done(function (res) {
-					callback(res)
+					let name = res.filter( (e) => { return e.name.indexOf(qry) > -1 } );
+					callback(name)
 				});
 			}
 		}
 	});
+
+	// Player 2 Country Loader
+	$('#p2_country').autoComplete({
+		resolver: 'custom',
+		formatResult: function (item) {
+			$('#p2_country_code').val(item.code);
+			return {
+				value: item.code,
+				text: item.name,
+			};
+		},
+		events: {
+			search: function (qry, callback) {
+			$.ajax(
+				'pages/tournament/js/countries.php',
+				{
+					data: { 'name': qry}
+				}
+				).done(function (res) {
+					let results = res.filter( (e) => { return e.name.indexOf(qry) > -1 } );
+					callback(results)
+				});
+			}
+		}
+	});
+
+	// Modal Country Loader
+	$('#modal_player_country').autoComplete({
+		resolver: 'custom',
+		formatResult: function (item) {
+			$('#modal_player_country_code').val(item.code);
+
+			return {
+				value: item.code,
+				text: item.name,
+			};
+		},
+		events: {
+			search: function (qry, callback) {
+			$.ajax(
+				'pages/tournament/js/countries.php',
+				{
+					data: { 'name': qry}
+				}
+				).done(function (res) {
+					let name = res.filter( (e) => { return e.name.indexOf(qry) > -1 } );
+					callback(name)
+				});
+			}
+		}
+	});
+
+	// Edit Modal Country Loader
+	$('#modal_edit_player1_country').autoComplete({
+		resolver: 'custom',
+		formatResult: function (item) {
+			$('#modal_edit_player1_country_code').val(item.code);
+
+			return {
+				value: item.code,
+				text: item.name,
+			};
+		},
+		events: {
+			search: function (qry, callback) {
+			$.ajax(
+				'pages/tournament/js/countries.php',
+				{
+					data: { 'name': qry}
+				}
+				).done(function (res) {
+					let name = res.filter( (e) => { return e.name.indexOf(qry) > -1 } );
+					callback(name)
+				});
+			}
+		}
+	});
+
+	// Edit Modal Country Loader
+	$('#modal_edit_player2_country').autoComplete({
+		resolver: 'custom',
+		formatResult: function (item) {
+			$('#modal_edit_player2_country_code').val(item.code);
+
+			return {
+				value: item.code,
+				text: item.name,
+			};
+		},
+		events: {
+			search: function (qry, callback) {
+			$.ajax(
+				'pages/tournament/js/countries.php',
+				{
+					data: { 'name': qry}
+				}
+				).done(function (res) {
+					let name = res.filter( (e) => { return e.name.indexOf(qry) > -1 } );
+					callback(name)
+				});
+			}
+		}
+	});	
 
     // Sanitize HTML Input
 	function sanitizeHTML(unsafe) {
@@ -79,7 +246,7 @@ $(document).ready(function() {
 			 .replace(/'/g, "&#039;");
 	 }
 
-	 // this is the id of the form
+	 // Save the Data to the Scoreboard
 	 $(" #save_scoreboard" ).submit(function(e) {
 
 		e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -93,7 +260,136 @@ $(document).ready(function() {
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data)
 			{
-			  console.log("Data Saved");
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Data Saved to the Scoreboard'
+                })
+			}
+		});
+		
+	 });
+
+	 // Save the Player Data to the Database
+	 $(" #save_player" ).submit(function(e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		var form = $(this);
+		var actionUrl = form.attr('action');
+		
+		$.ajax({
+			type: "POST",
+			url: actionUrl,
+			data: form.serialize(), // serializes the form's elements.
+			error: function(data)
+			{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'An error has occured'
+                })
+			},
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Player Saved to the Database'
+                })
+
+				// Clear Data on Save
+				$('#modal_player_tag').val("");
+				$('#modal_player_name').val("");
+				$('#modal_player_country').val("");
+				$('#modal_player_country_code').val("");
+
+				// Close Modal
+				$('#addModal').modal('toggle');
+			}
+		});
+		
+	 });
+
+	 // Send Player 1 Edit Data to the Database
+	 $(" #edit_player1" ).submit(function(e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		var name = document.getElementById("modal_edit_player1_name").value;
+
+		var form = $(this);
+		var actionUrl = form.attr('action');
+		
+		$.ajax({
+			type: "POST",
+			url: actionUrl,
+			data: form.serialize(), // serializes the form's elements.
+			error: function(data)
+			{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'An error has occured'
+                })
+			},
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Player Named '+ name +' has been Updated in the Database'
+                })
+
+				$('#p1_tag').val(document.getElementById("modal_edit_player1_tag").value);
+				$('#p1_country').val(document.getElementById("modal_edit_player1_country").value);
+				$('#p1_country_code').val(document.getElementById("modal_edit_player1_country_code").value);
+
+				// Clear Data on Save
+				$('#modal_edit_player1_tag').val("");
+				$('#modal_edit_player1_name').val("");
+				$('#modal_edit_player1_country').val("");
+				$('#modal_edit_player1_country_code').val("");
+
+				// Close Modal
+				$('#editModal1').modal('toggle');
+			}
+		});
+		
+	 });
+
+	 // Send Player 2 Edit Data to the Database
+	 $(" #edit_player2" ).submit(function(e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		var name = document.getElementById("modal_edit_player2_name").value;
+
+		var form = $(this);
+		var actionUrl = form.attr('action');
+		
+		$.ajax({
+			type: "POST",
+			url: actionUrl,
+			data: form.serialize(), // serializes the form's elements.
+			error: function(data)
+			{
+                Toast.fire({
+                    icon: 'error',
+                    title: 'An error has occured'
+                })
+			},
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Player Named '+ name +' has been Updated in the Database'
+                })
+
+				$('#p2_tag').val(document.getElementById("modal_edit_player2_tag").value);
+				$('#p2_country').val(document.getElementById("modal_edit_player2_country").value);
+				$('#p2_country_code').val(document.getElementById("modal_edit_player2_country_code").value);
+
+				// Clear Data on Save
+				$('#modal_edit_player2_tag').val("");
+				$('#modal_edit_player2_name').val("");
+				$('#modal_edit_player2_country').val("");
+				$('#modal_edit_player2_country_code').val("");
+
+				// Close Modal
+				$('#editModal2').modal('toggle');
 			}
 		});
 		
@@ -110,7 +406,7 @@ $(document).ready(function() {
 		player1name = $('#p1_name').val();
 		player1country = $('#p1_country').val();
 		player1countrycode = $('#p1_country_code').val();
-		player1status = $('#1_status').val();
+		player1status = $('#p1_status').val();
 		player1score = $('#p1_score').val();
 		player1position = $('#p1_position').val();
 		
@@ -161,6 +457,16 @@ $(document).ready(function() {
 		$('#p1_position').val('0');
 		$('#p2_position').val('0');
 
+		$('#modal_edit_player1_tag').val("");
+		$('#modal_edit_player1_name').val("");
+		$('#modal_edit_player1_country').val("");
+		$('#modal_edit_player1_country_code').val("");
+
+		$('#modal_edit_player2_tag').val("");
+		$('#modal_edit_player2_name').val("");
+		$('#modal_edit_player2_country').val("");
+		$('#modal_edit_player2_country_code').val("");
+
 		manualSave();
 	});	
 	
@@ -172,6 +478,11 @@ $(document).ready(function() {
 		$('#p1_country_code').val('');
 		$('#p1_status').val('');
 
+		$('#modal_edit_player1_tag').val("");
+		$('#modal_edit_player1_name').val("");
+		$('#modal_edit_player1_country').val("");
+		$('#modal_edit_player1_country_code').val("");
+
 		manualSave();
 	});
 
@@ -182,6 +493,11 @@ $(document).ready(function() {
 		$('#p2_country').val('');
 		$('#p2_country_code').val('');
 		$('#p2_status').val('');
+
+		$('#modal_edit_player2_tag').val("");
+		$('#modal_edit_player2_name').val("");
+		$('#modal_edit_player2_country').val("");
+		$('#modal_edit_player2_country_code').val("");
 
 		manualSave();
 	});
@@ -215,12 +531,12 @@ $(document).ready(function() {
 	});	
 
 	// Save Scores -- Auto
-	$("#p1_score, #p2_score").change(function() {
+	$("#p1_score, #p2_score").blur(function() {
 		manualSave();
 	});
 
 	// Save Position -- Auto
-	$("#p1_position, #p2_position").change(function() {
+	$("#p1_position, #p2_position").blur(function() {
 		manualSave();
 	});
 

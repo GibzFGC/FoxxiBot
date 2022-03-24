@@ -62,8 +62,8 @@ foreach($result as $row)
               <div class="card-header">
                 <h3 class="card-title">Player 1 Settings</h3>
 
-                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" id="tournament-edit-player"> Edit a Player</button>
-                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" id="tournament-add-player"> Add a Player</button>
+                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" data-toggle="modal" data-target="#editModal1" id="tournament-edit-player"> Edit a Player</button>
+                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" data-toggle="modal" data-target="#addModal" id="tournament-add-player"> Add a Player</button>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
@@ -80,8 +80,8 @@ foreach($result as $row)
 
                   <div class="form-group">
                     <label for="p1_country">Player Country</label>
-                    <input type="text" class="form-control" id="p1_country" name="p1_country" autocomplete="off" placeholder="Select a Country">
-                    <input type="hidden" class="form-control" id="p1_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p1Country"]; ?>">
+                    <input type="text" class="form-control" id="p1_country" name="p1_country" autocomplete="off" placeholder="Select a Country" value="<?php print $options["p1Country"]; ?>">
+                    <input type="hidden" class="form-control" id="p1_country_code" name="p1_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p1CountryCode"]; ?>">
                   </div>
 
                   <div class="form-group">
@@ -130,8 +130,8 @@ foreach($result as $row)
               <div class="card-header">
                 <h3 class="card-title">Player 2 Settings</h3>
 
-                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" id="tournament-edit-player"> Edit a Player</button>
-                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" id="tournament-add-player"> Add a Player</button>
+                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" data-toggle="modal" data-target="#editModal2" id="tournament-edit-player"> Edit a Player</button>
+                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" data-toggle="modal" data-target="#addModal" id="tournament-add-player"> Add a Player</button>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
@@ -148,8 +148,8 @@ foreach($result as $row)
 
                   <div class="form-group">
                     <label for="p2_country">Player Country</label>
-                    <input type="text" class="form-control" id="p2_country" name="p2_country" autocomplete="off" placeholder="Select a Country">
-                    <input type="hidden" class="form-control" id="p2_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p2Country"]; ?>">
+                    <input type="text" class="form-control" id="p2_country" name="p2_country" autocomplete="off" placeholder="Select a Country" value="<?php print $options["p2Country"]; ?>">
+                    <input type="hidden" class="form-control" id="p2_country_code" name="p2_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p2CountryCode"]; ?>">
                   </div>
 
                   <div class="form-group">
@@ -315,6 +315,138 @@ foreach($result as $row)
             </div>
         </div>
     </section>
+
+  <!-- Add Player Modal -->
+  <div class="modal" id="addModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add a Player</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Form Start -->
+        <form method="post" id="save_player" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=funcs&v=save_player">
+
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="p2_tag">Group Tag / Organisation</label>
+              <input type="text" class="form-control" id="modal_player_tag" name="modal_player_tag" placeholder="Enter the Players Tag / Organisation">
+            </div>
+
+            <div class="form-group">
+              <label for="p2_name">Player Name</label>
+              <input type="text" class="form-control" id="modal_player_name" name="modal_player_name" placeholder="Enter the Players Name" autocomplete="off" required>
+            </div>
+
+            <div class="form-group">
+              <label for="p2_country">Player Country</label>
+              <input type="text" class="form-control" id="modal_player_country" name="modal_player_country" autocomplete="off" placeholder="Select a Country" required>
+              <input type="hidden" class="form-control" id="modal_player_country_code" name="modal_player_country_code" placeholder="Player Country" title="Player Country" autocomplete="off">
+            </div>
+
+          </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Player Data</button>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- Edit Player 1 Modal -->
+    <div class="modal" id="editModal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editing Player 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Form Start -->
+        <form method="post" id="edit_player1" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=funcs&v=edit_player1">
+
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="modal_edit_player1_tag">Group Tag / Organisation</label>
+              <input type="text" class="form-control" id="modal_edit_player1_tag" name="modal_edit_player1_tag" placeholder="Enter the Players Tag / Organisation" value="<?php print $options["p1Tag"]; ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="modal_edit_player1_name">Player Name <small>(Read Only)</small></label>
+              <input type="text" class="form-control" id="modal_edit_player1_name" name="modal_edit_player1_name" placeholder="Enter the Players Name" autocomplete="off" readonly value="<?php print $options["p1Name"]; ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="modal_edit_player1_country">Player Country</label>
+              <input type="text" class="form-control" id="modal_edit_player1_country" name="modal_edit_player1_country" autocomplete="off" placeholder="Select a Country" required value="<?php print $options["p1Country"]; ?>">
+              <input type="hidden" class="form-control" id="modal_edit_player1_country_code" name="modal_edit_player1_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p1CountryCode"]; ?>">
+            </div>
+
+          </div>
+        
+        <div class="modal-footer">
+          <button type="button" id="edit_modal1_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Player Data</button>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- Edit Player 2 Modal -->
+    <div class="modal" id="editModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editing Player 2</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Form Start -->
+        <form method="post" id="edit_player2" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=funcs&v=edit_player2">
+
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="modal_edit_player2_tag">Group Tag / Organisation</label>
+              <input type="text" class="form-control" id="modal_edit_player2_tag" name="modal_edit_player2_tag" placeholder="Enter the Players Tag / Organisation" value="<?php print $options["p2Tag"]; ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="modal_edit_player2_name">Player Name <small>(Read Only)</small></label>
+              <input type="text" class="form-control" id="modal_edit_player2_name" name="modal_edit_player2_name" placeholder="Enter the Players Name" autocomplete="off" readonly value="<?php print $options["p2Name"]; ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="modal_edit_player2_country">Player Country</label>
+              <input type="text" class="form-control" id="modal_edit_player2_country" name="modal_edit_player2_country" autocomplete="off" placeholder="Select a Country" required value="<?php print $options["p2Country"]; ?>">
+              <input type="hidden" class="form-control" id="modal_edit_player2_country_code" name="modal_edit_player2_country_code" placeholder="Player Country" title="Player Country" autocomplete="off" value="<?php print $options["p2CountryCode"]; ?>">
+            </div>
+
+          </div>
+        
+        <div class="modal-footer">
+          <button type="button" id="edit_modal2_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Player Data</button>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="<?php print $gfw['template_path']; ?>/plugins/jquery/jquery.min.js"></script>
   <script src="/pages/tournament/js/tournament_scoreboard.js"></script>

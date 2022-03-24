@@ -135,6 +135,7 @@ foreach($data as $edit)
                     {dice} - rolls a dice and returns a random value<br />
                     {follows} - returns the amount of followers on your channel<br />
                     {game} - returns the currently played game<br />
+                    {points} - returns the current points for the user<br />
                     {sender} - returns the command users display name<br />
                     {title} - returns the current stream title<br />
                     {uptime} - returns the live stream time of your channel<br />

@@ -27,7 +27,7 @@ namespace FoxxiBot.TwitchBot
     public class Twitch_Variables
     {
 
-        public string convertVariables(string commandText, string input, string displayName)
+        public string convertVariables(string commandText, string input, string displayName, string username)
         {
 
             var new_string = input;
@@ -61,6 +61,12 @@ namespace FoxxiBot.TwitchBot
             {
                 var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
                 new_string = new_string.Replace("{game}", data.ToString());
+            }
+
+            if (new_string.Contains("{points}"))
+            {
+                var data = Twitch_GetData.userPoints(username);
+                new_string = new_string.Replace("{points}", data.ToString());
             }
 
             if (new_string.Contains("{sender}"))

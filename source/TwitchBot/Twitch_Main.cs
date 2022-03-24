@@ -39,6 +39,7 @@ namespace FoxxiBot.TwitchBot
 
         private Timer oauthTimer = null;
         private Timer liveTimer = null;
+        private Timer pointsTimer = null;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
 
@@ -92,11 +93,29 @@ namespace FoxxiBot.TwitchBot
             SQLite.twitchSQL TwitchSQl = new SQLite.twitchSQL();
             TwitchSQl.eraseWatchlist();
 
+            // Start Points Timer
+            pointsTimer = new Timer(pointsUpdate, null, 0, 300000);
+
             // Start Live Check Timer
             liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
             // Start OAuth Timer
             oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+        }
+
+        private void pointsUpdate(object state)
+        {
+            // Increase all Viewers Points Count
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+
+            string stm = "UPDATE gb_points SET value = value + 10 WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+
+            using var updateUser = new SQLiteCommand(stm, con);
+            updateUser.Prepare();
+            updateUser.ExecuteNonQuery();
+
+            con.Close();
         }
 
         private void streamLiveCallBack(object state)
@@ -600,7 +619,7 @@ namespace FoxxiBot.TwitchBot
                         if (e.ChatMessage.UserType >= (UserType)Enum.Parse(typeof(UserType), rdr["permission"].ToString()))
                         {
                             Twitch_Variables variables = new Twitch_Variables();
-                            var var_string = variables.convertVariables(e.ChatMessage.Message, (string)rdr["response"], e.ChatMessage.DisplayName);
+                            var var_string = variables.convertVariables(e.ChatMessage.Message, (string)rdr["response"], e.ChatMessage.DisplayName, e.ChatMessage.Username);
                             client.SendMessage(e.ChatMessage.Channel, var_string);
                         }
                     }
@@ -642,7 +661,17 @@ namespace FoxxiBot.TwitchBot
             insertCmd.Prepare();
             insertCmd.ExecuteNonQuery();
 
+            using var insertUser = new SQLiteCommand(con);
+
+            insertUser.CommandText = "INSERT or IGNORE INTO gb_points(username, value) VALUES (@username, @value)";
+            insertUser.Parameters.AddWithValue("@username", e.Username);
+            insertUser.Parameters.AddWithValue("@value", "0");
+
+            insertUser.Prepare();
+            insertUser.ExecuteNonQuery();
+
             con.Close();
+
         }
 
         private void Client_UserLeft(object sender, OnUserLeftArgs e)

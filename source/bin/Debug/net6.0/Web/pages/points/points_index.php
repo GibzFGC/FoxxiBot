@@ -115,9 +115,9 @@ foreach($result as $row)
               <!-- /.card-body -->
               
               <div class="card-footer">
-                <button style="float: right;" type="submit" class="btn btn-v-sm btn-primary">Take from All</button>
-                <button style="float: right;" type="submit" class="btn btn-v-sm btn-primary btn-spacer">Give to All</button>
-                <button style="float: right;" type="submit" class="btn btn-v-sm btn-primary btn-spacer">Make it Rain!</button>
+                <button style="float: right;" id="take_from_all" class="btn btn-v-sm btn-primary">Take from All</button>
+                <button style="float: right;" id="give_to_all" class="btn btn-v-sm btn-primary btn-spacer">Give to All</button>
+                <button style="float: right;" id="make_it_rain" class="btn btn-v-sm btn-primary btn-spacer">Make it Rain!</button>
               </div>
 
             </div>
