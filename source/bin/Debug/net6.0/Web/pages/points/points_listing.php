@@ -66,7 +66,6 @@ $result = $PDO->query("SELECT * FROM gb_points");
                     <td>". $row["username"] ."</td>
                     <td>". $row["value"] ."</td>
                     <td>
-                      <a href=\"$gfw[site_url]/index.php?p=points&a=edit&id=$row[username]\" class=\"btn btn-warning btn-sm\">Edit</a>
                       <a onclick=\"return confirm('Are you sure you want to delete this user and their points?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">Delete</a>                    
                     </td>
                   </tr>
