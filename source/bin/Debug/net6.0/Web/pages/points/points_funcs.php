@@ -18,7 +18,11 @@ if ($_REQUEST["v"] == "save") {
 
     $sql = 'INSERT OR REPLACE INTO gb_points_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
     $stmt = $PDO->prepare($sql);
-    
+
+    $stmt->bindValue(':parameter', "points_active");
+    $stmt->bindValue(':value', $_POST["points_active"]);
+    $stmt->execute();
+
     $stmt->bindValue(':parameter', "points_name");
     $stmt->bindValue(':value', $_POST["points_name"]);
     $stmt->execute();
