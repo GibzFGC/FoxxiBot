@@ -22,8 +22,8 @@ foreach($result as $row)
   $options[$row["parameter"]] = $row["value"];
 }
 ?>
-<!-- Custom CSS -->
-<link rel="stylesheet" href="/pages/tournament/css/tournament_scoreboard.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/pages/tournament/css/tournament_scoreboard.css">
 
   <!-- Form Start -->
   <form method="post" id="save_scoreboard" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=funcs&v=scoreboard_save">
