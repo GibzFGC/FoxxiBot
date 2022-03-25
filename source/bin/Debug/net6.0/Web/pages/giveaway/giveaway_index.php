@@ -180,8 +180,9 @@ foreach($result as $row)
                         $n_result = $PDO->query("SELECT value FROM gb_twitch_options WHERE parameter='Giveaway_Winner' LIMIT 1");
                         foreach($n_result as $n_row)
                         {
-                          $winner = json_decode($n_row["value"]);
+                          $winner = json_decode($n_row["value"], true);
 
+                          if (!empty($winner)) {
                           print '
                           <li class="nav-item">
                             <span class="nav-link">User ID:
@@ -201,6 +202,15 @@ foreach($result as $row)
                             </span>
                           </li>
                           ';
+                          } else {
+                            print '
+                            <li class="nav-item">
+                            <span class="nav-link">System:
+                              <span class="float-right">No giveaway winner yet</span>
+                            </span>
+                          </li>
+                          ';
+                          }
                         }
                       ?>
 
