@@ -55,5 +55,26 @@ namespace FoxxiBot.SQLite
             functions.SaveConfig().GetAwaiter().GetResult();
         }
 
+        public string pointOptions(string parameter)
+        {
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+            var stm = $"SELECT value FROM gb_points_options WHERE parameter='{parameter}' LIMIT 1";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows == true)
+            {
+                while (rdr.Read())
+                {
+                    return rdr["value"].ToString();
+                }
+            }
+
+            con.Close();
+            return null;
+        }
+
     }
 }

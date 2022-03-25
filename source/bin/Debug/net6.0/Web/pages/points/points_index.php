@@ -133,9 +133,19 @@ foreach($result as $row)
           <form method="post" id="points_settings" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=funcs&v=save">          
 
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card">
               <div class="card-header">
-                <h3 class="card-title">Main Points Settings</h3>
+                <h3 style="margin-top: 4px;" class="card-title">Main Points Settings</h3>
+
+                <div class="card-tools">
+                <?php
+                  if ($options["points_active"] == "off") {
+                    print '<input type="checkbox" name="points_active" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  } else {
+                    print '<input type="checkbox" name="points_active" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  }
+                ?>
+                </div>                
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
@@ -170,6 +180,11 @@ foreach($result as $row)
 
           </div>
           <!--/.col (third) -->
+
+          <script type="text/javascript">
+            const username = '<?php print $gfw["Twitch_ClientUser"]; ?>'
+            const channel = '<?php print $gfw["Twitch_BroadcasterChannel"]; ?>'
+          </script>
 
           <script src="<?php print $gfw['template_path']; ?>/plugins/jquery/jquery.min.js"></script>
           <script src="/pages/points/js/points.js"></script>

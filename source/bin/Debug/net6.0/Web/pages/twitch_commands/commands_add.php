@@ -118,6 +118,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     {follows} - returns the amount of followers on your channel<br />
                     {game} - returns the currently played game<br />
                     {points} - returns the current points for the user<br />
+                    {points_name} - returns the current points name in the bot<br />
                     {sender} - returns the command users display name<br />
                     {title} - returns the current stream title<br />
                     {uptime} - returns the live stream time of your channel<br />

@@ -46,12 +46,24 @@ if ($_REQUEST["v"] == "update_user") {
 
 if ($_REQUEST["v"] == "rain") {
 
+    $sql = "UPDATE gb_points SET value = value + $_REQUEST[points] WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+    
 }
 
 if ($_REQUEST["v"] == "give") {
 
+    $sql = "UPDATE gb_points SET value = value + $_REQUEST[points] WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+
 }
 
 if ($_REQUEST["v"] == "take") {
-    
+ 
+    $sql = "UPDATE gb_points SET value = value - $_REQUEST[points] WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+
 }

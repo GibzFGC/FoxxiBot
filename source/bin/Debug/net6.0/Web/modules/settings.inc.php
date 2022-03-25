@@ -17,9 +17,10 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 // Read Bot JSON / Get Twitch API Data
 	$gfw["bot_config"] = file_get_contents("../Data/config.json");
 	$bot_obj = json_decode($gfw["bot_config"]);
-
+	
 	$gfw["Twitch_ClientID"] = $bot_obj->TwitchClientID;
 	$gfw["Twitch_ClientOAuth"] = $bot_obj->TwitchClientOAuth;
+	$gfw["Twitch_ClientUser"] = $bot_obj->TwitchClientUser;
 	$gfw["Twitch_BroadcasterId"] = $bot_obj->TwitchBroadcasterId;
 	$gfw["Twitch_BroadcasterChannel"] = $bot_obj->TwitchClientChannel;
 

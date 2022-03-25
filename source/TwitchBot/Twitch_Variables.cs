@@ -69,6 +69,12 @@ namespace FoxxiBot.TwitchBot
                 new_string = new_string.Replace("{points}", data.ToString());
             }
 
+            if (new_string.Contains("{points_name}"))
+            {
+                SQLite.botSQL botSQL = new SQLite.botSQL();
+                new_string = new_string.Replace("{points_name}", botSQL.pointOptions("points_name").ToString());
+            }
+
             if (new_string.Contains("{sender}"))
             {
                 new_string = new_string.Replace("{sender}", displayName);

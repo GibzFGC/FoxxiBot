@@ -93,6 +93,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_active', 'off')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_name', 'Bot Points')";
             cmd.ExecuteNonQuery();
 

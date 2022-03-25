@@ -105,17 +105,33 @@ namespace FoxxiBot.TwitchBot
 
         private void pointsUpdate(object state)
         {
-            // Increase all Viewers Points Count
-            using var con = new SQLiteConnection(cs);
-            con.Open();
 
-            string stm = "UPDATE gb_points SET value = value + 10 WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+            SQLite.botSQL botSQL = new SQLite.botSQL();
 
-            using var updateUser = new SQLiteCommand(stm, con);
-            updateUser.Prepare();
-            updateUser.ExecuteNonQuery();
+            // If Points System Active
+            if (botSQL.pointOptions("points_active") == "on") {
 
-            con.Close();
+                // Give Points if Live
+                if (streamStatus == true)
+                {
+
+                    // Get Increment Value
+                    var increment = botSQL.pointOptions("points_increment");
+
+                    // Increase all Current Viewers Points Count
+                    using var con = new SQLiteConnection(cs);
+                    con.Open();
+
+                    string stm = "UPDATE gb_points SET value = value + " + increment + " WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+
+                    using var updateUser = new SQLiteCommand(stm, con);
+                    updateUser.Prepare();
+                    updateUser.ExecuteNonQuery();
+
+                    con.Close();
+
+                }
+            }
         }
 
         private void streamLiveCallBack(object state)
