@@ -120,6 +120,54 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_tournament_scoreboard (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1Tag', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1Name', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1Country', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1CountryCode', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1Status', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1Score', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p1TeamPosition', '0')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2Tag', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2Name', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2Country', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2CountryCode', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2Status', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2Score', '')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('p2TeamPosition', '0')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('tournamentRound', 'Pools')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_tournament_scoreboard (parameter, value) VALUES('tournamentRound', 'Round 1 - Best of 3')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
             cmd.ExecuteNonQuery();
 
