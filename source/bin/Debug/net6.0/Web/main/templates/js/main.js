@@ -12,7 +12,11 @@ $(document).ready(function() {
   });
 
   $('#gb_notifications').DataTable( {
-        "order": [[ 0, "desc" ]]
+    "order": [[ 0, "desc" ]]
+  });
+
+  $('#gb_points_rankings').DataTable( {
+    "order": [[ 1, "desc" ]]
   });
 
   //Initialize Select2 Elements

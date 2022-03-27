@@ -11,15 +11,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Jint;
 using Jint.Runtime.Interop;
-using Jint.Native.Json;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
 using System.Threading;

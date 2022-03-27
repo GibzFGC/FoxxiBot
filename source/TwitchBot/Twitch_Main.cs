@@ -14,20 +14,13 @@ using System;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
-using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Models;
 
-using FoxxiBot;
-using Newtonsoft.Json;
-using System.IO;
 using TwitchLib.PubSub;
 using System.Data.SQLite;
 using System.Threading;
-using System.Media;
-using System.Runtime.InteropServices;
-using Newtonsoft.Json.Linq;
 
 namespace FoxxiBot.TwitchBot
 {
