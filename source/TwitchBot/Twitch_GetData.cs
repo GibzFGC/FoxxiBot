@@ -79,6 +79,22 @@ namespace FoxxiBot.TwitchBot
             return (timeDifference.Days / 365 + " years " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
         }
 
+        public static async Task<string> getFollowAge(string user_id)
+        {
+            // create twitch api instance
+            var api = new TwitchAPI();
+            api.Settings.ClientId = Config.TwitchClientId;
+            api.Settings.AccessToken = Config.TwitchClientOAuth;
+
+            var data = await api.Helix.Users.GetUsersFollowsAsync(toId: user_id);
+
+            DateTime current_time = DateTime.Now;
+            DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());
+
+            TimeSpan timeDifference = current_time - user_time;
+            return (timeDifference.Days / 365 + " years " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+        }
+
         public static async Task<string> getFollows()
         {
             // create twitch api instance

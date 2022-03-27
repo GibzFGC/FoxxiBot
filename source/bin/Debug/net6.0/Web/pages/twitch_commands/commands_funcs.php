@@ -16,7 +16,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
 if ($_REQUEST["v"] == "save") {
 
-    if ($_POST["commandName"] == "so" || $_POST["commandName"] == "quote" || $_POST["commandName"] == "age" || $_POST["commandName"] == "sound" || $_POST["commandName"] == "audio" || $_POST["commandName"] == "play") {
+    if ($_POST["commandName"] == "so" || $_POST["commandName"] == "quote" || $_POST["commandName"] == "age" || $_POST["commandName"] == "followage" || $_POST["commandName"] == "sound" || $_POST["commandName"] == "audio" || $_POST["commandName"] == "play") {
 
         // Redirect
         $URL="$gfw[site_url]/index.php?p=twitch_commands&s=error";

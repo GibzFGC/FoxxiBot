@@ -312,6 +312,14 @@ namespace FoxxiBot.TwitchBot
                 return;
             }
 
+            // Follow Age Handler
+            if (e.Command.CommandText == "followage")
+            {
+                var result = commands.commandFollowAge(e);
+                SendChatMessage(result);
+                return;
+            }
+
             // Giveaway Handler
             if (e.Command.CommandText == "gw" || e.Command.CommandText == "giveaway")
             {
