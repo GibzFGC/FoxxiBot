@@ -70,6 +70,8 @@ namespace FoxxiBot.TwitchBot
             client.OnUserJoined += Client_UserJoined;
             client.OnUserLeft += Client_UserLeft;
 
+            client.OnChatCommandReceived += Client_OnChatCommandReceived;
+
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
             pubsub.OnListenResponse += Pubsub_OnListenResponse;
             pubsub.OnStreamUp += Pubsub_OnStreamUp;
@@ -296,11 +298,85 @@ namespace FoxxiBot.TwitchBot
             client.SendMessage(e.Channel, $"Hey and thanks for coming along, we'll be going live shortly!!");
         }
 
-        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
 
-            // split into args
-            var twitchMsg = e.ChatMessage.Message.Split(" ");
+            Twitch_Commands commands = new Twitch_Commands();
+
+            // Account Age Handler
+            if (e.Command.CommandText == "age")
+            {
+                var result = commands.commandAccountAge(e);
+                SendChatMessage(result);
+                return;
+            }
+
+            // Deaths Handler
+            if (e.Command.CommandText == "deaths")
+            {
+                var result = commands.commandDeaths(e);
+                SendChatMessage(result);
+                return;
+            }
+
+            // Giveaway Handler
+            if (e.Command.CommandText == "gw" || e.Command.CommandText == "giveaway")
+            {
+                var result = commands.commandGiveaway(e);
+                SendChatMessage(result);
+                return;
+            }
+
+            // Shoutout Handler
+            if (e.Command.CommandText == "so" || e.Command.CommandText == "shoutout")
+            {
+                var result = commands.commandShoutout(e);
+                SendChatMessage(result);
+                return;
+            }
+
+            // Sound Handler
+            if (e.Command.CommandText == "sound" || e.Command.CommandText == "audio" || e.Command.CommandText == "play")
+            {
+                var result = commands.commandSound(e);
+                SendChatMessage(result);
+                return;
+            }
+
+            // If command not development defined, check users custom in SQLite
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+
+            string stm = "SELECT * FROM gb_commands WHERE name = '!" + e.Command.CommandText + "' AND active = 1";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows == true)
+            {
+                while (rdr.Read())
+                {
+                    if (e.Command.ChatMessage.UserType >= (UserType)Enum.Parse(typeof(UserType), rdr["permission"].ToString()))
+                    {
+                        Twitch_Variables variables = new Twitch_Variables();
+                        var var_string = variables.convertVariables(e.Command.ChatMessage.Message, (string)rdr["response"], e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
+                        SendChatMessage(var_string);
+                    }
+                }
+            }
+            else
+            {
+                // Check if Plugin
+                Twitch_Jint plugin = new Twitch_Jint();
+                plugin.ExecPlugin(e.Command.ChatMessage.Channel, e, client, e.Command.ChatMessage.Message);
+            }
+
+            con.Close();
+
+        }
+
+        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        {
 
             // Manage Moderation
             Twitch_Moderation moderation = new Twitch_Moderation();
@@ -406,249 +482,6 @@ namespace FoxxiBot.TwitchBot
                 }
             }
 
-            // Check if IsBroadcaster / IsModerator for Admin Commands
-            if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
-            {
-                if (twitchMsg[0].Equals("!command"))
-                {
-                    // Should I Implement???
-                    return;
-                }
-
-            }
-
-            // Do Giveaway!
-            if (twitchMsg[0].Equals("!gw") || twitchMsg[0].Equals("!giveaway"))
-            {
-
-                if (twitchMsg.Length == 1)
-                {
-
-                    // Is Giveaway Active?
-                    if (twitchSQL.getOptions("Giveaway_Status") == "on")
-                    {
-
-                        if (e.ChatMessage.IsBroadcaster)
-                        {
-                            client.SendMessage(e.ChatMessage.Channel, twitchSQL.getOptions("Giveaway_Details"));
-                            return;
-                        }
-
-
-                        if (e.ChatMessage.IsStaff)
-                        {
-                            if (twitchSQL.getOptions("Giveaway_AllowTwitchStaff") == "on")
-                            {
-                                twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
-                                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
-                            }
-                            else
-                            {
-                                client.SendMessage(e.ChatMessage.Channel, "Sorry, Twitch Staff are excempt from this giveaway");
-                            }
-
-                            return;
-                        }
-
-                        if (e.ChatMessage.IsModerator)
-                        {
-                            if (twitchSQL.getOptions("Giveaway_AllowMods") == "on")
-                            {
-                                twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
-                                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
-                            }
-                            else
-                            {
-                                client.SendMessage(e.ChatMessage.Channel, "Sorry, Channel Moderators are excempt from this giveaway");
-                            }
-
-                            return;
-                        }
-
-                        twitchSQL.giveawayContestant(e.ChatMessage.UserId, e.ChatMessage.Username, e.ChatMessage.DisplayName);
-                        client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", you have entered the giveaway!");
-                        return;
-                    }
-                    else
-                    {
-                        client.SendMessage(e.ChatMessage.Channel, "All recent giveaways have ended");
-                        return;
-                    }
-                
-                }
-
-                if (twitchMsg.Length > 1)
-                {
-                    if (twitchMsg[1].Equals("winner"))
-                    {
-                        if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
-                        {
-                            var giveaway_winner = twitchSQL.giveawayWinner();
-                            JObject o = (JObject)JToken.Parse(giveaway_winner);
-
-                            client.SendMessage(e.ChatMessage.Channel, o["data"][0]["display_name"] + ", you have won the giveaway!!");
-                            twitchSQL.updateOptions("Giveaway_Winner", giveaway_winner);
-                            return;
-                        }
-                    }                          
-                }
-            
-            }
-
-
-            // Do Shout Out!
-            if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip)
-            {
-                if (twitchMsg[0].Equals("!so"))
-                {
-                    // split into args
-                    var split = e.ChatMessage.Message.Replace("@", "").Split(" ");
-
-                    try
-                    {
-                        var data = Twitch_GetData.ShoutOut(split[1]).GetAwaiter().GetResult();
-                        client.SendMessage(e.ChatMessage.Channel, data);
-                        return;
-                    }
-                    catch
-                    {
-                        var data = Twitch_GetData.displayNametoUserID(split[1]).GetAwaiter().GetResult();
-
-                        var value = Twitch_GetData.ShoutOut(data).GetAwaiter().GetResult();
-                        client.SendMessage(e.ChatMessage.Channel, value);
-                        return;
-                    }
-                    finally
-                    {
-                        Console.WriteLine("!so user not found!");
-                    }
-                }
-            }
-
-
-            // Death Counter
-            if (twitchMsg[0].Equals("!deaths"))
-            {
-
-                if (twitchMsg.Length == 1)
-                {
-                    int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
-                    client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {deaths} time(s)");
-                    return;
-                }
-
-                if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator)
-                {
-                    if (twitchMsg.Length > 1)
-                    {
-                        if (twitchMsg[1].Equals("add"))
-                        {
-                            int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
-                            var update = deaths + 1;
-
-                            twitchSQL.updateOptions("deathCounter", update.ToString());
-                            client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {update} time(s)");
-                            return;
-                        }
-
-                        if (twitchMsg[1].Equals("sub"))
-                        {
-                            int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
-                            int update = deaths - 1;
-
-                            twitchSQL.updateOptions("deathCounter", update.ToString());
-                            client.SendMessage(e.ChatMessage.Channel, $"The streamer has died {update} time(s)");
-                            return;
-                        }
-
-                        if (twitchMsg[1].Equals("reset"))
-                        {
-                            int update = 0;
-
-                            twitchSQL.updateOptions("deathCounter", update.ToString());
-                            client.SendMessage(e.ChatMessage.Channel, $"The death counter has been reset");
-                            return;
-                        }
-                    }
-                }
-            }
-
-            // Get Users Age
-            if (twitchMsg[0].Equals("!age"))
-            {
-                var data = Twitch_GetData.getAccountAge(e.ChatMessage.UserId).GetAwaiter().GetResult();
-                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago");
-
-                return;
-            }
-
-            // Play Sound File
-            if (twitchMsg[0].Equals("!sound") || twitchMsg[0].Equals("!audio") || twitchMsg[0].Equals("!play"))
-            {
-
-                using var con = new SQLiteConnection(cs);
-                con.Open();
-
-                string stm = "SELECT * FROM gb_sounds WHERE name = '" + twitchMsg[1] + "' AND active = 1";
-
-                using var cmd = new SQLiteCommand(stm, con);
-                using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-                if (rdr.HasRows == true)
-                {
-
-                    while (rdr.Read())
-                    {
-
-                        // Windows Implementation
-                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                        {
-                            using (var soundPlayer = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "\\Files\\Sounds\\" + rdr["file"]))
-                            {
-                                soundPlayer.Play();
-                            }
-                        }
-
-                        client.SendMessage(e.ChatMessage.Channel, "Playing the Sound File: " + rdr["name"]);
-
-                    }
-
-                }
-
-                con.Close();
-            }
-
-            if (e.ChatMessage.Message.Contains("!"))
-            {
-                using var con = new SQLiteConnection(cs);
-                con.Open();
-
-                string stm = "SELECT * FROM gb_commands WHERE name = '" + twitchMsg[0] + "' AND active = 1";
-
-                using var cmd = new SQLiteCommand(stm, con);
-                using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-                if (rdr.HasRows == true)
-                {
-                    while (rdr.Read())
-                    {
-                        if (e.ChatMessage.UserType >= (UserType)Enum.Parse(typeof(UserType), rdr["permission"].ToString()))
-                        {
-                            Twitch_Variables variables = new Twitch_Variables();
-                            var var_string = variables.convertVariables(e.ChatMessage.Message, (string)rdr["response"], e.ChatMessage.DisplayName, e.ChatMessage.Username);
-                            client.SendMessage(e.ChatMessage.Channel, var_string);
-                        }
-                    }
-                }
-                else
-                {              
-                    // Check if Plugin
-                    Twitch_Jint plugin = new Twitch_Jint();
-                    plugin.ExecPlugin(e.ChatMessage.Channel, e, client, e.ChatMessage.Message);
-                }
-
-                con.Close();
-            }
         }
 
         private void Client_OnNewSubscriber(object sender, OnNewSubscriberArgs e)

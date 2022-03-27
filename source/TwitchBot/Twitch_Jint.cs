@@ -89,7 +89,7 @@ namespace FoxxiBot.TwitchBot
 
         }
 
-        public void ExecPlugin(string channel, TwitchLib.Client.Events.OnMessageReceivedArgs e, TwitchLib.Client.TwitchClient client, string twitch_msg)
+        public void ExecPlugin(string channel, TwitchLib.Client.Events.OnChatCommandReceivedArgs e, TwitchLib.Client.TwitchClient client, string twitch_msg)
         {
             // Plugin Name
             string script = "";
@@ -153,7 +153,7 @@ namespace FoxxiBot.TwitchBot
                 js.SetValue("twitchClient", client);
                 js.SetValue("twitchChannel", channel);
                 js.SetValue("botCommand", twitch_msg);
-                js.SetValue("twitch_eData", e.ChatMessage);
+                js.SetValue("twitch_eData", e.Command.ChatMessage);
 
                 // Run the Plugin
                 js.Execute(script);
