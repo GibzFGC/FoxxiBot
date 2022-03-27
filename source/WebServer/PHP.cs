@@ -44,7 +44,7 @@ namespace FoxxiBot.WebServer
             process.StartInfo.EnvironmentVariables.Clear();
 
             process.StartInfo.EnvironmentVariables.Add("HTTP_REQUEST", httpListenerContext.Request.HttpMethod.ToString() + " " + httpListenerContext.Request.Url.PathAndQuery + " " + "HTTP/1.1");
-            process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", "http://localhost:25000");
+            process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", "http://localhost:" + Config.WebserverPort);
             process.StartInfo.EnvironmentVariables.Add("GATEWAY_INTERFACE", "CGI/1.1");
             process.StartInfo.EnvironmentVariables.Add("SERVER_PROTOCOL", "HTTP/1.1");
             process.StartInfo.EnvironmentVariables.Add("REDIRECT_STATUS", httpListenerContext.Response.StatusCode.ToString());
@@ -60,7 +60,7 @@ namespace FoxxiBot.WebServer
             process.StartInfo.EnvironmentVariables.Add("REMOTE_ADDR", httpListenerContext.Request.LocalEndPoint.Address.ToString());
             process.StartInfo.EnvironmentVariables.Add("REMOTE_PORT", httpListenerContext.Request.LocalEndPoint.Port.ToString());
             process.StartInfo.EnvironmentVariables.Add("REFERER", httpListenerContext.Request.UrlReferrer?.ToString() ?? "");
-            process.StartInfo.EnvironmentVariables.Add("SERVER_ADMIN", "antwanmedia@gmail.com");
+            process.StartInfo.EnvironmentVariables.Add("SERVER_ADMIN", "");
             process.StartInfo.EnvironmentVariables.Add("REQUEST_URI", httpListenerContext.Request.Url.PathAndQuery.ToString());
             process.StartInfo.EnvironmentVariables.Add("HTTP_COOKIE", httpListenerContext.Request.Headers["Cookie"]);
             process.StartInfo.EnvironmentVariables.Add("HTTP_ACCEPT", httpListenerContext.Request.Headers["Accept"]);
