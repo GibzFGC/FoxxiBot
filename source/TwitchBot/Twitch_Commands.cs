@@ -17,6 +17,14 @@ namespace FoxxiBot.TwitchBot
             return e.Command.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago";
         }
 
+        public string commandPermitUser(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
+        {
+            var display_name = e.Command.ArgumentsAsString.ToString().Replace("@", "");
+
+            twitchSQL.updateOptions("Permitted_User", display_name);
+            return e.Command.ChatMessage.DisplayName + ", you have been permitted to post a link";
+        }
+
         public string commandDeaths(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
             if (e.Command.ArgumentsAsList.Count == 0)

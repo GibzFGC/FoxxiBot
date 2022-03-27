@@ -296,6 +296,23 @@ namespace FoxxiBot.TwitchBot
 
             Twitch_Commands commands = new Twitch_Commands();
 
+            //// == Admin Commands == ////
+            //
+
+            if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+            {
+                // Link Permission Handler           
+                if (e.Command.CommandText == "permit")
+                {
+                    var result = commands.commandPermitUser(e);
+                    SendChatMessage(result);
+                    return;
+                }
+            
+            }
+
+            //// == User Commands == ////
+            ///
             // Account Age Handler
             if (e.Command.CommandText == "age")
             {
@@ -386,7 +403,7 @@ namespace FoxxiBot.TwitchBot
             // Will skip if the user is Twitch Staff, the Broadcaster, a Moderator or VIP
             if (e.ChatMessage.IsBroadcaster || e.ChatMessage.IsModerator || e.ChatMessage.IsVip || e.ChatMessage.IsStaff)
             {
-                // Skip These!!
+                // Skip over, higher power people at work!
             }
             else
             {
@@ -424,17 +441,26 @@ namespace FoxxiBot.TwitchBot
                 // Check URL
                 if (twitchSQL.getOptions("LinkFilter_Status") == "on")
                 {
-
-                    if (twitchSQL.getOptions("Whitelist_Status") == "on")
+                    if (moderation.checkURL(e.ChatMessage.Message) == true)
                     {
-                        if (moderation.checkWhitelist(e.ChatMessage.Message) == true)
+                        if (twitchSQL.getOptions("Whitelist_Status") == "on")
                         {
-                            return;
-                        } else
-                        {
-                            client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
-                            client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", We don't allow links in chat right now. Sorry!");
-                            return;
+                            if (twitchSQL.getOptions("Permitted_User") == e.ChatMessage.DisplayName)
+                            {
+                                twitchSQL.updateOptions("Permitted_User", "");
+                                return;
+                            }
+
+                            if (moderation.checkWhitelist(e.ChatMessage.Message) == true)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                client.SendMessage(e.ChatMessage.Channel, "/delete " + e.ChatMessage.Id);
+                                client.SendMessage(e.ChatMessage.Channel, e.ChatMessage.DisplayName + ", We don't allow links in chat right now. Sorry!");
+                                return;
+                            }
                         }
                     }
                     else
