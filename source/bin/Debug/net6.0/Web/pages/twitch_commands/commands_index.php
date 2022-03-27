@@ -72,6 +72,16 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   </tr>
 
                   <tr>
+                    <td>!followage</td>
+                    <td>{sender}, your account followed {follow_date} ago</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
                     <td>!so</td>
                     <td>Check out my friend, {user}! they've been playing: {game}</td>
                     <td>Viewer</td>
