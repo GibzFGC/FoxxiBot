@@ -62,7 +62,7 @@ namespace FoxxiBot.TwitchBot
         public string commandFollowAge(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
             var data = Twitch_GetData.getFollowAge(e.Command.ChatMessage.UserId).GetAwaiter().GetResult();
-            return e.Command.ChatMessage.DisplayName + " your account followed " + data.ToString() + " ago";
+            return e.Command.ChatMessage.DisplayName + ", your account followed " + data.ToString() + " ago";
         }
 
         public string commandGiveaway(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
