@@ -424,7 +424,7 @@ $(document).ready(function() {
 		$('#p1_country-code').val(player2countrycode);
 		$('#p1_status').val(player2status);
 		$('#p1_score').val(player2score);
-		$('#p1_score').val(player2position);
+		$('#p1_position').val(player2position);
 
 		$('#p2_tag').val(player1tag);
 		$('#p2_name').val(player1name);
@@ -432,7 +432,7 @@ $(document).ready(function() {
 		$('#p2_country-code').val(player1countrycode);
 		$('#p2_status').val(player1status);
 		$('#p2_score').val(player1score);
-		$('#p1_score').val(player1position);
+		$('#p1_position').val(player1position);
 		
 		manualSave();
 	});

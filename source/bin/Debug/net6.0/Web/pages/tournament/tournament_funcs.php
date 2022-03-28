@@ -201,3 +201,61 @@ if ($_REQUEST["v"] == "top8_save") {
     $stmt->execute();    
 
 }
+
+if ($_REQUEST["v"] == "top8_reset_match") {
+
+    $match_block = $_POST["top8_block"];
+
+    $sql = 'INSERT OR REPLACE INTO gb_tournament_top8 (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':parameter', $match_block . "-p1-tag");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p2-tag");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p1-name");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p2-name");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p1-country");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p2-country");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p1-country-code");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p2-country-code");
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p1-score");
+    $stmt->bindValue(':value', "0");
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-p2-score");
+    $stmt->bindValue(':value', "0");
+    $stmt->execute();
+
+}
+
+if ($_REQUEST["v"] == "top8_purge_db") {
+
+    $sql = "UPDATE gb_tournament_top8 SET value = :value";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':value', "");
+    $stmt->execute();
+}

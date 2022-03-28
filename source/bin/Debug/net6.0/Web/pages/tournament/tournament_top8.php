@@ -82,9 +82,9 @@ foreach($result as $row)
                 <h3 class="tournament-bracket__round-title">Winners Semis</h3>
                 <ul class="tournament-bracket__list">
                 
-                    <li data-toggle="modal" data-target="#editModal" data-title="Winners Semis - Match 1" data-match="w-ws-m1" class="match_box tournament-bracket__item">
+                    <li class="tournament-bracket__item">
                         <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
+                            <table data-toggle="modal" data-target="#editModal" data-title="Winners Semis - Match 1" data-match="w-ws-m1" class="match_box  tournament-bracket__table">
                             <thead class="sr-only">
                                 <tr>
                                 <th>Player</th>
@@ -94,30 +94,43 @@ foreach($result as $row)
                             <tbody class="tournament-bracket__content">
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <span id="w-ws-m1-p1-country-code" class="tournament-bracket__flag flag-icon flag-icon-<?php echo $results["w-ws-m1-p1-country-code"]; ?>" aria-label="Flag"></span>    
-                                    <abbr id="w-ws-m1-p1-name" class="tournament-bracket__code"><?php print $results["w-ws-m1-p1-name"]; ?></abbr>
+                                    <span id="w-ws-m1-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php echo $results["w-ws-m1-p1-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="w-ws-m1-p1-name" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p1-name"]; ?></abbr>
+
+                                    <abbr style="display: none;" id="w-ws-m1-p1-tag" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p1-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m1-p1-country" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p1-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m1-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p1-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span id="w-ws-m1-p1-score" class="tournament-bracket__number"><?php print $results["w-ws-m1-p1-score"]; ?></span>
+                                    <span id="w-ws-m1-p1-score" class="erasable tournament-bracket__number"><?php print $results["w-ws-m1-p1-score"]; ?></span>
                                 </td>
                                 </tr>
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <abbr id="w-ws-m1-p2-name" class="tournament-bracket__code"><?php print $results["w-ws-m1-p2-name"]; ?></abbr>
-                                    <span id="w-ws-m1-p2-country-code" class="tournament-bracket__flag flag-icon flag-icon-<?php echo $results["w-ws-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="w-ws-m1-p2-name" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p2-name"]; ?></abbr>
+                                    <span id="w-ws-m1-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php echo $results["w-ws-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                                    <abbr style="display: none;" id="w-ws-m1-p2-tag" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p2-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m1-p2-country" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p2-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m1-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-ws-m1-p2-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span id="w-ws-m1-p2-score" class="tournament-bracket__number"><?php print $results["w-ws-m1-p2-score"]; ?></span>
+                                    <span id="w-ws-m1-p2-score" class="erasable tournament-bracket__number"><?php print $results["w-ws-m1-p2-score"]; ?></span>
                                 </td>
                                 </tr>
                             </tbody>
                             </table>
                         </div>
+
+                        <div class="match-options">
+                            <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="w-ws-m1" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                            <a class="match-reset btn btn-v-sm btn-danger" data-match="w-ws-m1" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
+                        </div>
                     </li>
 
-                    <li data-toggle="modal" data-target="#editModal" data-title="Winners Semis - Match 2" data-match="w-ws-m2" class="match_box tournament-bracket__item">
+                    <li class="tournament-bracket__item">
                         <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
+                            <table data-toggle="modal" data-target="#editModal" data-title="Winners Semis - Match 2" data-match="w-ws-m2" class="match_box tournament-bracket__table">
                             <thead class="sr-only">
                                 <tr>
                                 <th>Player</th>
@@ -127,24 +140,37 @@ foreach($result as $row)
                             <tbody class="tournament-bracket__content">
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-ws-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
-                                    <abbr class="tournament-bracket__code"><?php print $results["w-ws-m2-p1-name"]; ?></abbr>
+                                <span id="w-ws-m2-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-ws-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="w-ws-m2-p1-name" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p1-name"]; ?></abbr>
+
+                                    <abbr style="display: none;" id="w-ws-m2-p1-tag" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p1-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m2-p1-country" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p1-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m2-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p1-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["w-ws-m2-p1-score"]; ?></span>
+                                    <span id="w-ws-m2-p1-score" class="erasable tournament-bracket__number"><?php print $results["w-ws-m2-p1-score"]; ?></span>
                                 </td>
                                 </tr>
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <abbr class="tournament-bracket__code"><?php print $results["w-ws-m2-p2-name"]; ?></abbr>
-                                    <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-ws-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="w-ws-m2-p2-name" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p2-name"]; ?></abbr>
+                                    <span id="w-ws-m2-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-ws-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                                    <abbr style="display: none;" id="w-ws-m2-p2-tag" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p2-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m2-p2-country" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p2-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="w-ws-m2-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-ws-m2-p2-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["w-ws-m2-p2-score"]; ?></span>
+                                    <span id="w-ws-m2-p2-score" class="erasable tournament-bracket__number"><?php print $results["w-ws-m2-p2-score"]; ?></span>
                                 </td>
                                 </tr>
                             </tbody>
                             </table>
+                        </div>
+                        
+                        <div class="match-options">
+                            <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="w-ws-m2" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                            <a class="match-reset btn btn-v-sm btn-danger" data-match="w-ws-m2" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                         </div>
                     </li>
 
@@ -155,9 +181,9 @@ foreach($result as $row)
                 <h3 class="tournament-bracket__round-title">Winners Finals</h3>
                 <ul class="tournament-bracket__list">
                 
-                <li data-toggle="modal" data-target="#editModal" data-title="Winners Finals" data-match="w-wf" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Winners Finals" data-match="w-wf" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -167,25 +193,38 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-wf-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["w-wf-p1-name"]; ?></abbr>
+                            <span id="w-wf-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-wf-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="w-wf-p1-name" class="erasable tournament-bracket__code"><?php print $results["w-wf-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="w-wf-p1-tag" class="erasable tournament-bracket__code"><?php print $results["w-wf-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="w-wf-p1-country" class="erasable tournament-bracket__code"><?php print $results["w-wf-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="w-wf-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-wf-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["w-wf-p1-score"]; ?></span>
+                            <span id="w-wf-p1-score" class="erasable tournament-bracket__number"><?php print $results["w-wf-p1-score"]; ?></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["w-wf-p2-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-wf-p2-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="w-wf-p2-name" class="erasable tournament-bracket__code"><?php print $results["w-wf-p2-name"]; ?></abbr>
+                            <span id="w-wf-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-wf-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="w-wf-p2-tag" class="erasable tournament-bracket__code"><?php print $results["w-wf-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="w-wf-p2-country" class="erasable tournament-bracket__code"><?php print $results["w-wf-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="w-wf-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-wf-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["w-wf-p2-score"]; ?></span>
+                            <span id="w-wf-p2-score" class="erasable tournament-bracket__number"><?php print $results["w-wf-p2-score"]; ?></span>
                         </td>
                         </tr>
                     </tbody>
                     </table>
                 </div>
+
+                <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="w-wf" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="w-wf" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
+                </div>                
                 </li>
 
             </ul>
@@ -206,9 +245,9 @@ foreach($result as $row)
             <div class="tournament-bracket__round tournament-bracket__round--gold">
             <h3 class="tournament-bracket__round-title">Grand Finals</h3>
             <ul class="tournament-bracket__list">
-                <li data-toggle="modal" data-target="#editModal" data-title="Grand Finals" data-match="w-gf" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Grand Finals" data-match="w-gf" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -218,26 +257,39 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-gf-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["w-gf-p1-name"]; ?></abbr>
+                            <span id="w-gf-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-gf-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="w-gf-p1-name" class="erasable tournament-bracket__code"><?php print $results["w-gf-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="w-gf-p1-tag" class="erasable tournament-bracket__code"><?php print $results["w-gf-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="w-gf-p1-country" class="erasable tournament-bracket__code"><?php print $results["w-gf-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="w-gf-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-gf-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["w-gf-p1-score"]; ?></span>
-                            <span class="tournament-bracket__medal tournament-bracket__medal--<?php print $win_class_1; ?> fa fa-trophy" aria-label="Gold medal"></span>
+                            <span id="w-gf-p1-score" class="erasable tournament-bracket__number"><?php print $results["w-gf-p1-score"]; ?></span>
+                            <span id="w-gf-p1-trophy" class="tournament-bracket__medal tournament-bracket__medal--<?php print $win_class_1; ?> fa fa-trophy" aria-label="Gold medal"></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["w-gf-p2-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-gf-p2-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="w-gf-p2-name" class="erasable tournament-bracket__code"><?php print $results["w-gf-p2-name"]; ?></abbr>
+                            <span id="w-gf-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["w-gf-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="w-gf-p2-tag" class="erasable tournament-bracket__code"><?php print $results["w-gf-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="w-gf-p2-country" class="erasable tournament-bracket__code"><?php print $results["w-gf-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="w-gf-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["w-gf-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["w-gf-p2-score"]; ?></span>
-                            <span class="tournament-bracket__medal tournament-bracket__medal--<?php print $win_class_2; ?> fa fa-trophy" aria-label="Silver medal"></span>
+                            <span id="w-gf-p2-score" class="erasable tournament-bracket__number"><?php print $results["w-gf-p2-score"]; ?></span>
+                            <span id="w-gf-p2-trophy" class="tournament-bracket__medal tournament-bracket__medal--<?php print $win_class_2; ?> fa fa-trophy" aria-label="Silver medal"></span>
                         </td>
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                  
+                  <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="w-gf" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="w-gf" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                   </div>
                 </li>
               </ul>
@@ -266,9 +318,9 @@ foreach($result as $row)
                 <h3 class="tournament-bracket__round-title">Losers Round X</h3>
                 <ul class="tournament-bracket__list">
                 
-                    <li data-toggle="modal" data-target="#editModal" data-title="Losers Round X - Match 1" data-match="l-lx-m1" class="match_box tournament-bracket__item">
+                    <li class="tournament-bracket__item">
                         <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
+                            <table data-toggle="modal" data-target="#editModal" data-title="Losers Round X - Match 1" data-match="l-lx-m1" class="match_box tournament-bracket__table">
                             <thead class="sr-only">
                                 <tr>
                                 <th>Player</th>
@@ -278,30 +330,43 @@ foreach($result as $row)
                             <tbody class="tournament-bracket__content">
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m1-p1-country-code"]; ?>" aria-label="Flag"></span>
-                                    <abbr class="tournament-bracket__code"><?php print $results["l-lx-m1-p1-name"]; ?></abbr>
+                                    <span id="l-lx-m1-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m1-p1-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="l-lx-m1-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p1-name"]; ?></abbr>
+
+                                    <abbr style="display: none;" id="l-lx-m1-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p1-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m1-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p1-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m1-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p1-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["l-lx-m1-p1-score"]; ?></span>
+                                    <span id="l-lx-m1-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-lx-m1-p1-score"]; ?></span>
                                 </td>
                                 </tr>
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <abbr class="tournament-bracket__code"><?php print $results["l-lx-m1-p2-name"]; ?></abbr>
-                                    <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="l-lx-m1-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p2-name"]; ?></abbr>
+                                    <span id="l-lx-m1-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                                    <abbr style="display: none;" id="l-lx-m1-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p2-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m1-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p2-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m1-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lx-m1-p2-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["l-lx-m1-p2-score"]; ?></span>
+                                    <span id="l-lx-m1-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-lx-m1-p2-score"]; ?></span>
                                 </td>
                                 </tr>
                             </tbody>
                             </table>
                         </div>
+
+                        <div class="match-options">
+                            <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-lx-m1" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                            <a class="match-reset btn btn-v-sm btn-danger" data-match="l-lx-m1" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
+                        </div>
                     </li>
 
-                    <li data-toggle="modal" data-target="#editModal" data-title="Losers Round X - Match 2" data-match="l-lx-m2" class="match_box tournament-bracket__item">
+                    <li class="tournament-bracket__item">
                         <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
+                            <table data-toggle="modal" data-target="#editModal" data-title="Losers Round X - Match 2" data-match="l-lx-m2" class="match_box tournament-bracket__table">
                             <thead class="sr-only">
                                 <tr>
                                 <th>Player</th>
@@ -311,24 +376,37 @@ foreach($result as $row)
                             <tbody class="tournament-bracket__content">
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
-                                    <abbr class="tournament-bracket__code"><?php print $results["l-lx-m2-p1-name"]; ?></abbr>
+                                    <span id="l-lx-m2-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="l-lx-m2-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p1-name"]; ?></abbr>
+
+                                    <abbr style="display: none;" id="l-lx-m2-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p1-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m2-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p1-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m2-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p1-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["l-lx-m2-p1-score"]; ?></span>
+                                    <span id="l-lx-m2-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-lx-m2-p1-score"]; ?></span>
                                 </td>
                                 </tr>
                                 <tr class="tournament-bracket__team">
                                 <td class="tournament-bracket__country">
-                                    <abbr class="tournament-bracket__code"><?php print $results["l-lx-m2-p2-name"]; ?></abbr>
-                                    <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+                                    <abbr id="l-lx-m2-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p2-name"]; ?></abbr>
+                                    <span id="l-lx-m2-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lx-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                                    <abbr style="display: none;" id="l-lx-m2-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p2-tag"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m2-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p2-country"]; ?></abbr>
+                                    <abbr style="display: none;" id="l-lx-m2-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lx-m2-p2-country-code"]; ?></abbr>
                                 </td>
                                 <td class="tournament-bracket__score">
-                                    <span class="tournament-bracket__number"><?php print $results["l-lx-m2-p2-score"]; ?></span>
+                                    <span id="l-lx-m2-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-lx-m2-p2-score"]; ?></span>
                                 </td>
                                 </tr>
                             </tbody>
                             </table>
+                        </div>
+
+                        <div class="match-options">
+                            <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-lx-m2" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                            <a class="match-reset btn btn-v-sm btn-danger" data-match="l-lx-m2" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                         </div>
                     </li>
 
@@ -339,9 +417,9 @@ foreach($result as $row)
                 <h3 class="tournament-bracket__round-title">Losers Quarters</h3>
                 <ul class="tournament-bracket__list">
 
-                <li data-toggle="modal" data-target="#editModal" data-title="Losers Quarters - Match 1" data-match="l-lq-m1" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Losers Quarters - Match 1" data-match="l-lq-m1" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -351,30 +429,43 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m1-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lq-m1-p1-name"]; ?></abbr>
+                            <span id="l-lq-m1-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m1-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lq-m1-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="l-lq-m1-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m1-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m1-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lq-m1-p1-score"]; ?></span>
+                            <span id="l-lq-m1-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-lq-m1-p1-score"]; ?></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lq-m1-p2-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lq-m1-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p2-name"]; ?></abbr>
+                            <span id="l-lq-m1-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m1-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="l-lq-m1-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m1-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m1-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lq-m1-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lq-m1-p2-score"]; ?></span>
+                            <span id="l-lq-m1-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-lq-m1-p2-score"]; ?></span>
                         </td>
                         </tr>
                     </tbody>
                     </table>
                 </div>
+
+                <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-lq-m1" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="l-lq-m1" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
+                </div>
                 </li>
 
-                <li data-toggle="modal" data-target="#editModal" data-title="Losers Quarters - Match 2" data-match="l-lq-m2" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Losers Quarters - Match 2" data-match="l-lq-m2" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -384,24 +475,37 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lq-m2-p1-name"]; ?></abbr>
+                            <span id="l-lq-m2-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m2-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lq-m2-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="l-lq-m2-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m2-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m2-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lq-m2-p1-score"]; ?></span>
+                            <span id="l-lq-m2-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-lq-m2-p1-score"]; ?></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lq-m2-p2-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lq-m2-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p2-name"]; ?></abbr>
+                            <span id="l-lq-m2-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lq-m2-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="l-lq-m2-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m2-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lq-m2-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lq-m2-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lq-m2-p2-score"]; ?></span>
+                            <span id="l-lq-m2-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-lq-m2-p2-score"]; ?></span>
                         </td>
                         </tr>
                     </tbody>
                     </table>
+                </div>
+                
+                <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-lq-m2" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="l-lq-m2" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                 </div>
                 </li>
 
@@ -412,9 +516,9 @@ foreach($result as $row)
                 <h3 class="tournament-bracket__round-title">Losers Semis</h3>
                 <ul class="tournament-bracket__list">
                 
-                <li data-toggle="modal" data-target="#editModal" data-title="Losers Semis" data-match="l-ls" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Losers Semis" data-match="l-ls" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -424,24 +528,37 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-ls-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["l-ls-p1-name"]; ?></abbr>
+                            <span id="l-ls-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-ls-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-ls-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-ls-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="l-ls-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-ls-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-ls-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-ls-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-ls-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-ls-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-ls-p1-score"]; ?></span>
+                            <span id="l-ls-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-ls-p1-score"]; ?></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["l-ls-p1-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-ls-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-ls-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-ls-p1-name"]; ?></abbr>
+                            <span id="l-ls-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-ls-p1-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="l-ls-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-ls-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-ls-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-ls-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-ls-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-ls-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-ls-p2-score"]; ?></span>
+                            <span id="l-ls-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-ls-p2-score"]; ?></span>
                         </td>
                         </tr>
                     </tbody>
                     </table>
+                </div>
+
+                <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-ls" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="l-ls" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                 </div>
                 </li>
 
@@ -463,9 +580,9 @@ foreach($result as $row)
             <div class="tournament-bracket__round tournament-bracket__round--gold">
             <h3 class="tournament-bracket__round-title">Losers Finals</h3>
             <ul class="tournament-bracket__list">
-                <li data-toggle="modal" data-target="#editModal" data-title="Losers Finals" data-match="l-lf" class="match_box tournament-bracket__item">
+                <li class="tournament-bracket__item">
                 <div class="tournament-bracket__match" tabindex="0">
-                    <table class="tournament-bracket__table">
+                    <table data-toggle="modal" data-target="#editModal" data-title="Losers Finals" data-match="l-lf" class="match_box tournament-bracket__table">
                     <thead class="sr-only">
                         <tr>
                         <th>Player</th>
@@ -475,26 +592,39 @@ foreach($result as $row)
                     <tbody class="tournament-bracket__content">
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lf-p1-country-code"]; ?>" aria-label="Flag"></span>
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lf-p1-name"]; ?></abbr>
+                            <span id="l-lf-p1-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lf-p1-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lf-p1-name" class="erasable tournament-bracket__code"><?php print $results["l-lf-p1-name"]; ?></abbr>
+
+                            <abbr style="display: none;" id="l-lf-p1-tag" class="erasable tournament-bracket__code"><?php print $results["l-lf-p1-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lf-p1-country" class="erasable tournament-bracket__code"><?php print $results["l-lf-p1-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lf-p1-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lf-p1-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lf-p1-score"]; ?></span>
-                            <span class="tournament-bracket__medal tournament-bracket__medal--<?php print $lose_class_1; ?> fa fa-trophy" aria-label="Gold medal"></span>
+                            <span id="l-lf-p1-score" class="erasable tournament-bracket__number"><?php print $results["l-lf-p1-score"]; ?></span>
+                            <span id="l-lf-p1-trophy" class="tournament-bracket__medal tournament-bracket__medal--<?php print $lose_class_1; ?> fa fa-trophy" aria-label="Gold medal"></span>
                         </td>
                         </tr>
                         <tr class="tournament-bracket__team">
                         <td class="tournament-bracket__country">
-                            <abbr class="tournament-bracket__code"><?php print $results["l-lf-p2-name"]; ?></abbr>
-                            <span class="tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lf-p2-country-code"]; ?>" aria-label="Flag"></span>
+                            <abbr id="l-lf-p2-name" class="erasable tournament-bracket__code"><?php print $results["l-lf-p2-name"]; ?></abbr>
+                            <span id="l-lf-p2-country-code" class="flag-erase tournament-bracket__flag flag-icon flag-icon-<?php print $results["l-lf-p2-country-code"]; ?>" aria-label="Flag"></span>
+
+                            <abbr style="display: none;" id="l-lf-p2-tag" class="erasable tournament-bracket__code"><?php print $results["l-lf-p2-tag"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lf-p2-country" class="erasable tournament-bracket__code"><?php print $results["l-lf-p2-country"]; ?></abbr>
+                            <abbr style="display: none;" id="l-lf-p2-country-code-value" class="erasable tournament-bracket__code"><?php print $results["l-lf-p2-country-code"]; ?></abbr>
                         </td>
                         <td class="tournament-bracket__score">
-                            <span class="tournament-bracket__number"><?php print $results["l-lf-p2-score"]; ?></span>
-                            <span class="tournament-bracket__medal tournament-bracket__medal--<?php print $lose_class_2; ?> fa fa-trophy" aria-label="Silver medal"></span>
+                            <span id="l-lf-p2-score" class="erasable tournament-bracket__number"><?php print $results["l-lf-p2-score"]; ?></span>
+                            <span id="l-lf-p2-trophy" class="tournament-bracket__medal tournament-bracket__medal--<?php print $lose_class_2; ?> fa fa-trophy" aria-label="Silver medal"></span>
                         </td>
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+
+                  <div class="match-options">
+                    <a class="match-swap btn btn-v-sm btn-primary btn-spacer" data-match="l-lf" href="#"><i class="fas fa-exchange-alt"></i> Swap</a>
+                    <a class="match-reset btn btn-v-sm btn-danger" data-match="l-lf" href="#"><i class="fas fa-eraser"></i> Reset Match</a>
                   </div>
                 </li>
               </ul>
@@ -507,6 +637,24 @@ foreach($result as $row)
             <!-- /.card -->
           </div>
           <!-- /.col -->
+
+          <!-- second column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <!-- /.card-header -->
+              
+                <div class="card-footer">
+                  <input type="hidden" id="submit" name="submit" value="submit">
+                    <p style="float: left; margin-top:15px;">Reset All will clear all values!</p>
+                    <button style="float: right; margin-top:9px;" id="purge-all" class="btn btn-danger">Reset All</button>
+                  </div>
+                </div>
+
+            </div>
+            <!-- /.card -->
+
+          </div>
 
         </div>
         <!-- /.row -->
@@ -562,7 +710,7 @@ foreach($result as $row)
 
                         <div class="form-group">
                             <label for="player_1_country">Player Country</label>
-                            <input type="text" class="form-control" id="player_1_country" name="player_1_country">
+                            <input type="text" class="form-control" id="player_1_country" name="player_1_country" autocomplete="off">
                             <input type="hidden" class="form-control" id="player_1_country_code" name="player_1_country_code">
                         </div>
 
@@ -598,7 +746,7 @@ foreach($result as $row)
 
                         <div class="form-group">
                             <label for="player_2_country">Player Country</label>
-                            <input type="text" class="form-control" id="player_2_country" name="player_2_country">
+                            <input type="text" class="form-control" id="player_2_country" name="player_2_country" autocomplete="off">
                             <input type="hidden" class="form-control" id="player_2_country_code" name="player_2_country_code">
                         </div>
 

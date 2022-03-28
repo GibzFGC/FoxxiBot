@@ -368,7 +368,6 @@ html {
   padding: 0 0.5em;
   color: #fff;
   font-weight: 600;
-  text-transform: uppercase;
   border: 0;
   text-decoration: none;
   transition: padding 0.2s ease-in-out;
@@ -419,4 +418,21 @@ html {
 .tournament-tag {
   text-transform: none;
   color: #FFD700;
+}
+.match-options {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Button Extensions */
+.btn-v-sm {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.btn-spacer {
+  margin-right: 5px;
 }

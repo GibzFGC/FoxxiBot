@@ -143,7 +143,7 @@ header('Content-Type: application/json; charset=UTF-8');
     {"name": "Lithuania", "code": "LT"}, 
     {"name": "Luxembourg", "code": "LU"}, 
     {"name": "Macao", "code": "MO"}, 
-    {"name": "Macedonia, The Former Yugoslav Republic of", "code": "MK"}, 
+    {"name": "Macedonia, North", "code": "MK"}, 
     {"name": "Madagascar", "code": "MG"}, 
     {"name": "Malawi", "code": "MW"}, 
     {"name": "Malaysia", "code": "MY"}, 
