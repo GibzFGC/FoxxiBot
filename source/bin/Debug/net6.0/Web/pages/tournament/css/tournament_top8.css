@@ -130,7 +130,7 @@ html {
   .tournament-bracket__item::after {
     position: absolute;
     right: 0;
-    content: '';
+    
     display: block;
     width: 1em;
     height: 45%;
@@ -204,7 +204,6 @@ html {
     position: absolute;
     left: 0;
     z-index: 1;
-    content: '';
     display: block;
     width: 1em;
     height: 10%;
