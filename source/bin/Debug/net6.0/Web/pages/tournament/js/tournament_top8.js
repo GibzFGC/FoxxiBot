@@ -73,6 +73,32 @@ $(document).ready(function() {
 		$('#' + $current_match + '-p2-county-code-value').text(player1countrycode);
 		$('#' + $current_match + '-p2-score').text(player1score);
 		p2_flag.className = player1flag;
+
+		// Save Swap
+		$.ajax({
+			type: "POST",
+			url: "/index.php?p=tournament&a=funcs&v=top8_save",
+            data: {
+                'top8_block' : $current_match,
+				'player_1_tag' : player2tag,
+				'player_2_tag' : player1tag,
+				'player_1_name' : player2name,
+				'player_2_name' : player1name,
+				'player_1_country' : player2country,
+				'player_2_country' : player1country,
+				'player_1_country_code' : player2countrycode,
+				'player_2_country_code' : player1countrycode,
+				'player_1_score' : player2score,
+				'player_2_score' : player1score,
+            },
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'The match data has swapped!'
+                })
+			}
+		});
 	});
 
     // Erase Match
