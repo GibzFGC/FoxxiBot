@@ -631,6 +631,8 @@ $(document).ready(function() {
 			}
 		});
 
+		document.getElementById("tournament-move-p1").selectedIndex = 0;
+
 	});
 
 	$("#tournament-move-p2").change(function() {
@@ -659,6 +661,8 @@ $(document).ready(function() {
                 })
 			}
 		});
+
+		document.getElementById("tournament-move-p1").selectedIndex = 0;
 
 	});
 
