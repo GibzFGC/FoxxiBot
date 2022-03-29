@@ -153,6 +153,35 @@ if ($_REQUEST["v"] == "scoreboard_save") {
 
 }
 
+if ($_REQUEST["v"] == "top8_quick_add") {
+
+    $match_block = $_POST["top8_block"];
+
+    $sql = 'INSERT OR REPLACE INTO gb_tournament_top8 (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':parameter', $match_block . "-tag");
+    $stmt->bindValue(':value', $_POST["player_tag"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-name");
+    $stmt->bindValue(':value', $_POST["player_name"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-country");
+    $stmt->bindValue(':value', $_POST["player_country"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-country-code");
+    $stmt->bindValue(':value', $_POST["player_country_code"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', $match_block . "-score");
+    $stmt->bindValue(':value', $_POST["player_score"]);
+    $stmt->execute();
+    
+}
+
 if ($_REQUEST["v"] == "top8_save") {
 
     $match_block = $_POST["top8_block"];
@@ -198,7 +227,7 @@ if ($_REQUEST["v"] == "top8_save") {
 
     $stmt->bindValue(':parameter', $match_block . "-p2-score");
     $stmt->bindValue(':value', $_POST["player_2_score"]);
-    $stmt->execute();    
+    $stmt->execute();
 
 }
 

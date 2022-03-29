@@ -603,4 +603,63 @@ $(document).ready(function() {
 		$('#final-preview').attr('src', "/custom/scoreboard/" + selected + "/Scoreboard.html");
 	});	
 
+	// Send to Top 8
+	$("#tournament-move-p1").change(function() {
+
+		if ($(this).val() == "Set Top 8 Placement" || $(this).val() == "") {
+			return;
+		}
+
+		var match = $(this).val();
+		$.ajax({
+			type: "POST",
+			url: "/index.php?p=tournament&a=funcs&v=top8_quick_add",
+            data: {
+                'top8_block' : match,
+				'player_tag' :  $("#p1_tag").val(),
+				'player_name' : $("#p1_name").val(),
+				'player_country' : $("#p1_country").val(),
+				'player_country_code' : $("#p1_country_code").val(),
+				'player_score' : "0",
+            },
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'The player has been saved to the Top 8'
+                })
+			}
+		});
+
+	});
+
+	$("#tournament-move-p2").change(function() {
+
+		if ($(this).val() == "Set Top 8 Placement" || $(this).val() == "") {
+			return;
+		}
+
+		var match = $(this).val();
+		$.ajax({
+			type: "POST",
+			url: "/index.php?p=tournament&a=funcs&v=top8_quick_add",
+            data: {
+                'top8_block' : match,
+				'player_tag' :  $("#p2_tag").val(),
+				'player_name' : $("#p2_name").val(),
+				'player_country' : $("#p2_country").val(),
+				'player_country_code' : $("#p2_country_code").val(),
+				'player_score' : "0",
+            },
+			success: function(data)
+			{
+                Toast.fire({
+                    icon: 'success',
+                    title: 'The player has been saved to the Top 8'
+                })
+			}
+		});
+
+	});
+
 });

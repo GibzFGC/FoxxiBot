@@ -101,7 +101,7 @@ $(document).ready(function() {
 		});
 	});
 
-    // Erase Match
+	// Erase Match
     $(".match-reset").on('click', function(e) {
 		e.preventDefault(); // avoid to execute the actual submit of the form.
 		var $current_match = $(this).data("match");
