@@ -131,7 +131,7 @@ $(document).ready(function() {
 		});
 
 		chat.connect().then(globalUserState => {
-			chat.say('#' + channel, 'Everyone got a bonus of x points!')
+			chat.say('#' + channel, 'Everyone got a bonus of ' + points + ' points!')
 		})
 
 	});
