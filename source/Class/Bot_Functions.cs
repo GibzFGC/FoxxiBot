@@ -237,7 +237,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Permitted_User','')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_perms (name TEXT, value TEXT)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_perms (name TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_perms (name, value) VALUES('Viewer','0')";
