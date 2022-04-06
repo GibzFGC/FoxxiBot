@@ -86,7 +86,7 @@ namespace FoxxiBot.TwitchBot
             api.Settings.ClientId = Config.TwitchClientId;
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Users.GetUsersFollowsAsync(toId: user_id);
+            var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id);
 
             DateTime current_time = DateTime.Now;
             DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());

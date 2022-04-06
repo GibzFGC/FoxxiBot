@@ -13,6 +13,14 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
+
+$options = array();
+
+$result = $PDO->query("SELECT * FROM gb_points_options");
+foreach($result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -61,6 +69,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     <label for="commandResponse">Response</label>
                     <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..." required></textarea>
                   </div>
+
+                  <?php if ($options["points_active"] == "on") { ?>
+                  <div class="form-group">
+                    <label for="commandPoints">Point Cost</label>
+                    <input type="number" class="form-control" id="commandPoints" name="commandPoints" value="0">
+                  </div>
+                  <?php } ?>
 
                   <div class="form-group">
                   <label>Permission</label>

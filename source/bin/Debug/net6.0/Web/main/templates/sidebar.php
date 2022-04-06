@@ -318,6 +318,13 @@ foreach($result as $row)
               </li>
 
               <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=redeems" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Point Redeems</p>
+                </a>
+              </li>              
+
+              <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Management</p>

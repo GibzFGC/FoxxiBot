@@ -19,6 +19,11 @@ if ($_REQUEST["v"] == "save") {
     $sql = 'INSERT OR REPLACE INTO gb_points_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
     $stmt = $PDO->prepare($sql);
 
+    // Check if value null
+    if (!isset($_POST["points_active"])) {
+        $_POST["points_active"] = "off";
+    }
+
     $stmt->bindValue(':parameter', "points_active");
     $stmt->bindValue(':value', $_POST["points_active"]);
     $stmt->execute();
@@ -44,6 +49,24 @@ if ($_REQUEST["v"] == "update_user") {
 
     $stmt->bindValue(':username', $_POST["points_username"]);
     $stmt->bindValue(':value', $_POST["points_current"]);
+    $stmt->execute();
+
+}
+
+if ($_REQUEST["v"] == "refund") {
+
+    // Refund Points
+    $sql = "UPDATE gb_points SET value = value + $_REQUEST[points] WHERE username = :username";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':username', $_REQUEST["user"]);
+    $stmt->execute();
+
+    // Delete Action
+    $sql = 'DELETE FROM gb_points_actions WHERE id = :commandID';
+    $stmt = $PDO->prepare($sql);
+    
+    $stmt->bindValue(':commandID', $_REQUEST["id"]);
     $stmt->execute();
 
 }

@@ -24,6 +24,10 @@ if (isset($_REQUEST['a'])) {
         include("points/points_listing.php");
     }
 
+    if ($_REQUEST['a'] == "redeems") {
+        include("points/points_redeems.php");
+    }    
+
     if ($_REQUEST['a'] == "funcs") {
         include("points/points_funcs.php");
     }

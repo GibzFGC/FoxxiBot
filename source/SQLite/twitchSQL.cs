@@ -169,5 +169,24 @@ namespace FoxxiBot.SQLite
             return "No participants found";
         }
 
+        public void pointsChange(string username, decimal value)
+        {
+
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var updateCmd = new SQLiteCommand(con);
+
+            updateCmd.CommandText = "UPDATE gb_points SET value = @value WHERE username = @username";
+
+            updateCmd.Parameters.AddWithValue("@username", username);
+            updateCmd.Parameters.AddWithValue("@value", value);
+
+            updateCmd.Prepare();
+            updateCmd.ExecuteNonQuery();
+
+            con.Close();
+        }
+
     }
 }

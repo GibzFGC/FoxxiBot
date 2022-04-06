@@ -440,7 +440,7 @@ namespace FoxxiBot.DiscordBot
                                 var channel = discordSQL.getOptions("StreamChannel");
 
                                 // Create Embed
-                                var twitch_url = $"http://www.twitch.tv/{data.Streams[0].UserName}";
+                                var twitch_url = $"http://www.twitch.tv/{data.Streams[0].UserLogin}";
 
                                 // Repair Twitch Stupid Image Link
                                 StringBuilder builder = new StringBuilder(data.Streams[0].ThumbnailUrl);

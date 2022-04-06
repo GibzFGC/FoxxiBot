@@ -25,11 +25,12 @@ if ($_REQUEST["v"] == "save") {
 
     } else {
     
-        $sql = 'INSERT INTO gb_commands (name, response, permission, active) VALUES (:commandName, :commandResponse, :commandPermissions, :commandActive)' or die(print_r($PDO->errorInfo(), true));
+        $sql = 'INSERT INTO gb_commands (name, response, points, permission, active) VALUES (:commandName, :commandResponse, :commandPoints, :commandPermissions, :commandActive)' or die(print_r($PDO->errorInfo(), true));
         $stmt = $PDO->prepare($sql);
         
         $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
+        $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
         $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();
@@ -52,12 +53,13 @@ if ($_REQUEST["v"] == "edit") {
 
     } else {
 
-        $sql = "UPDATE gb_commands SET name = :commandName, response = :commandResponse, permission = :commandPermissions, active = :commandActive WHERE id = :commandID";
+        $sql = "UPDATE gb_commands SET name = :commandName, response = :commandResponse, points = :commandPoints, permission = :commandPermissions, active = :commandActive WHERE id = :commandID";
         $stmt = $PDO->prepare($sql);
 
         $stmt->bindValue(':commandID', $_POST["commandID"]);
         $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
+        $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
         $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();

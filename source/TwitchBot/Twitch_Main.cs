@@ -295,6 +295,7 @@ namespace FoxxiBot.TwitchBot
         {
 
             Twitch_Commands commands = new Twitch_Commands();
+            Twitch_Points points = new Twitch_Points();
 
             //// == Admin Commands == ////
             //
@@ -361,6 +362,15 @@ namespace FoxxiBot.TwitchBot
                 return;
             }
 
+            //// == Points Commands == ////
+            // Gamble Handler
+            if (e.Command.CommandText == "gamble")
+            {
+                var result = points.commandGamblePoints(e);
+                SendChatMessage(result);
+                return;
+            }
+
             // If command not development defined, check users custom in SQLite
             using var con = new SQLiteConnection(cs);
             con.Open();
@@ -376,6 +386,45 @@ namespace FoxxiBot.TwitchBot
                 {
                     if (e.Command.ChatMessage.UserType >= (UserType)Enum.Parse(typeof(UserType), rdr["permission"].ToString()))
                     {
+                        // Has Points Definition?
+                        if ((int)(long)rdr["points"] > 0)
+                        {
+                            int user_points = Convert.ToInt32(Twitch_GetData.userPoints(e.Command.ChatMessage.Username));
+
+                            if (user_points < (int)(long)rdr["points"])
+                            {
+                                SendChatMessage(e.Command.ChatMessage.DisplayName + ", sorry, you don't have enough points to use that command!");
+                                return;
+                            }
+
+                            // Math for Points
+                            int final_points = user_points - (int)(long)rdr["points"];
+
+                            // Insert Action Log
+                            using var insertCmd = new SQLiteCommand(con);
+                            insertCmd.CommandText = "INSERT INTO gb_points_actions (username, recipient, action, points) VALUES (@username, @recipient, @action, @points)";
+
+                            insertCmd.Parameters.AddWithValue("@username", e.Command.ChatMessage.Username);
+                            insertCmd.Parameters.AddWithValue("@recipient", e.Command.ArgumentsAsString);
+                            insertCmd.Parameters.AddWithValue("@action", e.Command.CommandText);
+                            insertCmd.Parameters.AddWithValue("@points", (int)(long)rdr["points"]);
+
+                            insertCmd.Prepare();
+                            insertCmd.ExecuteNonQuery();
+
+                            // Take Points for Command
+                            using var updateCmd = new SQLiteCommand(con);
+                            updateCmd.CommandText = "UPDATE gb_points SET value = @value WHERE username = @username";
+
+                            updateCmd.Parameters.AddWithValue("@username", e.Command.ChatMessage.Username);
+                            updateCmd.Parameters.AddWithValue("@value", final_points);
+
+                            updateCmd.Prepare();
+                            updateCmd.ExecuteNonQuery();
+
+                        }
+
+                        // Perform the Command
                         Twitch_Variables variables = new Twitch_Variables();
                         var var_string = variables.convertVariables(e.Command.ChatMessage.Message, (string)rdr["response"], e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
                         SendChatMessage(var_string);
