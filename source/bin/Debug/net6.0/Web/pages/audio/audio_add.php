@@ -13,6 +13,14 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
+
+$options = array();
+
+$result = $PDO->query("SELECT * FROM gb_points_options");
+foreach($result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -60,6 +68,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     <label for="soundUpload">File Upload (Supported: *.wav)</label><br />
                     <input type="file" name="soundUpload" required />
                   </div>
+
+                  <?php if ($options["points_active"] == "on") { ?>
+                  <div class="form-group">
+                    <label for="soundPoints">Point Cost</label>
+                    <input type="number" class="form-control" id="soundPoints" name="soundPoints" value="0">
+                  </div>
+                  <?php } ?>
 
                   <div class="form-group">
                     <label>Active</label>

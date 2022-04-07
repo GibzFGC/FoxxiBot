@@ -35,10 +35,11 @@ if ($_REQUEST["v"] == "save") {
         $add_new = str_replace('../','', $add_sound);
     }
 
-    $sql = 'INSERT INTO gb_sounds (name, file, active) VALUES (:soundName, :soundFile, :soundActive)' or die(print_r($PDO->errorInfo(), true));
+    $sql = 'INSERT INTO gb_sounds (name, file, active) VALUES (:soundName, :soundFile, :soundPoints, :soundActive)' or die(print_r($PDO->errorInfo(), true));
     $stmt = $PDO->prepare($sql);
     
     $stmt->bindValue(':soundName', $_POST["soundName"]);
+    $stmt->bindValue(':soundPoints', $_POST["soundPoints"]);
     $stmt->bindValue(':soundFile', $sound_name);
     $stmt->bindValue(':soundActive', $_POST["soundActive"]);
     $stmt->execute();

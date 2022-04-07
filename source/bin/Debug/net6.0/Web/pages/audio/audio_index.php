@@ -54,6 +54,7 @@ $result = $PDO->query("SELECT * FROM gb_sounds");
                   <tr>
                     <th>Name</th>
                     <th>File</th>
+                    <th>Points</th>
                     <th>Active</th>
                     <th>Actions</th>
                   </tr>
@@ -67,6 +68,7 @@ $result = $PDO->query("SELECT * FROM gb_sounds");
                   <tr>
                     <td>". $row["name"] ."</td>
                     <td>". $row["file"] ."</td>
+                    <td>". $row["points"] ."</td>
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
                       <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=audio&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>

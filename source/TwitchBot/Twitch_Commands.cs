@@ -162,6 +162,43 @@ namespace FoxxiBot.TwitchBot
                 while (rdr.Read())
                 {
 
+                    // Has Points Definition?
+                    if ((int)(long)rdr["points"] > 0)
+                    {
+                        int user_points = Convert.ToInt32(Twitch_GetData.userPoints(e.Command.ChatMessage.Username));
+
+                        if (user_points < (int)(long)rdr["points"])
+                        {
+                            return e.Command.ChatMessage.DisplayName + ", sorry, you don't have enough points to use that command!";
+                        }
+
+                        // Math for Points
+                        int final_points = user_points - (int)(long)rdr["points"];
+
+                        // Insert Action Log
+                        using var insertCmd = new SQLiteCommand(con);
+                        insertCmd.CommandText = "INSERT INTO gb_points_actions (username, recipient, action, points, status) VALUES (@username, @recipient, @action, @points, @status)";
+
+                        insertCmd.Parameters.AddWithValue("@username", e.Command.ChatMessage.Username);
+                        insertCmd.Parameters.AddWithValue("@recipient", e.Command.ArgumentsAsString);
+                        insertCmd.Parameters.AddWithValue("@action", e.Command.CommandText);
+                        insertCmd.Parameters.AddWithValue("@points", (int)(long)rdr["points"]);
+                        insertCmd.Parameters.AddWithValue("@status", 0);
+
+                        insertCmd.Prepare();
+                        insertCmd.ExecuteNonQuery();
+
+                        // Take Points for Command
+                        using var updateCmd = new SQLiteCommand(con);
+                        updateCmd.CommandText = "UPDATE gb_points SET value = @value WHERE username = @username";
+
+                        updateCmd.Parameters.AddWithValue("@username", e.Command.ChatMessage.Username);
+                        updateCmd.Parameters.AddWithValue("@value", final_points);
+
+                        updateCmd.Prepare();
+                        updateCmd.ExecuteNonQuery();
+                    }
+
                     // Windows Implementation
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     {

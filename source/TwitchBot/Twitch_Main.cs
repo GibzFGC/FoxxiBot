@@ -402,12 +402,13 @@ namespace FoxxiBot.TwitchBot
 
                             // Insert Action Log
                             using var insertCmd = new SQLiteCommand(con);
-                            insertCmd.CommandText = "INSERT INTO gb_points_actions (username, recipient, action, points) VALUES (@username, @recipient, @action, @points)";
+                            insertCmd.CommandText = "INSERT INTO gb_points_actions (username, recipient, action, points, status) VALUES (@username, @recipient, @action, @points, @status)";
 
                             insertCmd.Parameters.AddWithValue("@username", e.Command.ChatMessage.Username);
                             insertCmd.Parameters.AddWithValue("@recipient", e.Command.ArgumentsAsString);
                             insertCmd.Parameters.AddWithValue("@action", e.Command.CommandText);
                             insertCmd.Parameters.AddWithValue("@points", (int)(long)rdr["points"]);
+                            insertCmd.Parameters.AddWithValue("@status", 0);
 
                             insertCmd.Prepare();
                             insertCmd.ExecuteNonQuery();
@@ -421,7 +422,6 @@ namespace FoxxiBot.TwitchBot
 
                             updateCmd.Prepare();
                             updateCmd.ExecuteNonQuery();
-
                         }
 
                         // Perform the Command
