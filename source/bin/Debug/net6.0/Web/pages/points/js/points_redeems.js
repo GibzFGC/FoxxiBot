@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// Set Action Status
-	$( "#completed_button" ).click(function(e) {
+	$( ".completed_button" ).click(function(e) {
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -26,22 +26,22 @@ $(document).ready(function() {
 
         // Set Table Status
         if (status == 0) {
-            document.getElementById("completed_button").innerText = "Set as Complete";
-            document.getElementById("completed_button").setAttribute("class", "btn btn-success btn-sm");
-            document.getElementById("completed_button").setAttribute("data-status", 1);
+            $( this ).text("Set as Complete");
+            $( this ).attr("class", "btn btn-success btn-sm");
+            $( this ).attr("data-status", 1);
             return;
         }
         
         if (status == 1) {
-            document.getElementById("completed_button").innerText = "Set as Incomplete";
-            document.getElementById("completed_button").setAttribute("class", "btn btn-warning btn-sm");
-            document.getElementById("completed_button").setAttribute("data-status", 0);
+            $( this ).text("Set as Incomplete");
+            $( this ).attr("class", "btn btn-warning btn-sm");
+            $( this ).attr("data-status", 0);
             return;
         }
 	});
 
 	// Send Refund
-	$( "#refund_button" ).click(function(e) {
+	$( ".refund_button" ).click(function(e) {
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -69,13 +69,13 @@ $(document).ready(function() {
         var complete_elem = document.getElementById('completed_button');
         complete_elem.parentNode.removeChild(complete_elem);
 
-        document.getElementById("refund_button").innerText = "This action has been refunded";
-        document.getElementById("refund_button").setAttribute("class", "btn btn-sm");
-        document.getElementById("refund_button").setAttribute("style", "color: #fff;");
+        $( this ).text("This action has been refunded");
+        $( this ).attr("class", "btn btn-sm");
+        $( this ).attr("style", "color: #fff;");
 
-        document.getElementById("refund_button").removeAttribute("data-id");
-        document.getElementById("refund_button").removeAttribute("data-user");
-        document.getElementById("refund_button").removeAttribute("data-points");
+        $( this).removeAttr("data-id");
+        $( this ).removeAttr("data-user");
+        $( this ).removeAttr("data-points");
 	});    
 
 });

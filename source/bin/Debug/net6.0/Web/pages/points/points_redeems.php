@@ -51,6 +51,7 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
                 <table id="gb_points_rankings" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Username</th>
                     <th>Recipient</th>
                     <th>Action</th>
@@ -66,6 +67,7 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
   {
               print "
                   <tr>
+                    <td>". $row["id"] ."</td>
                     <td>". $row["username"] ."</td>
                     <td>". $row["recipient"] ."</td>
                     <td>". $row["action"] ."</td>
@@ -85,8 +87,8 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
 
                 print "
                   <td>
-                    <a id=\"completed_button\" data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"btn btn-success btn-sm\">Set as Complete</a>                    
-                    <a id=\"refund_button\" data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"btn btn-danger btn-sm\">Refund</a>
+                    <a data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"completed_button btn btn-success btn-sm\">Set as Complete</a>                    
+                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
                   </td>
                 ";
               }
@@ -96,8 +98,8 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
 
                 print "
                   <td>
-                    <a id=\"completed_button\" data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"btn btn-warning btn-sm\">Set as Incomplete</a>                    
-                    <a id=\"refund_button\" data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"btn btn-danger btn-sm\">Refund</a>
+                    <a data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"completed_button btn btn-warning btn-sm\">Set as Incomplete</a>                    
+                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
                   </td>
                 ";
               }
