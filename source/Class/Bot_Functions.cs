@@ -90,7 +90,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value INTEGER)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_actions (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, recipient TEXT, action TEXT, points INTEGER)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_actions (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, recipient TEXT, action TEXT, points INTEGER, status INTEGER)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_options (parameter TEXT UNIQUE, value TEXT)";
