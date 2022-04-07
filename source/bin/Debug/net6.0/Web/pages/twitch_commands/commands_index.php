@@ -53,7 +53,8 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <thead>
                   <tr>
                     <th>Command</th>
-                    <th style="width: 65%;">Response</th>
+                    <th style="width: 50%;">Response</th>
+                    <th>Points</th>
                     <th>Permission</th>
                     <th>Active</th>
                     <th>Actions</th>
@@ -64,6 +65,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tr>
                     <td>!age</td>
                     <td>{user}, your account was created {creation_date}</td>
+                    <td>0</td>
                     <td>Viewer</td>
                     <td>Active</td>
                     <td>
@@ -74,6 +76,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tr>
                     <td>!followage</td>
                     <td>{sender}, your account followed {follow_date} ago</td>
+                    <td>0</td>
                     <td>Viewer</td>
                     <td>Active</td>
                     <td>
@@ -84,6 +87,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tr>
                     <td>!so</td>
                     <td>Check out my friend, {user}! they've been playing: {game}</td>
+                    <td>0</td>
                     <td>Viewer</td>
                     <td>Active</td>
                     <td>
@@ -94,6 +98,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tr>
                     <td>!sound [alias. !audio, !play]</td>
                     <td>Will play a sound from the vault if it exists~</td>
+                    <td>0</td>
                     <td>Viewer</td>
                     <td>Active</td>
                     <td>
@@ -108,6 +113,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tr>
                     <td>". $row["name"] ."</td>
                     <td>". $row["response"] ."</td>
+                    <td>". $row["points"] ."</td>
                     <td>". twitchPerms($row["permission"]) ."</td>
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
