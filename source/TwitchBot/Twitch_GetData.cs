@@ -76,7 +76,7 @@ namespace FoxxiBot.TwitchBot
             DateTime user_time = DateTime.Parse(data.Users[0].CreatedAt.ToString());
 
             TimeSpan timeDifference = current_time - user_time;
-            return (timeDifference.Days / 365 + " years " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+            return (Math.Floor(timeDifference.Days / 365.25) + " years " + Math.Floor((timeDifference.Days / 30.4167) % 12) + " months " + Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
         }
 
         public static async Task<string> getFollowAge(string user_id)
@@ -86,13 +86,15 @@ namespace FoxxiBot.TwitchBot
             api.Settings.ClientId = Config.TwitchClientId;
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id);
+            var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id, toId: Config.TwitchMC_Id);
+
+            Console.WriteLine(data.Follows[0].FollowedAt.ToString());
 
             DateTime current_time = DateTime.Now;
             DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());
 
             TimeSpan timeDifference = current_time - user_time;
-            return (timeDifference.Days / 365 + " years " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+            return (Math.Floor(timeDifference.Days / 365.25) + " years " + Math.Floor((timeDifference.Days / 30.4167) % 12) + " months " + Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
         }
 
         public static async Task<string> getFollows()
