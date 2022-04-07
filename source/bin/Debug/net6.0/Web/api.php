@@ -59,7 +59,8 @@ if (isset($_REQUEST["state"])) {
         }
 
         if (isset($_REQUEST["where"])) {
-            $where = "WHERE " . $_REQUEST["where"];
+            $where_fix = str_replace(":","=", $_REQUEST["where"]);
+            $where = "WHERE " . $where_fix;
         }
 
         if (isset($_REQUEST["order"])) {
@@ -85,6 +86,39 @@ if (isset($_REQUEST["state"])) {
     }
 
     if ($_REQUEST["state"] == "send") {
+
+        if (!isset($_REQUEST["table"])) {
+            print "Error: Please profile a table to access.";
+            return;
+        }
+        else
+        {
+            $table = $_REQUEST["table"];
+        }     
+
+        if (isset($_REQUEST["column"])) {
+            $column = $_REQUEST["column"];
+        }
+
+        if (isset($_REQUEST["value"])) {
+            $value = $_REQUEST["value"];
+        }
+
+        if (isset($_REQUEST["id"])) {
+            $id = $_REQUEST["id"];
+        }
+
+        if (isset($_REQUEST["position"])) {
+            $position = $_REQUEST["position"];
+        }
+
+        $statement = $PDO->prepare("UPDATE $table SET $column = :value WHERE $id = :position");
+        $statement->bindValue(':value', $value);
+        $statement->bindValue(':position', $position);
+        $statement->execute();
+
+        // var_dump($statement);
+        print "Updated " . $table . " Column " . $column . " value " . $value;
 
     }
 
