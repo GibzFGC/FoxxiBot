@@ -53,20 +53,33 @@ if ($_REQUEST["v"] == "update_user") {
 
 }
 
+if ($_REQUEST["v"] == "status") {
+
+    // Set Status
+    $sql = "UPDATE gb_points_actions SET status = :status WHERE id = :id";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':id', $_POST["id"]);
+    $stmt->bindValue(':status', $_POST["status"]);
+    $stmt->execute();
+
+}
+
 if ($_REQUEST["v"] == "refund") {
 
     // Refund Points
-    $sql = "UPDATE gb_points SET value = value + $_REQUEST[points] WHERE username = :username";
+    $sql = "UPDATE gb_points SET value = value + $_POST[points] WHERE username = :username";
     $stmt = $PDO->prepare($sql);
 
-    $stmt->bindValue(':username', $_REQUEST["user"]);
+    $stmt->bindValue(':username', $_POST["user"]);
     $stmt->execute();
 
-    // Delete Action
-    $sql = 'DELETE FROM gb_points_actions WHERE id = :commandID';
+    // Set Status
+    $sql = "UPDATE gb_points_actions SET status = :status WHERE id = :id";
     $stmt = $PDO->prepare($sql);
-    
-    $stmt->bindValue(':commandID', $_REQUEST["id"]);
+
+    $stmt->bindValue(':id', $_POST["id"]);
+    $stmt->bindValue(':status', -1);
     $stmt->execute();
 
 }

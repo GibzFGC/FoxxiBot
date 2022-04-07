@@ -55,6 +55,7 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
                     <th>Recipient</th>
                     <th>Action</th>
                     <th>Points</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -69,11 +70,40 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
                     <td>". $row["recipient"] ."</td>
                     <td>". $row["action"] ."</td>
                     <td>". $row["points"] ."</td>
-                    <td>
-                      <a onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=refund&id=$row[id]&user=$row[username]&points=$row[points]\" class=\"btn btn-danger btn-sm\">Refund</a>                    
-                    </td>
-                  </tr>
               ";
+
+              if ($row["status"] == -1) {
+                print "<td>Refunded</td>";
+
+                print "
+                  <td>This action has been refunded</td>
+                ";
+              }
+
+              if ($row["status"] == 0) {
+                print "<td>Not yet completed</td>";
+
+                print "
+                  <td>
+                    <a id=\"completed_button\" data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"btn btn-success btn-sm\">Set as Complete</a>                    
+                    <a id=\"refund_button\" data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"btn btn-danger btn-sm\">Refund</a>
+                  </td>
+                ";
+              }
+
+              if ($row["status"] == 1) {
+                print "<td>Completed</td>";
+
+                print "
+                  <td>
+                    <a id=\"completed_button\" data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"btn btn-warning btn-sm\">Set as Incomplete</a>                    
+                    <a id=\"refund_button\" data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"btn btn-danger btn-sm\">Refund</a>
+                  </td>
+                ";
+              }
+
+              print "</tr>";
+
   }
 ?>
 
@@ -96,3 +126,6 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
 
   </div>
   <!-- /.content-wrapper -->
+
+  <script src="<?php print $gfw['template_path']; ?>/plugins/jquery/jquery.min.js"></script>
+  <script src="/pages/points/js/points_redeems.js"></script>
