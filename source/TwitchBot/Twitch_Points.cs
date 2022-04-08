@@ -32,8 +32,14 @@ namespace FoxxiBot.TwitchBot
                 return "Please specify an amount of points you would like to gamble";
             }
 
+            if (e.Command.ArgumentsAsString.Contains("."))
+            {
+                return "Please use a whole number or percentage, no decimals!";
+            }
+
             if (e.Command.ArgumentsAsList.Count > 0)
             {
+                
                 int n;
                 int points = Convert.ToInt32(Twitch_GetData.userPoints(e.Command.ChatMessage.Username));
 
