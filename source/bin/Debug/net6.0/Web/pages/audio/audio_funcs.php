@@ -51,6 +51,43 @@ if ($_REQUEST["v"] == "save") {
 
 }
 
+if ($_REQUEST["v"] == "edit") {
+
+    if (empty($_FILES["soundUpload"]["name"])) {
+        $add_sound = $_POST["soundLocalFile"];
+        $sound_name = $add_sound;
+    } else {
+    
+        $filenamed = str_replace("?", "", $_FILES["soundUpload"]["name"]);
+        $filenamee = str_replace(":", "", $filenamed);
+        $filenamef = str_replace(" ", "", $filenamee);
+    
+        $extension1 = end(explode(".", $filenamef));
+    
+        $add_sound = "../Files/Sounds/". $_POST["soundName"] . "." . $extension1;
+        $sound_name = $_POST["soundName"] . "." . $extension1;
+        copy($_FILES["soundUpload"]["tmp_name"], $add_sound);
+        chmod("$add_sound",0777);
+        $add_new = str_replace('../','', $add_sound);
+    }
+
+    $sql = "UPDATE gb_sounds SET name = :soundName, points = :soundPoints, file = :soundFile, active = :soundActive WHERE id = :commandID";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':commandID', $_POST["commandID"]);
+    $stmt->bindValue(':soundName', $_POST["soundName"]);
+    $stmt->bindValue(':soundPoints', $_POST["soundPoints"]);
+    $stmt->bindValue(':soundFile', $sound_name);
+    $stmt->bindValue(':soundActive', $_POST["soundActive"]);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=audio&s=success";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+}
+
 if ($_REQUEST["v"] == "delete") {
 
     $sql = 'DELETE FROM gb_sounds WHERE id = :commandID';

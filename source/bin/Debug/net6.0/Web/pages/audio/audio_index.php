@@ -71,6 +71,7 @@ $result = $PDO->query("SELECT * FROM gb_sounds");
                     <td>". $row["points"] ."</td>
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
+                      <a href=\"$gfw[site_url]/index.php?p=audio&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>
                       <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=audio&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
                     </td>
                   </tr>
