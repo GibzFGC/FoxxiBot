@@ -63,7 +63,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tbody>
 
                   <tr>
-                    <td>!age</td>
+                    <td>!accountage</td>
                     <td>{user}, your account was created {creation_date}</td>
                     <td>0</td>
                     <td>Viewer</td>

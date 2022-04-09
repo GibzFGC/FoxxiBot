@@ -66,6 +66,12 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_streamers (username TEXT UNIQUE, live TEXT DEFAULT 0)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_game_duel (sender TEXT UNIQUE, recipient TEXT, confirm INTEGER DEFAULT 0)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_game_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 

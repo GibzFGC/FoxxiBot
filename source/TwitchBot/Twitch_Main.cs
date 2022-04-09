@@ -115,14 +115,20 @@ namespace FoxxiBot.TwitchBot
 
                     // Increase all Current Viewers Points Count
                     using var con = new SQLiteConnection(cs);
+                    SQLiteTransaction this_transaction;
                     con.Open();
 
                     string stm = "UPDATE gb_points SET value = value + " + increment + " WHERE EXISTS (SELECT username FROM gb_twitch_watchlist WHERE username = gb_points.username)";
+
+                    // Start a local transaction
+                    this_transaction = con.BeginTransaction();
 
                     using var updateUser = new SQLiteCommand(stm, con);
                     updateUser.Prepare();
                     updateUser.ExecuteNonQuery();
 
+                    // Commit all Data to SQL
+                    this_transaction.Commit();
                     con.Close();
 
                 }
@@ -294,7 +300,9 @@ namespace FoxxiBot.TwitchBot
         private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
 
+            // Command Declarations
             Twitch_Commands commands = new Twitch_Commands();
+            Twitch_Games games = new Twitch_Games();
             Twitch_Points points = new Twitch_Points();
 
             //// == Admin Commands == ////
@@ -315,7 +323,7 @@ namespace FoxxiBot.TwitchBot
             //// == User Commands == ////
             ///
             // Account Age Handler
-            if (e.Command.CommandText == "age")
+            if (e.Command.CommandText == "accountage")
             {
                 var result = commands.commandAccountAge(e);
                 SendChatMessage(result);
@@ -333,6 +341,13 @@ namespace FoxxiBot.TwitchBot
             // Follow Age Handler
             if (e.Command.CommandText == "followage")
             {
+                // Check if Broadcaster
+                if (e.Command.ChatMessage.IsBroadcaster)
+                {
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", You can't check yourself, silly goose!");
+                    return;
+                }
+
                 var result = commands.commandFollowAge(e);
                 SendChatMessage(result);
                 return;
@@ -362,7 +377,17 @@ namespace FoxxiBot.TwitchBot
                 return;
             }
 
+            //// == Game Commands == ////
+            ///
+            if (e.Command.CommandText == "duel")
+            {
+                var result = games.commandDuel(e);
+                SendChatMessage(result);
+                return;
+            }
+
             //// == Points Commands == ////
+            ///
             // Gamble Handler
             if (e.Command.CommandText == "gamble")
             {

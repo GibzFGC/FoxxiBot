@@ -82,8 +82,13 @@ if ($_REQUEST["v"] == "delete_player") {
 if ($_REQUEST["v"] == "scoreboard_save") {
 
     $sql = 'INSERT OR REPLACE INTO gb_tournament_scoreboard (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
-    $stmt = $PDO->prepare($sql);
     
+    // Prepare for large data dump
+    $PDO->beginTransaction();
+    
+    // Prepare to Insert Data
+    $stmt = $PDO->prepare($sql);
+
     // Player 1 Data
     $stmt->bindValue(':parameter', "p1Tag");
     $stmt->bindValue(':value', $_POST["p1_tag"]);
@@ -104,7 +109,7 @@ if ($_REQUEST["v"] == "scoreboard_save") {
     $stmt->bindValue(':parameter', "p1Status");
     $stmt->bindValue(':value', $_POST["p1_status"]);
     $stmt->execute();
-
+    
     $stmt->bindValue(':parameter', "p1Score");
     $stmt->bindValue(':value', $_POST["p1_score"]);
     $stmt->execute();
@@ -121,7 +126,7 @@ if ($_REQUEST["v"] == "scoreboard_save") {
     $stmt->bindValue(':parameter', "p2Name");
     $stmt->bindValue(':value', $_POST["p2_name"]);
     $stmt->execute();
-
+    
     $stmt->bindValue(':parameter', "p2Country");
     $stmt->bindValue(':value', $_POST["p2_country"]);
     $stmt->execute();
@@ -151,6 +156,9 @@ if ($_REQUEST["v"] == "scoreboard_save") {
     $stmt->bindValue(':value', $_POST["tournament-round-extra"]);
     $stmt->execute();
 
+    // Commit Data & End Transaction
+    $PDO->commit();
+
 }
 
 if ($_REQUEST["v"] == "top8_quick_add") {
@@ -158,12 +166,17 @@ if ($_REQUEST["v"] == "top8_quick_add") {
     $match_block = $_POST["top8_block"];
 
     $sql = 'INSERT OR REPLACE INTO gb_tournament_top8 (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+
+    // Prepare for large data dump
+    $PDO->beginTransaction();
+    
+    // Prepare to Insert Data
     $stmt = $PDO->prepare($sql);
 
     $stmt->bindValue(':parameter', $match_block . "-tag");
     $stmt->bindValue(':value', $_POST["player_tag"]);
     $stmt->execute();
-
+    
     $stmt->bindValue(':parameter', $match_block . "-name");
     $stmt->bindValue(':value', $_POST["player_name"]);
     $stmt->execute();
@@ -179,7 +192,10 @@ if ($_REQUEST["v"] == "top8_quick_add") {
     $stmt->bindValue(':parameter', $match_block . "-score");
     $stmt->bindValue(':value', $_POST["player_score"]);
     $stmt->execute();
-    
+
+    // Commit Data & End Transaction
+    $PDO->commit();
+
 }
 
 if ($_REQUEST["v"] == "top8_save") {
@@ -187,6 +203,11 @@ if ($_REQUEST["v"] == "top8_save") {
     $match_block = $_POST["top8_block"];
 
     $sql = 'INSERT OR REPLACE INTO gb_tournament_top8 (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+
+    // Prepare for large data dump
+    $PDO->beginTransaction();
+    
+    // Prepare to Insert Data
     $stmt = $PDO->prepare($sql);
 
     $stmt->bindValue(':parameter', $match_block . "-p1-tag");
@@ -229,6 +250,9 @@ if ($_REQUEST["v"] == "top8_save") {
     $stmt->bindValue(':value', $_POST["player_2_score"]);
     $stmt->execute();
 
+    // Commit Data & End Transaction
+    $PDO->commit();
+
 }
 
 if ($_REQUEST["v"] == "top8_reset_match") {
@@ -236,6 +260,11 @@ if ($_REQUEST["v"] == "top8_reset_match") {
     $match_block = $_POST["top8_block"];
 
     $sql = 'INSERT OR REPLACE INTO gb_tournament_top8 (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+
+    // Prepare for large data dump
+    $PDO->beginTransaction();
+    
+    // Prepare to Insert Data
     $stmt = $PDO->prepare($sql);
 
     $stmt->bindValue(':parameter', $match_block . "-p1-tag");
@@ -245,7 +274,7 @@ if ($_REQUEST["v"] == "top8_reset_match") {
     $stmt->bindValue(':parameter', $match_block . "-p2-tag");
     $stmt->bindValue(':value', "");
     $stmt->execute();
-
+    
     $stmt->bindValue(':parameter', $match_block . "-p1-name");
     $stmt->bindValue(':value', "");
     $stmt->execute();
@@ -278,13 +307,24 @@ if ($_REQUEST["v"] == "top8_reset_match") {
     $stmt->bindValue(':value', "0");
     $stmt->execute();
 
+    // Commit Data & End Transaction
+    $PDO->commit();
+
 }
 
 if ($_REQUEST["v"] == "top8_purge_db") {
 
     $sql = "UPDATE gb_tournament_top8 SET value = :value";
+
+    // Prepare for large data dump
+    $PDO->beginTransaction();
+    
+    // Prepare to Insert Data
     $stmt = $PDO->prepare($sql);
 
     $stmt->bindValue(':value', "");
     $stmt->execute();
+
+    // Commit Data & End Transaction
+    $PDO->commit();
 }
