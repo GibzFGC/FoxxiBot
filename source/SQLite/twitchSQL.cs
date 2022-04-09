@@ -58,6 +58,27 @@ namespace FoxxiBot.SQLite
             return null;
         }
 
+        public string getGameOptions(string parameter)
+        {
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+            var stm = $"SELECT value FROM gb_game_options WHERE parameter='{parameter}' LIMIT 1";
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows == true)
+            {
+                while (rdr.Read())
+                {
+                    return rdr["value"].ToString();
+                }
+            }
+
+            con.Close();
+            return null;
+        }
+
         public void updateOptions(string parameter, string value)
         {
             using var con = new SQLiteConnection(cs);
