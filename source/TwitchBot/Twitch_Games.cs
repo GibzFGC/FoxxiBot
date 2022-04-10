@@ -1,4 +1,16 @@
-﻿using System;
+﻿// Copyright(C) 2020 - 2022 FoxxiBot
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -90,7 +102,7 @@ namespace FoxxiBot.TwitchBot
                                 "Like a flash of lightning, both draw but one falls... " + winner + " is the victor!",
                                 "Two entered, one left. Victory to " + winner + "! Glory to their name!",
                                 "Welcome back to the stange of History... " + winner + "!",
-                                winner.ToUpper() + "WINS !",
+                                winner.ToUpper() + " WINS !",
                             };
 
                             // Select Story Elements (Random)
@@ -161,11 +173,10 @@ namespace FoxxiBot.TwitchBot
 
                             // Create new Duel
                             using var createDuelCmd = new SQLiteCommand(con);
-                            createDuelCmd.CommandText = "INSERT INTO gb_game_duel (sender, recipient, confirm) VALUES (@sender, @recipient, @confirm)";
+                            createDuelCmd.CommandText = "INSERT INTO gb_game_duel (sender, recipient) VALUES (@sender, @recipient)";
 
                             createDuelCmd.Parameters.AddWithValue("@sender", e.Command.ChatMessage.DisplayName);
                             createDuelCmd.Parameters.AddWithValue("@recipient", e.Command.ArgumentsAsString.Replace("@", ""));
-                            createDuelCmd.Parameters.AddWithValue("@confirm", 0);
 
                             createDuelCmd.Prepare();
                             createDuelCmd.ExecuteNonQuery();
@@ -181,11 +192,10 @@ namespace FoxxiBot.TwitchBot
 
                         // Create a Duel
                         using var createDuelCmd = new SQLiteCommand(con);
-                        createDuelCmd.CommandText = "INSERT INTO gb_game_duel (sender, recipient, confirm) VALUES (@sender, @recipient, @confirm)";
+                        createDuelCmd.CommandText = "INSERT INTO gb_game_duel (sender, recipient) VALUES (@sender, @recipient)";
 
                         createDuelCmd.Parameters.AddWithValue("@sender", e.Command.ChatMessage.DisplayName);
                         createDuelCmd.Parameters.AddWithValue("@recipient", e.Command.ArgumentsAsString.Replace("@", ""));
-                        createDuelCmd.Parameters.AddWithValue("@confirm", 0);
 
                         createDuelCmd.Prepare();
                         createDuelCmd.ExecuteNonQuery();
