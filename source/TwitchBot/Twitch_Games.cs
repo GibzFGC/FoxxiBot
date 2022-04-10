@@ -91,7 +91,7 @@ namespace FoxxiBot.TwitchBot
                             string[] mid_duel = {
                                 "The battle is fierce, neither side looking to give leeway and each opponent prepared to give thier lives for the battle!",
                                 "As spectators look on in stages of awe and terror -- both combatants clash weapons as the steel and metal clang in a symphony of destruction!",
-                                "The battle has been wrought with losses, the armies of " + loser + " have fallen and they are the only ones left standing. Weapon in hand, they prepare to lay it all on the line!",
+                                "The battle has been wrought with losses, the armies of " + loser + " have fallen. " + loser + " is the only one left standing. Weapon in hand, they prepare to lay it all on the line!",
                                 "Back to back, they walk three paces",
                                 "The toll is large but both fight to the bitter end. " + winner + " looks badly beaten whilst " + loser + "lays quiet on the floor...",
                             };
