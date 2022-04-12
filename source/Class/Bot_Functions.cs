@@ -29,10 +29,15 @@ namespace FoxxiBot.Class
         public Task CreateTables()
         {
             using var con = new SQLiteConnection(cs);
+            SQLiteTransaction this_transaction;
+
             con.Open();
             
             using var cmd = new SQLiteCommand(con);
-            
+
+            // Start a local transaction
+            this_transaction = con.BeginTransaction();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
@@ -275,6 +280,9 @@ namespace FoxxiBot.Class
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
             cmd.ExecuteNonQuery();
+
+            // Commit all Data to SQL
+            this_transaction.Commit();
 
             con.Close();
             return Task.CompletedTask;
