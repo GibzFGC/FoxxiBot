@@ -28,7 +28,7 @@ if ($_REQUEST["v"] == "save") {
     
         $extension1 = end(explode(".", $filenamef));
     
-        $add_sound = "../Files/Sounds/". $_POST["soundName"] . "." . $extension1;
+        $add_sound = "obs/sounds/files/". $_POST["soundName"] . "." . $extension1;
         $sound_name = $_POST["soundName"] . "." . $extension1;
         copy($_FILES["soundUpload"]["tmp_name"], $add_sound);
         chmod("$add_sound",0777);
@@ -64,7 +64,7 @@ if ($_REQUEST["v"] == "edit") {
     
         $extension1 = end(explode(".", $filenamef));
     
-        $add_sound = "../Files/Sounds/". $_POST["soundName"] . "." . $extension1;
+        $add_sound = "obs/sounds/files". $_POST["soundName"] . "." . $extension1;
         $sound_name = $_POST["soundName"] . "." . $extension1;
         copy($_FILES["soundUpload"]["tmp_name"], $add_sound);
         chmod("$add_sound",0777);

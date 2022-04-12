@@ -70,12 +70,12 @@ foreach($data as $edit)
                   </div>
 
                   <div class="form-group">
-                    <label for="soundUpload">File Upload (Supported: *.wav)</label><br />
+                    <label for="soundUpload">Sound Upload</label><br />
                     <input type="file" name="soundUpload" />
                   </div>
 
                   <div class="form-group">
-                    <label for="soundLocalFile">Local File (Supported: *.wav)</label><br />
+                    <label for="soundLocalFile">Local Sound File</label><br />
                     <input type="text" class="form-control" id="soundLocalFile" name="soundLocalFile" value="<?php print $edit["file"]; ?>" />
                   </div>                  
 
@@ -132,7 +132,7 @@ foreach($data as $edit)
                     When using this fuction, please be aware of copyright and know that any files you use must either be owned by you, you have permission to use them or
                     some other agreement.<br /><br />
                     This is to prevent you from getting Twitch Copyright Claimed or worse from rights holders.<br /><br />
-                    The only supported file format right now is *.wav (Wave).
+                    This module supports most major audio formats through the stream browser source widget in "obs/sounds". Information @ <a target="_blank" href="https://github.com/goldfire/howler.js#format-recommendations">Howler</a>
                   </div>
 
                 </div>

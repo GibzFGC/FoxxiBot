@@ -65,7 +65,7 @@ foreach($result as $row)
                   </div>
 
                   <div class="form-group">
-                    <label for="soundUpload">File Upload (Supported: *.wav)</label><br />
+                    <label for="soundUpload">Sound Upload</label><br />
                     <input type="file" name="soundUpload" required />
                   </div>
 
@@ -115,7 +115,7 @@ foreach($result as $row)
                     When using this fuction, please be aware of copyright and know that any files you use must either be owned by you, you have permission to use them or
                     some other agreement.<br /><br />
                     This is to prevent you from getting Twitch Copyright Claimed or worse from rights holders.<br /><br />
-                    The only supported file format right now is *.wav (Wave).
+                    This module supports most major audio formats through the stream browser source widget in "obs/sounds". Information @ <a target="_blank" href="https://github.com/goldfire/howler.js#format-recommendations">Howler</a>
                   </div>
 
                 </div>
