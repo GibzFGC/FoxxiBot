@@ -211,14 +211,13 @@ namespace FoxxiBot.TwitchBot
                         updateCmd.ExecuteNonQuery();
                     }
 
-                    // Windows Implementation
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    {
-                        using (var soundPlayer = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "\\Files\\Sounds\\" + rdr["file"]))
-                        {
-                            soundPlayer.Play();
-                        }
-                    }
+                    // OBS Browser Source Implementation
+                    using var insertSound = new SQLiteCommand(con);
+                    insertSound.CommandText = "INSERT INTO gb_sounds_queue (file) VALUES (@file)";
+                    insertSound.Parameters.AddWithValue("@file", rdr["file"]);
+
+                    insertSound.Prepare();
+                    insertSound.ExecuteNonQuery();
 
                     return "Playing the Sound File: " + rdr["name"];
                 }

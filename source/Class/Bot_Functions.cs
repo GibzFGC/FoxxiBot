@@ -120,6 +120,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_sounds (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, file TEXT, points INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_sounds_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, file TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_ticker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, response TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
