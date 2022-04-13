@@ -1,0 +1,679 @@
+body {
+	margin:0px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: "a_FuturaOrto";
+}
+
+#board {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:1920px;
+	height:1080px;
+    background-image:url('../img/top8.png');
+}
+.winner {
+    color: #F1E3A3 !important;
+}
+
+/** Winners Section **/
+#w-ws-m1-p1-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 140px;
+}
+
+#w-ws-m1-p1-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 140px;
+}
+
+#w-ws-m1-p2-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 230px;
+}
+
+#w-ws-m1-p2-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 230px;
+}
+
+#w-ws-m2-p1-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 370px;
+}
+
+#w-ws-m2-p1-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 370px;
+}
+
+#w-ws-m2-p2-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top:460px;
+}
+
+#w-ws-m2-p2-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 460px;
+}
+
+#w-wf-p1-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 280px;
+}
+
+#w-wf-p1-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 280px;
+}
+
+#w-wf-p2-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 370px;
+}
+
+#w-wf-p2-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 370px;
+}
+
+#w-gf-p1-name {
+    position: absolute;
+    display: block;
+    left: 990px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 280px;
+}
+
+#w-gf-p1-score {
+    position: absolute;
+    display: block;
+    left: 1310px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 280px;
+}
+
+#w-gf-p2-name {
+    position: absolute;
+    display: block;
+    left: 990px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+    
+    color: #fff;
+    top: 370px;
+}
+
+#w-gf-p2-score {
+    position: absolute;
+    display: block;
+    left: 1310px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 370px;
+}
+
+/** Losers Section **/
+#l-lx-m1-p1-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 610px;
+}
+
+#l-lx-m1-p1-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 610px;
+}
+
+#l-lx-m1-p2-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 700px;
+}
+
+#l-lx-m1-p2-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 700px;
+}
+
+#l-lx-m2-p1-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 840px;
+}
+
+#l-lx-m2-p1-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 840px;
+}
+
+#l-lx-m2-p2-name {
+    position: absolute;
+    display: block;
+    left: 60px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 930px;
+}
+
+#l-lx-m2-p2-score {
+    position: absolute;
+    display: block;
+    left: 380px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 930px;
+}
+
+#l-lq-m1-p1-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 610px;
+}
+
+#l-lq-m1-p1-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 610px;
+}
+
+#l-lq-m1-p2-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 700px;
+}
+
+#l-lq-m1-p2-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 700px;
+}
+
+#l-lq-m2-p1-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 840px;
+}
+
+#l-lq-m2-p1-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 840px;
+}
+
+#l-lq-m2-p2-name {
+    position: absolute;
+    display: block;
+    left: 530px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 930px;
+}
+
+#l-lq-m2-p2-score {
+    position: absolute;
+    display: block;
+    left: 850px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 930px;
+}
+
+#l-ls-p1-name {
+    position: absolute;
+    display: block;
+    left: 990px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 740px;
+}
+
+#l-ls-p1-score {
+    position: absolute;
+    display: block;
+    left: 1310px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 740px;
+}
+
+#l-ls-p2-name {
+    position: absolute;
+    display: block;
+    left: 990px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 830px;
+}
+
+#l-ls-p2-score {
+    position: absolute;
+    display: block;
+    left: 1310px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 830px;
+}
+
+#l-lf-p1-name {
+    position: absolute;
+    display: block;
+    left: 1460px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 740px;
+}
+
+#l-lf-p1-score {
+    position: absolute;
+    display: block;
+    left: 1780px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 740px;
+}
+
+#l-lf-p2-name {
+    position: absolute;
+    display: block;
+    left: 1460px;
+    width: 290px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+
+    color: #fff;
+    top: 830px;
+}
+
+#l-lf-p2-score {
+    position: absolute;
+    display: block;
+    left: 1780px;
+    width: 30px;
+    height: 40px;
+
+    line-height: 40px;
+    font-size: 30px;
+    text-align: left;
+    text-transform: uppercase;
+    
+    color: #fff;
+    top: 830px;
+}
