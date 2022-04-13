@@ -21,6 +21,11 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FoxxiBot | Dashboard</title>
 
+  <link rel="apple-touch-icon" sizes="180x180" href="<?php print $gfw['template_path']; ?>/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?php print $gfw['template_path']; ?>/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<?php print $gfw['template_path']; ?>/img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="<?php print $gfw['template_path']; ?>/img/favicon/site.webmanifest">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- SweetAlert2 -->

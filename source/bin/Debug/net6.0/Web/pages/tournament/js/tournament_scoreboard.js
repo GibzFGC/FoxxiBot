@@ -592,15 +592,9 @@ $(document).ready(function() {
 	});
 	
 	// Check Live Preview
-	$('.live-preview').click(function() {
-		var selected = $(this).data("live");
-		
-		var iheight = $(this).data("height");
-		var iwidth = $(this).data("width");
-
-		$('#final-preview').attr('height', iheight);
-		$('#final-preview').attr('width', iwidth);
-		$('#final-preview').attr('src', "/custom/scoreboard/" + selected + "/Scoreboard.html");
+	$('#live_preview').change(function() {
+		var selected = $("#live_preview :selected").val();
+		$('#final-preview').attr('src', "/obs/tournament/" + selected + "/index.html");
 	});	
 
 	// Send to Top 8

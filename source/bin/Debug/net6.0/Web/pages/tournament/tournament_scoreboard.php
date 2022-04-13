@@ -312,6 +312,44 @@ foreach($result as $row)
             <!-- Small boxes (Stat box) -->
             <div class="row">
 
+              <!-- full column -->
+              <div class="col-md-12">
+
+                <div class="card card">
+                  <div class="card-header">
+                    <h3 class="card-title">Live Preview</h3>
+
+                    <div style="width: 300px;" class="card-tools">
+                        <select id="live_preview" class="form-control select2bs4" style="width: 100%;">
+                            <option selected="selected">Select a Scoreboard</option>
+
+                            <?php
+                              $dir = new DirectoryIterator('obs/tournament/');
+
+                              foreach ($dir as $fileinfo) {
+                                if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+                                    print "<option value=" . $fileinfo->getFilename() . ">" . $fileinfo->getFilename() . "</option>";
+                                }
+                              }
+                            ?>
+
+                        </select>
+                    </div>
+
+                  </div>
+
+                  <div class="card-body">
+
+                      <div style="background-color:#343a40" align="center">
+                        <iframe class="iframe" id="final-preview" src="" width="1240" height="100" frameborder="0" scrolling="no"></iframe>
+                      </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
         </div>
     </section>

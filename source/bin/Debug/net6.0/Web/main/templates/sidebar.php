@@ -99,15 +99,6 @@ foreach($result as $row)
               </p>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=games" class="nav-link">
-              <i class="nav-icon fas fa-award"></i>
-              <p>
-              Game Management
-              </p>
-            </a>
-          </li> 
           <?php } ?>
 
           <?php if ($options["twitch_features"] == "on") { ?>
