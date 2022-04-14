@@ -307,8 +307,8 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Hey and thanks for coming along, we'll be going live shortly!!");
-            client.SendMessage(e.Channel, $"Hey and thanks for coming along, we'll be going live shortly!!");
+            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Hey and thanks for coming along, Let's have a comfy stream!!");
+            client.SendMessage(e.Channel, $"Hey and thanks for coming along, Let's have a comfy stream!!");
         }
 
         private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
@@ -419,7 +419,7 @@ namespace FoxxiBot.TwitchBot
                 {
                     // Check if Twitter Features are Active
                     SQLite.botSQL botSQL = new SQLite.botSQL();
-                    if (botSQL.getOptions("twitter_features") == "on")
+                    if (botSQL.getOptions("twitter_features") == "off")
                     {
                         SendChatMessage("The bot's Twitter Functionality is currently turned off");
                         return;
