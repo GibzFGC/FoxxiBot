@@ -417,14 +417,22 @@ namespace FoxxiBot.TwitchBot
             {
                 if (e.Command.ChatMessage.IsBroadcaster)
                 {
+                    // Check if Twitter Features are Active
+                    SQLite.botSQL botSQL = new SQLite.botSQL();
+                    if (botSQL.getOptions("twitter_features") == "on")
+                    {
+                        SendChatMessage("The bot's Twitter Functionality is currently turned off");
+                        return;
+                    }
 
+                    // Twitter Confirmed Active, Let's Tweet!
                     Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
 
                     Twitch_Variables variables = new Twitch_Variables();
                     var var_string = variables.convertVariables(null, e.Command.ArgumentsAsString, null, null);
 
                     twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
-
+                    SendChatMessage("The tweet has been sent!");
                 }
             }
 
