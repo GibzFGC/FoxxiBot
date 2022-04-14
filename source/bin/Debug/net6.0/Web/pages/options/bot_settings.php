@@ -164,23 +164,23 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
+                  <label>User Access Token</label>
+                  <input type="text" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="Enter Your User Token" value="<?php print $options["twitter_usertoken"]; ?>">
+                </div>
+
+                <div class="form-group">
+                  <label>User Access Secret</label>
+                  <input type="text" class="form-control" id="twitter_usertokensecret" name="twitter_usertokensecret" placeholder="Enter Your Application API Key Secret" value="<?php print $options["twitter_usertokensecret"]; ?>">
+                </div>
+
+                <div class="form-group">
                   <label>Application API Key</label>
-                  <input type="password" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="Enter Your User Token" value="<?php print $options["twitter_usertoken"]; ?>">
+                  <input type="text" class="form-control" id="twitter_consumerkey" name="twitter_consumerkey" placeholder="Enter Your Consumer Key" value="<?php print $options["twitter_consumerkey"]; ?>">
                 </div>
 
                 <div class="form-group">
                   <label>Application API Key Secret</label>
-                  <input type="password" class="form-control" id="twitter_usertokensecret" name="twitter_usertokensecret" placeholder="Enter Your Application API Key Secret" value="<?php print $options["twitter_usertokensecret"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Your Consumer Key</label>
-                  <input type="password" class="form-control" id="twitter_consumerkey" name="twitter_consumerkey" placeholder="Enter Your Consumer Key" value="<?php print $options["twitter_consumerkey"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Your Consumer Key Secret</label>
-                  <input type="password" class="form-control" id="twitter_consumersecret" name="twitter_consumersecret" placeholder="Enter Your Consumer Secret" value="<?php print $options["twitter_consumersecret"]; ?>">
+                  <input type="text" class="form-control" id="twitter_consumersecret" name="twitter_consumersecret" placeholder="Enter Your Consumer Secret" value="<?php print $options["twitter_consumersecret"]; ?>">
                 </div>
 
                 <div class="form-group">
