@@ -270,16 +270,19 @@ namespace FoxxiBot.TwitchBot
         {
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
 
-            // If Tweets Active, Send a Tweet
-            Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-
+            // If Auto-Tweet is Active, Send a Tweet
             SQLite.botSQL botSQL = new SQLite.botSQL();
-            var live_tweet = botSQL.getOptions("twitter_livestatement");
+            if (botSQL.getOptions("twitter_features") == "on")
+            {
+                Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
+                var live_tweet = botSQL.getOptions("twitter_livestatement");
 
-            Twitch_Variables variables = new Twitch_Variables();
-            var var_string = variables.convertVariables(null, live_tweet, null, null);
+                Twitch_Variables variables = new Twitch_Variables();
+                var var_string = variables.convertVariables(null, live_tweet, null, null);
 
-            twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
+                twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
+            }
+
         }
 
         private void Pubsub_OnStreamDown(object sender, TwitchLib.PubSub.Events.OnStreamDownArgs e)
