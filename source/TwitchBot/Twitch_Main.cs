@@ -410,6 +410,24 @@ namespace FoxxiBot.TwitchBot
                 return;
             }
 
+            //// == Twitter Commands == ////
+            ///
+            // Tweet Handler
+            if (e.Command.CommandText == "tweet")
+            {
+                if (e.Command.ChatMessage.IsBroadcaster)
+                {
+
+                    Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
+
+                    Twitch_Variables variables = new Twitch_Variables();
+                    var var_string = variables.convertVariables(null, e.Command.ArgumentsAsString, null, null);
+
+                    twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
+
+                }
+            }
+
             // If command not development defined, check users custom in SQLite
             using var con = new SQLiteConnection(cs);
             con.Open();
