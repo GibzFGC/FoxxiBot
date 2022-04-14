@@ -53,7 +53,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Bot Version:
-                      <span class="float-right">1.0.1 Alpha Rev.4</span>
+                      <span class="float-right">1.0.2 Alpha</span>
                     </span>
                   </li>
 
@@ -102,6 +102,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     <span class="nav-link">AdminLTE Version &amp; License:
                       <span class="float-right">3.2.0-rc | <a href="https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE">MIT License</a> 
                       | <a target="_blank" href="https://adminlte.io">Website</a></span>
+                    </span>
+                  </li>
+
+                  <li class="nav-item">
+                    <span class="nav-link">CoreTweet Version &amp; License:
+                      <span class="float-right">1.0.0.483 | <a target="_blank" href="https://github.com/CoreTweet/CoreTweet/blob/master/LICENSE">MIT License</a>
+                       | <a target="_blank" href="https://github.com/CoreTweet/CoreTweet">Github</a></span>
                     </span>
                   </li>
 

@@ -39,9 +39,11 @@ function loadSounds() {
 
 	    // Sound Volume Handler
 	    Howler.volume(0.2);
-	    sound.play();
-
         deletePlayed(data[0]["id"]);
+		
+		sound.play();
+		console.log("Audio queue finished");
+		isPlaying = false;
 
 		} else {
 			console.log("Waiting for a Sound Call");

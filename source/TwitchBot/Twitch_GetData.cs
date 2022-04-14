@@ -187,12 +187,13 @@ namespace FoxxiBot.TwitchBot
             try
             {
                 var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
-                TimeSpan current_time = new TimeSpan(0, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-                TimeSpan stream_time = new TimeSpan(0, data.Streams[0].StartedAt.Hour, data.Streams[0].StartedAt.Minute, data.Streams[0].StartedAt.Second);
+                
+                DateTime current_time = DateTime.Now;
+                DateTime user_time = DateTime.Parse(data.Streams[0].StartedAt.ToString());
 
-                double timeDifference = current_time.TotalMinutes - stream_time.TotalMinutes;
-                var final_time = TimeSpan.FromMinutes(timeDifference);
-                return (final_time.Hours + " hours " + final_time.Minutes + " mins " + final_time.Seconds + " secs").ToString();
+                TimeSpan timeDifference = current_time - user_time;
+                return (Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+                // return (Math.Floor(timeDifference.Days / 365.25) + " years " + Math.Floor((timeDifference.Days / 30.4167) % 12) + " months " + Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();                
             }
             catch
             {

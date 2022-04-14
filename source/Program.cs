@@ -129,10 +129,6 @@ namespace FoxxiBot
                     reader.Close();
                 }
 
-                // Check & Set Debug Mode
-                SQLite.botSQL botSQL = new SQLite.botSQL();
-                botSQL.debugMode();
-
                 // Start Web Server
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
@@ -168,6 +164,10 @@ namespace FoxxiBot
                 {
                     Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
                 }
+
+                // Check & Set Debug Mode
+                SQLite.botSQL botSQL = new SQLite.botSQL();
+                botSQL.debugMode();
 
                 // prevent console from closing
                 Console.ReadLine();

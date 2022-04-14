@@ -53,6 +53,11 @@ namespace FoxxiBot.TwitchBot
                 new_string = new_string.Replace("{game}", data.ToString());
             }
 
+            if (new_string.Contains("{link}"))
+            {
+                new_string = new_string.Replace("{link}", "https://www.twitch.tv/" + Config.TwitchClientChannel);
+            }
+
             if (new_string.Contains("{points}"))
             {
                 var data = Twitch_GetData.userPoints(username);
