@@ -1,5 +1,5 @@
 var xmlhttp = new XMLHttpRequest();
-var animating = false;
+var isPlaying = false;
 var doUpdate = false;
 
 function init() {
@@ -13,7 +13,7 @@ function init() {
 function pollHandler()
 {
 doUpdate = true;
-if (!animating && doUpdate) {
+if (isPlaying == false && doUpdate) {
     loadSounds();
   }
 }
@@ -25,7 +25,10 @@ function isEmpty(obj) {
 // Set Audio File
 function setAudio(audio) {
 	sound = new Howl({
-		src: [audio]
+		src: [audio],
+		autoplay: true,
+		loop: false,
+		volume: 0.5,
 	});
 }
 
@@ -35,16 +38,19 @@ function loadSounds() {
 
 	if (!isEmpty(data)) {
 
-        setAudio("files/" + data[0]["file"]);
+		// Set isPlaying
+		isPlaying = true;
 
-	    // Sound Volume Handler
-	    Howler.volume(0.2);
-        deletePlayed(data[0]["id"]);
+		// Play the Next Sound
+		setAudio("files/" + data[0]["file"]);
+
+		// Fires when the sound finishes playing.
+		sound.on('end', function(){
+			deletePlayed(data[0]["id"]);
+			console.log("Audio queue finished");
+			isPlaying = false;
+  		});
 		
-		sound.play();
-		console.log("Audio queue finished");
-		isPlaying = false;
-
 		} else {
 			console.log("Waiting for a Sound Call");
 		}
