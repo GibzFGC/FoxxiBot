@@ -107,3 +107,18 @@ if ($_REQUEST["v"] == "take") {
     $stmt->execute();
 
 }
+
+if ($_REQUEST["v"] == "delete") {
+
+    $sql = 'DELETE FROM gb_points_actions WHERE id = :commandID';
+    $stmt = $PDO->prepare($sql);
+    
+    $stmt->bindValue(':commandID', $_REQUEST["id"]);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=points&a=redeems&s=success";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+}

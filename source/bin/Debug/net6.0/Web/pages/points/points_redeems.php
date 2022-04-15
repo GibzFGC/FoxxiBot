@@ -78,17 +78,26 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
                 print "<td>Refunded</td>";
 
                 print "
-                  <td>This action has been refunded</td>
+                  <td>
+                    <span class=\"completed_button btn btn-default btn-sm\">Refunded</span>
+                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                  </td>
+                  
                 ";
               }
 
               if ($row["status"] == 0) {
-                print "<td>Not yet completed</td>";
+                print "
+                <td>
+                <span class=\"completed_button btn btn-default btn-sm\">Not Performed</span>
+                </td>
+                ";
 
                 print "
                   <td>
                     <a data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"completed_button btn btn-success btn-sm\">Set as Complete</a>                    
                     <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
+                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
                   </td>
                 ";
               }
@@ -100,6 +109,7 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
                   <td>
                     <a data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"completed_button btn btn-warning btn-sm\">Set as Incomplete</a>                    
                     <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
+                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
                   </td>
                 ";
               }
