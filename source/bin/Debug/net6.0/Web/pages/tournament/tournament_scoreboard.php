@@ -317,7 +317,7 @@ foreach($result as $row)
 
                 <div class="card card">
                   <div class="card-header">
-                    <h3 class="card-title">Live Preview</h3>
+                    <h3 class="card-title">Live Preview <small>(Max preview is 1280x100)</small></h3>
 
                     <div style="width: 300px;" class="card-tools">
                         <select id="live_preview" class="form-control select2bs4" style="width: 100%;">
@@ -341,8 +341,8 @@ foreach($result as $row)
                   <div class="card-body">
 
                       <div style="background-color:#343a40" align="center">
-                        <iframe class="iframe" id="final-preview" src="" width="1240" height="100" frameborder="0" scrolling="no"></iframe>
-                      </div>
+                        <iframe class="iframe" id="final-preview" width="1200" height="100" frameborder="0" scrolling="yes"></iframe>
+                      </div> 
 
                   </div>
 
