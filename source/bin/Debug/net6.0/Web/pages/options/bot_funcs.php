@@ -65,7 +65,11 @@ if ($_REQUEST["v"] == "save") {
 
     $stmt->bindValue(':parameter', "twitter_features");
     $stmt->bindValue(':value', $_POST["twitter_features"]);
-    $stmt->execute();    
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "twitter_username");
+    $stmt->bindValue(':value', $_POST["twitter_username"]);
+    $stmt->execute(); 
 
     $stmt->bindValue(':parameter', "twitter_usertoken");
     $stmt->bindValue(':value', $_POST["twitter_usertoken"]);

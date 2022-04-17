@@ -101,6 +101,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_features','off')";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_username','')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_usertoken','')";
             cmd.ExecuteNonQuery();
 

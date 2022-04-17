@@ -164,6 +164,11 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
+                  <label>Twitter Username</label>
+                  <input type="text" class="form-control" id="twitter_username" name="twitter_username" placeholder="Enter Your Twitter Username" value="<?php print $options["twitter_username"]; ?>">
+                </div>
+
+                <div class="form-group">
                   <label>User Access Token</label>
                   <input type="text" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="Enter Your User Token" value="<?php print $options["twitter_usertoken"]; ?>">
                 </div>
