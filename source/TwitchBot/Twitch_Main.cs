@@ -34,7 +34,7 @@ namespace FoxxiBot.TwitchBot
         private Timer liveTimer = null;
         private Timer pointsTimer = null;
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         bool streamStatus;
         int current_row = 1;

@@ -21,7 +21,7 @@ namespace FoxxiBot.SQLite
 {
     internal class discordSQL
     {
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         public string getOptions(string parameter)
         {

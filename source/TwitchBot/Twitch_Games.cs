@@ -22,7 +22,7 @@ namespace FoxxiBot.TwitchBot
     internal class Twitch_Games
     {
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
         SQLite.twitchSQL twitchSQL = new SQLite.twitchSQL();
 
         public string commandDuel(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)

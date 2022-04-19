@@ -34,7 +34,7 @@ namespace FoxxiBot.DiscordBot
         private DiscordSocketClient client;
         private CommandService commands;
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
         private Timer promoTimer = null;
         public async Task MainAsync()
         {

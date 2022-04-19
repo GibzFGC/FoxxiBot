@@ -164,7 +164,7 @@ public class Websocket
         JArray array = new JArray();
 
         // Read SQL Table
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
         using var con = new SQLiteConnection(cs);
         con.Open();
 
@@ -331,7 +331,7 @@ public class Websocket
         var split = command.Split(" ");
 
         // Delete the SQL Row
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
         using var con = new SQLiteConnection(cs);
         con.Open();
         
@@ -399,7 +399,7 @@ public class Websocket
     static async Task GetStreamStatus(WebSocketContext socket)
     {
         // Query the SQLite
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         using var con = new SQLiteConnection(cs);
         con.Open();
@@ -483,7 +483,7 @@ public class Websocket
     static async Task GetStreamNotifications(WebSocketContext socket)
     {
         // Query the SQLite
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         using var con = new SQLiteConnection(cs);
         con.Open();

@@ -144,8 +144,8 @@ namespace FoxxiBot.DiscordBot
                 js.SetValue("jsonConvert", TypeReference.CreateTypeReference(js, typeof(Newtonsoft.Json.JsonConvert)));
 
                 // SQLite Declarations
-                js.SetValue("botSQLPath", "URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db");
-                js.SetValue("pluginSQLPath", "URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\plugins.db");
+                js.SetValue("botSQLPath", "URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db");
+                js.SetValue("pluginSQLPath", "URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/plugins.db");
                 js.SetValue("SQLiteConnection", TypeReference.CreateTypeReference(js, typeof(System.Data.SQLite.SQLiteConnection)));
                 js.SetValue("SQLiteCommand", TypeReference.CreateTypeReference(js, typeof(System.Data.SQLite.SQLiteCommand)));
 

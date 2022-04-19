@@ -217,7 +217,7 @@ namespace FoxxiBot.TwitchBot
         public static string userPoints(string userId)
         {
 
-            string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+            string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 

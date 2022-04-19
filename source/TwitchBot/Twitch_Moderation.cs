@@ -19,7 +19,7 @@ namespace FoxxiBot.TwitchBot
     internal class Twitch_Moderation
     {
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         // Check if a message is mostly CAPS
         public bool checkBlacklist(string input)
@@ -139,7 +139,7 @@ namespace FoxxiBot.TwitchBot
         // Check if a message has duplicates / spam
         public bool checkSpam(string input)
         {
-            Regex UrlMatch = new Regex("(.)(?<=\\1\\1\\1\\1\\1\\1)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+            Regex UrlMatch = new Regex("(.)(?<=/1/1/1/1/1/1)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
             if (UrlMatch.Match(input).Success)
             {

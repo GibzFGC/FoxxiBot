@@ -28,7 +28,7 @@ namespace FoxxiBot.DiscordBot
     public class SystemModule : ModuleBase<SocketCommandContext>
     {
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         // ~system serverid
         [Command("serverid")]
@@ -531,7 +531,7 @@ namespace FoxxiBot.DiscordBot
     [Group("promo")]
     public class StreamModule : ModuleBase<SocketCommandContext>
     {
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         // ~promo
         [Command]

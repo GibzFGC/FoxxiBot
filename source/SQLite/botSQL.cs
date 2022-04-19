@@ -21,7 +21,7 @@ namespace FoxxiBot.SQLite
 {
     internal class botSQL
     {
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
         public void debugMode()
         {
