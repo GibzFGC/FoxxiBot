@@ -139,7 +139,7 @@ namespace FoxxiBot.TwitchBot
         // Check if a message has duplicates / spam
         public bool checkSpam(string input)
         {
-            Regex UrlMatch = new Regex("(.)(?<=/1/1/1/1/1/1)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+            Regex UrlMatch = new Regex("(.)(?<=\\1\\1\\1\\1\\1\\1)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
             if (UrlMatch.Match(input).Success)
             {
