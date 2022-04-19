@@ -23,8 +23,8 @@ namespace FoxxiBot.TwitchBot
 {
     public class Twitch_Jint
     {
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
-        string plugin_directory = AppDomain.CurrentDomain.BaseDirectory + "\\Scripts\\Twitch\\";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
+        string plugin_directory = AppDomain.CurrentDomain.BaseDirectory + "/Scripts/Twitch/";
 
         public void loadPlugins()
         {

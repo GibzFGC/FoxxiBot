@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace FoxxiBot.WebServer
@@ -22,13 +23,24 @@ namespace FoxxiBot.WebServer
 
     class PHP
     {
-        private string phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries\\php-8.1.1\\php-cgi.exe";
+        private string phpDir;
         public Process process;
 
         public PHP(string filename, string queryString, byte[] requestBody, HttpListenerContext httpListenerContext)
         {
 
-            var documentRootPath = AppDomain.CurrentDomain.BaseDirectory + "Web\\";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            { 
+                phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries/php-8.1.1/php-cgi.exe";
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                phpDir = "/usr/bin/php-cgi8.1";
+            }
+
+
+            var documentRootPath = AppDomain.CurrentDomain.BaseDirectory + "Web/";
             var scriptFilePath = Path.GetFullPath(filename);
             var scriptFileName = Path.GetFileName(filename);
             var tempPath = Path.GetTempPath();

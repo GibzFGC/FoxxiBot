@@ -31,8 +31,8 @@ namespace FoxxiBot.DiscordBot
 {
     public class Discord_Jint
     {
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "\\Data\\bot.db";
-        string plugin_directory = AppDomain.CurrentDomain.BaseDirectory + "\\Scripts\\Discord\\";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
+        string plugin_directory = AppDomain.CurrentDomain.BaseDirectory + "/Scripts/Discord/";
 
         public void loadPlugins()
         {

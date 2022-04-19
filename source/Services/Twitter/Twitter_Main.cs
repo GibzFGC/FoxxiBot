@@ -12,10 +12,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LinqToTwitter;
+using LinqToTwitter.Common;
 using LinqToTwitter.OAuth;
 
 namespace FoxxiBot.Services.Twitter
@@ -23,7 +25,26 @@ namespace FoxxiBot.Services.Twitter
     internal class Twitter_Main
     {
 
+        public static TwitterContext twitter;
         SQLite.botSQL botSQL = new SQLite.botSQL();
+
+        public Twitter_Main()
+        {
+
+            var auth = new SingleUserAuthorizer
+            {
+                CredentialStore = new InMemoryCredentialStore()
+                {
+                    ConsumerKey = botSQL.getOptions("twitter_consumerkey"), // Application API Key
+                    ConsumerSecret = botSQL.getOptions("twitter_consumersecret"), // & Application Key Secret
+                    OAuthToken = botSQL.getOptions("twitter_usertoken"), // User Access Token
+                    OAuthTokenSecret = botSQL.getOptions("twitter_usertokensecret") // User Access Secret
+                }
+            };
+
+            twitter = new TwitterContext(auth);
+
+        }
 
         public async Task sendTweet(string status)
         {
@@ -31,19 +52,6 @@ namespace FoxxiBot.Services.Twitter
             // Check if twitter active
             if (botSQL.getOptions("twitter_features") == "on")
             {
-
-                var auth = new SingleUserAuthorizer
-                {
-                    CredentialStore = new InMemoryCredentialStore()
-                    {
-                        ConsumerKey = botSQL.getOptions("twitter_consumerkey"), // Application API Key
-                        ConsumerSecret = botSQL.getOptions("twitter_consumersecret"), // & Application Key Secret
-                        OAuthToken = botSQL.getOptions("twitter_usertoken"), // User Access Token
-                        OAuthTokenSecret = botSQL.getOptions("twitter_usertokensecret") // User Access Secret
-                    }
-                };
-
-                TwitterContext twitter = new TwitterContext(auth);
 
                 try
                 {
