@@ -14,26 +14,6 @@ function truncate(str, n){
   return (str.length > n) ? str.substr(0, n-1) + '...' : str;
 };
 
-  function serverCheck() {
-    $.ajax({
-        type: 'HEAD',
-        timeout: 1000,
-        url:"http://localhost:25000",
-        statusCode:{
-          400: function(response){
-            document.getElementById("server_status").classList.remove('bg-success');
-            document.getElementById("server_status").classList.add('bg-danger');
-            document.getElementById("server_status").innerHTML = "Offline";
-          },
-          200: function(response){
-            document.getElementById("server_status").classList.add('bg-success');
-            document.getElementById("server_status").classList.remove('bg-danger');
-            document.getElementById("server_status").innerHTML = "Online";
-          }
-        }
-      });
-  }
-
   // Milliseconds to Time
   function msToTime(duration) {
     var milliseconds = Math.floor((duration % 1000) / 100),
@@ -48,28 +28,10 @@ function truncate(str, n){
     return hours + " hours, " + minutes + " mins, " + seconds + " secs";
   }
 
-  // This handles EVERYTHING!
-  var sysinfo = window.setInterval(function() {
-    serverCheck();
-  }, 1000);
-
-
 // Twitch Handler
 const clientId = TwitchClientID;
 const token = TwitchClientOAuth;
 const { api } = new TwitchJs({ clientId, token })
-
-// Set Game Form Data
-api.get('channels', { search: { broadcaster_id: TwitchChannelID } })
-.then(response => {
-  if (document.getElementById("searchGame").value != response["data"][0].gameName) {
-    document.getElementById("searchGame").value = response["data"][0].gameName;
-  }
-
-  if (document.getElementById("setTitle").value != response["data"][0].title) {
-    document.getElementById("setTitle").value = response["data"][0].title;
-  }
-})
 
 var twitch = window.setInterval(function() {
   // Get Users Channel Info
