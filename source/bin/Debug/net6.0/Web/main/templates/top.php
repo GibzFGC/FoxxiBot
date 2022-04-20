@@ -55,8 +55,6 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
   <script src="<?php print $gfw['template_path']; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- TwitchJS -->
   <script src="<?php print $gfw['template_path']; ?>/plugins/twitch-js/twitch.js"></script>
-  <!-- Websocket Handler -->
-  <script src="<?php print $gfw['template_path']; ?>/js/reconnecting-websocket.min.js"></script>
 
   <script>
   var Toast = Swal.mixin({
