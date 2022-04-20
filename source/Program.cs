@@ -133,12 +133,6 @@ namespace FoxxiBot
                 // Start Web Server
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
-
-                // Create WS Server
-                Websocket mySocket = new Websocket();
-                mySocket.Start();
-
-                Console.WriteLine("Server Layer: WebSocket Started!");
                 Console.WriteLine("");
 
                 // Start Twitch Bot
@@ -361,10 +355,6 @@ namespace FoxxiBot
             {
                 Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
             }
-
-            // Create WS Server
-            Websocket mySocket = new Websocket();
-            mySocket.Start();
 
             // prevent console from closing
             Console.ReadLine();

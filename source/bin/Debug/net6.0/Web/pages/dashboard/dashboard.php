@@ -40,7 +40,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
         <!-- Small boxes (Stat box) -->
         <div class="row">
 
-          <div class="col-md-4">
+          <div class="col-md-6">
               <!-- Widget: user widget style 1 -->
               <div class="card card-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -89,7 +89,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             </div>
             <!-- /.col -->
 
-            <div class="col-md-4">
+            <div class="col-md-6">
             <!-- Widget: user widget style 2 -->
             <div class="card card-widget widget-user-2">
               <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -124,43 +124,6 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   </li>
                   
                   <!-- <a href="#" class="btn btn-block btn-primary btn-sm float-right" data-toggle="modal" data-target="#streamModal">Edit Stream Info</a> -->
-                </ul>
-              </div>
-            </div>
-            <!-- /.widget-user -->
-          </div>
-
-            <div class="col-md-4">
-            <!-- Widget: user widget style 2 -->
-            <div class="card card-widget widget-user-2">
-              <!-- Add the bg color to the header using any of the bg-* classes -->
-              <div class="widget-user-header bg-primary">
-                <!-- /.widget-user-image -->
-                <h3 class="user-username">Bot Statistics & Data</h3>
-                <h5 class="user-desc">Useful Stats</h5>
-              </div>
-              <div class="card-footer p-0">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      CPU Usage: <span id="cpu_usage" class="float-right badge bg-info">Loading...</span>
-                    </span>
-                  </li>
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      RAM Usage: <span id="ram_usage" class="float-right badge bg-info">Loading...</span>
-                    </span>
-                  </li>
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      Server Status: <span id="server_status" class="float-right badge bg-success">Loading...</span>
-                    </span>
-                  </li>
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      Websocket Status: <span id="socket_status" class="float-right badge bg-success">Loading...</span>
-                    </span>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -245,52 +208,8 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     </section>
     <!-- /.content -->
 
-
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Modal -->
-  <div class="modal" id="streamModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <div class="modal-body">
-
-          <div class="form-group">
-            <label for="setTitle">Stream Title</label>
-            <input type="text" class="form-control" id="setTitle" name="setTitle" placeholder="Enter Stream Title">
-          </div>
-
-          <div class="form-group">
-            <label>Stream Game</label>
-              <input type="text" class="form-control" id="searchGame" name="searchGame" placeholder="Enter Game Title">
-              <select class="select2" id="setGame" name="setGame" data-placeholder="Search Results..." style="width: 100%;">
-              
-              </select>
-            </div>
-
-            <div class="form-group">
-            <label>Stream Tags</label>
-              <select class="select2" id="setTags" name="setTags" multiple="multiple" data-placeholder="Search by typing a Tag Title" style="width: 100%;" value="">
-              
-              </select>
-            </div>
-
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
   
   <script type="text/javascript">
     var TwitchClientID = "<?php print $gfw["Twitch_ClientID"]; ?>";

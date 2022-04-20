@@ -10,62 +10,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-let socket = new ReconnectingWebSocket("ws://localhost:24000");
-socket.debug = true;
-
 function truncate(str, n){
   return (str.length > n) ? str.substr(0, n-1) + '...' : str;
 };
-
-socket.onopen = function(e) {
-    console.log("[open] Connection established");
-    console.log("Sending to server");
-    
-    // Set Panel Status
-    document.getElementById("socket_status").classList.add('bg-success');
-    document.getElementById("socket_status").classList.remove('bg-danger');
-    document.getElementById("socket_status").innerHTML = "Online";
-
-    // Send Commands
-    socket.send("GetCPUUsage end");
-    socket.send("GetRAMUsage end");
-  };
-  
-  socket.onmessage = function(e) {
-    json = JSON.parse(e.data);
-    // console.log(json);
-
-    if ( typeof json["data"][0].cpu_usage !== 'undefined' ) {
-      document.getElementById("cpu_usage").textContent = json["data"]["0"].cpu_usage + "%";
-    }
-  
-    if ( typeof json["data"][0].ram_usage !== 'undefined' ) {
-      document.getElementById("ram_usage").textContent = json["data"]["0"].ram_usage + " MB";
-    }
-  };
-
-  socket.onclose = function(e) {
-    // Set Panel Status
-    document.getElementById("socket_status").classList.remove('bg-success');
-    document.getElementById("socket_status").classList.add('bg-danger');
-    document.getElementById("socket_status").innerHTML = "Offline";
-
-    // Check Server Status
-    serverCheck();
-
-    if (e.wasClean) {
-        // e.g. server process killed or network down
-        console.log(`[close] Connection closed cleanly, code=${e.code} reason=${e.reason}`);
-    } else {
-      // e.g. server process killed or network down
-      // event.code is usually 1006 in this case
-      console.log('[close] Connection died');
-    }
-  };
-  
-  socket.onerror = function(error) {
-    console.log(`[error] ${error.message}`);
-  };
 
   function serverCheck() {
     $.ajax({
@@ -103,10 +50,6 @@ socket.onopen = function(e) {
 
   // This handles EVERYTHING!
   var sysinfo = window.setInterval(function() {
-    socket.send("GetCPUUsage end");
-    socket.send("GetRAMUsage end");
-
-    // Check Server Status
     serverCheck();
   }, 1000);
 
