@@ -22,6 +22,7 @@ namespace FoxxiBot.Settings
     {
         // Bot Specifics
         public string Debug { get; set; }
+        public string WebserverIP { get; set; }
         public string WebserverPort { get; set; }
 
         // Bot & Twitch Main Settings
