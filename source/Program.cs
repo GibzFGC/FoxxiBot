@@ -107,6 +107,7 @@ namespace FoxxiBot
 
                     // Set needed Values Internally
                     Config.Debug = (string)o["Debug"];
+                    Config.WebserverIP = (string)o["WebserverIP"];
                     Config.WebserverPort = (string)o["WebserverPort"];
                     Config.TwitchBotName = (string)o["BotName"];
                     Config.TwitchClientId = (string)o["TwitchClientID"];

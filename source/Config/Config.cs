@@ -22,6 +22,7 @@ namespace FoxxiBot
         public static string Debug = "false";
 
         // Webserver
+        public static string WebserverIP = "";
         public static string WebserverPort = "25000";
 
         // Twitch - Bot Parameters
