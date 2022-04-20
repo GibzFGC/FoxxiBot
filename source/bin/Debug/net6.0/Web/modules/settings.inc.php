@@ -31,13 +31,24 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     $gfw['site_active'] = true;	    																		// Sets if the website is online for public viewing or not
 
 
-// Set Website Path, Title and Description:-
+// Set Website Path:-
     /* (edit these settings as needed) */
-	if ($bot_obj->TwitchClientID) {
-		$gfw['site_url'] = "http://localhost:" . $bot_obj->WebserverPort;             	      				// Set the url for the website (NO TRAILING SLASH!)
+	$site_ip;																								// Stores the needed IP Address
+	$site_port;																								// Stores the needed Port Value
+
+	if ($bot_obj->WebserverIP) {
+		$site_ip =  $bot_obj->WebserverIP;
 	} else {
-		$gfw['site_url'] = "http://localhost:25000";       	      											// Set the url for the website (NO TRAILING SLASH!)
+		$site_ip = "localhost";
 	}
+	
+	if ($bot_obj->WebserverPort) {
+		$site_port =  $bot_obj->WebserverPort;
+	} else {
+		$site_port = "25000";
+	}
+
+	$gfw['site_url'] = "http://" . $site_ip . ":" . $site_port;					             	      		// Set the url for the website (NO TRAILING SLASH!)
 
 // Advanced Website Settings:-
     /* (please don't edit unless you know what you're doing) */
