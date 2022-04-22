@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>FoxxiBot Game Title Widget</title>
+        <link rel="stylesheet" href="main.css" type="text/css" charset="utf-8">
+    </head>
+
+    <body onLoad="init()">
+
+        <div id="game_title"><!-- Game Title Here --></div>
+
+        <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+		    var xmlhttp = new XMLHttpRequest();	
+		
+            var animating = false;
+            var doUpdate = false;
+        
+            function init() {
+
+                xmlhttp.overrideMimeType('application/json');
+            
+                var timeout = this.window.setInterval(function() {
+                    pollHandler();
+                }, 250);
+
+            }
+        
+            function pollHandler()
+            {
+            doUpdate = true;
+            if (!animating && doUpdate) {
+                loadGame();
+              }
+            }
+
+            function loadGame() {
+                // Load Data
+                $.getJSON('/api.php?state=get&table=gb_options&where=parameter:"game_title" LIMIT 1', function(data) {
+                    var game = document.getElementById('game_title');
+                    game.innerHTML = data[0]["value"];
+                });
+            }
+        </script>
+
+    </body>
+
+</html>
