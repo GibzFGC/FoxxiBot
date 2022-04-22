@@ -89,6 +89,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('stream_status',0)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('game_title','')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('discord_features','on')";
             cmd.ExecuteNonQuery();
 

@@ -33,6 +33,7 @@ namespace FoxxiBot.TwitchBot
         private Timer oauthTimer = null;
         private Timer liveTimer = null;
         private Timer pointsTimer = null;
+        private string gameTitle = null;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
@@ -139,6 +140,16 @@ namespace FoxxiBot.TwitchBot
         {
             // Check Bot Owners Twitch Channel
             streamStatus = Twitch_GetData.streamStatus().GetAwaiter().GetResult();
+
+            // Set Game
+            SQLite.botSQL gameSQL = new SQLite.botSQL();
+            var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
+
+            if (gameTitle != data.ToString())
+            {
+                gameTitle = data.ToString();
+                gameSQL.updateOptions("game_title", data.ToString());
+            }
         }
 
         private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
