@@ -56,7 +56,7 @@ namespace FoxxiBot.Services.Twitter
                 try
                 {
                     await twitter.TweetAsync(status);
-                    Console.WriteLine("A Tweet has been Sent!");
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + $" - A tweet has been sent: " + status);
                 }
                 catch (Exception e)
                 {
