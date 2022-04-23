@@ -279,21 +279,50 @@ namespace FoxxiBot.TwitchBot
 
         private void Pubsub_OnStreamUp(object sender, TwitchLib.PubSub.Events.OnStreamUpArgs e)
         {
+            // Tell the Streamer that the Steam is now Live
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
 
-            // If Auto-Tweet is Active, Send a Tweet
+            // If Twitter & LiveStatement is Active, Send a Tweet
             SQLite.botSQL botSQL = new SQLite.botSQL();
+
             if (botSQL.getOptions("twitter_features") == "on")
             {
-                Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-                var live_tweet = botSQL.getOptions("twitter_livestatement");
 
-                Twitch_Variables variables = new Twitch_Variables();
-                var var_string = variables.convertVariables(null, live_tweet, null, null);
+                if (botSQL.getOptions("twitter_livestatement_status") == "on")
+                {
+                    // Check if Game has it's own Method
+                    using var con = new SQLiteConnection(cs);
+                    con.Open();
 
-                twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
+                    // Get the currently played game
+                    var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
+
+                    // Start DB Search
+                    string stm = "SELECT * FROM gb_twitter_status WHERE game = '" + data.ToString() + "' OR game = 'null' AND active = 1 LIMIT 1";
+
+                    using var cmd = new SQLiteCommand(stm, con);
+                    using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                    if (rdr.HasRows == true)
+                    {
+
+                        while (rdr.Read())
+                        {
+
+                            Twitch_Variables variables = new Twitch_Variables();
+                            var tweet_status = variables.convertVariables(null, rdr["tweet"].ToString(), null, null);
+
+                            Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
+                            twitterAPI.sendTweet(tweet_status).GetAwaiter().GetResult();
+
+                        }
+
+                    }
+
+                    con.Close();
+                }
+
             }
-
         }
 
         private void Pubsub_OnStreamDown(object sender, TwitchLib.PubSub.Events.OnStreamDownArgs e)

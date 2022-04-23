@@ -119,9 +119,6 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_consumersecret','')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_livestatement','')";
-            cmd.ExecuteNonQuery();
-
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_livestatement_status','off')";
             cmd.ExecuteNonQuery();
 
@@ -306,6 +303,12 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitter_status (game TEXT UNIQUE, tweet TEXT, active INTEGER)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitter_status (game, tweet, active) VALUES('null', 'What to send to twitter if there is no game specified. Activate once you edit it for usage!', '0')";
             cmd.ExecuteNonQuery();
 
             // Commit all Data to SQL
