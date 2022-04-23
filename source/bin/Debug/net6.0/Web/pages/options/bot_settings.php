@@ -118,6 +118,19 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
+                  <label>Show Twitter Menu</label>
+                    <div style="float: right;">
+                    <?php
+                    if ($options["twitter_features"] == "off") {
+                    print '<input type="checkbox" name="twitter_features" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                    } else {
+                      print '<input type="checkbox" name="twitter_features" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                    }
+                    ?>
+                  </div>
+                </div>
+
+                <div class="form-group">
                   <label>Show Tournament Menu</label>
                     <div style="float: right;">
                     <?php
@@ -138,82 +151,6 @@ foreach($result as $row)
 
           </div>
           <!--/.col (second) -->
-
-          <!-- second column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="card card-primary">
-              <div class="card-header">
-              <h3 class="card-title"><i class="fab fa-twitter"></i>&nbsp; Twitter Integration</h3>
-              </div>
-
-              <!-- /.card-header -->
-              <div class="card-body">
-
-                <div class="form-group">
-                  <label>Twitter Features</label>
-                    <div style="float: right;">
-                    <?php
-                    if ($options["twitter_features"] == "off") {
-                    print '<input type="checkbox" name="twitter_features" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    } else {
-                      print '<input type="checkbox" name="twitter_features" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    }
-                    ?>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label>Twitter Username</label>
-                  <input type="text" class="form-control" id="twitter_username" name="twitter_username" placeholder="Enter Your Twitter Username" value="<?php print $options["twitter_username"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>User Access Token</label>
-                  <input type="text" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="Enter Your User Token" value="<?php print $options["twitter_usertoken"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>User Access Secret</label>
-                  <input type="text" class="form-control" id="twitter_usertokensecret" name="twitter_usertokensecret" placeholder="Enter Your Application API Key Secret" value="<?php print $options["twitter_usertokensecret"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Application API Key</label>
-                  <input type="text" class="form-control" id="twitter_consumerkey" name="twitter_consumerkey" placeholder="Enter Your Consumer Key" value="<?php print $options["twitter_consumerkey"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Application API Key Secret</label>
-                  <input type="text" class="form-control" id="twitter_consumersecret" name="twitter_consumersecret" placeholder="Enter Your Consumer Secret" value="<?php print $options["twitter_consumersecret"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Enter your Go Live Statement (Can use custom variables, e.g. {game}, {link})</label>
-                  <input type="text" class="form-control" id="twitter_livestatement" name="twitter_livestatement" placeholder="Enter your Go Live Statement" value="<?php print $options["twitter_livestatement"]; ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Live Auto-Tweet</label>
-                    <div style="float: right;">
-                    <?php
-                    if ($options["twitter_livestatement_status"] == "off") {
-                    print '<input type="checkbox" name="twitter_livestatement_status" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    } else {
-                      print '<input type="checkbox" name="twitter_livestatement_status" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    }
-                    ?>
-                  </div>
-                </div>
-
-              </div>
-              <!-- /.card-body -->
-
-            </div>
-            <!-- /.card -->
-
-            </div>
-            <!-- /.card -->
 
           <!-- second column -->
           <div class="col-md-12">

@@ -75,7 +75,11 @@ if ($gfw["site_active"] == true) {
 
             if ($page_loader == 'tournament') {
                 $cpage = "pages/tournament_loader.php";
-            }            
+            }
+
+            if ($page_loader == 'twitter') {
+                $cpage = "pages/twitter_loader.php";
+            }
 
             if ($page_loader == 'notifications') {
                 $cpage = "pages/notifications_loader.php";

@@ -17,7 +17,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FoxxiBot | Dashboard</title>
 

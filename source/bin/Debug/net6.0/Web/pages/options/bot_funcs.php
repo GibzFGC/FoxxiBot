@@ -58,46 +58,13 @@ if ($_REQUEST["v"] == "save") {
     $stmt->bindValue(':value', $_POST["tournament_features"]);
     $stmt->execute();
 
-    // twitter_features
+    // twitter features
     if (!isset($_POST["twitter_features"])) {
         $_POST["twitter_features"] = "off";
     }
 
     $stmt->bindValue(':parameter', "twitter_features");
     $stmt->bindValue(':value', $_POST["twitter_features"]);
-    $stmt->execute();
-
-    $stmt->bindValue(':parameter', "twitter_username");
-    $stmt->bindValue(':value', $_POST["twitter_username"]);
-    $stmt->execute(); 
-
-    $stmt->bindValue(':parameter', "twitter_usertoken");
-    $stmt->bindValue(':value', $_POST["twitter_usertoken"]);
-    $stmt->execute(); 
-
-    $stmt->bindValue(':parameter', "twitter_usertokensecret");
-    $stmt->bindValue(':value', $_POST["twitter_usertokensecret"]);
-    $stmt->execute();
-
-    $stmt->bindValue(':parameter', "twitter_consumerkey");
-    $stmt->bindValue(':value', $_POST["twitter_consumerkey"]);
-    $stmt->execute(); 
-
-    $stmt->bindValue(':parameter', "twitter_consumersecret");
-    $stmt->bindValue(':value', $_POST["twitter_consumersecret"]);
-    $stmt->execute();
-
-    // twitter_features
-    if (!isset($_POST["twitter_livestatement_status"])) {
-        $_POST["twitter_livestatement_status"] = "off";
-    }
-
-    $stmt->bindValue(':parameter', "twitter_livestatement_status");
-    $stmt->bindValue(':value', $_POST["twitter_livestatement_status"]);
-    $stmt->execute();
-
-    $stmt->bindValue(':parameter', "twitter_livestatement");
-    $stmt->bindValue(':value', $_POST["twitter_livestatement"]);
     $stmt->execute();
 
     // Redirect

@@ -289,6 +289,45 @@ foreach($result as $row)
           </li>
           <?php } ?>
 
+          <li class="li_header">OTHER SERVICES</li>
+          <?php if ($options["twitter_features"] == "on") { ?>
+
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-twitter"></i>
+              <p>
+                Twitter
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add a Game Live Status</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Twitter Status List</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=settings" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Twitter Settings</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <?php } ?>
+
           <li class="li_header">GLOBAL FEATURES</li>
 
           <li class="nav-item">
