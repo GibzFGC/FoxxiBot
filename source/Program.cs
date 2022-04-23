@@ -54,6 +54,9 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
+            // Set Application Encoding
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             // If Plugins SQLite doesn't exist
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db"))
             {
