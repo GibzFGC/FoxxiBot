@@ -20,7 +20,7 @@ $bot_obj = json_decode($bot_json);
 <html lang="en" >
   <head>
       <meta charset="UTF-8">
-      <title>FoxxiBot Chat Widget</title>
+      <title><?= _CHAT_WIDGET_TITLE ?></title>
       <link rel="stylesheet" href="css/style.css">
   </head>
 
