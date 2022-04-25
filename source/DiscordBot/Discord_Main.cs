@@ -31,7 +31,7 @@ namespace FoxxiBot.DiscordBot
 {
     public class Discord_Main
     {
-        private DiscordSocketClient client;
+        private static DiscordSocketClient client;
         private CommandService commands;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
@@ -497,10 +497,10 @@ namespace FoxxiBot.DiscordBot
             }
         }
 
-        public async void SendDiscordMessage(string channelId, string message)
+        public static async void SendDiscordMessage(ulong channelId, string message)
         {
-            await client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
-            .GetTextChannel(Convert.ToUInt64(channelId)).SendMessageAsync(message);
+            var channel = client.GetChannel(channelId) as SocketTextChannel;
+            await channel.SendMessageAsync(message);
         }
 
     }

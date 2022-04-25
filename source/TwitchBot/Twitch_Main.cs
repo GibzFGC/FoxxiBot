@@ -312,7 +312,7 @@ namespace FoxxiBot.TwitchBot
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
 
             // If Discord Auto Stream Message is Active, Send a Notification
-            // Discord_AutoLiveMessage();
+            Discord_AutoLiveMessage();
 
             // If Twitter & LiveStatement is Active, Send a Tweet
             SQLite.botSQL botSQL = new SQLite.botSQL();
@@ -794,7 +794,7 @@ namespace FoxxiBot.TwitchBot
             if (active == "on")
             {
                 DiscordBot.Discord_Main discord = new DiscordBot.Discord_Main();
-                var channelId = discordSQL.getOptions("AnnounceChannel");
+                var channelId = Convert.ToUInt64(discordSQL.getOptions("AnnounceChannel"));
 
                 // Get Auto Stream Discord Message
                 var discord_message = discordSQL.getOptions("AnnounceChannel_Text");
@@ -806,7 +806,7 @@ namespace FoxxiBot.TwitchBot
                 }
 
                 // Send Discord Message
-                discord.SendDiscordMessage(channelId, discord_message);
+                DiscordBot.Discord_Main.SendDiscordMessage(channelId, discord_message);
             }
 
         }
