@@ -29,6 +29,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     $gfw['in_development'] = true;																			// Is on a Development Server (TRUE / FALSE)
 	$gfw['in_database'] = true; 																			// Use an SQLite Database? (TRUE / FALSE)
     $gfw['site_active'] = true;	    																		// Sets if the website is online for public viewing or not
+	$gfw['bot_language'] = $bot_obj->BotLang;																// Sets the preferred language from the user (default: en)
 
 
 // Set Website Path:-

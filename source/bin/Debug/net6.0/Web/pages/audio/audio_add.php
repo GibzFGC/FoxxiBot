@@ -29,13 +29,13 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Adding a Audio / Sound</h1>
+            <h1 class="m-0"><?= _AUDIO_ADD ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Audio / Sound</li>
-              <li class="breadcrumb-item active">Add</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _AUDIO ?></li>
+              <li class="breadcrumb-item active"><?= _ADD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,33 +54,33 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Audio / Sound Information</h3>
+                <h3 class="card-title"><?= _AUDIO_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
                     <label for="commandName">Name</label>
-                    <input type="text" class="form-control" id="soundName" name="soundName" placeholder="Enter Sound Name" required>
+                    <input type="text" class="form-control" id="soundName" name="soundName" placeholder="<?= _AUDIO_NAME ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="soundUpload">Sound Upload</label><br />
+                    <label for="soundUpload"><?= _AUDIO_UPLOAD ?></label><br />
                     <input type="file" name="soundUpload" required />
                   </div>
 
                   <?php if ($options["points_active"] == "on") { ?>
                   <div class="form-group">
-                    <label for="soundPoints">Point Cost</label>
+                    <label for="soundPoints"><?= _POINT_COST ?></label>
                     <input type="number" class="form-control" id="soundPoints" name="soundPoints" value="0">
                   </div>
                   <?php } ?>
 
                   <div class="form-group">
-                    <label>Active</label>
+                    <label><?= _ACTIVE ?></label>
                     <select class="form-control select2" id="soundActive" name="soundActive" style="width: 100%;">
-                      <option value="1" SELECTED>Yes</option>';
-                      <option value="0">No</option>';
+                      <option value="1" SELECTED><?= _YES ?></option>';
+                      <option value="0"><?= _NO ?></option>';
                     </select>
                   </div>
 
@@ -89,7 +89,7 @@ foreach($result as $row)
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Sound</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _AUDIO_CREATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -104,18 +104,14 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Important Information</h3>
+                <h3 class="card-title"><?= _INFO ?></h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
                   <div class="form-group">
-                    You can add sounds, music or any other audio with the bot if you add a file. It can be accessed by using the "!sound name" function.<br /><br />
-                    When using this fuction, please be aware of copyright and know that any files you use must either be owned by you, you have permission to use them or
-                    some other agreement.<br /><br />
-                    This is to prevent you from getting Twitch Copyright Claimed or worse from rights holders.<br /><br />
-                    This module supports most major audio formats through the stream browser source widget in "obs/sounds". Information @ <a target="_blank" href="https://github.com/goldfire/howler.js#format-recommendations">Howler</a>
+                    <?= _AUDIO_INFO ?>
                   </div>
 
                 </div>

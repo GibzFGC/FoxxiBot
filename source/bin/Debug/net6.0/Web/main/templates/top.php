@@ -19,7 +19,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= _TITLE ?></title>
+  <title><?= _PAGE_TITLE ?></title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="<?php print $gfw['template_path']; ?>/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="<?php print $gfw['template_path']; ?>/img/favicon/favicon-32x32.png">
