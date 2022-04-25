@@ -26,7 +26,7 @@ namespace FoxxiBot.Class
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Data/Backups");
             }
 
-            // Check if Backup folder exists
+            // Check if Web folder exists
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Web"))
             {
 
