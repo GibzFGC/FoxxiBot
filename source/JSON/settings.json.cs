@@ -48,5 +48,7 @@ namespace FoxxiBot.Settings
         public string DiscordServerId { get; set; }
         public string DiscordToken { get; set; }
         public string DiscordPrefix { get; set; }
+
+        public string BotLang { get; set; }
     }
 }

@@ -129,6 +129,8 @@ namespace FoxxiBot
                     Config.DiscordToken = (string)o["DiscordToken"];
                     Config.DiscordPrefix = (string)o["DiscordPrefix"];
 
+                    Config.BotLang = (string)o["BotLang"];
+
                     // Close the File
                     reader.Close();
                 }
@@ -212,6 +214,11 @@ namespace FoxxiBot
 
                 Console.WriteLine("");
 
+                Console.WriteLine("Last but not least: What is your preferred language (default: en) ?");
+                string BotLang = Console.ReadLine();
+
+                Console.WriteLine("");
+
                 // Set needed Values Internally
                 Config.TwitchBotName = BotName;
                 Config.TwitchClientId = TwitchClientID;
@@ -220,6 +227,7 @@ namespace FoxxiBot
                 Config.TwitchClientChannel = TwitchClientChannel;
                 Config.DiscordToken = DiscordToken;
                 Config.DiscordPrefix = DiscordPrefix;
+                Config.BotLang = BotLang;
 
                 // Begin the Verification / OAuth Phase
                 MainAsync().GetAwaiter().GetResult();
@@ -330,6 +338,8 @@ namespace FoxxiBot
             objSettings.DiscordServerId = Config.DiscordServerId;
             objSettings.DiscordToken = Config.DiscordToken;
             objSettings.DiscordPrefix = Config.DiscordPrefix;
+
+            objSettings.BotLang = Config.BotLang;
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
