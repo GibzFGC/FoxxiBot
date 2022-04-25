@@ -27,7 +27,7 @@ foreach($result as $row)
     <!-- Brand Logo -->
     <a href="<?php print $gfw['site_url']; ?>" class="brand-link">
       <img src="<?php print $gfw['template_path']; ?>/img/FoxxiBot.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">FoxxiBot</span>
+      <span class="brand-text font-weight-light"><?= _BOTNAME ?></span>
     </a>
 
     <!-- Sidebar -->
@@ -41,7 +41,7 @@ foreach($result as $row)
         </div>
         <div class="info">
           <a id="twitch_profile_name" target="_blank" href="https://www.twitch.tv/<?php print $gfw["Twitch_BroadcasterChannel"]; ?>" class="d-block">
-          Loading...
+          <?= _LOADING ?>
           </a>
         </div>
       </div>
@@ -56,7 +56,7 @@ foreach($result as $row)
             <a href="<?php print $gfw['site_url']; ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Dashboard
+                <?= _DASHBOARD ?>
               </p>
             </a>
           </li>
@@ -65,19 +65,19 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=notifications" class="nav-link">
               <i class="nav-icon fas fa-bell"></i>
               <p>
-                Notifications
+                <?= _NOTIFICATION ?>
               </p>
             </a>
           </li>
 
           <?php if ($options["tournament_features"] == "on") { ?>
-          <li class="li_header">TOURNAMENT FEATURES</li>
+          <li class="li_header"><?= _TOURNAMENT_FEAT ?></li>
 
           <li class="nav-item">
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              Scoreboard
+              <?= _TOURNAMENT_SCORE ?>
               </p>
             </a>
           </li>
@@ -86,7 +86,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=top8" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              Top 8
+              <?= _TOURNAMENT_TOP ?>
               </p>
             </a>
           </li> 
@@ -95,20 +95,20 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=players" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              Player Management
+              <?= _TOURNAMENT_PLAYER ?>
               </p>
             </a>
           </li>
           <?php } ?>
 
           <?php if ($options["twitch_features"] == "on") { ?>
-          <li class="li_header">TWITCH FEATURES</li>
+          <li class="li_header"><?= _TWITCH_FEAT ?></li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-terminal"></i>
               <p>
-                Twitch Commands
+              <?= _TWITCH_CMDS ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -117,14 +117,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch_commands&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Command</p>
+                  <p><?= _TWITCH_ADD_CMD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch_commands" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -135,7 +135,7 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-play"></i>
               <p>
-                Audio / Sounds
+              <?= _AUDIO ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -144,14 +144,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=audio&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add an Audio / Sound</p>
+                  <p><?= _AUDIO_ADD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=audio" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -162,7 +162,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=giveaway" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              Giveaway
+              <?= _GIVEAWAY ?>
               </p>
             </a>
           </li>          
@@ -171,7 +171,7 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i>
               <p>
-                Moderation
+              <?= _MODERATION ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -180,14 +180,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=modlist" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Whitelist / Blacklist</p>
+                  <p><?= _MODERATION_WL_BL ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=moderation" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Moderation Settings</p>
+                  <p><?= _MODERATION_SETTINGS ?></p>
                 </a>
               </li>
 
@@ -198,7 +198,7 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chalkboard"></i>
               <p>
-                Ticker
+              <?= _TICKER ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -207,14 +207,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=ticker&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Tick</p>
+                  <p><?= _TICKER_ADD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=ticker" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -225,7 +225,7 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-clock"></i>
               <p>
-                Timers
+              <?= _TIMERS ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -234,14 +234,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=timers&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Timer</p>
+                  <p><?= _TIMERS_ADD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=timers" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -252,20 +252,20 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=settings" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Twitch Settings
+              <?= _TWITCH_SETTINGS ?>
               </p>
             </a>
           </li>          
           <?php } ?>
 
           <?php if ($options["discord_features"] == "on") { ?>
-          <li class="li_header">DISCORD FEATURES</li>
+          <li class="li_header"><?= _DISCORD_FEAT ?></li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-terminal"></i>
               <p>
-                Discord Commands
+              <?= _DISCORD_CMDS ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -274,14 +274,14 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord_commands&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Command</p>
+                  <p><?= _DISCORD_ADD_CMD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord_commands" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -292,7 +292,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=promo" class="nav-link">
               <i class="nav-icon fab fa-twitch"></i>
               <p>
-                Promo / Streamers
+              <?= _PROMO ?>
               </p>
             </a>
           </li>
@@ -301,20 +301,20 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord&a=settings" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Discord Settings
+              <?= _DISCORD_SETTINGS ?>
               </p>
             </a>
           </li>          
           <?php } ?>
 
-          <li class="li_header">OTHER SERVICES</li>
+          <li class="li_header"><?= _OTHER_SERVICE ?></li>
           <?php if ($options["twitter_features"] == "on") { ?>
 
             <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-twitter"></i>
               <p>
-                Twitter
+              <?= _TWITTER ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -323,21 +323,21 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Game Live Status</p>
+                  <p><?= _TWITTER_GAME_STATUS ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Twitter Status List</p>
+                  <p><?= _TWITTER_STATUS_LIST ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=settings" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Twitter Settings</p>
+                  <p><?= _TWITTER_SETTINGS ?></p>
                 </a>
               </li>
 
@@ -346,13 +346,13 @@ foreach($result as $row)
 
           <?php } ?>
 
-          <li class="li_header">GLOBAL FEATURES</li>
+          <li class="li_header"><?= _GLOBAL_FEAT ?></li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
-                Points
+              <?= _POINTS ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -361,21 +361,21 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=listing" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Point Rankings</p>
+                  <p><?= _POINT_RANK ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=redeems" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Point Redeems</p>
+                  <p><?= _POINT_REDEEM ?></p>
                 </a>
               </li>              
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
@@ -386,7 +386,7 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-comment-dots"></i>
               <p>
-                Quotes
+              <?= _QUOTES ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -395,27 +395,27 @@ foreach($result as $row)
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=quotes&a=add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add a Quote</p>
+                  <p><?= _QUOTES_ADD ?></p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=quotes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management</p>
+                  <p><?= _MANAGEMENT ?></p>
                 </a>
               </li>
 
             </ul>
           </li>
 
-          <li class="li_header">BOT MANAGEMENT</li>
+          <li class="li_header"><?= _BOT_MANAGEMENT ?></li>
 
           <li class="nav-item">
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=options&a=settings" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Settings
+              <?= _SETTINGS ?>
               </p>
             </a>
           </li>
@@ -424,12 +424,12 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=plugins" class="nav-link">
               <i class="nav-icon fas fa-plug"></i>
               <p>
-                Plugins
+              <?= _PLUGINS ?>
               </p>
             </a>
           </li>
 
-          <li class="li_header">HELP & SUPPORT</li>
+          <li class="li_header"><?= _HELP ?></li>
 
           <li class="nav-item">
             <a target="_blank" href="https://github.com/GibzFGC/FoxxiBot" class="nav-link">
@@ -462,7 +462,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=version" class="nav-link">
               <i class="nav-icon fas fa-code-branch"></i>
               <p>
-                Version Information
+                <?= _VERSION_INFO ?>
               </p>
             </a>
           </li>

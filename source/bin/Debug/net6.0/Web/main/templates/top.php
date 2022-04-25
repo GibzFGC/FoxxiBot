@@ -19,7 +19,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FoxxiBot | Dashboard</title>
+  <title><?= _TITLE ?></title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="<?php print $gfw['template_path']; ?>/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="<?php print $gfw['template_path']; ?>/img/favicon/favicon-32x32.png">
@@ -81,7 +81,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php print $gfw['site_url']; ?>" class="nav-link">Home</a>
+        <a href="<?php print $gfw['site_url']; ?>" class="nav-link"><?= _HOME ?></a>
       </li>
     </ul>
 
@@ -95,7 +95,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
           <span class="badge badge-warning navbar-badge">0</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">0 Notifications</span>
+          <span class="dropdown-item dropdown-header">0 <?= _NOTIFICATION ?></span>
           <div class="dropdown-divider"></div>
 
           <!--
@@ -107,7 +107,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
           
           <div class="dropdown-divider"></div>
 
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="#" class="dropdown-item dropdown-footer"><?= _NOTIFICATION_ALL ?></a>
         </div>
       </li>
 
