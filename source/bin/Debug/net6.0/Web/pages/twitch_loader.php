@@ -28,4 +28,8 @@ if (isset($_REQUEST['a'])) {
         include("twitch/twitch_funcs.php");
     }
 
+    if ($_REQUEST['a'] == "settings") {
+        include("twitch/twitch_settings.php");
+    }
+
 }

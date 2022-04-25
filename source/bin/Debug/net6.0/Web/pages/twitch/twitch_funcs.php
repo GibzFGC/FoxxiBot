@@ -127,3 +127,44 @@ if ($_REQUEST["v"] == "save") {
     echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
     echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 }
+
+if ($_REQUEST["v"] == "settings") {
+
+    $sql = 'INSERT OR REPLACE INTO gb_twitch_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+
+    // Check if value null
+    if (!isset($_POST["partner_status"])) {
+        $_POST["partner_status"] = "off";
+    }
+
+    $stmt->bindValue(':parameter', "Partner_Status");
+    $stmt->bindValue(':value', $_POST["partner_status"]);
+    $stmt->execute();
+    
+    $stmt->bindValue(':parameter', "Joined_Channel");
+    $stmt->bindValue(':value', $_POST["joined_channel"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "Follow_Message");
+    $stmt->bindValue(':value', $_POST["follow_message"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "Raid_Message");
+    $stmt->bindValue(':value', $_POST["raid_message"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "Prime_Channel");
+    $stmt->bindValue(':value', $_POST["prime_message"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "Subscriber_Message");
+    $stmt->bindValue(':value', $_POST["subcriber_message"]);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=twitch&a=settings";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+}
