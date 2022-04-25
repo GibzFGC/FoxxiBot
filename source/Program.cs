@@ -57,6 +57,9 @@ namespace FoxxiBot
             // Set Application Encoding
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+            // Check Folder / File integrity
+            Class.Bot_Integrity Bot_Intrgrity = new Class.Bot_Integrity();
+
             // If Plugins SQLite doesn't exist
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db"))
             {
