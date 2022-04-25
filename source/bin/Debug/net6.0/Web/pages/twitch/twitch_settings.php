@@ -108,7 +108,7 @@ foreach($result as $row)
 
                 <div class="form-group">
                   <label>Twitch Subscription Message</label>
-                  <input type="text" class="form-control" id="subcriber_message" name="subcriber_message" placeholder="Enter your Twitch Subcriber Message" value="<?php print $options["Subcriber_Message"]; ?>">
+                  <input type="text" class="form-control" id="subscriber_message" name="subscriber_message" placeholder="Enter your Twitch Subcriber Message" value="<?php print $options["Subscriber_Message"]; ?>">
                 </div>
 
                 <div class="form-group">
