@@ -64,7 +64,7 @@ foreach($result as $row)
                   <select class="form-control select2" id="" name="discord_setbotchannel" style="width: 100%;">
 
                   <?php
-                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' ORDER BY channel_name ASC");
+                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' OR channel_type='News' ORDER BY channel_name ASC");
                   foreach($result as $row)
                   {
                     if ($row["channel_id"] == $options["BotChannel"]) {
@@ -95,7 +95,7 @@ foreach($result as $row)
                   <select class="form-control select2" id="" name="discord_setgreetingchannel" style="width: 100%;">
 
                   <?php
-                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' ORDER BY channel_name ASC");
+                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' OR channel_type='News' ORDER BY channel_name ASC");
                   foreach($result as $row)
                   {
                     if ($row["channel_id"] == $options["GreetingChannel"]) {
@@ -177,7 +177,7 @@ foreach($result as $row)
                 <select class="form-control select2" id="" name="discord_setannouncechannel" style="width: 100%;">
 
                 <?php
-                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' ORDER BY channel_name ASC");
+                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' OR channel_type='News' ORDER BY channel_name ASC");
                   foreach($result as $row)
                   {
                     if ($row["channel_id"] == $options["AnnounceChannel"]) {
@@ -233,7 +233,7 @@ foreach($result as $row)
                 <select class="form-control select2" id="" name="discord_setstreamchannel" style="width: 100%;">
 
                 <?php
-                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' ORDER BY channel_name ASC");
+                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' OR channel_type='News' ORDER BY channel_name ASC");
                   foreach($result as $row)
                   {
                     if ($row["channel_id"] == $options["StreamChannel"]) {
