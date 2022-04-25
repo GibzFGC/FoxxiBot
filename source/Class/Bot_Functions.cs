@@ -227,7 +227,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_options (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Joined_Channel','FoxxiBot has arrived, time for an awesome stream!!')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Joined_Channel','{bot} has arrived, time for an awesome stream!!')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Partner_Status','off')";
@@ -245,7 +245,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Raid_Message','Thank you for the raid of {count}, {user}!')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Subcriber_Message','Thank you for the Subscription, {user}!')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Subscriber_Message','Thank you for the Subscription, {user}!')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Partner_Status','off')";

@@ -154,12 +154,12 @@ if ($_REQUEST["v"] == "settings") {
     $stmt->bindValue(':value', $_POST["raid_message"]);
     $stmt->execute();
 
-    $stmt->bindValue(':parameter', "Prime_Channel");
+    $stmt->bindValue(':parameter', "Prime_Message");
     $stmt->bindValue(':value', $_POST["prime_message"]);
     $stmt->execute();
 
     $stmt->bindValue(':parameter', "Subscriber_Message");
-    $stmt->bindValue(':value', $_POST["subcriber_message"]);
+    $stmt->bindValue(':value', $_POST["subscriber_message"]);
     $stmt->execute();
 
     // Redirect
