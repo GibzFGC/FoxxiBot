@@ -160,20 +160,76 @@ foreach($result as $row)
 
           </div>
           <!--/.col (first) -->
+
+          <!-- second column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Your Announcements Settings</h3>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body">
+
+              <div class="form-group">
+                <label>Set the Auto Announce Channel for your Stream</label>
+                <select class="form-control select2" id="" name="discord_setannouncechannel" style="width: 100%;">
+
+                <?php
+                  $result = $PDO->query("SELECT * FROM gb_discord_channels WHERE channel_type='Text' ORDER BY channel_name ASC");
+                  foreach($result as $row)
+                  {
+                    if ($row["channel_id"] == $options["AnnounceChannel"]) {
+                      print '<option value="'. $row['channel_id'] .'" SELECTED>'. $row['channel_name'] .'</option>';
+                    } else {
+                      print '<option value="'. $row['channel_id'] .'">'. $row['channel_name'] .'</option>';
+                    }
+                  }
+                  ?>
+                </select>
+                </div>
+
+                <div class="form-group">
+                <label>Set your Auto Announce Message?</label>
+                  <input type="text" class="form-control" id="announcechannel_text" name="announcechannel_text" placeholder="Enter your auto announcement message" value="<?php print $options["AnnounceChannel_Text"]; ?>">
+                </div>
+
+                <div class="form-group">
+                <label>Use the Auto Announce System?</label>
+                  <div style="float: right;">
+                  <?php
+                  if ($options["AnnounceChannel_Status"] == "off") {
+                  print '<input type="checkbox" name="autoannouncechannel_status" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  } else {
+                    print '<input type="checkbox" name="autoannouncechannel_status" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  }
+                  ?>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.card-body -->
+
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (second) -->
           
           <!-- second column -->
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Streaming Settings</h3>
+                <h3 class="card-title">Streamer Promo Settings</h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
 
                 <div class="form-group">
-                <label>Set the Notification Channel</label>
+                <label>Set the Stream Promo Channel</label>
                 <select class="form-control select2" id="" name="discord_setstreamchannel" style="width: 100%;">
 
                 <?php
@@ -191,7 +247,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                <label>Use the Stream Notification System?</label>
+                <label>Use the Stream Promo System?</label>
                   <div style="float: right;">
                   <?php
                   if ($options["StreamChannel_Status"] == "off") {

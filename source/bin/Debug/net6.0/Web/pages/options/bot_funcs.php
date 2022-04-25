@@ -25,7 +25,7 @@ if ($_REQUEST["v"] == "save") {
 
     console_log($data["BotLang"]);
 
-    chmod("../Data/config.json",0777);
+    chmod("../Data/config.json",0700);
     file_put_contents("../Data/config.json", $json_object);
 
     // SQLite Save
