@@ -15,6 +15,20 @@
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
 if ($_REQUEST["v"] == "save") {
+
+    // JSON Save
+    $json_object = file_get_contents("../Data/config.json");
+    $data = json_decode($json_object, true);
+
+    $data["BotLang"] = $_POST["bot_lang"];
+    $json_object = json_encode($data);
+
+    console_log($data["BotLang"]);
+
+    chmod("../Data/config.json",0777);
+    file_put_contents("../Data/config.json", $json_object);
+
+    // SQLite Save
     $sql = 'INSERT OR REPLACE INTO gb_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
     $stmt = $PDO->prepare($sql);
     

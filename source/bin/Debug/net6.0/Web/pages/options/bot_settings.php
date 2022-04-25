@@ -59,6 +59,29 @@ foreach($result as $row)
               <!-- /.card-header -->
                 <div class="card-body">
 
+                <div class="form-group">
+                    <label>Web Panel Language</label>
+                    <select class="form-control select2" id="bot_lang" name="bot_lang" style="width: 100%;">
+
+                    <?php
+                    foreach (new DirectoryIterator("modules/locales/") as $file) {
+                      if ($file->isFile()) {
+                          $file_no_lang = str_replace("lang_", "", $file->getFilename());
+                          $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_no_lang);
+
+                          if ($gfw['bot_language'] == $withoutExt) {
+                            print "<option value='". $withoutExt ."' SELECTED>" . $withoutExt . "</option>";
+                          } else {
+                            print "<option value='". $withoutExt ."'>" . $withoutExt . "</option>";
+                          }
+                      }
+                    }
+                    ?>
+
+                    </select>
+                    
+                  </div>
+
                   <div class="form-group">
                     <label>Debug Mode <small>(requires a restart)</small></label>
                       <div style="float: right;">

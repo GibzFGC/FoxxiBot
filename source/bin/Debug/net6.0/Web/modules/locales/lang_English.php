@@ -24,7 +24,7 @@ define("_TWITCH_ADD_CMD", "Add a Command");
 
 define("_AUDIO", "Audio / Sounds");
 define("_AUDIO_ADD", "Add an Audio / Sound");
-define("_AUDIO_ADD", "Adding a Audio / Sound");
+//define("_AUDIO_ADD", "Adding a Audio / Sound");
 define("_AUDIO_EDIT", "Editing a Audio / Sound");
 define("_AUDIO_NAME", "Enter Sound Name");
 define("_AUDIO_UPLOAD", "Sound Upload");

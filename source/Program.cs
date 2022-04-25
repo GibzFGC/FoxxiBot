@@ -214,11 +214,6 @@ namespace FoxxiBot
 
                 Console.WriteLine("");
 
-                Console.WriteLine("Last but not least: What is your preferred language (default: en) ?");
-                string BotLang = Console.ReadLine();
-
-                Console.WriteLine("");
-
                 // Set needed Values Internally
                 Config.TwitchBotName = BotName;
                 Config.TwitchClientId = TwitchClientID;
@@ -227,7 +222,7 @@ namespace FoxxiBot
                 Config.TwitchClientChannel = TwitchClientChannel;
                 Config.DiscordToken = DiscordToken;
                 Config.DiscordPrefix = DiscordPrefix;
-                Config.BotLang = BotLang;
+                Config.BotLang = "English";
 
                 // Begin the Verification / OAuth Phase
                 MainAsync().GetAwaiter().GetResult();
