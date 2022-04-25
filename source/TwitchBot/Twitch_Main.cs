@@ -40,6 +40,9 @@ namespace FoxxiBot.TwitchBot
         bool streamStatus;
         int current_row = 1;
 
+        // Get Twitch SQL Access
+        SQLite.twitchSQL twitchSQL = new SQLite.twitchSQL();
+
         public Twitch_Main()
         {
             ConnectionCredentials credentials = new ConnectionCredentials(Config.TwitchClientUser, Config.TwitchClientOAuth);
@@ -247,18 +250,35 @@ namespace FoxxiBot.TwitchBot
             pubsub.ListenToFollows(Config.TwitchMC_Id);
             pubsub.ListenToWhispers(Config.TwitchMC_Id);
 
-            // pubsub.ListenToBitsEventsV2(Config.TwitchMC_Id);
-            // pubsub.ListenToChannelPoints(Config.TwitchMC_Id);
-            
+            // If Twitch Affiliate / Partner, access Bits and Channel Point Directives
+            if (twitchSQL.getOptions("Partner_Status") == "on") {
+                pubsub.ListenToBitsEventsV2(Config.TwitchMC_Id);
+                pubsub.ListenToChannelPoints(Config.TwitchMC_Id);
+            }
+
             pubsub.SendTopics(Config.TwitchMC_ClientOAuth);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - PubSub Connected");
         }
 
         private void Client_OnRaidNotification(object sender, OnRaidNotificationArgs e)
         {
-            // Mention it in Chat            
-            client.SendMessage(e.Channel, "We just got raided by " + e.RaidNotification.DisplayName.ToString() + " for " + e.RaidNotification.MsgParamViewerCount.ToString() + " viewers!");
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - We just got raided by " + e.RaidNotification.DisplayName.ToString() + " for " + e.RaidNotification.MsgParamViewerCount.ToString() + " viewers!");
+            // Get Raid Message
+            var raid_message = twitchSQL.getOptions("Raid_Message");
+
+            // Convert variables if used
+            if (raid_message.Contains("{user}"))
+            {
+                raid_message = raid_message.Replace("{user}",e.RaidNotification.DisplayName.ToString());
+            }
+
+            if (raid_message.Contains("{count}"))
+            {
+                raid_message = raid_message.Replace("{count}", e.RaidNotification.MsgParamViewerCount.ToString());
+            }
+
+            // Mention it in Chat
+            client.SendMessage(e.Channel, raid_message);
+            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + raid_message);
 
             // Save Data to Events & Notifications
             SQLite.twitchSQL TwitchSQL = new SQLite.twitchSQL();
@@ -273,8 +293,17 @@ namespace FoxxiBot.TwitchBot
             TwitchSQL.saveEvent("Follower", e.DisplayName.ToString(), "0");
             TwitchSQL.saveNotification("Follower", e.DisplayName.ToString(), "0", DateTime.Now.ToString());
 
-            client.SendMessage(Config.TwitchClientChannel, "We have a new Foxy follower, welcome to " + e.DisplayName.ToString());
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - We have a new follower: " + e.DisplayName.ToString());
+            // Mention it in Chat
+            var follow_message = twitchSQL.getOptions("Follow_Message");
+
+            // Convert variables if used
+            if (follow_message.Contains("{user}"))
+            {
+                follow_message = follow_message.Replace("{user}", e.DisplayName.ToString());
+            }
+
+            client.SendMessage(Config.TwitchClientChannel, follow_message);
+            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + follow_message);
         }
 
         private void Pubsub_OnStreamUp(object sender, TwitchLib.PubSub.Events.OnStreamUpArgs e)
@@ -347,8 +376,16 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Hey and thanks for coming along, Let's have a comfy stream!!");
-            client.SendMessage(e.Channel, $"Hey and thanks for coming along, Let's have a comfy stream!!");
+            // Get Join Message
+            var joined_message = twitchSQL.getOptions("Joined_Channel");
+
+            if (joined_message.Contains("{bot}"))
+            {
+                joined_message = joined_message.Replace("{bot}", Config.TwitchBotName.ToString());
+            }
+
+            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + joined_message);
+            client.SendMessage(e.Channel, joined_message);
         }
 
         private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
@@ -668,9 +705,31 @@ namespace FoxxiBot.TwitchBot
         private void Client_OnNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
             if (e.Subscriber.SubscriptionPlan == SubscriptionPlan.Prime)
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the foxy clan! You just earned 500 points! So kind of you to use your Twitch Prime on this channel!");
+            {
+                // Get Prime Message
+                var prime_message = twitchSQL.getOptions("Prime_Message");
+
+                // Convert variables if used
+                if (prime_message.Contains("{user}"))
+                {
+                    prime_message = prime_message.Replace("{user}", e.Subscriber.DisplayName.ToString());
+                }
+
+                client.SendMessage(e.Channel, prime_message);
+            }
             else
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the foxy clan! You just earned 500 points!");
+            {
+                // Get Prime Message
+                var subscriber_message = twitchSQL.getOptions("Subcriber_Message");
+
+                // Convert variables if used
+                if (subscriber_message.Contains("{user}"))
+                {
+                    subscriber_message = subscriber_message.Replace("{user}", e.Subscriber.DisplayName.ToString());
+                }
+
+                client.SendMessage(e.Channel, subscriber_message);
+            }
         }
 
         public void SendChatMessage(string message)
