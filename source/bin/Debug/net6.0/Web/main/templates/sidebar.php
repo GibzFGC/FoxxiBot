@@ -247,6 +247,15 @@ foreach($result as $row)
 
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch&a=settings" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Twitch Settings
+              </p>
+            </a>
+          </li>          
           <?php } ?>
 
           <?php if ($options["discord_features"] == "on") { ?>
@@ -287,6 +296,15 @@ foreach($result as $row)
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord&a=settings" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Discord Settings
+              </p>
+            </a>
+          </li>          
           <?php } ?>
 
           <li class="li_header">OTHER SERVICES</li>
@@ -397,16 +415,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=options&a=settings" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Bot Settings
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=discord&a=settings" class="nav-link">
-              <i class="nav-icon fas fa-cogs"></i>
-              <p>
-                Discord Settings
+                Settings
               </p>
             </a>
           </li>
