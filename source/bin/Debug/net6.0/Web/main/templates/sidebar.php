@@ -306,9 +306,9 @@ foreach($result as $row)
             </a>
           </li>          
           <?php } ?>
-
-          <li class="li_header"><?= _OTHER_SERVICE ?></li>
           <?php if ($options["twitter_features"] == "on") { ?>
+          <li class="li_header"><?= _OTHER_SERVICE ?></li>
+          
 
             <li class="nav-item">
             <a href="#" class="nav-link">
