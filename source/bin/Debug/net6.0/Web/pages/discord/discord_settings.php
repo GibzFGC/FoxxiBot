@@ -29,12 +29,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Discord Settings</h1>
+            <h1 class="m-0"><?= _DISCORD_SETTINGS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Discord Settings</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _DISCORD_SETTINGS ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,13 +54,13 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Main Discord Bot Settings</h3>
+                <h3 class="card-title"><?= _DISCORD_SETTINGS_MAIN ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                  <label>Set Bot Channel</label>
+                  <label><?= _DISCORD_BOT_CHANNEL ?></label>
                   <select class="form-control select2" id="" name="discord_setbotchannel" style="width: 100%;">
 
                   <?php
@@ -78,7 +78,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                <label>Lock Bot to the Bot Channel? (Not recommended if you intend to use plugins!)</label>
+                <label><?= _DISCORD_LOCK_BOT_CHANNEL ?></label>
                   <div style="float: right;">
                   <?php
                   if ($options["BotChannel_Status"] == "off") {
@@ -91,7 +91,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Set Join/Leave Greeting Channel</label>
+                  <label><?= _DISCORD_JOIN_CHANNEL ?></label>
                   <select class="form-control select2" id="" name="discord_setgreetingchannel" style="width: 100%;">
 
                   <?php
@@ -110,7 +110,7 @@ foreach($result as $row)
 
 
                 <div class="form-group">
-                <label>Use the Greeting / Leaving System?</label>
+                <label><?= _DISCORD_GREET_LEAVE ?></label>
                   <div style="float: right;">
                   <?php
                   if ($options["GreetingChannel_Status"] == "off") {
@@ -123,7 +123,7 @@ foreach($result as $row)
                 </div>                
 
                 <div class="form-group">
-                  <label>Set Join Auto-Role</label>
+                  <label><?= _DISCORD_SET_AUTO_ROLE ?></label>
                   <select class="form-control select2" id="" name="discord_setautoroll" style="width: 100%;">
 
                   <?php
@@ -141,7 +141,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                <label>Use the Join Auto-Role?</label>
+                <label><?= _DISCORD_SET_AUTO_ROLE ?></label>
                   <div style="float: right;">
                   <?php
                   if ($options["AutoRole_Status"] == "off") {
@@ -166,14 +166,14 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Streaming Settings</h3>
+                <h3 class="card-title"><?= _DISCORD_STREAM_SETTINGS ?></h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
 
                 <div class="form-group">
-                <label>Set the Notification Channel</label>
+                <label><?= _DISCORD_SET_NOTIFY_CHANNEL ?></label>
                 <select class="form-control select2" id="" name="discord_setstreamchannel" style="width: 100%;">
 
                 <?php
@@ -191,7 +191,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                <label>Use the Stream Notification System?</label>
+                <label><?= _DISCORD_NOTIFICATION_SYS ?></label>
                   <div style="float: right;">
                   <?php
                   if ($options["StreamChannel_Status"] == "off") {
@@ -220,8 +220,8 @@ foreach($result as $row)
               
                 <div class="card-footer">
                   <input type="hidden" id="submit" name="submit" value="submit">
-                    <p style="float: left; margin-top:15px;">Optional settings for Discord if you plan to use that side of the bot.</p>
-                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary">Save Settings</button>
+                    <p style="float: left; margin-top:15px;"><?= _DISCORD_OPTIONAL_SETTINGS ?></p>
+                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
                   </div>
                 </div>
 

@@ -32,12 +32,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Points Settings</h1>
+            <h1 class="m-0"><?= _POINTS_SETTINGS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Points Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _POINTS_SETTINGS ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -59,18 +59,18 @@ foreach($result as $row)
           <!-- general form elements -->
             <div class="card card">
               <div class="card-header">
-                <h3 class="card-title">User Management</h3>
+                <h3 class="card-title"><?= _POINTS_USR_MNGMNT ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                 <div class="form-group">
-                    <label for="points_username">Username</label>
-                    <input type="text" class="form-control" id="points_username" name="points_username" placeholder="Search a Username" autocomplete="off" required>
+                    <label for="points_username"><?= _USERNAME ?></label>
+                    <input type="text" class="form-control" id="points_username" name="points_username" placeholder="<?= _SEARCH_USERNAME ?>" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="points_current">Points</label>
+                    <label for="points_current"><?= _POINTS ?></label>
                     <input type="number" class="form-control" id="points_current" name="points_current" placeholder="0" required>
                 </div>
 
@@ -78,8 +78,8 @@ foreach($result as $row)
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button style="float: right;" id="update_user" type="submit" class="btn btn-v-sm btn-primary">Update</button>
-                <button style="float: right;" id="update_user_clear" type="submit" class="btn btn-v-sm btn-danger btn-spacer">Clear</button>
+                <button style="float: right;" id="update_user" type="submit" class="btn btn-v-sm btn-primary"><?= _UPDATE ?></button>
+                <button style="float: right;" id="update_user_clear" type="submit" class="btn btn-v-sm btn-danger btn-spacer"><?= _CLEAR ?></button>
               </div>
 
             </div>
@@ -96,18 +96,18 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card">
               <div class="card-header">
-                <h3 class="card-title">Fun Tools</h3>
+                <h3 class="card-title"><?= _POINTS_FUN_TOOLS ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                 <div class="form-group">
-                    <label for="points_modifier">Set Points to Change (only works for Give to All & Take from All)</label>
+                    <label for="points_modifier"><?= _POINTS_MODIFIER ?></label>
                     <input type="number" class="form-control" id="points_modifier" name="points_modifier" placeholder="0">
                 </div>
 
                 <div class="form-group">
-                    <label for="points_rain">Max Points for Make it Rain?</label>
+                    <label for="points_rain"><?= _POINTS_RAIN ?></label>
                     <input type="number" class="form-control" id="points_rain" name="points_rain" placeholder="0">
                 </div>
 
@@ -115,9 +115,9 @@ foreach($result as $row)
               <!-- /.card-body -->
               
               <div class="card-footer">
-                <button style="float: right;" id="take_from_all" class="btn btn-v-sm btn-primary">Take from All</button>
-                <button style="float: right;" id="give_to_all" class="btn btn-v-sm btn-primary btn-spacer">Give to All</button>
-                <button style="float: right;" id="make_it_rain" class="btn btn-v-sm btn-primary btn-spacer">Make it Rain!</button>
+                <button style="float: right;" id="take_from_all" class="btn btn-v-sm btn-primary"><?= _POINTS_TAKE_ALL ?></button>
+                <button style="float: right;" id="give_to_all" class="btn btn-v-sm btn-primary btn-spacer"><?= _POINTS_GIVE_ALL ?></button>
+                <button style="float: right;" id="make_it_rain" class="btn btn-v-sm btn-primary btn-spacer"><?= _POINTS_MAKE_RAIN ?></button>
               </div>
 
             </div>
@@ -135,7 +135,7 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card">
               <div class="card-header">
-                <h3 style="margin-top: 4px;" class="card-title">Main Points Settings</h3>
+                <h3 style="margin-top: 4px;" class="card-title"><?= _POINTS_SETTINGS_MAIN ?></h3>
 
                 <div class="card-tools">
                 <?php
@@ -151,25 +151,25 @@ foreach($result as $row)
                 <div class="card-body">
 
                 <div class="form-group">
-                    <label for="points_name">Points Name</label>
-                    <input type="text" class="form-control" id="points_name" name="points_name" placeholder="Enter Points Name" value="<?php print $options["points_name"]; ?>" required>
+                    <label for="points_name"><?= _POINTS_NAME ?></label>
+                    <input type="text" class="form-control" id="points_name" name="points_name" placeholder="<?= _POINTS_NAME_ENTER ?>" value="<?php print $options["points_name"]; ?>" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="points_shortname">Points Short Name</label>
-                    <input type="text" class="form-control" id="points_shortname" name="points_shortname" placeholder="Enter Points Short Name" value="<?php print $options["points_short"]; ?>" required>
+                    <label for="points_shortname"><?= _POINTS_SHORT ?></label>
+                    <input type="text" class="form-control" id="points_shortname" name="points_shortname" placeholder="<?= _POINTS_SHORT_ENTER ?>" value="<?php print $options["points_short"]; ?>" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="points_increment">Points Given Every 5 Mins</label>
-                    <input type="number" class="form-control" id="points_increment" name="points_increment" placeholder="Enter Points Value" value="<?php print $options["points_increment"]; ?>" required>
+                    <label for="points_increment"><?= _POINTS_GIVEN ?></label>
+                    <input type="number" class="form-control" id="points_increment" name="points_increment" placeholder="<?= _POINTS_GIVEN_VALUE ?>" value="<?php print $options["points_increment"]; ?>" required>
                 </div>
 
                 </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                <button style="float: right;" id="update_settings" type="submit" class="btn btn-primary">Save Settings</button>
+                <button style="float: right;" id="update_settings" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
               </div>
 
               </div>

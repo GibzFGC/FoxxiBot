@@ -141,7 +141,6 @@ namespace FoxxiBot.DiscordBot
         private Task CreateSlashCommands()
         {
 
-
             return Task.CompletedTask;
         }
 

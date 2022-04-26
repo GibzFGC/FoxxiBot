@@ -65,12 +65,12 @@ $discord = $PDO->query("SELECT * FROM gb_discord_plugins");
                     <table id="gb_datatable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Command</th>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Date</th>
-                        <th>File</th>
-                        <th>Actions</th>
+                        <th><?= _CMD ?></th>
+                        <th><?= _NAME ?></th>
+                        <th><?= _AUTHOR ?></th>
+                        <th><?= _DATE ?></th>
+                        <th><?= _FILE ?></th>
+                        <th><?= _ACTIONS ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -95,7 +95,7 @@ $discord = $PDO->query("SELECT * FROM gb_discord_plugins");
                 }
                       
                       print "
-                        <a onclick=\"return confirm('Are you sure you want to delete this plugin? \\n\\n If so, delete the related files in the plugins folder to prevent re-install on next load!');\" href=\"$gfw[site_url]/index.php?p=plugins&a=funcs&v=delete&platform=twitch&id=$twitch_plugin[command]\" class=\"btn btn-danger btn-sm\">Delete Plugin</a>
+                        <a onclick=\"return confirm('". _DELETE_MSG_FILES ."');\" href=\"$gfw[site_url]/index.php?p=plugins&a=funcs&v=delete&platform=twitch&id=$twitch_plugin[command]\" class=\"btn btn-danger btn-sm\">". _DELETE_PLUGIN ."</a>
                       </td>
                     </tr>
                     ";
@@ -112,12 +112,12 @@ $discord = $PDO->query("SELECT * FROM gb_discord_plugins");
                   <table id="gb_datatable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Command</th>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Date</th>
-                        <th>File</th>
-                        <th>Actions</th>
+                      <th><?= _CMD ?></th>
+                        <th><?= _NAME ?></th>
+                        <th><?= _AUTHOR ?></th>
+                        <th><?= _DATE ?></th>
+                        <th><?= _FILE ?></th>
+                        <th><?= _ACTIONS ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -142,7 +142,7 @@ $discord = $PDO->query("SELECT * FROM gb_discord_plugins");
                       }
                       
                       print "
-                        <a onclick=\"return confirm('Are you sure you want to delete this plugin? \\n\\ nIf so, delete the files in the plugins folder to prevent re-install!');\" href=\"$gfw[site_url]/index.php?p=plugins&a=funcs&v=delete&platform=discord&id=$discord_plugin[command]\" class=\"btn btn-danger btn-sm\">Delete Plugin</a>
+                        <a onclick=\"return confirm('". _DELETE_MSG_FILES ."');\" href=\"$gfw[site_url]/index.php?p=plugins&a=funcs&v=delete&platform=discord&id=$discord_plugin[command]\" class=\"btn btn-danger btn-sm\">". _DELETE_PLUGIN ."</a>
                       </td>
                     </tr>
                     ";
