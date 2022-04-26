@@ -51,9 +51,9 @@ $result = $PDO->query("SELECT * FROM gb_points");
                 <table id="gb_points_rankings" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Username</th>
-                    <th>Points</th>
-                    <th>Actions</th>
+                    <th><?= _USERNAME ?></th>
+                    <th><?= _POINTS ?></th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -66,7 +66,7 @@ $result = $PDO->query("SELECT * FROM gb_points");
                     <td>". $row["username"] ."</td>
                     <td>". $row["value"] ."</td>
                     <td>
-                      <a onclick=\"return confirm('Are you sure you want to delete this user and their points?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">Delete</a>                    
+                      <a onclick=\"return confirm('". _DELETE_USER_POINTS . "');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>                    
                     </td>
                   </tr>
               ";

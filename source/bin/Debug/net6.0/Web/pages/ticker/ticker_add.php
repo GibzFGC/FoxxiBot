@@ -21,13 +21,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Adding a Ticker</h1>
+            <h1 class="m-0"><?= _TICKER_ADDING ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Ticker</li>
-              <li class="breadcrumb-item active">Add</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _TICKER ?></li>
+              <li class="breadcrumb-item active"><?= _ADD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,26 +46,26 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ticker Information</h3>
+                <h3 class="card-title"><?= _TICKER_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="tickerName">Name</label>
-                    <input type="text" class="form-control" id="tickerName" name="tickerName" placeholder="Enter Ticker Name" required>
+                    <label for="tickerName"><?= _TICKER_NAME ?></label>
+                    <input type="text" class="form-control" id="tickerName" name="tickerName" placeholder="<?= _TICKER_NAME_PLACE ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="tickerResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="tickerResponse" name="tickerResponse" placeholder="Enter the response text here..." required></textarea>
+                    <label for="tickerResponse"><?= _TICKER_RESPONSE ?></label>
+                    <textarea class="form-control" rows="3"  id="tickerResponse" name="tickerResponse" placeholder="<?= _TICKER_RESPONSE_PLACE ?>" required></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label>Active</label>
+                    <label><?= _ACTIVE ?></label>
                     <select class="form-control select2" id="tickerActive" name="tickerActive" style="width: 100%;">
-                      <option value="1" SELECTED>Yes</option>';
-                      <option value="0">No</option>';
+                      <option value="1" SELECTED><?= _YES ?></option>';
+                      <option value="0"><?= _NO ?></option>';
                     </select>
                   </div>
 
@@ -74,7 +74,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Ticker</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TICKER_CREATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -89,7 +89,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Information</h3>
+                <h3 class="card-title"><?= _TICKER_USEFUL ?></h3>
               </div>
               <!-- /.card-header -->
               
@@ -97,11 +97,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <p>
-                      Tickers are for showing information in a consice box that scrolls with information you set.
-                      <br /><br />
-                      This could be useful for showing social media info, events / meet-ups / game announcement, etc.
-                      <br /><br />
-                      You can also set which are active at any time, meaning they can be re-used or recycled (edited).
+                      <?= _TICKER_USEFUL_TEXT ?>
                     </p>
                   </div>
 

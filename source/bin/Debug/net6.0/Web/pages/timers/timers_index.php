@@ -23,12 +23,12 @@ $result = $PDO->query("SELECT * FROM gb_twitch_timers");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Timers Management</h1>
+            <h1><?= _TIMERS_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Timers Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _TIMERS_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -44,17 +44,17 @@ $result = $PDO->query("SELECT * FROM gb_twitch_timers");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here are your Twitch Timers.</h3>
+                <h3 class="card-title"><?= _TIMERS_YOURS ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Response</th>
-                    <th>Active</th>
-                    <th>Actions</th>
+                    <th><?= _NAME ?></th>
+                    <th><?= _RESPONSE ?></th>
+                    <th><?= _ACTIVE ?></th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -69,7 +69,7 @@ $result = $PDO->query("SELECT * FROM gb_twitch_timers");
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
                       <a href=\"$gfw[site_url]/index.php?p=timers&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>
-                      <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=timers&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                      <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=timers&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                     </td>
                   </tr>
               ";

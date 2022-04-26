@@ -23,12 +23,12 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Point Redeems</h1>
+            <h1><?= _POINTS_REDEEM ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Point Redeems</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _POINTS_REDEEM ?></li>
             </ol>
           </div>
         </div>
@@ -44,20 +44,20 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here are the recent stream Point Redeems.</h3>
+                <h3 class="card-title"><?= _POINTS_REDEEM_TITLE ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_points_rankings" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Recipient</th>
-                    <th>Action</th>
-                    <th>Points</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th><?= _ID ?></th>
+                    <th><?= _USERNAME ?></th>
+                    <th><?= _RECIPIENT ?></th>
+                    <th><?= _ACTION ?></th>
+                    <th><?= _POINTS ?></th>
+                    <th><?= _STATUS ?></th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -75,12 +75,12 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
               ";
 
               if ($row["status"] == -1) {
-                print "<td>Refunded</td>";
+                print "<td>". _POINTS_REFUNDED ."</td>";
 
                 print "
                   <td>
-                    <span class=\"completed_button btn btn-default btn-sm\">Refunded</span>
-                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                    <span class=\"completed_button btn btn-default btn-sm\">". _POINTS_REFUNDED ."</span>
+                    <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                   </td>
                   
                 ";
@@ -89,27 +89,27 @@ $result = $PDO->query("SELECT * FROM gb_points_actions");
               if ($row["status"] == 0) {
                 print "
                 <td>
-                <span class=\"completed_button btn btn-default btn-sm\">Not Performed</span>
+                <span class=\"completed_button btn btn-default btn-sm\">". _POINTS_NOT_PERFORMED ."</span>
                 </td>
                 ";
 
                 print "
                   <td>
-                    <a data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"completed_button btn btn-success btn-sm\">Set as Complete</a>                    
-                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
-                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                    <a data-id=\"$row[id]\" data-status=\"1\" href=\"#\" class=\"completed_button btn btn-success btn-sm\">". _POINTS_SET_COMPLETE ."</a>                    
+                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('". _POINTS_CONFIRM ."');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">". _POINTS_REFUND ."</a>
+                    <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                   </td>
                 ";
               }
 
               if ($row["status"] == 1) {
-                print "<td>Completed</td>";
+                print "<td>". _POINTS_COMPLETED ."</td>";
 
                 print "
                   <td>
-                    <a data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"completed_button btn btn-warning btn-sm\">Set as Incomplete</a>                    
-                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('Are you sure you want to refund this user their points?');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">Refund</a>
-                    <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                    <a data-id=\"$row[id]\" data-status=\"0\" href=\"#\" class=\"completed_button btn btn-warning btn-sm\">". _POINTS_SET_INCOMPLETE ."</a>                    
+                    <a data-id=\"$row[id]\" data-user=\"$row[username]\" data-points=\"$row[points]\" onclick=\"return confirm('". _POINTS_CONFIRM ."');\" href=\"#\" class=\"refund_button btn btn-danger btn-sm\">". _POINTS_REFUND ."</a>
+                    <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                   </td>
                 ";
               }
