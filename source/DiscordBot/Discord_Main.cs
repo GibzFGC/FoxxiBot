@@ -496,5 +496,11 @@ namespace FoxxiBot.DiscordBot
             }
         }
 
+        public async void SendDiscordMessage(string channelId, string message)
+        {
+            await client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
+            .GetTextChannel(Convert.ToUInt64(channelId)).SendMessageAsync(message);
+        }
+
     }
 }

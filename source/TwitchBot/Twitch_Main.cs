@@ -311,6 +311,9 @@ namespace FoxxiBot.TwitchBot
             // Tell the Streamer that the Steam is now Live
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
 
+            // If Discord Auto Stream Message is Active, Send a Notification
+            // Discord_AutoLiveMessage();
+
             // If Twitter & LiveStatement is Active, Send a Tweet
             SQLite.botSQL botSQL = new SQLite.botSQL();
 
@@ -485,6 +488,11 @@ namespace FoxxiBot.TwitchBot
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
                 return;
+            }
+
+            if (e.Command.CommandText == "test")
+            {
+                Discord_AutoLiveMessage();
             }
 
             //// == Twitter Commands == ////
@@ -775,6 +783,32 @@ namespace FoxxiBot.TwitchBot
             deleteCmd.ExecuteNonQuery();
 
             con.Close();
+        }
+
+        private void Discord_AutoLiveMessage()
+        {
+
+            SQLite.discordSQL discordSQL = new SQLite.discordSQL();
+            var active = discordSQL.getOptions("AnnounceChannel_Status");
+
+            if (active == "on")
+            {
+                DiscordBot.Discord_Main discord = new DiscordBot.Discord_Main();
+                var channelId = discordSQL.getOptions("AnnounceChannel");
+
+                // Get Auto Stream Discord Message
+                var discord_message = discordSQL.getOptions("AnnounceChannel_Text");
+
+                // Convert variables if used
+                if (discord_message.Contains("{link}"))
+                {
+                    discord_message = discord_message.Replace("{link}", "https://www.twitch.tv/" + Config.TwitchClientChannel);
+                }
+
+                // Send Discord Message
+                discord.SendDiscordMessage(channelId, discord_message);
+            }
+
         }
 
     }

@@ -62,6 +62,15 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AutoRole_Status','off')";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel_Text','Now live on Twitch @ {link}! Come join me~')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
             cmd.ExecuteNonQuery();
 
