@@ -16,18 +16,95 @@ define("_FOLLOWS_LATEST", "Latest Followers");
 define("_VIEWS", "VIEWS");
 define("_EVENTS_LATEST", "Latest Events");
 define("_WAITING_STREAM", "Waiting for next stream!");
+define("_GLOBAL_FEAT", "GLOBAL FEATURES");
+define("_OTHER_SERVICE", "OTHER SERVICES");
 
 define("_TOURNAMENT_FEAT", "TOURNAMENT FEATURES");
+define("_TOURNAMENT", "Tournament");
 define("_TOURNAMENT_SCORE", "Scoreboard");
 define("_TOURNAMENT_TOP", "Top 8");
 define("_TOURNAMENT_PLAYER", "Player Management");
+define("_TOURNAMENT_PLAYER_LIST", "Tournament Player Listing");
+define("_TOURNAMENT_ROSTER", "Here is your Tournament Player Roster.");
+define("_TOURNAMENT_DELETE_PLAYER", "Are you sure you want to delete this player?");
+define("_TOURNAMENT_SCOREBOARD", "Scoreboard");
+define("_TOURNAMENT_PLAYER1", "Player 1 Settings");
+define("_TOURNAMENT_EDIT_BTN", "Edit a Player");
+define("_TOURNAMENT_ADD_BTN", "Add a Player");
+define("_TOURNAMENT_GROUP", "Group Tag / Organisation");
+define("_TOURNAMENT_GROUP_PLACE", "Enter the Players Tag / Organisation");
+define("_TOURNAMENT_PLAYERNAME", "Player Name");
+define("_TOURNAMENT_PLAYERNAME_PLACE", "Enter the Players Name");
+define("_TOURNAMENT_PLAYER_COUNTRY", "Player Country");
+define("_TOURNAMENT_PLAYER_COUNTRY_SELECT", "Select a Country");
+define("_TOURNAMENT_PLAYER_COUNTRY_CODE", "Player Country");
+define("_TOURNAMENT_PLAYER_STATUS", "Player Status");
+define("_TOURNAMENT_PLAYER_STATUS_SET", "Set the Status [ex. W]");
+define("_TOURNAMENT_SWAP", "Swap");
 
 define("_TWITCH_SETTINGS", "Twitch Settings");
+define("_TWITCH_SETTINGS_MAIN", "Main Twitch Bot Settings");
+define("_TWITCH_SETTINGS_PARTNER", "I'm an Affiliate / Partner");
+define("_TWITCH_SETTINGS_BOT_CHANNEL", "Bot Message on Join Channel");
+define("_TWITCH_SETTINGS_BOT_CHANNEL_MSG", "Enter your Bot Message used when it joins your channel");
+define("_TWITCH_SETTINGS_STREAM", "Stream Messages");
+define("_TWITCH_SETTINGS_STREAM_FOLLOW", "Twitch Follow Message");
+define("_TWITCH_SETTINGS_STREAM_FOLLOW_PLACE", "Enter your Twitch Follow Message");
+define("_TWITCH_SETTINGS_STREAM_RAID", "Twitch Raid Message");
+define("_TWITCH_SETTINGS_STREAM_RAID_PLACE", "Enter your Twitch Raid Message");
+define("_TWITCH_SETTINGS_STREAM_SUB", "Twitch Subscription Message");
+define("_TWITCH_SETTINGS_STREAM_SUB_PLACE", "Enter your Twitch Subcriber Message");
+define("_TWITCH_SETTINGS_STREAM_PRIMESUB", "Twitch Prime Subscription Message");
+define("_TWITCH_SETTINGS_STREAM_PRIMESUB_PLACE", "Enter your Twitch Prime Subcriber Message");
+define("_TWITCH_SETTINGS_INFO", "These settings make the bot more personal to your Twitch channel.");
+
 define("_TWITCH_FEAT", "TWITCH FEATURES");
-define("_TWITCH_CMDS", "Twitch Commands");
-define("_TWITCH_ADD_CMD", "Add a Command");
 define("_TWITCH_DATA", "Twitch Data");
 define("_TWITCH_DATA_DELAY", "(There might be a slight delay...)");
+
+define("_TWITCH_CMDS", "Twitch Commands");
+define("_TWITCH_ADD_CMD", "Add a Command");
+define("_TWITCH_CMD_INFO", "Command Information");
+define("_TWITCH_CMD_NAME", "Name (without !)");
+define("_TWITCH_CMD_NAME_PLACE", "Enter Command Name");
+define("_TWITCH_CMD_RESPONSE", "Enter the response text here...");
+define("_TWITCH_CMD_USEFUL_VARS", "Useful Variables");
+define("_TWITCH_CMD_VARS_INFO", "Here is a list of internal variables:<br /><br />
+{1} - A custom argument for whatever you want<br />
+{2} - A custom argument for whatever you want (only works if the first is set)<br />
+{dice} - rolls a dice and returns a random value<br />
+{follows} - returns the amount of followers on your channel<br />
+{game} - returns the currently played game<br />
+{points} - returns the current points for the user<br />
+{points_name} - returns the current points name in the bot<br />
+{sender} - returns the command users display name<br />
+{title} - returns the current stream title<br />
+{uptime} - returns the live stream time of your channel<br />
+{user} - returns the targeted user in the message<br />
+{views} - returns the overall views of your channel");
+define("_TWITCH_CMD_EDIT", "Editing a Command");
+define("_TWITCH_CMD_MNGMNT", "Twitch Commands Management");
+define("_TWITCH_CMD_YOURS", "Here are your Twitch Commands.");
+
+define("_TWITCH_MODERATION", "Twitch Moderation");
+define("_TWITCH_MODERATION_EXPL", "Below you can manage how the bot will handle Twitch Moderation");
+define("_TWITCH_MODERATION_BL", "Blacklist Words / URLs");
+define("_TWITCH_MODERATOIN_BL_FEAT", "This feature will take the words you've put into the blacklist and remove them from messages.");
+define("_TWITCH_MODERATION_WL", "Whitelist Words / URLs");
+define("_TWITCH_MODERATOIN_WL_FEAT", "This feature will take the words or links you've put into the whitelist and make sure they're sent.");
+define("_TWITCH_MODERATION_FILTER", "Link Filter");
+define("_TWITCH_MODERATION_FILTER_FEAT", "Link filtering will stop web links from being posted in your Twitch chat. (unless whitelisted)");
+define("_TWITCH_MODERATION_CAPS", "Caps Filter");
+define("_TWITCH_MODERATION_CAPS_FEAT", "Will prevent messages from being posted if they're mostly capital letters.");
+define("_TWITCH_MODERATION_SYMBOLS", "Symbols Filter");
+define("_TWITCH_MODERATION_SYMBOLS_FEAT", "Will prevent messages from being posted if they're mostly symbols.");
+define("_TWITCH_MODERATION_SPAM", "Spam Filter");
+define("_TWITCH_MODERATION_SPAM_FEAT", "Attempt to prevent messages that comtain a lot of spam.");
+define("_TWITCH_MODERATION_ME", "/me Filter");
+define("_TWITCH_MODERATION_ME_FEAT", "Prevents use of the /me function on Twitch in chat messages.");
+define("_TWITCH_MODERATION_PURGE", "Purge Fake System Messages");
+define("_TWITCH_MODERATION_PURGE_FEAT", "This will prevent people from sending messages like <code>&lt;message deleted&gt;</code>.");
+define("_TWITCH_MODERATION_SUBMIT", "Make sure to save your settings!");
 
 define("_AUDIO", "Audio / Sounds");
 define("_AUDIO_ADD", "Add an Audio / Sound");
@@ -68,6 +145,13 @@ define("_NOTIFICATION_LATEST", "Here are your latest Twitch Notifications.");
 define("_MODERATION", "Moderation");
 define("_MODERATION_WL_BL", "Whitelist / Blacklist");
 define("_MODERATION_SETTINGS", "Moderation Settings");
+define("_MODERATION_MNGMNT", "Whitelist / Blacklist Management");
+define("_MODERATION_DEFINITION", "Add a New Definition");
+define("_MODERATION_STRING", "Word / Text String");
+define("_MODERATION_STRING_PLACE", "Enter a Word or String here");
+define("_MODERATION_LIST", "Select a List");
+define("_MODERATION_ADD", "Add to...");
+define("_MODERATION_ADD_LIST", "Add to List");
 
 define("_TICKER", "Ticker");
 define("_TICKER_ADD", "Add a Tick");
@@ -144,14 +228,40 @@ define("_PROMO_STREAMER_ADD_BTN", "Add Streamer to Promo");
 define("_PROMO_STREAMER_REGISTERED", "Here are the registered Streamers for Promo.");
 define("_PROMO_STREAMER_OFFLINE", "Currently Offline");
 
-define("_OTHER_SERVICE", "OTHER SERVICES");
-
 define("_TWITTER", "Twitter");
 define("_TWITTER_GAME_STATUS", "Add a Game Live Status");
 define("_TWITTER_STATUS_LIST", "Twitter Status List");
 define("_TWITTER_SETTINGS", "Twitter Settings");
-
-define("_GLOBAL_FEAT", "GLOBAL FEATURES");
+define("_TWITTER_LIVE_ADD", "Adding a Twitter Live Status");
+define("_TWITTER_TWEET_INFO", "Tweet Information");
+define("_TWITTER_GAME_NAME", "Game Name (must match Twitch name)");
+define("_TWITTER_GAME_NAME_PLACE", "Enter a Game Title");
+define("_TWITTER_CONTENT", "Tweet Contents");
+define("_TWITTER_CONTENT_PLACE", "Enter the tweet text here...");
+define("_TWITTER_TWEET_CREATE", "Create Tweet");
+define("_TWITTER_TWEET_UPDATE", "Update Tweet");
+define("_TWITTER_USEFUL_VARS", "Useful Variables");
+define("_TWITTER_VARS_INFO", "Here is a list of internal variables:<br /><br />
+{link} - returns your Twitch stream url<br />
+{game} - returns the currently assigned Twitch game<br />
+{title} - returns the current Twitch stream title<br /><br />
+More might be added in future, recommend some!");
+define("_TWITTER_EDIT_STATUS", "Editing a Twitter Live Status");
+define("_TWITTER_STATUS_MNGMNT", "Twitter Status Management");
+define("_TWITTER_STATUS_YOURS", "Here are your Twitter Live Statuses.");
+define("_TWITTER_FEAT", "Twitter Features");
+define("_TWITTER_USERNAME", "Twitter Username");
+define("_TWITTER_USERNAME_PLACE", "Enter Your Twitter Username");
+define("_TWITTER_ACCESSTOKEN", "User Access Token");
+define("_TWITTER_ACCESSTOKEN_PLACE", "Enter Your User Token");
+define("_TWITTER_ACCESSSECRET", "User Access Secret");
+define("_TWITTER_ACCESSSECRET_PLACE", "Enter Your Application API Key Secret");
+define("_TWITTER_APIKEY", "Application API Key");
+define("_TWITTER_APIKEY_PLACE", "Enter Your Consumer Key");
+define("_TWITTER_APISECRET", "Application API Key Secret");
+define("_TWITTER_APISECRET_PLACE", "Enter Your Consumer Secret");
+define("_TWITTER_AUTOTWEET", "Live Auto-Tweet");
+define("_TWITTER_OPTIONAL", "This is an optional service if you want Twitter functionality.");
 
 define("_POINTS", "Points");
 define("_POINT_RANK", "Point Rankings");
@@ -226,6 +336,8 @@ define("_CHAT_WIDGET_TITLE", "FoxxiBot Chat Widget");
 define("_ADD", "Add");
 define("_EDIT", "Edit");
 define("_CLEAR", "Clear");
+define("_TAG", "Tag");
+define("_COUNTRY", "Country");
 define("_CLEAR_DATA", "Clear all Data");
 define("_YES", "Yes");
 define("_NO", "No");
@@ -253,6 +365,7 @@ define("_SAVE_SETTINGS", "Save Settings");
 define("_SAVE_DATA", "Save Data");
 define("_PERMISSION", "Permission");
 define("_CMD", "Command");
+define("_CMDS", "_COMMANDS");
 define("_ADD_CMD", "Adding a Command");
 define("_CREATE_CMD", "Create Command");
 define("_UPDATE", "Update");
@@ -261,6 +374,11 @@ define("_USERID", "User ID");
 define("_DISPLAYNAME", "Display Name");
 define("_USERNAME", "Username");
 define("_SEARCH_USERNAME", "Search a Username");
+define("_WHITELIST", "Whitelist");
+define("_BLACKLIST", "Blacklist");
+define("_ITEM", "Item");
+define("_TWEET", "Tweet");
+define("_BOT_CONTROLLED", "Bot Controlled");
 
 define("_DELETE_MSG", "Are you sure you want to delete this item?");
 define("_DELETE_MSG_FILES", "Are you sure you want to delete this plugin? \\n\\n If so, delete the related files in the plugins folder to prevent re-install on next load!");

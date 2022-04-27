@@ -24,12 +24,12 @@ $result = $PDO->query("SELECT * FROM gb_commands");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Twitch Commands Management</h1>
+            <h1><?= _TWITCH_CMD_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Twitch Commands Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _TWITCH_CMD_MNGMNT ?></a></li>
+              <li class="breadcrumb-item active"><?= _TWITCH_CMD_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -45,19 +45,19 @@ $result = $PDO->query("SELECT * FROM gb_commands");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here are your Twitch Commands.</h3>
+                <h3 class="card-title"><?= _TWITCH_CMD_YOURS ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Command</th>
-                    <th style="width: 50%;">Response</th>
-                    <th>Points</th>
-                    <th>Permission</th>
-                    <th>Active</th>
-                    <th>Actions</th>
+                    <th><?= _CMD ?></th>
+                    <th style="width: 50%;"><?= _RESPONSE ?></th>
+                    <th><?= _POINTS ?></th>
+                    <th><?= _PERMISSION ?></th>
+                    <th><?= _ACTIVE ?></th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -118,7 +118,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                     <td>". boolean_return($row["active"]) ."</td>
                     <td>
                       <a href=\"$gfw[site_url]/index.php?p=twitch_commands&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>
-                      <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=twitch_commands&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                      <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=twitch_commands&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                     </td>
                   </tr>
               ";

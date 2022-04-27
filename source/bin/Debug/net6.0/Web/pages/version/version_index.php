@@ -22,12 +22,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Version Information</h1>
+            <h1><?= _VERSION_INFO ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Version Information</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _VERSION_INFO ?></li>
             </ol>
           </div>
         </div>

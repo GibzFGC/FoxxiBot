@@ -29,12 +29,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Twitch Settings</h1>
+            <h1 class="m-0"><?= _TWITCH_SETTINGS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Twitch Settings</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _TWITCH_SETTINGS ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,13 +54,13 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Main Twitch Bot Settings</h3>
+                <h3 class="card-title"><?= _TWITCH_SETTINGS_MAIN ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                 <div class="form-group">
-                <label>I'm an Affiliate / Partner</label>
+                <label><?= _TWITCH_SETTINGS_PARTNER ?></label>
                   <div style="float: right;">
                   <?php
                   if ($options["Partner_Status"] == "off") {
@@ -73,8 +73,8 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Bot Message on Join Channel</label>
-                  <input type="text" class="form-control" id="joined_channel" name="joined_channel" placeholder="Enter your Bot Message used when it joins your channel" value="<?php print $options["Joined_Channel"]; ?>">
+                  <label><?= _TWITCH_SETTINGS_BOT_CHANNEL ?></label>
+                  <input type="text" class="form-control" id="joined_channel" name="joined_channel" placeholder="<?= _TWITCH_SETTINGS_BOT_CHANNEL_MSG ?>" value="<?php print $options["Joined_Channel"]; ?>">
                 </div>                
 
               </div>
@@ -90,30 +90,30 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Stream Messages</h3>
+                <h3 class="card-title"><?= _TWITCH_SETTINGS_STREAM ?></h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
 
                 <div class="form-group">
-                  <label>Twitch Follow Message</label>
-                  <input type="text" class="form-control" id="follow_message" name="follow_message" placeholder="Enter your Twitch Follow Message" value="<?php print $options["Follow_Message"]; ?>">
+                  <label><?= _TWITCH_SETTINGS_STREAM_FOLLOW ?></label>
+                  <input type="text" class="form-control" id="follow_message" name="follow_message" placeholder="<?= _TWITCH_SETTINGS_STREAM_FOLLOW_PLACE ?>" value="<?php print $options["Follow_Message"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Twitch Raid Message</label>
-                  <input type="text" class="form-control" id="raid_message" name="raid_message" placeholder="Enter your Twitch Raid Message" value="<?php print $options["Raid_Message"]; ?>">
+                  <label><?= _TWITCH_SETTINGS_STREAM_RAID ?></label>
+                  <input type="text" class="form-control" id="raid_message" name="raid_message" placeholder="<?= _TWITCH_SETTINGS_STREAM_RAID_PLACE ?>" value="<?php print $options["Raid_Message"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Twitch Subscription Message</label>
-                  <input type="text" class="form-control" id="subscriber_message" name="subscriber_message" placeholder="Enter your Twitch Subcriber Message" value="<?php print $options["Subscriber_Message"]; ?>">
+                  <label><?= _TWITCH_SETTINGS_STREAM_SUB ?></label>
+                  <input type="text" class="form-control" id="subscriber_message" name="subscriber_message" placeholder="<?= _TWITCH_SETTINGS_STREAM_SUB_PLACE ?>" value="<?php print $options["Subscriber_Message"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Twitch Prime Subscription Message</label>
-                  <input type="text" class="form-control" id="prime_message" name="prime_message" placeholder="Enter your Twitch Prime Subcriber Message" value="<?php print $options["Prime_Message"]; ?>">
+                  <label><?= _TWITCH_SETTINGS_STREAM_PRIMESUB ?></label>
+                  <input type="text" class="form-control" id="prime_message" name="prime_message" placeholder="<?= _TWITCH_SETTINGS_STREAM_PRIMESUB_PLACE ?>" value="<?php print $options["Prime_Message"]; ?>">
                 </div>
 
               </div>
@@ -133,8 +133,8 @@ foreach($result as $row)
               
                 <div class="card-footer">
                   <input type="hidden" id="submit" name="submit" value="submit">
-                    <p style="float: left; margin-top:15px;">These settings make the bot more personal to your Twitch channel.</p>
-                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary">Save Settings</button>
+                    <p style="float: left; margin-top:15px;"><?= _TWITCH_SETTINGS_INFO ?></p>
+                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
                   </div>
                 </div>
 

@@ -26,13 +26,13 @@ foreach($data as $edit)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Editing a Twitter Live Status</h1>
+            <h1 class="m-0"><?= _TWITTER_EDIT_STATUS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Twitter</li>
-              <li class="breadcrumb-item active">Edit</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _TWITTER ?></li>
+              <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -51,36 +51,36 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tweet Information</h3>
+                <h3 class="card-title"><?= _TWITTER_TWEET_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="commandName">Game Name (must match Twitch name)</label>
+                    <label for="commandName"><?= _TWITTER_GAME_NAME ?></label>
                     <?php
                     if ($edit["game"] == "null") {
-                      print '<input type="text" class="form-control" id="commandGame" name="commandGame" placeholder="Enter a Game Title" value="' . $edit["game"] . '" readonly required>';
+                      print '<input type="text" class="form-control" id="commandGame" name="commandGame" placeholder="'. _TWITTER_GAME_NAME_PLACE .'" value="' . $edit["game"] . '" readonly required>';
                     } else {
-                      print '<input type="text" class="form-control" id="commandGame" name="commandGame" placeholder="Enter a Game Title" value="' . $edit["game"] . '" required>';
+                      print '<input type="text" class="form-control" id="commandGame" name="commandGame" placeholder="'. _TWITTER_GAME_NAME_PLACE .'" value="' . $edit["game"] . '" required>';
                     }
                     ?>
                   </div>
 
                   <div class="form-group">
-                    <label for="commandResponse">Tweet Contents</label>
-                    <textarea class="form-control" rows="3"  id="commandTweet" name="commandTweet" placeholder="Enter the tweet text here..." required><?php print $edit["tweet"]; ?></textarea>
+                    <label for="commandResponse"><?= _TWITTER_CONTENT ?></label>
+                    <textarea class="form-control" rows="3"  id="commandTweet" name="commandTweet" placeholder="<?= _TWITTER_CONTENT_PLACE ?>" required><?php print $edit["tweet"]; ?></textarea>
                   </div>
 
                   <div class="form-group">
-                  <label>Active</label>
+                  <label><?= _ACTIVE ?></label>
                   <select class="form-control select2" id="commandActive" name="commandActive" style="width: 100%;">
                   <?php if($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED>No</option>";
-                      print "<option value=\"1\">Yes</option>";
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED>Yes</option>";
-                      print "<option value=\"0\">No</option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
                     ?>
                   </select>
@@ -92,7 +92,7 @@ foreach($data as $edit)
               <div class="card-footer">
                 <input type="hidden" id="commandID" name="commandID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Update Tweet</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TWITTER_TWEET_UPDATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -107,18 +107,14 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Variables</h3>
+                <h3 class="card-title"><?= _TWITTER_USEFUL_VARS ?></h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
                   <div class="form-group">
-                    Here is a list of internal variables:<br /><br />
-                    {link} - returns your Twitch stream url<br />
-                    {game} - returns the currently assigned Twitch game<br />
-                    {title} - returns the current Twitch stream title<br /><br />
-                    More might be added in future, recommend some!
+                    <?= _TWITTER_VARS_INFO ?>
                   </div>
 
                 </div>
