@@ -71,9 +71,40 @@ define("_MODERATION_SETTINGS", "Moderation Settings");
 
 define("_TICKER", "Ticker");
 define("_TICKER_ADD", "Add a Tick");
+define("_TICKER_ADDING", "Adding a Ticker");
+define("_TICKER_INFO", "Ticker Information");
+define("_TICKER_NAME", "Name");
+define("_TICKER_NAME_PLACE", "Enter Ticker Name");
+define("_TICKER_RESPONSE", "Response");
+define("_TICKER_RESPONSE_PLACE", "Enter the response text here...");
+define("_TICKER_CREATE", "Create Ticker");
+define("_TICKER_USEFUL", "Useful Information");
+define("_TICKER_USEFUL_TEXT", "Tickers are for showing information in a consice box that scrolls with information you set.
+<br /><br />
+This could be useful for showing social media info, events / meet-ups / game announcement, etc.
+<br /><br />
+You can also set which are active at any time, meaning they can be re-used or recycled (edited).");
+define("_TICKER_EDIT", "Editing a Ticker");
+define("_TICKER_MNGMNT", "Ticker Management");
+define("_TICKER_UPDATE", "Update Ticker");
+define("_TICKER_YOURS", "Here are your Tickers.");
 
 define("_TIMERS", "Timers");
 define("_TIMERS_ADD", "Add a Timer");
+define("_TIMERS_ADDING", "Adding a Timer");
+define("_TIMERS_INFO", "Timer Information");
+define("_TIMERS_NAME_PLACE", "Enter Timer Name");
+define("_TIMERS_RESPONSE_PLACE", "Enter the response text here...");
+define("_TIMERS_CREATE", "Create Timer");
+define("_TIMERS_USEFUL", "Useful Information");
+define("_TIMERS_USEFUL_TEXT", "Timers are used to show a message every 15 minutes (set to prevent spam). Using these is useful for showing social media
+for example.
+<br /><br />
+We don't recommend using too many timers so that you don't over-bombard your viewers as they can chase them off.");
+define("_TIMERS_EDIT", "Editing a Timer");
+define("_TIMERS_UPDATE", "Update Timer");
+define("_TIMERS_MNGMNT", "Timers Management");
+define("_TIMERS_YOURS", "Here are your Twitch Timers.");
 
 define("_DISCORD_SETTINGS", "Discord Settings");
 define("_DISCORD_SETTINGS_MAIN", "Main Discord Bot Settings");
@@ -105,6 +136,13 @@ define("_DISCORD_VARS_INFO", "Here is a list of internal variables:<br /><br />
 {sender} - returns the command users display name<br />");
 
 define("_PROMO", "Promo / Streamers");
+define("_PROMO_MNGMNT", "Discord Promo / Streamer Management");
+define("_PROMO_ADDITION", "Quick Promo / Streamer Addition");
+define("_PROMO_STREAMER_NAME", "Add a Streamers Twitch username");
+define("_PROMO_STREAMER_PLACE", "Enter a Streamers Username here");
+define("_PROMO_STREAMER_ADD_BTN", "Add Streamer to Promo");
+define("_PROMO_STREAMER_REGISTERED", "Here are the registered Streamers for Promo.");
+define("_PROMO_STREAMER_OFFLINE", "Currently Offline");
 
 define("_OTHER_SERVICE", "OTHER SERVICES");
 
@@ -136,9 +174,34 @@ define("_POINTS_GIVEN", "Points Given Every 5 Mins");
 define("_POINTS_GIVEN_VALUE", "Enter Points Value");
 define("_POINTS_RANKING", "Points Rankings");
 define("_POINTS_RANKING_TITLE", "Here are the current Points Rankings.");
+define("_POINTS_REDEEM", "Point Redeems");
+define("_POINTS_REDEEM_TITLE", "Here are the recent stream Point Redeems.");
+define("_POINTS_REFUNDED", "Refunded");
+define("_POINTS_REFUND", "Refund");
+define("_POINTS_NOT_PERFORMED", "Not Performed");
+define("_POINTS_SET_COMPLETE", "Set as Complete");
+define("_POINTS_SET_INCOMPLETE", "Set as Incomplete");
+define("_POINTS_CONFIRM", "Are you sure you want to refund this user their points?");
+define("_POINTS_COMPLETED", "Completed");
 
 define("_QUOTES", "Quotes");
 define("_QUOTES_ADD", "Add a Quote");
+define("_QUOTES_ADDING", "Adding a Quote");
+define("_QUOTE_INFORMATION", "Quote Information");
+define("_QUOTE_NAME_PLACE", "Enter Quote Name");
+define("_QUOTE_TEXT_PLACE", "Enter the bot response here...");
+define("_QUOTE_SOURCE", "Source");
+define("_QUOTE_SOURCE_PLACE", "Enter Quote Source");
+define("_QUOTE_CREATE", "Create Quote");
+define("_QUOTE_SYSTEM", "Quote System");
+define("_QUOTE_SYSTEM_INFO", "The quote system lets you take some of your favourite media (game, movie, etc) quotes or even awesome stream moments and save them as quotes for
+people to call upon and see<br /><br />
+Viewers will be able to do \"!quote\" for a random one or if you have a name set, it will work like \"!quote name\".<br /><br />
+This will work on both Discord and Twitch so make sure to add some awesome stuff!");
+define("_QUOTE_EDIT", "Editing a Quote");
+define("_QUOTE_UPDATE", "Update Quote");
+define("_QUOTE_MNGMNT", "Quotes Management");
+define("_QUOTE_YOURS", "Here are your Quotes");
 
 define("_BOT_MANAGEMENT", "BOT MANAGEMENT");
 define("_SETTINGS", "Settings");
@@ -173,6 +236,9 @@ define("_NAME", "Name");
 define("_AUTHOR", "Author");
 define("_FILE", "File");
 define("_TYPE", "Type");
+define("_RECIPIENT", "Recipient");
+define("_STATUS", "Status");
+define("_ACTION", "Action");
 define("_ACTIONS", "Actions");
 define("_PLAY", "Play");
 define("_VIEWERS", "Viewer(s)");
@@ -200,3 +266,4 @@ define("_DELETE_MSG", "Are you sure you want to delete this item?");
 define("_DELETE_MSG_FILES", "Are you sure you want to delete this plugin? \\n\\n If so, delete the related files in the plugins folder to prevent re-install on next load!");
 define("_DELETE", "Delete");
 define("_DELETE_PLUGIN", "Delete Plugin");
+define("_DELETE_USER_POINTS", "Are you sure you want to delete this user and their points?");

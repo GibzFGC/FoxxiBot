@@ -24,12 +24,12 @@ $result = $PDO->query("SELECT * FROM gb_discord_streamers");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Discord Promo / Streamer Management</h1>
+            <h1><?= _PROMO_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Promo Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _PROMO_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -48,21 +48,21 @@ $result = $PDO->query("SELECT * FROM gb_discord_streamers");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Promo / Streamer Addition</h3>
+                <h3 class="card-title"><?= _PROMO_ADDITION ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="commandName">Add a Streamers Twitch username</label>
-                    <input type="text" class="form-control" id="twitchName" name="twitchName" placeholder="Enter a Streamers Username Here">
+                    <label for="commandName"><?= _PROMO_STREAMER_NAME ?></label>
+                    <input type="text" class="form-control" id="twitchName" name="twitchName" placeholder="<?= _PROMO_STREAMER_PLACE ?>">
                   </div>
                 </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Add Streamer to Promo</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _PROMO_STREAMER_ADD_BTN ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -74,16 +74,16 @@ $result = $PDO->query("SELECT * FROM gb_discord_streamers");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here are the registered Streamers for Promo.</h3>
+                <h3 class="card-title"><?= _PROMO_STREAMER_REGISTERED ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Username</th>
+                    <th><?= _USERNAME ?></th>
                     <th>Live</th>
-                    <th>Actions</th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -92,7 +92,7 @@ $result = $PDO->query("SELECT * FROM gb_discord_streamers");
   foreach($result as $row)
   {
     if ($row["live"] == "0") {
-      $live_status = "Currently Offline";
+      $live_status = _PROMO_STREAMER_OFFLINE;
     } else {
       $live_status = "Currently streaming @ <a target='_blank' href='https://www.twitch.tv/" . $row["username"] . "'>https://www.twitch.tv/" . $row["username"] . "</a>";
     }
@@ -102,7 +102,7 @@ $result = $PDO->query("SELECT * FROM gb_discord_streamers");
                   <tr>
                     <td>". $row["username"] ."</td>
                     <td>". $live_status ."</td>
-                    <td><a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=promo&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">Delete</a></td>
+                    <td><a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=promo&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a></td>
                   </tr>
               ";
   }
