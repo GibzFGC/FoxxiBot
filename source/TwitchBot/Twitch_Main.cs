@@ -800,9 +800,21 @@ namespace FoxxiBot.TwitchBot
                 var discord_message = discordSQL.getOptions("AnnounceChannel_Text");
 
                 // Convert variables if used
+                if (discord_message.Contains("{game}"))
+                {
+                    var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
+                    discord_message = discord_message.Replace("{game}", data.ToString());
+                }
+
                 if (discord_message.Contains("{link}"))
                 {
                     discord_message = discord_message.Replace("{link}", "https://www.twitch.tv/" + Config.TwitchClientChannel);
+                }
+
+                if (discord_message.Contains("{title}"))
+                {
+                    var data = Twitch_GetData.getTitle().GetAwaiter().GetResult();
+                    discord_message = discord_message.Replace("{game}", data.ToString());
                 }
 
                 // Send Discord Message
