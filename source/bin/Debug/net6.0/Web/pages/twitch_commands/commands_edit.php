@@ -38,13 +38,13 @@ foreach($data as $edit)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Editing a Command: </h1>
+            <h1 class="m-0"><?= _TWITCH_CMD_EDIT ?>: </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Commands</li>
-              <li class="breadcrumb-item active">Edit</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _COMMANDS ?></li>
+              <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -63,24 +63,24 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Command Information</h3>
+                <h3 class="card-title"><?= _TWITCH_CMD_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Name (without !)</label>
-                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" value="<?php print $command_name; ?>" required>
+                    <label for="exampleInputEmail1"><?= _TWITCH_CMD_NAME ?></label>
+                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="<?= _TWITCH_CMD_NAME_PLACE ?>" value="<?php print $command_name; ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Response</label>
-                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..." required><?php print $edit["response"]; ?></textarea>
+                    <label for="exampleInputPassword1"><?= _RESPONSE ?></label>
+                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="<?= _TWITCH_CMD_RESPONSE ?>" required><?php print $edit["response"]; ?></textarea>
                   </div>
 
                   <?php if ($options["points_active"] == "on") { ?>
                   <div class="form-group">
-                    <label for="commandPoints">Point Cost</label>
+                    <label for="commandPoints"><?= _POINT_COST ?></label>
                     <input type="number" class="form-control" id="commandPoints" name="commandPoints" value="<?php print $edit["points"]; ?>">
                   </div>
                   <?php } ?>
@@ -104,14 +104,14 @@ foreach($data as $edit)
                 </div>
 
                 <div class="form-group">
-                  <label>Active</label>
+                  <label><?= _ACTIVE ?></label>
                   <select class="form-control select2" id="commandActive" name="commandActive" style="width: 100%;">
                   <?php if($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED>No</option>";
-                      print "<option value=\"1\">Yes</option>";
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED>Yes</option>";
-                      print "<option value=\"0\">No</option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
                     ?>
                   </select>
@@ -123,7 +123,7 @@ foreach($data as $edit)
               <div class="card-footer">
               <input type="hidden" id="commandID" name="commandID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="toast_success btn btn-primary">Update Command</button>
+                <button style="float: right;" type="submit" class="toast_success btn btn-primary"><?= _UPDATE_CMD ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -138,26 +138,14 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Variables</h3>
+                <h3 class="card-title"><?= _TWITCH_CMD_USEFUL_VARS ?></h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
                   <div class="form-group">
-                    Here is a list of internal variables:<br /><br />
-                    {1} - A custom argument for whatever you want<br />
-                    {2} - A custom argument for whatever you want (only works if the first is set)<br />
-                    {dice} - rolls a dice and returns a random value<br />
-                    {follows} - returns the amount of followers on your channel<br />
-                    {game} - returns the currently played game<br />
-                    {points} - returns the current points for the user<br />
-                    {points_name} - returns the current points name in the bot<br />
-                    {sender} - returns the command users display name<br />
-                    {title} - returns the current stream title<br />
-                    {uptime} - returns the live stream time of your channel<br />
-                    {user} - returns the targeted user in the message<br />
-                    {views} - returns the overall views of your channel
+                    <?= _TWITCH_CMD_VARS_INFO ?>
                   </div>
 
                 </div>

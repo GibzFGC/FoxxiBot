@@ -29,12 +29,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Twitter Settings</h1>
+            <h1 class="m-0"><?= _TWITTER_SETTINGS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Twitter Settings</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _TWITTER_SETTINGS ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,14 +54,14 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3 class="card-title"><i class="fab fa-twitter"></i>&nbsp; Twitter Settings</h3>
+              <h3 class="card-title"><i class="fab fa-twitter"></i>&nbsp; <?= _TWITTER_SETTINGS ?></h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
 
                 <div class="form-group">
-                  <label>Twitter Features</label>
+                  <label><?= _TWITTER_FEAT ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["twitter_features"] == "off") {
@@ -74,32 +74,32 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Twitter Username</label>
-                  <input type="text" class="form-control" id="twitter_username" name="twitter_username" placeholder="Enter Your Twitter Username" value="<?php print $options["twitter_username"]; ?>">
+                  <label><?= _TWITTER_USERNAME ?></label>
+                  <input type="text" class="form-control" id="twitter_username" name="twitter_username" placeholder="<?= _TWITTER_USERNAME_PLACE ?>" value="<?php print $options["twitter_username"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>User Access Token</label>
-                  <input type="text" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="Enter Your User Token" value="<?php print $options["twitter_usertoken"]; ?>">
+                  <label><?= _TWITTER_ACCESSTOKEN ?></label>
+                  <input type="text" class="form-control" id="twitter_usertoken" name="twitter_usertoken" placeholder="<?= _TWITTER_ACCESSTOKEN_PLACE ?>" value="<?php print $options["twitter_usertoken"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>User Access Secret</label>
-                  <input type="text" class="form-control" id="twitter_usertokensecret" name="twitter_usertokensecret" placeholder="Enter Your Application API Key Secret" value="<?php print $options["twitter_usertokensecret"]; ?>">
+                  <label><?= _TWITTER_ACCESSSECRET ?></label>
+                  <input type="text" class="form-control" id="twitter_usertokensecret" name="twitter_usertokensecret" placeholder="<?= _TWITTER_ACCESSSECRET_PLACE ?>" value="<?php print $options["twitter_usertokensecret"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Application API Key</label>
-                  <input type="text" class="form-control" id="twitter_consumerkey" name="twitter_consumerkey" placeholder="Enter Your Consumer Key" value="<?php print $options["twitter_consumerkey"]; ?>">
+                  <label><?= _TWITTER_APIKEY ?></label>
+                  <input type="text" class="form-control" id="twitter_consumerkey" name="twitter_consumerkey" placeholder="<?= _TWITTER_APIKEY_PLACE ?>" value="<?php print $options["twitter_consumerkey"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Application API Key Secret</label>
-                  <input type="text" class="form-control" id="twitter_consumersecret" name="twitter_consumersecret" placeholder="Enter Your Consumer Secret" value="<?php print $options["twitter_consumersecret"]; ?>">
+                  <label><?= _TWITTER_APISECRET ?></label>
+                  <input type="text" class="form-control" id="twitter_consumersecret" name="twitter_consumersecret" placeholder="<?= _TWITTER_APISECRET_PLACE ?>" value="<?php print $options["twitter_consumersecret"]; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Live Auto-Tweet</label>
+                  <label><?= _TWITTER_AUTOTWEET ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["twitter_livestatement_status"] == "off") {
@@ -128,8 +128,8 @@ foreach($result as $row)
               
                 <div class="card-footer">
                   <input type="hidden" id="submit" name="submit" value="submit">
-                    <p style="float: left; margin-top:15px;">This is an optional service if you want Twitter functionality.</p>
-                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary">Save Settings</button>
+                    <p style="float: left; margin-top:15px;"><?= _TWITTER_OPTIONAL ?></p>
+                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
                   </div>
                 </div>
 

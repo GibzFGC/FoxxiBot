@@ -29,12 +29,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Twitch Moderation</h1>
+            <h1 class="m-0"><?= _TWITCH_MODERATION ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Twitch Moderation</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _TWITCH_MODERATION ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,7 +54,7 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Below you can manage how the bot will handle Twitch Moderation</h3>
+                <h3 class="card-title"><?= _TWITCH_MODERATION_EXPL ?></h3>
               </div>
               
               <!-- /.card-header -->
@@ -65,7 +65,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Blacklist Words / URLs</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_BL ?></h3>
                         
                         <div class="card-tools">
                           <?php
@@ -79,7 +79,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        This feature will take the words you've put into the blacklist and remove them from messages.
+                        <?= _TWITCH_MODERATOIN_BL_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -89,7 +89,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Whitelist Words / URLs</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_WL ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -103,7 +103,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        This feature will take the words or links you've put into the whitelist and make sure they're sent.
+                      <?= _TWITCH_MODERATOIN_WL_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -113,7 +113,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Link Filter</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_FILTER ?></h3>
                         
                         <div class="card-tools">
                           <?php
@@ -128,7 +128,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        Link filtering will stop web links from being posted in your Twitch chat. (unless whitelisted)
+                        <?= _TWITCH_MODERATION_FILTER_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -138,7 +138,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Caps Filter</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_CAPS ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -152,7 +152,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        Will prevent messages from being posted if they're mostly capital letters.
+                        <?= _TWITCH_MODERATION_CAPS_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -162,7 +162,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Symbols Filter</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_SYMBOLS ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -176,7 +176,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        Will prevent messages from being posted if they're mostly symbols.
+                        <?= _TWITCH_MODERATION_SYMBOLS_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -186,7 +186,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Spam Filter</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_SPAM ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -200,7 +200,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        Attempt to prevent messages that comtain a lot of spam.
+                        <?= _TWITCH_MODERATION_SPAM_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -210,7 +210,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">/me Filter</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_ME ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -224,7 +224,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        Prevents use of the /me function on Twitch in chat messages.
+                        <?= _TWITCH_MODERATION_ME_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -234,7 +234,7 @@ foreach($result as $row)
                   <div class="col-md-3">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 5px;" class="card-title">Purge Fake System Messages</h3>
+                        <h3 style="margin-top: 5px;" class="card-title"><?= _TWITCH_MODERATION_PURGE ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -248,7 +248,7 @@ foreach($result as $row)
                       </div>
                     
                       <div class="card-body">
-                        This will prevent people from sending messages like <code>&lt;message deleted&gt;</code>.
+                        <?= _TWITCH_MODERATION_PURGE_FEAT ?>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -259,8 +259,8 @@ foreach($result as $row)
 
                 <div class="card-footer">
                   <input type="hidden" id="submit" name="submit" value="submit">
-                    <p style="float: left; margin-top:15px;">Make sure to save your settings!</p>
-                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary">Save Settings</button>
+                    <p style="float: left; margin-top:15px;"><?= _TWITCH_MODERATION_SUBMIT ?></p>
+                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
                   </div>
                 </div>
 
