@@ -178,7 +178,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   {
                     print '
                     <li class="nav-item">
-                      <span class="nav-link"><a style="margin-right: 10px;" href="'. $gfw['site_url'] .'/index.php?p=notifications&a=funcs&v=event&type='. $n_row["type"] .'&name='. $n_row["user"] .'&views='. $n_row["viewers"] .'" class="btn btn-primary btn-sm">'._PLAY_.'</a>'.$n_row["type"] .': '. $n_row["user"] .'
+                      <span class="nav-link"><a style="margin-right: 10px;" href="'. $gfw['site_url'] .'/index.php?p=notifications&a=funcs&v=event&type='. $n_row["type"] .'&name='. $n_row["user"] .'&views='. $n_row["viewers"] .'" class="btn btn-primary btn-sm">'._PLAY.'</a>'.$n_row["type"] .': '. $n_row["user"] .'
                         <span class="float-right">'. $n_row["viewers"] .' '._VIEWERS.'</span>
                       </span>
                     </li>
