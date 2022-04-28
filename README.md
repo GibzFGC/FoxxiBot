@@ -18,9 +18,14 @@ FoxxiBot also let's people make plugins using Javascript with .NET Libraries via
 
 FoxxiBot requires the following software to be installed:
 - Windows 10/11 x64 (ARM Compatible)
-- Linux x64 (tested on Ubuntu 21.10)
-- .NET 6.0 (or newer)
-- Visual Studio Community 2022 (if you're looking to modify / build it yourself)
+- Linux x64 (tested on Ubuntu 21.10 & 22.40LTS)
+- Raspberry Pi (tested on Pi 4B / 4gb & Ubuntu 22.40LTS)
+- .NET 6.0 (or newer) | [Link to Microsoft](https://dotnet.microsoft.com/en-us/download)
+
+## Looking to Compile it for Yourself?
+In order to compile it yourself, you'll need
+- Windows: Visual Studio Community 2022. All dependencies are set up, Just build as needed
+- Linux: Visual Studio Code & OmniSharp Addon. All dependencies are set up, Just build as needed
 
 ## Starting with FoxxiBot
 
