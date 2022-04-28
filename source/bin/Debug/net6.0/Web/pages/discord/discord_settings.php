@@ -223,7 +223,6 @@ foreach($result as $row)
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title"><?= _DISCORD_STREAM_SETTINGS ?></h3>
-                <h3 class="card-title">Streamer Promo Settings</h3>
               </div>
 
               <!-- /.card-header -->
@@ -231,7 +230,6 @@ foreach($result as $row)
 
                 <div class="form-group">
                 <label><?= _DISCORD_SET_NOTIFY_CHANNEL ?></label>
-                <label>Set the Stream Promo Channel</label>
                 <select class="form-control select2" id="" name="discord_setstreamchannel" style="width: 100%;">
 
                 <?php
