@@ -71,17 +71,18 @@ namespace FoxxiBot
             // If Bot SQLite doesn't exist
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db"))
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Database file found. Checking for Updates...");
+                // Confirm DB File Found
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Database file found. Checking for Updates...]", ConsoleColor.Yellow);
                 
                 // Update the Tables & Default Data
                 Class.Bot_Functions functions = new Class.Bot_Functions();
                 functions.CreateTables().GetAwaiter().GetResult();
 
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Bot Starting...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Bot Starting...]", ConsoleColor.Yellow);
                 Console.WriteLine("");
             } else
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - No Database file found. Creating now~");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - No Database file found. Creating now...]", ConsoleColor.Yellow);
 
                 // Create the Database File
                 var dbFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db");
@@ -91,7 +92,7 @@ namespace FoxxiBot
                 Class.Bot_Functions functions = new Class.Bot_Functions();
                 functions.CreateTables().GetAwaiter().GetResult();
 
-                Console.WriteLine("Database file created. Continuing Launch...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [Database file created] - Continuing Launch...", ConsoleColor.Yellow);
                 Console.WriteLine("");
             }
 
@@ -103,7 +104,7 @@ namespace FoxxiBot
                 File.Copy(@AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db", @AppDomain.CurrentDomain.BaseDirectory + "Data/Backups/bot.backup." + localDate.ToString("ddMMyyyy.HHmmss") + ".db", true);
 
                 // Initialize Twitch
-                Console.WriteLine("Welcome to FoxxiBot. Loading your Settings...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Loading your Settings...", ConsoleColor.Cyan);
                 Console.WriteLine("");
 
                 // Load from JSON
@@ -177,7 +178,7 @@ namespace FoxxiBot
             }
             else
             {
-                Console.WriteLine("Welcome to FoxxiBot. Let's Get Started");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Let's Get Started", ConsoleColor.Cyan);
                 Console.WriteLine("");
                 Console.WriteLine("Let's set up the Bot's permissions to the Bot's Account on Twitch");
                 Console.WriteLine("");

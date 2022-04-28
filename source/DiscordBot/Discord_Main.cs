@@ -125,9 +125,8 @@ namespace FoxxiBot.DiscordBot
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     break;
             }
-            Console.WriteLine($"{DateTime.Now,-19} [{message.Severity,8}] {message.Source}: {message.Message} {message.Exception}");
-            Console.ResetColor();
 
+            Class.Bot_Functions.WriteColour($"{DateTime.Now,-19}: {Config.TwitchBotName} [| Discord] - {message.Message}", ConsoleColor.Magenta);
             return Task.CompletedTask;
         }
 

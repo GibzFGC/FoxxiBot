@@ -369,7 +369,7 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnLog(object sender, OnLogArgs e)
         {
-            Console.WriteLine($"{e.DateTime.ToString()}: {Config.TwitchBotName} - {e.Data}");
+           Class.Bot_Functions.WriteColour($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}", ConsoleColor.Blue);
         }
 
         private void Client_OnConnected(object sender, OnConnectedArgs e)

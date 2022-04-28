@@ -17,6 +17,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FoxxiBot.Class
@@ -381,5 +382,28 @@ namespace FoxxiBot.Class
             
             return Task.CompletedTask;
         }
+
+        // Change the Colour of ConsoleText
+        public static void WriteColour(string message, ConsoleColor color)
+        {
+            var pieces = Regex.Split(message, @"(\[[^\]]*\])");
+
+            for (int i = 0; i < pieces.Length; i++)
+            {
+                string piece = pieces[i];
+
+                if (piece.StartsWith("[") && piece.EndsWith("]"))
+                {
+                    Console.ForegroundColor = color;
+                    piece = piece.Substring(1, piece.Length - 2);
+                }
+
+                Console.Write(piece);
+                Console.ResetColor();
+            }
+
+            Console.WriteLine();
+        }
+
     }
 }
