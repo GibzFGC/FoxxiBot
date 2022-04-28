@@ -59,19 +59,19 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Operating Version:
-                      <span class="float-right"><?php print PHP_OS; ?></span>
+                      <span class="float-right"><?php print getenv('OS_VERSION'); ?></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">.NET Framework Version:
-                      <span class="float-right">6.0</span>
+                      <span class="float-right"><?php print getenv('DOTNET_VERSION'); ?></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">PHP Version:
-                      <span class="float-right">8.1.1</span>
+                      <span class="float-right"><?php print phpversion(); ?></span>
                     </span>
                   </li>
 

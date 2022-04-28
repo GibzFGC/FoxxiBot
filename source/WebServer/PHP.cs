@@ -55,6 +55,8 @@ namespace FoxxiBot.WebServer
 
             process.StartInfo.EnvironmentVariables.Clear();
 
+            process.StartInfo.EnvironmentVariables.Add("OS_VERSION", RuntimeInformation.OSDescription);
+            process.StartInfo.EnvironmentVariables.Add("DOTNET_VERSION", Environment.Version.ToString());
             process.StartInfo.EnvironmentVariables.Add("HTTP_REQUEST", httpListenerContext.Request.HttpMethod.ToString() + " " + httpListenerContext.Request.Url.PathAndQuery + " " + "HTTP/1.1");
             process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", "http://localhost:" + Config.WebserverPort);
             process.StartInfo.EnvironmentVariables.Add("GATEWAY_INTERFACE", "CGI/1.1");
