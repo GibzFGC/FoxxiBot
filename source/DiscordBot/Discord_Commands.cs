@@ -491,7 +491,10 @@ namespace FoxxiBot.DiscordBot
                 else if (userAct is RichGame richGame)
                     embed.AddField("Activity", richGame.Name, true)
                         .AddField("Details", richGame.Details, true)
-                        .WithThumbnailUrl(richGame.SmallAsset.GetImageUrl() ?? user.GetAvatarUrl())
+                        .AddField("Playing Since", richGame.Timestamps?.Start.Value.ToString("hh:mm:ss tt") ?? "Unknown", true)
+                        .AddField("Time Playing",
+                            (DateTimeOffset.Now - richGame.Timestamps?.Start).Value.ToString(@"hh\:mm\:ss") ?? "Unknown", true)
+                        .WithThumbnailUrl(richGame.SmallAsset?.GetImageUrl() ?? user.GetAvatarUrl())
                         .WithColor(Color.Gold);
                 else
                     embed.AddField("Activity", userAct.Name ?? "None", true);
@@ -501,7 +504,7 @@ namespace FoxxiBot.DiscordBot
                 embed.AddField("Activity", "None", true);
             }
 
-            // Tell Admin it's Done
+            // Check if Bot locked to a Channel
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
             if (active == "off")
@@ -514,8 +517,6 @@ namespace FoxxiBot.DiscordBot
                 await Context.Client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
                     .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync(embed: embed.Build());
             }
-
-            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("avatar")]
@@ -532,7 +533,7 @@ namespace FoxxiBot.DiscordBot
             eb.WithColor(Color.Orange);
             eb.WithImageUrl(userInfo.GetAvatarUrl());
 
-            // Tell Admin it's Done
+            // Check if Bot locked to a Channel
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
 
@@ -565,7 +566,7 @@ namespace FoxxiBot.DiscordBot
             await ((ITextChannel)Context.Channel).DeleteMessagesAsync(messages);
             const int delay = 3000;
 
-            // Tell Admin it's Done
+            // Check if Bot locked to a Channel
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
 
@@ -599,6 +600,7 @@ namespace FoxxiBot.DiscordBot
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("StreamChannel_Status");
 
+            // Check if Bot locked to a Channel
             if (active == "off")
             {
                 await ReplyAsync($"The promo system is turned off right now");
@@ -632,6 +634,7 @@ namespace FoxxiBot.DiscordBot
 
             con.Close();
 
+            // Check if Bot locked to a Channel
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
 
@@ -661,6 +664,7 @@ namespace FoxxiBot.DiscordBot
 
             con.Close();
 
+            // Check if Bot locked to a Channel
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
 
