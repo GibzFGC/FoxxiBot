@@ -440,31 +440,83 @@ namespace FoxxiBot.DiscordBot
         public Task SayAsync([Remainder][Summary("The text to echo")] string echo)
             => ReplyAsync(echo);
 
-		[Command("userinfo")]
-		[Summary
-		("Returns info about the current user, or the user parameter, if one passed.")]
-		[Alias("user", "whois")]
-		public async Task UserInfoAsync(
-		[Summary("The (optional) user to get info from")]
-		SocketUser user = null)
-		{
-			var userInfo = user ?? Context.Client.CurrentUser;
+        [Command("userinfo")]
+        [RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
+        public async Task UserInfoAsync(SocketGuildUser user = null)
+        {
+            user = (SocketGuildUser)(user ?? Context.User);
+
+            if (user.IsBot)
+            {
+                await ReplyAsync("Bots are not people~");
+                return;
+            }
+
+            var embed = new EmbedBuilder { ThumbnailUrl = user.GetAvatarUrl() }
+                .AddField("Member ID", user.Id, true)
+                .AddField("Status", user.Status, true)
+                .AddField("Joined Guild", user.JoinedAt.Value.ToString("dd MMMM, yyyy"), true)
+                .AddField("Account Created", user.CreatedAt.ToString("dd MMMM, yyyy"), true)
+                .AddField("Roles", user.Roles.Count - 1, true)
+                .WithTimestamp(DateTimeOffset.Now)
+                .WithAuthor(x =>
+                {
+                    x.Name = user.Username;
+                    x.IconUrl = user.GetAvatarUrl();
+                })
+                .WithFooter(x =>
+                {
+                    x.Text = $"Requested By {Context.User.Username}";
+                    x.IconUrl = Context.User.GetAvatarUrl();
+                })
+                .WithColor(Color.Red);
+
+            if (user?.Activities.Count > 0)
+            {
+                var userActivities = user?.Activities.ToList();
+                var userAct = userActivities?.First();
+
+                if (userAct is SpotifyGame spot)
+                    embed.AddField("Listening To", "Spotify", true)
+                        .AddField("Track", spot.TrackTitle, true)
+                        .AddField("Artist(s)", string.Join(", ", spot.Artists), true)
+                        .AddField("Album", spot.AlbumTitle, true)
+                        .WithThumbnailUrl(spot.AlbumArtUrl)
+                        .WithColor(Color.Green);
+                else if (userAct is CustomStatusGame statusGame)
+                    embed.AddField("Activity", statusGame.Name, true)
+                        .AddField("Details", statusGame.Details, true)
+                        .AddField("Playing Since", statusGame.CreatedAt, true)
+                        .WithColor(Color.Magenta);
+                else if (userAct is RichGame richGame)
+                    embed.AddField("Activity", richGame.Name, true)
+                        .AddField("Details", richGame.Details, true)
+                        .WithThumbnailUrl(richGame.SmallAsset.GetImageUrl() ?? user.GetAvatarUrl())
+                        .WithColor(Color.Gold);
+                else
+                    embed.AddField("Activity", userAct.Name ?? "None", true);
+            }
+            else
+            {
+                embed.AddField("Activity", "None", true);
+            }
 
             // Tell Admin it's Done
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("BotChannel_Status");
-
             if (active == "off")
             {
-                await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
+                await ReplyAsync(embed: embed.Build());
             }
             else
             {
                 var channel = discordSQL.getOptions("BotChannel");
                 await Context.Client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
-                    .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync($"{userInfo.Username}#{userInfo.Discriminator}");
+                    .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync(embed: embed.Build());
             }
-		}
+
+            await ReplyAsync(embed: embed.Build());
+        }
 
         [Command("avatar")]
         [Summary
@@ -494,6 +546,13 @@ namespace FoxxiBot.DiscordBot
                 await Context.Client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
                     .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync($"The avatar for {userInfo.Username}", false, eb.Build());
             }
+        }
+
+        [Command("anilist")]
+        [RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
+        public async Task AniListSync(SocketGuildUser user = null)
+        {
+            
         }
 
         [Command("purge", RunMode = RunMode.Async)]

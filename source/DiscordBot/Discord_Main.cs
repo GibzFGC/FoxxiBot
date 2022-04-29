@@ -126,7 +126,7 @@ namespace FoxxiBot.DiscordBot
                     break;
             }
 
-            Class.Bot_Functions.WriteColour($"{DateTime.Now,-19}: {Config.TwitchBotName} [| Discord] - {message.Message}", ConsoleColor.Magenta);
+            Class.Bot_Functions.WriteColour($"{DateTime.Now,-19}: {Config.TwitchBotName} [| Discord] - {message.Exception} {message.Message}", ConsoleColor.Magenta);
             return Task.CompletedTask;
         }
 
