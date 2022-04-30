@@ -98,8 +98,9 @@ namespace FoxxiBot.TwitchBot
             // Start Live Check Timer
             liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
-            // Start OAuth Timer
-            oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+            // Start OAuth Timer -- every 3 hours, 30 mins
+            oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
+            //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
         }
 
         private void pointsUpdate(object state)
@@ -212,7 +213,6 @@ namespace FoxxiBot.TwitchBot
             Config.TwitchClientOAuth = bot_authToken.AccessToken;
             Config.TwitchClientRefresh = bot_authToken.RefreshToken;
 
-
             // Get New Auth Token
             var broadcast_authToken = api.Auth.RefreshAuthTokenAsync(Config.TwitchMC_ClientRefresh, Config.TwitchClientSecret).GetAwaiter().GetResult();
             Config.TwitchMC_ClientOAuth = broadcast_authToken.AccessToken;
@@ -226,7 +226,7 @@ namespace FoxxiBot.TwitchBot
         private static void OauthCallback(object state)
         {
             // Announce OAuth Check
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - OAuth Check");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Renewing Bot / Broadcaster Authentication", ConsoleColor.Blue);
 
             // Check Twitch Tokens
             refreshBotOauth();
@@ -257,7 +257,7 @@ namespace FoxxiBot.TwitchBot
             }
 
             pubsub.SendTopics(Config.TwitchMC_ClientOAuth);
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - PubSub Connected");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Service Connected (PubSub)", ConsoleColor.Blue);
         }
 
         private void Client_OnRaidNotification(object sender, OnRaidNotificationArgs e)

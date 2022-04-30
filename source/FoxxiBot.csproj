@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="ddxgt50g.qk2~" />
+    <None Remove="DiscordBot\Commands\Images\Discord_Memes.cs~RF106b442.TMP" />
   </ItemGroup>
 
   <ItemGroup>
