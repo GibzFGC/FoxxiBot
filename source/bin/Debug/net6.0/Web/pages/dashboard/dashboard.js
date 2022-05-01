@@ -64,7 +64,7 @@ var twitch = window.setInterval(function() {
         var output = date.getDate() + "\\" +  (date.getMonth()+1) + "\\" + date.getFullYear();
 
         // Final List Send
-        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=event&type=Follower&views=0&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> ' + response["data"][follow_list].fromName +'<span class="float-right">'+ output +'</span></span></li>';
+        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=event&type=Follower&views=0&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> <a style="color: #fff;" target="_blank" href="https://www.twitch.tv/'+ response["data"][follow_list].fromName +'">' + response["data"][follow_list].fromName +'</a><span class="float-right">'+ output +'</span></span></li>';
       }
 
   })
