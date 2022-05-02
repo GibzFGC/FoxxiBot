@@ -30,7 +30,7 @@ namespace FoxxiBot.DiscordBot.Commands.Images
         {
             // ~anime
             [Command]
-            public async Task DefaultPrefix()
+            public async Task AnimeAsync()
             {
 
                 // Get a random Array value
@@ -73,8 +73,7 @@ namespace FoxxiBot.DiscordBot.Commands.Images
 
             // ~anime get <tags>
             [Command("get")]
-            [RequireUserPermission(Discord.GuildPermission.Administrator)]
-            public async Task SetPrefix([Remainder] string tags)
+            public async Task GetAnime([Remainder] string tags)
             {
 
                 // Get HTTP Data
