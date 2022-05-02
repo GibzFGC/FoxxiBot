@@ -24,12 +24,12 @@ $result = $PDO->query("SELECT * FROM gb_tournament_players");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><?= _TOURNAMENT_PLAYER_LIST ?></h1>
+            <h1>Tournament Player Listing</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
-              <li class="breadcrumb-item active"><?= _TOURNAMENT_PLAYER_LIST ?></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Tournament Player Listing</li>
             </ol>
           </div>
         </div>
@@ -45,17 +45,17 @@ $result = $PDO->query("SELECT * FROM gb_tournament_players");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><?= _TOURNAMENT_ROSTER ?></h3>
+                <h3 class="card-title">Here is your Tournament Player Roster.</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th><?= _NAME ?></th>
-                    <th><?= _TAG ?></th>
-                    <th><?= _COUNTRY ?></th>
-                    <th><?= _ACTIONS ?></th>
+                    <th>Name</th>
+                    <th>Tag</th>
+                    <th>Country</th>
+                    <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -69,7 +69,7 @@ $result = $PDO->query("SELECT * FROM gb_tournament_players");
                     <td>". $row["tag"] ."</td>
                     <td>". $row["country"] ." (". $row["country_code"] .")</td>
                     <td>
-                      <a onclick=\"return confirm('". _TOURNAMENT_DELETE_PLAYER ."');\" href=\"$gfw[site_url]/index.php?p=tournament&a=funcs&v=delete_player&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
+                      <a onclick=\"return confirm('Are you sure you want to delete this player?');\" href=\"$gfw[site_url]/index.php?p=tournament&a=funcs&v=delete_player&id=$row[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
                     </td>
                   </tr>
               ";
