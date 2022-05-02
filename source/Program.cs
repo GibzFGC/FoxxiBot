@@ -54,6 +54,9 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
+            // Set Application Title
+            Console.Title = "FoxxiBot v1.0.2 Alpha - Revision 1 :: Started @ " + DateTime.Now.ToString("F");
+
             // Set Application Encoding
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
