@@ -71,13 +71,13 @@ foreach($result as $row)
           </li>
 
           <?php if ($options["tournament_features"] == "on") { ?>
-          <li class="li_header"><?= _TOURNAMENT_FEAT ?></li>
+          <li class="li_header">TOURNAMENT FEATURES</li>
 
           <li class="nav-item">
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              <?= _TOURNAMENT_SCORE ?>
+                Scoreboard
               </p>
             </a>
           </li>
@@ -86,7 +86,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=top8" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              <?= _TOURNAMENT_TOP ?>
+                Top 8
               </p>
             </a>
           </li> 
@@ -95,7 +95,7 @@ foreach($result as $row)
             <a href="<?php print $gfw["site_url"]; ?>/index.php?p=tournament&a=players" class="nav-link">
               <i class="nav-icon fas fa-award"></i>
               <p>
-              <?= _TOURNAMENT_PLAYER ?>
+                Player Management
               </p>
             </a>
           </li>
