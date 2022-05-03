@@ -10,22 +10,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
-using FoxxiBot.Settings;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Data.SQLite;
-using TwitchLib.Api.Auth;
-using TwitchLib.Api.Core.Exceptions;
-using TwitchLib.Api.Core.Enums;
-using TwitchLib.Api.Core.Interfaces;
-using System.Data.SqlClient;
 using FoxxiBot.SQLite;
 using FoxxiBot.TwitchBot;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace FoxxiBot
 {
@@ -34,7 +26,7 @@ namespace FoxxiBot
 
         // Set the Scopes for Twitch
         private static List<string> botScopes = new List<string> { "chat:read", "whispers:read", "whispers:edit", "chat:edit", "channel:moderate", "channel:manage:broadcast", "channel:read:redemptions", "channel:read:subscriptions" };
-        private static List<string>broadcastScopes = new List<string> { "channel:manage:broadcast", "channel:edit:commercial", "channel:moderate", "channel:read:redemptions", "channel:read:subscriptions", "chat:read", "whispers:read" };
+        private static List<string> broadcastScopes = new List<string> { "channel:manage:broadcast", "channel:edit:commercial", "channel:moderate", "channel:read:redemptions", "channel:read:subscriptions", "chat:read", "whispers:read" };
 
         static void Server()
         {
@@ -76,14 +68,15 @@ namespace FoxxiBot
             {
                 // Confirm DB File Found
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Database file found. Checking for Updates...]", ConsoleColor.Yellow);
-                
+
                 // Update the Tables & Default Data
                 Class.Bot_Functions functions = new Class.Bot_Functions();
                 functions.CreateTables().GetAwaiter().GetResult();
 
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Bot Starting...]", ConsoleColor.Yellow);
                 Console.WriteLine("");
-            } else
+            }
+            else
             {
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - No Database file found. Creating now...]", ConsoleColor.Yellow);
 
@@ -314,7 +307,7 @@ namespace FoxxiBot
             Config.TwitchClientUser = bot_user.Login;
             Config.TwitchClientOAuth = bot_refresh.AccessToken;
             Config.TwitchClientRefresh = bot_refresh.RefreshToken;
-            
+
             Config.TwitchMC_Id = broadcast_user.Id;
             Config.TwitchMC_ClientOAuth = broadcast_refresh.AccessToken;
             Config.TwitchMC_ClientRefresh = broadcast_refresh.RefreshToken;
@@ -353,7 +346,8 @@ namespace FoxxiBot
             Console.WriteLine("");
 
             // Start Twitch Bot
-            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null) {
+            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+            {
                 Twitch_Main bot = new Twitch_Main();
             }
             else
@@ -366,7 +360,8 @@ namespace FoxxiBot
             {
                 DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
                 Discord.MainAsync().GetAwaiter().GetResult();
-            } else
+            }
+            else
             {
                 Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
             }

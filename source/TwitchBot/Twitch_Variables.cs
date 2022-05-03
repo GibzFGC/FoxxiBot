@@ -77,8 +77,8 @@ namespace FoxxiBot.TwitchBot
 
             if (new_string.Contains("{title}"))
             {
-               var data = Twitch_GetData.getTitle().GetAwaiter().GetResult();
-               new_string = new_string.Replace("{title}", data.ToString());
+                var data = Twitch_GetData.getTitle().GetAwaiter().GetResult();
+                new_string = new_string.Replace("{title}", data.ToString());
             }
 
             if (new_string.Contains("{user}"))
@@ -91,9 +91,11 @@ namespace FoxxiBot.TwitchBot
             {
                 var data = Twitch_GetData.getUpTime().GetAwaiter().GetResult();
 
-                if (data != null) {
+                if (data != null)
+                {
                     new_string = new_string.Replace("{uptime}", data.ToString());
-                } else
+                }
+                else
                 {
                     new_string = new_string.Replace("{uptime}", "Offline");
                 }

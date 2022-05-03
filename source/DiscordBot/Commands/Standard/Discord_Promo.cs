@@ -10,10 +10,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Discord.Commands;
 using System;
 using System.Data.SQLite;
 using System.Threading.Tasks;
-using Discord.Commands;
 
 namespace FoxxiBot.DiscordBot.Commands.Standard
 {

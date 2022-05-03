@@ -10,11 +10,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Discord;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Commands;
 
 namespace FoxxiBot.DiscordBot.Commands.System
 {

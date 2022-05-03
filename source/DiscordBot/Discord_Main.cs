@@ -15,11 +15,9 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -177,15 +175,15 @@ namespace FoxxiBot.DiscordBot
                 // If it's a SQLite / Created Command or a Plugin, the following kicks in
                 // split into args
                 var discordMsg = msg.Content.Split(" ");
-                
+
                 using var con = new SQLiteConnection(cs);
                 con.Open();
-                
+
                 string stm = "SELECT * FROM gb_discord_commands WHERE name = '" + discordMsg[0].Substring(1) + "' AND active = 1";
-                
+
                 using var cmd = new SQLiteCommand(stm, con);
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
-                
+
                 if (rdr.HasRows == true)
                 {
 
@@ -259,7 +257,7 @@ namespace FoxxiBot.DiscordBot
                     Discord_Jint plugin = new Discord_Jint();
                     plugin.ExecPlugin(client, context, arg, msg);
                 }
-                
+
                 con.Close();
 
             }
@@ -348,7 +346,7 @@ namespace FoxxiBot.DiscordBot
                 var role_id = Convert.ToUInt64(discordSQL.getOptions("AutoRole"));
                 await user.AddRoleAsync(role_id);
             }
-            
+
         }
 
         private async Task Server_UserLeft(SocketGuild guild, SocketUser user)
@@ -406,7 +404,8 @@ namespace FoxxiBot.DiscordBot
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("StreamChannel_Status");
 
-            if (active == "on") {
+            if (active == "on")
+            {
 
                 // create twitch api instance
                 var api = new TwitchAPI();
@@ -427,7 +426,7 @@ namespace FoxxiBot.DiscordBot
                         var data = await api.Helix.Streams.GetStreamsAsync(userLogins: new List<string> { rdr["username"].ToString() });
                         if (rdr["live"].ToString() == "0")
                         {
-                            
+
                             if (data.Streams.Length >= 1)
                             {
                                 // Define Discord Context

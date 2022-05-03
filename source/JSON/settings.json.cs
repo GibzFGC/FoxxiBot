@@ -10,12 +10,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace FoxxiBot.Settings
 {
     public class Settings
@@ -30,7 +24,7 @@ namespace FoxxiBot.Settings
         public string TwitchClientID { get; set; }
         public string TwitchClientSecret { get; set; }
         public string TwitchClientRedirect { get; set; }
-        public string TwitchClientChannel{ get; set; }
+        public string TwitchClientChannel { get; set; }
 
         // Twitch Bot Account Info
         public string TwitchClientUser { get; set; }

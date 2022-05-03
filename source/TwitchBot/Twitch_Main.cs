@@ -11,16 +11,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Data.SQLite;
+using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Models;
-
 using TwitchLib.PubSub;
-using System.Data.SQLite;
-using System.Threading;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -109,7 +108,8 @@ namespace FoxxiBot.TwitchBot
             SQLite.botSQL botSQL = new SQLite.botSQL();
 
             // If Points System Active
-            if (botSQL.pointOptions("points_active") == "on") {
+            if (botSQL.pointOptions("points_active") == "on")
+            {
 
                 // Give Points if Live
                 if (streamStatus == true)
@@ -240,7 +240,7 @@ namespace FoxxiBot.TwitchBot
             }
             else
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName +$" - { e.Response.Error}");
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + $" - { e.Response.Error}");
             }
         }
 
@@ -251,7 +251,8 @@ namespace FoxxiBot.TwitchBot
             pubsub.ListenToWhispers(Config.TwitchMC_Id);
 
             // If Twitch Affiliate / Partner, access Bits and Channel Point Directives
-            if (twitchSQL.getOptions("Partner_Status") == "on") {
+            if (twitchSQL.getOptions("Partner_Status") == "on")
+            {
                 pubsub.ListenToBitsEventsV2(Config.TwitchMC_Id);
                 pubsub.ListenToChannelPoints(Config.TwitchMC_Id);
             }
@@ -268,7 +269,7 @@ namespace FoxxiBot.TwitchBot
             // Convert variables if used
             if (raid_message.Contains("{user}"))
             {
-                raid_message = raid_message.Replace("{user}",e.RaidNotification.DisplayName.ToString());
+                raid_message = raid_message.Replace("{user}", e.RaidNotification.DisplayName.ToString());
             }
 
             if (raid_message.Contains("{count}"))
@@ -369,7 +370,7 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnLog(object sender, OnLogArgs e)
         {
-           Class.Bot_Functions.WriteColour($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}", ConsoleColor.Blue);
+            Class.Bot_Functions.WriteColour($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}", ConsoleColor.Blue);
         }
 
         private void Client_OnConnected(object sender, OnConnectedArgs e)
@@ -411,7 +412,7 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(result);
                     return;
                 }
-            
+
             }
 
             //// == User Commands == ////

@@ -11,12 +11,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace FoxxiBot.WebServer
 {
@@ -30,7 +28,7 @@ namespace FoxxiBot.WebServer
         {
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            { 
+            {
                 phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries/php-8.1.1/php-cgi.exe";
             }
 

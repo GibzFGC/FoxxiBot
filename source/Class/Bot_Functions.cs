@@ -12,11 +12,8 @@
 
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -33,7 +30,7 @@ namespace FoxxiBot.Class
             SQLiteTransaction this_transaction;
 
             con.Open();
-            
+
             using var cmd = new SQLiteCommand(con);
 
             // Start a local transaction
@@ -379,7 +376,7 @@ namespace FoxxiBot.Class
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
-            
+
             return Task.CompletedTask;
         }
 

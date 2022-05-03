@@ -11,10 +11,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -39,7 +35,7 @@ namespace FoxxiBot.TwitchBot
 
             if (e.Command.ArgumentsAsList.Count > 0)
             {
-                
+
                 int n;
                 int points = Convert.ToInt32(Twitch_GetData.userPoints(e.Command.ChatMessage.Username));
 
@@ -163,7 +159,7 @@ namespace FoxxiBot.TwitchBot
 
             }
 
-                return null;
+            return null;
         }
 
     }

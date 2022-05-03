@@ -10,13 +10,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using TwitchLib.Api;
-using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
+using System.Threading.Tasks;
+using TwitchLib.Api;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -31,9 +30,10 @@ namespace FoxxiBot.TwitchBot
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
             var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
-            if (data.Streams.Length == 0) {
+            if (data.Streams.Length == 0)
+            {
                 // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Offline");
-                
+
                 SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
                 discordSQL.updateOptions("stream_status", "0");
 
@@ -187,7 +187,7 @@ namespace FoxxiBot.TwitchBot
             try
             {
                 var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
-                
+
                 DateTime current_time = DateTime.Now;
                 DateTime user_time = DateTime.Parse(data.Streams[0].StartedAt.ToString());
 
@@ -211,7 +211,7 @@ namespace FoxxiBot.TwitchBot
             var user = await api.Helix.Users.GetUsersAsync(null, logins: new List<string> { userId }, Config.TwitchClientOAuth);
 
             var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
-            return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: "+ channel.Data[0].GameName  + " @ http://twitch.tv/" + user.Users[0].Login;
+            return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: " + channel.Data[0].GameName + " @ http://twitch.tv/" + user.Users[0].Login;
         }
 
         public static string userPoints(string userId)
