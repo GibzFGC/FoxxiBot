@@ -26,7 +26,7 @@ namespace FoxxiBot.DiscordBot.Commands.Images
 
         [Group("anime")]
         [Summary("Returns a random anime image from the server")]
-        public class PrefixModule : ModuleBase<SocketCommandContext>
+        public class AnimeModule : ModuleBase<SocketCommandContext>
         {
             // ~anime
             [Command]
