@@ -50,6 +50,13 @@ namespace FoxxiBot.DiscordBot.Commands.Images
             {
                 var result = response.Content.ReadAsStringAsync().Result;
 
+                // If no Images Found
+                if (result.Length == 0)
+                {
+                    await ReplyAsync($"Sorry, something went wrong. Please try again!");
+                    return;
+                }
+
                 // Get number of items
                 JObject o = JObject.Parse(result);
                 int count = o["data"].Count();

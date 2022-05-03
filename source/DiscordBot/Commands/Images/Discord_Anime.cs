@@ -49,6 +49,13 @@ namespace FoxxiBot.DiscordBot.Commands.Images
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
 
+                    // If no Images Found
+                    if (result.Length == 0)
+                    {
+                        await ReplyAsync($"Sorry, something went wrong. Please try again!");
+                        return;
+                    }
+
                     // Get number of items
                     JArray o = JArray.Parse(result);
                     int count = o.Count;
@@ -88,11 +95,18 @@ namespace FoxxiBot.DiscordBot.Commands.Images
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
 
+                    // If no Tags / Images Found
+                    if (result.Length == 0)
+                    {
+                        await ReplyAsync($"Sorry, no images for {tags} were found");
+                        return;
+                    }
+
                     // Get number of items
                     JArray o = JArray.Parse(result);
                     int count = o.Count;
 
-                    // Ger random from JSON Count
+                    // Get random from JSON Count
                     Random json_rnd = new Random();
                     int selected = json_rnd.Next(count);
 
@@ -110,6 +124,6 @@ namespace FoxxiBot.DiscordBot.Commands.Images
 
             }
         }
-        
+
     }
 }
