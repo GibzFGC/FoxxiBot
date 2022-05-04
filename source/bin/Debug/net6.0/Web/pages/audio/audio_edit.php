@@ -89,14 +89,14 @@ foreach($data as $edit)
                   <div class="form-group">
                   <label><?= _ACTIVE ?></label>
                   <select class="form-control select2" id="soundActive" name="soundActive" style="width: 100%;">
-                  <?php if ($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED><?= _NO ?></option>";
-                      print "<option value=\"1\"><?= _YES ?></option>";
+                  <?php if($edit["active"] == 0) {
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED><?= _YES ?></option>";
-                      print "<option value=\"0\"><?= _NO ?></option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
-                  ?>
+                    ?>
                   </select>
                 </div>
 
