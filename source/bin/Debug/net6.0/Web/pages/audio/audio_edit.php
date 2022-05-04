@@ -128,7 +128,7 @@ foreach($data as $edit)
                 <div class="card-body">
 
                   <div class="form-group">
-                    <?= _AUDIO_INFO ?>
+                    <?= _AUDIO_INFO_TEXT ?>
                   </div>
 
                 </div>
