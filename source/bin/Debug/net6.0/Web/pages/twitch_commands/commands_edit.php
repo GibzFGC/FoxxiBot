@@ -43,7 +43,7 @@ foreach($data as $edit)
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
-              <li class="breadcrumb-item"><?= _COMMANDS ?></li>
+              <li class="breadcrumb-item"><?= _TWITCH_CMD_MNGMNT ?></li>
               <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
