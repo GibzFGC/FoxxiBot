@@ -28,7 +28,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"><?= _TWITCH_CMD_MNGMNT ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
               <li class="breadcrumb-item active"><?= _TWITCH_CMD_MNGMNT ?></li>
             </ol>
           </div>
