@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DiscordBot\Commands\Games\" />
     <Folder Include="DiscordBot\Commands\Tests\" />
   </ItemGroup>
 

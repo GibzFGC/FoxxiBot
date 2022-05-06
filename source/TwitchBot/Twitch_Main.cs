@@ -491,11 +491,6 @@ namespace FoxxiBot.TwitchBot
                 return;
             }
 
-            if (e.Command.CommandText == "test")
-            {
-                Discord_AutoLiveMessage();
-            }
-
             //// == Twitter Commands == ////
             ///
             // Tweet Handler
