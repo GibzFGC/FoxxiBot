@@ -21,12 +21,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0"><?= _DASHBOARD ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _DASHBOARD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -45,8 +45,8 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <div class="card card-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-primary">
-                  <h3 id="dashboard_displayname" class="widget-user-username">Loading...</h3>
-                  <h5 class="widget-user-desc">BROADCASTER</h5>
+                  <h3 id="dashboard_displayname" class="widget-user-username"><?= _LOADING ?></h3>
+                  <h5 class="widget-user-desc"><?= _BROADCASTER ?></h5>
                 </div>
 
                 <a target="_blank" href="https://www.twitch.tv/<?php print $gfw["Twitch_BroadcasterChannel"]; ?>">
@@ -59,7 +59,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   <div class="row">
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
-                        <h5 id="stream_status" class="description-header">Loading...</h5>
+                        <h5 id="stream_status" class="description-header"><?= _LOADING ?></h5>
                         <span class="description-text">STREAM</span>
                       </div>
                       <!-- /.description-block -->
@@ -67,16 +67,16 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     <!-- /.col -->
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
-                        <h5 id="total_follows" class="description-header">Loading...</h5>
-                        <span class="description-text">FOLLOWS</span>
+                        <h5 id="total_follows" class="description-header"><?= _LOADING ?></h5>
+                        <span class="description-text"><?= _FOLLOWS ?></span>
                       </div>
                       <!-- /.description-block -->
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-4">
                       <div class="description-block">
-                        <h5 id="total_views" class="description-header">Loading...</h5>
-                        <span class="description-text">VIEWS</span>
+                        <h5 id="total_views" class="description-header"><?= _LOADING ?></h5>
+                        <span class="description-text"><?= _VIEWS ?></span>
                       </div>
                       <!-- /.description-block -->
                     </div>
@@ -95,31 +95,31 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header bg-primary">
                 <!-- /.widget-user-image -->
-                <h3 class="user-username">Twitch Data</h3>
-                <h5 class="user-desc">(There might be a slight delay...)</h5>
+                <h3 class="user-username"><?= _TWITCH_DATA ?></h3>
+                <h5 class="user-desc"><?= _TWITCH_DATA_DELAY ?></h5>
               </div>
               <div class="card-footer p-0">
                 <ul class="nav flex-column">
                   <li class="nav-item">
                     <span class="nav-link">
-                      Title: <span id="stream_title" class="float-right">Loading...</span>
+                      <?= _TITLE ?>: <span id="stream_title" class="float-right"><?= _LOADING ?></span>
                     </span>
                   </li>
                   <li class="nav-item">
                     <span class="nav-link">
-                      Game: <span id="stream_game" class="float-right">Loading...</span>
-                    </span>
-                  </li>
-
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      Viewer(s): <span id="stream_viewers" class="float-right">Loading...</span>
+                      <?= _GAME ?>: <span id="stream_game" class="float-right"><?= _LOADING ?></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">
-                      Uptime: <span id="stream_uptime" class="float-right">Loading...</span>
+                      <?= _VIEWERS ?>: <span id="stream_viewers" class="float-right"><?= _LOADING ?></span>
+                    </span>
+                  </li>
+
+                  <li class="nav-item">
+                    <span class="nav-link">
+                      <?= _UPTIME ?>: <span id="stream_uptime" class="float-right"><?= _LOADING ?></span>
                     </span>
                   </li>
                   
@@ -149,11 +149,11 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header">
                 <!-- /.widget-user-image -->
-                <h3 style="margin-top: 5px; margin-left: 5px; padding: 5px;" class="user-username">Latest Followers</h3>
+                <h3 style="margin-top: 5px; margin-left: 5px; padding: 5px;" class="user-username"><?= _FOLLOWS_LATEST ?></h3>
               </div>
               <div class="card-footer p-0">
                 <ul id="follower_list" class="nav flex-column">                  
-                  Loading...
+                <?= _LOADING ?>
                 </ul>
               </div>
             </div>
@@ -167,7 +167,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header">
                 <!-- /.widget-user-image -->
-                <h3 style="margin-top: 5px; margin-left: 5px; padding: 5px;" class="user-username">Latest Events</h3>
+                <h3 style="margin-top: 5px; margin-left: 5px; padding: 5px;" class="user-username"><?= _EVENTS_LATEST ?></h3>
               </div>
               <div class="card-footer p-0">
                 <ul class="nav flex-column">
@@ -178,8 +178,8 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   {
                     print '
                     <li class="nav-item">
-                      <span class="nav-link"><a style="margin-right: 10px;" href="'. $gfw['site_url'] .'/index.php?p=notifications&a=funcs&v=event&type='. $n_row["type"] .'&name='. $n_row["user"] .'&views='. $n_row["viewers"] .'" class="btn btn-primary btn-sm">Play</a>'.$n_row["type"] .': '. $n_row["user"] .'
-                        <span class="float-right">'. $n_row["viewers"] .' viewer(s)</span>
+                      <span class="nav-link"><a style="margin-right: 10px;" href="'. $gfw['site_url'] .'/index.php?p=notifications&a=funcs&v=event&type='. $n_row["type"] .'&name='. $n_row["user"] .'&views='. $n_row["viewers"] .'" class="btn btn-primary btn-sm">'._PLAY.'</a>'.$n_row["type"] .': <a style="color: #fff;" target="_blank" href="https://www.twitch.tv/'. $n_row["user"] .'">'. $n_row["user"] .'</a>
+                        <span class="float-right">'. $n_row["viewers"] .' '._VIEWERS.'</span>
                       </span>
                     </li>
                     ';

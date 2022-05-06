@@ -10,22 +10,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
-using FoxxiBot.Settings;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Data.SQLite;
-using TwitchLib.Api.Auth;
-using TwitchLib.Api.Core.Exceptions;
-using TwitchLib.Api.Core.Enums;
-using TwitchLib.Api.Core.Interfaces;
-using System.Data.SqlClient;
 using FoxxiBot.SQLite;
 using FoxxiBot.TwitchBot;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace FoxxiBot
 {
@@ -34,7 +26,7 @@ namespace FoxxiBot
 
         // Set the Scopes for Twitch
         private static List<string> botScopes = new List<string> { "chat:read", "whispers:read", "whispers:edit", "chat:edit", "channel:moderate", "channel:manage:broadcast", "channel:read:redemptions", "channel:read:subscriptions" };
-        private static List<string>broadcastScopes = new List<string> { "channel:manage:broadcast", "channel:edit:commercial", "channel:moderate", "channel:read:redemptions", "channel:read:subscriptions", "chat:read", "whispers:read" };
+        private static List<string> broadcastScopes = new List<string> { "channel:manage:broadcast", "channel:edit:commercial", "channel:moderate", "channel:read:redemptions", "channel:read:subscriptions", "chat:read", "whispers:read" };
 
         static void Server()
         {
@@ -54,8 +46,14 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
+            // Set Application Title
+            Console.Title = "FoxxiBot v1.0.2 Alpha - Revision 1 :: Started @ " + DateTime.Now.ToString("F");
+
             // Set Application Encoding
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            // Check Folder / File integrity
+            Class.Bot_Integrity Bot_Intrgrity = new Class.Bot_Integrity();
 
             // If Plugins SQLite doesn't exist
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db"))
@@ -68,17 +66,19 @@ namespace FoxxiBot
             // If Bot SQLite doesn't exist
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db"))
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Database file found. Checking for Updates...");
-                
+                // Confirm DB File Found
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Database file found. Checking for Updates...]", ConsoleColor.Yellow);
+
                 // Update the Tables & Default Data
                 Class.Bot_Functions functions = new Class.Bot_Functions();
                 functions.CreateTables().GetAwaiter().GetResult();
 
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Bot Starting...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Bot Starting...]", ConsoleColor.Yellow);
                 Console.WriteLine("");
-            } else
+            }
+            else
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - No Database file found. Creating now~");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - No Database file found. Creating now...]", ConsoleColor.Yellow);
 
                 // Create the Database File
                 var dbFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db");
@@ -88,7 +88,7 @@ namespace FoxxiBot
                 Class.Bot_Functions functions = new Class.Bot_Functions();
                 functions.CreateTables().GetAwaiter().GetResult();
 
-                Console.WriteLine("Database file created. Continuing Launch...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [Database file created] - Continuing Launch...", ConsoleColor.Yellow);
                 Console.WriteLine("");
             }
 
@@ -100,7 +100,7 @@ namespace FoxxiBot
                 File.Copy(@AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db", @AppDomain.CurrentDomain.BaseDirectory + "Data/Backups/bot.backup." + localDate.ToString("ddMMyyyy.HHmmss") + ".db", true);
 
                 // Initialize Twitch
-                Console.WriteLine("Welcome to FoxxiBot. Loading your Settings...");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Loading your Settings...", ConsoleColor.Cyan);
                 Console.WriteLine("");
 
                 // Load from JSON
@@ -128,6 +128,8 @@ namespace FoxxiBot
                     Config.DiscordServerId = (string)o["DiscordServerId"];
                     Config.DiscordToken = (string)o["DiscordToken"];
                     Config.DiscordPrefix = (string)o["DiscordPrefix"];
+
+                    Config.BotLang = (string)o["BotLang"];
 
                     // Close the File
                     reader.Close();
@@ -172,7 +174,7 @@ namespace FoxxiBot
             }
             else
             {
-                Console.WriteLine("Welcome to FoxxiBot. Let's Get Started");
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Let's Get Started", ConsoleColor.Cyan);
                 Console.WriteLine("");
                 Console.WriteLine("Let's set up the Bot's permissions to the Bot's Account on Twitch");
                 Console.WriteLine("");
@@ -220,6 +222,7 @@ namespace FoxxiBot
                 Config.TwitchClientChannel = TwitchClientChannel;
                 Config.DiscordToken = DiscordToken;
                 Config.DiscordPrefix = DiscordPrefix;
+                Config.BotLang = "English";
 
                 // Begin the Verification / OAuth Phase
                 MainAsync().GetAwaiter().GetResult();
@@ -304,7 +307,7 @@ namespace FoxxiBot
             Config.TwitchClientUser = bot_user.Login;
             Config.TwitchClientOAuth = bot_refresh.AccessToken;
             Config.TwitchClientRefresh = bot_refresh.RefreshToken;
-            
+
             Config.TwitchMC_Id = broadcast_user.Id;
             Config.TwitchMC_ClientOAuth = broadcast_refresh.AccessToken;
             Config.TwitchMC_ClientRefresh = broadcast_refresh.RefreshToken;
@@ -331,6 +334,8 @@ namespace FoxxiBot
             objSettings.DiscordToken = Config.DiscordToken;
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
+            objSettings.BotLang = Config.BotLang;
+
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
 
@@ -341,7 +346,8 @@ namespace FoxxiBot
             Console.WriteLine("");
 
             // Start Twitch Bot
-            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null) {
+            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+            {
                 Twitch_Main bot = new Twitch_Main();
             }
             else
@@ -354,7 +360,8 @@ namespace FoxxiBot
             {
                 DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
                 Discord.MainAsync().GetAwaiter().GetResult();
-            } else
+            }
+            else
             {
                 Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
             }

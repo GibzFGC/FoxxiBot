@@ -11,12 +11,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace FoxxiBot.WebServer
 {
@@ -30,7 +28,7 @@ namespace FoxxiBot.WebServer
         {
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            { 
+            {
                 phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries/php-8.1.1/php-cgi.exe";
             }
 
@@ -55,6 +53,8 @@ namespace FoxxiBot.WebServer
 
             process.StartInfo.EnvironmentVariables.Clear();
 
+            process.StartInfo.EnvironmentVariables.Add("OS_VERSION", RuntimeInformation.OSDescription);
+            process.StartInfo.EnvironmentVariables.Add("DOTNET_VERSION", Environment.Version.ToString());
             process.StartInfo.EnvironmentVariables.Add("HTTP_REQUEST", httpListenerContext.Request.HttpMethod.ToString() + " " + httpListenerContext.Request.Url.PathAndQuery + " " + "HTTP/1.1");
             process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", "http://localhost:" + Config.WebserverPort);
             process.StartInfo.EnvironmentVariables.Add("GATEWAY_INTERFACE", "CGI/1.1");

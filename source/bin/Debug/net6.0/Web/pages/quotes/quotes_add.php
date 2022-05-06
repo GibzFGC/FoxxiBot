@@ -21,13 +21,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Adding a Quote</h1>
+            <h1 class="m-0"><?= _QUOTES_ADDING ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Quotes</li>
-              <li class="breadcrumb-item active">Add</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _QUOTES ?></li>
+              <li class="breadcrumb-item active"><?= _ADD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,24 +46,24 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quote Information</h3>
+                <h3 class="card-title"><?= _QUOTE_INFORMATION ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="quoteName">Name</label>
-                    <input type="text" class="form-control" id="quoteName" name="quoteName" placeholder="Enter Quote Name" required>
+                    <label for="quoteName"><?= _NAME ?></label>
+                    <input type="text" class="form-control" id="quoteName" name="quoteName" placeholder="<?= _QUOTE_NAME_PLACE ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="quoteText">Text</label>
-                    <textarea class="form-control" rows="3" id="quoteText" name="quoteText" placeholder="Enter the bot response here..." required></textarea>
+                    <textarea class="form-control" rows="3" id="quoteText" name="quoteText" placeholder="<?= _QUOTE_TEXT_PLACE ?>" required></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label for="quoteSource">Source</label>
-                    <input type="text" class="form-control" id="quoteSource" name="quoteSource" placeholder="Enter Quote Source">
+                    <label for="quoteSource"><?= _QUOTE_SOURCE ?></label>
+                    <input type="text" class="form-control" id="quoteSource" name="quoteSource" placeholder="<?= _QUOTE_SOURCE_PLACE ?>">
                   </div>
 
               </div>
@@ -71,7 +71,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Quote</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _QUOTE_CREATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -86,17 +86,14 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quote System</h3>
+                <h3 class="card-title"><?= _QUOTE_SYSTEM ?></h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
                   <div class="form-group">
-                    The quote system lets you take some of your favourite media (game, movie, etc) quotes or even awesome stream moments and save them as quotes for
-                    people to call upon and see<br /><br />
-                    Viewers will be able to do "!quote" for a random one or if you have a name set, it will work like "!quote name".<br /><br />
-                    This will work on both Discord and Twitch so make sure to add some awesome stuff!
+                    <?= _QUOTE_SYSTEM_INFO ?>
                   </div>
 
                 </div>

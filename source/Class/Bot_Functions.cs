@@ -12,11 +12,9 @@
 
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FoxxiBot.Class
@@ -32,7 +30,7 @@ namespace FoxxiBot.Class
             SQLiteTransaction this_transaction;
 
             con.Open();
-            
+
             using var cmd = new SQLiteCommand(con);
 
             // Start a local transaction
@@ -60,6 +58,15 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AutoRole_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel_Status','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_discord_options (parameter, value) VALUES('AnnounceChannel_Text','Now live on Twitch @ {link}! Come join me~')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_plugins (name TEXT, author TEXT, date TEXT, command TEXT UNIQUE, file TEXT, active INTEGER)";
@@ -365,10 +372,35 @@ namespace FoxxiBot.Class
             objSettings.DiscordToken = Config.DiscordToken;
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
+            objSettings.BotLang = Config.BotLang;
+
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
-            
+
             return Task.CompletedTask;
         }
+
+        // Change the Colour of ConsoleText
+        public static void WriteColour(string message, ConsoleColor color)
+        {
+            var pieces = Regex.Split(message, @"(\[[^\]]*\])");
+
+            for (int i = 0; i < pieces.Length; i++)
+            {
+                string piece = pieces[i];
+
+                if (piece.StartsWith("[") && piece.EndsWith("]"))
+                {
+                    Console.ForegroundColor = color;
+                    piece = piece.Substring(1, piece.Length - 2);
+                }
+
+                Console.Write(piece);
+                Console.ResetColor();
+            }
+
+            Console.WriteLine();
+        }
+
     }
 }

@@ -32,12 +32,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Giveaway Management</h1>
+            <h1><?= _GIVEAWAY_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Giveaway Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _GIVEAWAY_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -53,7 +53,7 @@ foreach($result as $row)
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here is Giveaway Information.</h3>
+                <h3 class="card-title"><?= _GIVEAWAY_INFO ?></h3>
 
                 <div class="card-tools">
                   <h3 style="margin-top: 4px;" class="card-title">Status:&nbsp;&nbsp;</h3>
@@ -75,26 +75,26 @@ foreach($result as $row)
                   <div class="col-md-4">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 3px;" class="card-title">Giveaway Details</h3>
+                        <h3 style="margin-top: 3px;" class="card-title"><?= _GIVEAWAY_DETAILS ?></h3>
                       </div>
                     
                       <div class="card-body">
 
                         <div class="form-group">
-                          <label for="giveawayName">Giveaway Name</label>
+                          <label for="giveawayName"><?= _GIVEAWAY_NAME ?></label>
 
                           <?php
                           if (isset($options["Giveaway_Name"])) {
-                            print "<input type=\"text\" class=\"form-control\" id=\"giveawayName\" name=\"giveawayName\" placeholder=\"Enter Giveaway Name\" value=\"$options[Giveaway_Name]\" required>";
+                            print "<input type=\"text\" class=\"form-control\" id=\"giveawayName\" name=\"giveawayName\" placeholder=\"". _GIVEAWAY_PLACE_ENTER ."\" value=\"$options[Giveaway_Name]\" required>";
                           } else {
-                            print "<input type=\"text\" class=\"form-control\" id=\"giveawayName\" name=\"giveawayName\" placeholder=\"Enter Giveaway Name\" required>";
+                            print "<input type=\"text\" class=\"form-control\" id=\"giveawayName\" name=\"giveawayName\" placeholder=\"". _GIVEAWAY_PLACE_ENTER ."\" required>";
                           }
                           ?>
                         </div>
                       
                         <div class="form-group">
                           <label for="giveawayDetails">Giveaway Details</label>
-                          <textarea class="form-control" rows="3"  id="giveawayDetails" name="giveawayDetails" placeholder="Ex. Want to win a bla, then type !giveaway to be added to the draw" required><?php if (isset($options["Giveaway_Details"])) { print $options["Giveaway_Details"]; } ?></textarea>
+                          <textarea class="form-control" rows="3"  id="giveawayDetails" name="giveawayDetails" placeholder="<?= _GIVEAWAY_PLACE_INFO ?>" required><?php if (isset($options["Giveaway_Details"])) { print $options["Giveaway_Details"]; } ?></textarea>
                         </div>
 
                       </div>
@@ -102,8 +102,8 @@ foreach($result as $row)
 
                       <div class="card-footer">
                         <input type="hidden" id="submit" name="submit" value="submit">
-                        <a onclick="return confirm('Are you sure you want to clear all data, including giveaway participants?');" href="<?php print $gfw["site_url"]; ?>/index.php?p=giveaway&a=funcs&v=clear" class="btn btn-danger">Clear all Data</a>
-                        <button style="float: right;" type="submit" class="btn btn-primary">Save Data</button>
+                        <a onclick="return confirm('<?= _GIVEAWAY_CLEAR ?>');" href="<?php print $gfw["site_url"]; ?>/index.php?p=giveaway&a=funcs&v=clear" class="btn btn-danger"><?= _CLEAR_DATA ?></a>
+                        <button style="float: right;" type="submit" class="btn btn-primary"><?= _SAVE_DATA ?></button>
                       </div>
 
                     </div>
@@ -113,13 +113,13 @@ foreach($result as $row)
                   <div class="col-md-4">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 3px;" class="card-title">Giveaway Options</h3>
+                        <h3 style="margin-top: 3px;" class="card-title"><?= _GIVEAWAY_OPTIONS ?></h3>
                       </div>
                     
                       <div class="card-body">
 
                         <div class="form-group">
-                          <label>Allow Twitch Staff to Join Giveaway?</label>
+                          <label><?= _GIVEAWAY_OPTIONS_STAFF ?></label>
                           <div style="float: right;">
                           <?php
                           if (!isset($options["Giveaway_AllowTwitchStaff"]) || $options["Giveaway_AllowTwitchStaff"] == "off") {
@@ -132,7 +132,7 @@ foreach($result as $row)
                         </div>
 
                         <div class="form-group">
-                          <label>Allow Mods to Join Giveaway?</label>
+                          <label><?= _GIVEAWAY_OPTIONS_MODS ?></label>
                           <div style="float: right;">
                           <?php
                           if (!isset($options["Giveaway_AllowMods"]) || $options["Giveaway_AllowMods"] == "off") {
@@ -149,7 +149,7 @@ foreach($result as $row)
 
                       <div class="card-footer">
                         <input type="hidden" id="submit" name="submit" value="submit">
-                        <button style="float: right;" type="submit" class="btn btn-primary">Save Data</button>
+                        <button style="float: right;" type="submit" class="btn btn-primary"><?= _SAVE_DATA ?></button>
                       </div>
 
                     </div>
@@ -159,7 +159,7 @@ foreach($result as $row)
                   <div class="col-md-4">
                     <div class="card">
                       <div class="card-header">
-                        <h3 style="margin-top: 3px;" class="card-title">Giveaway Results</h3>
+                        <h3 style="margin-top: 3px;" class="card-title"><?= _GIVEAWAY_RESULTS ?></h3>
 
                         <div class="card-tools">
                           <?php
@@ -168,7 +168,7 @@ foreach($result as $row)
                           $gw_result->execute(); 
                           $number_of_rows = $gw_result->fetchColumn(); 
                           ?>
-                          <h3 style="margin-top: 3px;" class="card-title"><?php echo $number_of_rows; ?> Participants</h3>
+                          <h3 style="margin-top: 3px;" class="card-title"><?php echo $number_of_rows; ?> <?= _GIVEAWAY_PARTICIPANTS ?></h3>
                         </div>
                       </div>
                     
@@ -185,19 +185,19 @@ foreach($result as $row)
                           if (!empty($winner)) {
                           print '
                           <li class="nav-item">
-                            <span class="nav-link">User ID:
+                            <span class="nav-link">'. _USERID . ':
                               <span class="float-right">'. $winner->data[0]->uid .'</span>
                             </span>
                           </li>
 
                           <li class="nav-item">
-                            <span class="nav-link">Display Name:
+                            <span class="nav-link">' . _DISPLAYNAME . ':
                               <span class="float-right">'. $winner->data[0]->display_name .'</span>
                             </span>
                           </li>
 
                           <li class="nav-item">
-                            <span class="nav-link">Username:
+                            <span class="nav-link">' . _USERNAME . ':
                               <span class="float-right">'. $winner->data[0]->username .'</span>
                             </span>
                           </li>
@@ -206,7 +206,7 @@ foreach($result as $row)
                             print '
                             <li class="nav-item">
                             <span class="nav-link">System:
-                              <span class="float-right">No giveaway winner yet</span>
+                              <span class="float-right">' . _GIVEAWAY_NO_WINNER . '</span>
                             </span>
                           </li>
                           ';

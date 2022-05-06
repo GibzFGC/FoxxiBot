@@ -11,16 +11,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Data.SQLite;
+using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Models;
-
 using TwitchLib.PubSub;
-using System.Data.SQLite;
-using System.Threading;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -98,8 +97,9 @@ namespace FoxxiBot.TwitchBot
             // Start Live Check Timer
             liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
-            // Start OAuth Timer
-            oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+            // Start OAuth Timer -- every 3 hours, 30 mins
+            oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
+            //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
         }
 
         private void pointsUpdate(object state)
@@ -108,7 +108,8 @@ namespace FoxxiBot.TwitchBot
             SQLite.botSQL botSQL = new SQLite.botSQL();
 
             // If Points System Active
-            if (botSQL.pointOptions("points_active") == "on") {
+            if (botSQL.pointOptions("points_active") == "on")
+            {
 
                 // Give Points if Live
                 if (streamStatus == true)
@@ -212,7 +213,6 @@ namespace FoxxiBot.TwitchBot
             Config.TwitchClientOAuth = bot_authToken.AccessToken;
             Config.TwitchClientRefresh = bot_authToken.RefreshToken;
 
-
             // Get New Auth Token
             var broadcast_authToken = api.Auth.RefreshAuthTokenAsync(Config.TwitchMC_ClientRefresh, Config.TwitchClientSecret).GetAwaiter().GetResult();
             Config.TwitchMC_ClientOAuth = broadcast_authToken.AccessToken;
@@ -226,7 +226,7 @@ namespace FoxxiBot.TwitchBot
         private static void OauthCallback(object state)
         {
             // Announce OAuth Check
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - OAuth Check");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Renewing Bot / Broadcaster Authentication", ConsoleColor.Blue);
 
             // Check Twitch Tokens
             refreshBotOauth();
@@ -240,7 +240,7 @@ namespace FoxxiBot.TwitchBot
             }
             else
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName +$" - { e.Response.Error}");
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + $" - { e.Response.Error}");
             }
         }
 
@@ -251,13 +251,14 @@ namespace FoxxiBot.TwitchBot
             pubsub.ListenToWhispers(Config.TwitchMC_Id);
 
             // If Twitch Affiliate / Partner, access Bits and Channel Point Directives
-            if (twitchSQL.getOptions("Partner_Status") == "on") {
+            if (twitchSQL.getOptions("Partner_Status") == "on")
+            {
                 pubsub.ListenToBitsEventsV2(Config.TwitchMC_Id);
                 pubsub.ListenToChannelPoints(Config.TwitchMC_Id);
             }
 
             pubsub.SendTopics(Config.TwitchMC_ClientOAuth);
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - PubSub Connected");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Service Connected (PubSub)", ConsoleColor.Blue);
         }
 
         private void Client_OnRaidNotification(object sender, OnRaidNotificationArgs e)
@@ -268,7 +269,7 @@ namespace FoxxiBot.TwitchBot
             // Convert variables if used
             if (raid_message.Contains("{user}"))
             {
-                raid_message = raid_message.Replace("{user}",e.RaidNotification.DisplayName.ToString());
+                raid_message = raid_message.Replace("{user}", e.RaidNotification.DisplayName.ToString());
             }
 
             if (raid_message.Contains("{count}"))
@@ -310,6 +311,9 @@ namespace FoxxiBot.TwitchBot
         {
             // Tell the Streamer that the Steam is now Live
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
+
+            // If Discord Auto Stream Message is Active, Send a Notification
+            Discord_AutoLiveMessage();
 
             // If Twitter & LiveStatement is Active, Send a Tweet
             SQLite.botSQL botSQL = new SQLite.botSQL();
@@ -366,7 +370,7 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnLog(object sender, OnLogArgs e)
         {
-            Console.WriteLine($"{e.DateTime.ToString()}: {Config.TwitchBotName} - {e.Data}");
+            Class.Bot_Functions.WriteColour($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}", ConsoleColor.Blue);
         }
 
         private void Client_OnConnected(object sender, OnConnectedArgs e)
@@ -408,7 +412,7 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(result);
                     return;
                 }
-            
+
             }
 
             //// == User Commands == ////
@@ -485,6 +489,11 @@ namespace FoxxiBot.TwitchBot
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
                 return;
+            }
+
+            if (e.Command.CommandText == "test")
+            {
+                Discord_AutoLiveMessage();
             }
 
             //// == Twitter Commands == ////
@@ -775,6 +784,44 @@ namespace FoxxiBot.TwitchBot
             deleteCmd.ExecuteNonQuery();
 
             con.Close();
+        }
+
+        private void Discord_AutoLiveMessage()
+        {
+
+            SQLite.discordSQL discordSQL = new SQLite.discordSQL();
+            var active = discordSQL.getOptions("AnnounceChannel_Status");
+
+            if (active == "on")
+            {
+                DiscordBot.Discord_Main discord = new DiscordBot.Discord_Main();
+                var channelId = Convert.ToUInt64(discordSQL.getOptions("AnnounceChannel"));
+
+                // Get Auto Stream Discord Message
+                var discord_message = discordSQL.getOptions("AnnounceChannel_Text");
+
+                // Convert variables if used
+                if (discord_message.Contains("{game}"))
+                {
+                    var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
+                    discord_message = discord_message.Replace("{game}", data.ToString());
+                }
+
+                if (discord_message.Contains("{link}"))
+                {
+                    discord_message = discord_message.Replace("{link}", "https://www.twitch.tv/" + Config.TwitchClientChannel);
+                }
+
+                if (discord_message.Contains("{title}"))
+                {
+                    var data = Twitch_GetData.getTitle().GetAwaiter().GetResult();
+                    discord_message = discord_message.Replace("{game}", data.ToString());
+                }
+
+                // Send Discord Message
+                DiscordBot.Discord_Main.SendDiscordMessage(channelId, discord_message);
+            }
+
         }
 
     }

@@ -21,13 +21,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Adding a Timer</h1>
+            <h1 class="m-0"><?= _TIMERS_ADDING ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Timers</li>
-              <li class="breadcrumb-item active">Add</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _TIMERS ?></li>
+              <li class="breadcrumb-item active"><?= _ADD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,26 +46,26 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Timer Information</h3>
+                <h3 class="card-title"><?= _TIMERS_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="timerName">Name</label>
-                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="Enter Timer Name" required>
+                    <label for="timerName"><?= _NAME ?></label>
+                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="<?= _TIMERS_NAME_PLACE ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="timerResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="Enter the response text here..." required></textarea>
+                    <label for="timerResponse"><?= _RESPONSE ?></label>
+                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="<?= _TIMERS_RESPONSE_PLACE ?>" required></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label>Active</label>
+                    <label><?= _ACTIVE ?></label>
                     <select class="form-control select2" id="timerActive" name="timerActive" style="width: 100%;">
-                      <option value="1" SELECTED>Yes</option>';
-                      <option value="0">No</option>';
+                      <option value="1" SELECTED><?= _YES ?></option>';
+                      <option value="0"><?= _NO ?></option>';
                     </select>
                   </div>
 
@@ -74,7 +74,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Timer</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TIMERS_CREATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -89,7 +89,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Information</h3>
+                <h3 class="card-title"><?= _TIMERS_USEFUL ?></h3>
               </div>
               <!-- /.card-header -->
               
@@ -97,10 +97,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <p>
-                      Timers are used to show a message every 15 minutes (set to prevent spam). Using these is useful for showing social media
-                      for example.
-                      <br /><br />
-                      We don't recommend using too many timers so that you don't over-bombard your viewers as they can chase them off.
+                      <?= _TIMERS_USEFUL_TEXT ?>
                     </p>
                   </div>
 

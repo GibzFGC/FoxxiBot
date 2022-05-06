@@ -62,15 +62,15 @@ foreach($result as $row)
               <div class="card-header">
                 <h3 class="card-title">Player 1 Settings</h3>
 
-                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" data-toggle="modal" data-target="#editModal1" id="tournament-edit-player"> Edit a Player</button>
-                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" data-toggle="modal" data-target="#addModal" id="tournament-add-player"> Add a Player</button>
+                <button style="float:right;" type="button" class="btn btn-info btn-v-sm" data-toggle="modal" data-target="#editModal1" id="tournament-edit-player"> Add a Player</button>
+                <button style="float:right;" type="button" class="btn btn-success btn-v-sm btn-spacer" data-toggle="modal" data-target="#addModal" id="tournament-add-player"> Edit a Player</button>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
                     <label for="p1_tag">Group Tag / Organisation</label>
-                    <input type="text" class="form-control" id="p1_tag" name="p1_tag" placeholder="Enter the Players Tag / Organisation" value="<?php print $options["p1Tag"]; ?>">
+                    <input type="text" class="form-control" id="p1_tag" name="p1_tag" placeholder="Group Tag / Organisation" value="<?php print $options["p1Tag"]; ?>">
                   </div>
 
                   <div class="form-group">

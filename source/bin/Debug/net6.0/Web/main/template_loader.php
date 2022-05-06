@@ -17,6 +17,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 // Initial Checks
 if ($gfw["site_active"] == true) {
 
+    include("modules/locales/lang_".$gfw["bot_language"].".php");
     include("main/templates/top.php");
     include("main/templates/sidebar.php");
 
@@ -117,7 +118,7 @@ if ($gfw["site_active"] == true) {
     include("main/templates/footer.php");
 
     if ($gfw["site_active"] == false) {
-        print "Down for Maintenance";
+        print _MAINTENANCE;
     }
 
 /* End of file */

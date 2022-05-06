@@ -10,15 +10,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LinqToTwitter;
-using LinqToTwitter.Common;
 using LinqToTwitter.OAuth;
+using System;
+using System.Threading.Tasks;
 
 namespace FoxxiBot.Services.Twitter
 {
@@ -48,7 +43,7 @@ namespace FoxxiBot.Services.Twitter
 
         public async Task sendTweet(string status)
         {
-            
+
             // Check if twitter active
             if (botSQL.getOptions("twitter_features") == "on")
             {
@@ -62,7 +57,7 @@ namespace FoxxiBot.Services.Twitter
                 {
                     Console.WriteLine(e.Message);
                 }
-            
+
             }
 
         }

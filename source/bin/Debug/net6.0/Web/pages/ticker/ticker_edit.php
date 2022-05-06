@@ -26,13 +26,13 @@ foreach($data as $edit)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Editing a Ticker: </h1>
+            <h1 class="m-0"><?= _TICKER_EDIT ?>: </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Ticker</li>
-              <li class="breadcrumb-item active">Edit</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _TICKER ?></li>
+              <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -51,30 +51,30 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ticker Information</h3>
+                <h3 class="card-title"><?= _TICKER_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="tickerName">Name</label>
-                    <input type="text" class="form-control" id="tickerName" name="tickerName" placeholder="Enter Ticker Name" value="<?php print $edit["name"]; ?>" required>
+                    <label for="tickerName"><?= _TICKER_NAME ?></label>
+                    <input type="text" class="form-control" id="tickerName" name="tickerName" placeholder="<?= _TICKER_NAME_PLACE ?>" value="<?php print $edit["name"]; ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="tickerResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="tickerResponse" name="tickerResponse" placeholder="Enter the response text here..." required><?php print $edit["response"]; ?></textarea>
+                    <textarea class="form-control" rows="3"  id="tickerResponse" name="tickerResponse" placeholder="<?= _TICKER_RESPONSE_PLACE ?>" required><?php print $edit["response"]; ?></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label>Active</label>
+                    <label><?= _ACTIVE ?></label>
                     <select class="form-control select2" id="tickerActive" name="tickerActive" style="width: 100%;">
                     <?php if($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED>No</option>";
-                      print "<option value=\"1\">Yes</option>";
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED>Yes</option>";
-                      print "<option value=\"0\">No</option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
                     ?>
                     </select>
@@ -86,7 +86,7 @@ foreach($data as $edit)
               <div class="card-footer">
               <input type="hidden" id="ttickerID" name="tickerID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Update Ticker</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TICKER_UPDATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -101,7 +101,7 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Information</h3>
+                <h3 class="card-title"><?= _TICKER_USEFUL ?></h3>
               </div>
               <!-- /.card-header -->
               
@@ -109,11 +109,7 @@ foreach($data as $edit)
 
                   <div class="form-group">
                     <p>
-                      Tickers are for showing information in a consice box that scrolls with information you set.
-                      <br /><br />
-                      This could be useful for showing social media info, events / meet-ups / game announcement, etc.
-                      <br /><br />
-                      You can also set which are active at any time, meaning they can be re-used or recycled (edited).
+                      <?= _TICKER_USEFUL_TEXT ?>
                     </p>
                   </div>
 

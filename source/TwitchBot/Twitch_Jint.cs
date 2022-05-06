@@ -10,14 +10,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Jint;
 using Jint.Runtime.Interop;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Data.SQLite;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -92,7 +92,7 @@ namespace FoxxiBot.TwitchBot
             // Check if Plugin
             using var con = new SQLiteConnection(cs);
             con.Open();
-            
+
             var command = twitch_msg.Split(" ");
             string plugin_stm = "SELECT * FROM gb_twitch_plugins WHERE command = '" + command[0] + "' AND active = 1 LIMIT 1";
 

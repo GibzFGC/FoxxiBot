@@ -29,12 +29,12 @@ foreach($result as $row)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Bot Settings</h1>
+            <h1 class="m-0"><?= _BOT_SETTINGS ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Bot Settings</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _BOT_SETTINGS ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,13 +54,36 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Main Bot Settings</h3>
+                <h3 class="card-title"><?= _BOT_SETTINGS_MAIN ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
+                <div class="form-group">
+                    <label><?= _BOT_SETTINGS_LANG ?></label>
+                    <select class="form-control select2" id="bot_lang" name="bot_lang" style="width: 100%;">
+
+                    <?php
+                    foreach (new DirectoryIterator("modules/locales/") as $file) {
+                      if ($file->isFile()) {
+                          $file_no_lang = str_replace("lang_", "", $file->getFilename());
+                          $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_no_lang);
+
+                          if ($gfw['bot_language'] == $withoutExt) {
+                            print "<option value='". $withoutExt ."' SELECTED>" . $withoutExt . "</option>";
+                          } else {
+                            print "<option value='". $withoutExt ."'>" . $withoutExt . "</option>";
+                          }
+                      }
+                    }
+                    ?>
+
+                    </select>
+                    
+                  </div>
+
                   <div class="form-group">
-                    <label>Debug Mode <small>(requires a restart)</small></label>
+                    <label><?= _BOT_SETTINGS_DEBUG ?> <small><?= _BOT_SETTINGS_DEBUG_RESTART ?></small></label>
                       <div style="float: right;">
                       <?php
                       if ($options["debug"] == "off") {
@@ -85,14 +108,14 @@ foreach($result as $row)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Side Menu Settings</h3>
+                <h3 class="card-title"><?= _BOT_SETTINGS_SIDEBAR ?></h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
 
                 <div class="form-group">
-                  <label>Show Discord Menu</label>
+                  <label><?= _BOT_SETTINGS_DISCORD_MENU ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["discord_features"] == "off") {
@@ -105,7 +128,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Show Twitch Menu</label>
+                  <label><?= _BOT_SETTINGS_TWITCH_MENU ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["twitch_features"] == "off") {
@@ -118,7 +141,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Show Twitter Menu</label>
+                  <label><?= _BOT_SETTINGS_TWITTER_MENU ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["twitter_features"] == "off") {
@@ -131,7 +154,7 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label>Show Tournament Menu</label>
+                  <label><?= _BOT_SETTINGS_TOURN_MENU ?></label>
                     <div style="float: right;">
                     <?php
                     if ($options["tournament_features"] == "off") {
@@ -160,8 +183,8 @@ foreach($result as $row)
               
                 <div class="card-footer">
                   <input type="hidden" id="submit" name="submit" value="submit">
-                    <p style="float: left; margin-top:15px;">Optional settings for Discord if you plan to use that side of the bot.</p>
-                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary">Save Settings</button>
+                    <p style="float: left; margin-top:15px;"><?= _BOT_SETTINGS_DISCORD_OPT ?></p>
+                    <button style="float: right; margin-top:9px;" type="submit" class="btn btn-primary"><?= _SAVE_SETTINGS ?></button>
                   </div>
                 </div>
 

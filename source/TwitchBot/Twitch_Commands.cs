@@ -12,8 +12,6 @@
 
 using System;
 using System.Data.SQLite;
-using System.Runtime.InteropServices;
-using System.Media;
 
 namespace FoxxiBot.TwitchBot
 {

@@ -21,13 +21,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Adding a Command</h1>
+            <h1 class="m-0"><?= _ADD_CMD ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Discord Commands</li>
-              <li class="breadcrumb-item active">Add</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _DISCORD_CMDS ?></li>
+              <li class="breadcrumb-item active"><?= _ADD ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,24 +46,24 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Command Information</h3>
+                <h3 class="card-title"><?= _DISCORD_CMD_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="commandName">Name (without prefix)</label>
-                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" required>
+                    <label for="commandName"><?= _DISCORD_CMD_NAME ?></label>
+                    <input type="text" class="form-control" id="commandName" name="commandName" placeholder="<?= _DISCORD_CMD_ENTER ?>" required>
                     <span style="margin-top: 10px; background: #FF0000; padding: 10px; visibility: hidden;" id="commandNameError"></span>
                   </div>
 
                   <div class="form-group">
-                    <label for="commandResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="Enter the response text here..." required></textarea>
+                    <label for="commandResponse"><?= _RESPONSE ?></label>
+                    <textarea class="form-control" rows="3"  id="commandResponse" name="commandResponse" placeholder="<?= _DISCORD_CMD_RESPONSE ?>" required></textarea>
                   </div>
 
                   <div class="form-group">
-                  <label>Permission</label>
+                  <label><?= _PERMISSION ?></label>
                   <select class="form-control select2" multiple id="commandPermissions" name="commandPermissions[]" style="width: 100%;">
 
                   <?php
@@ -81,10 +81,10 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                 </div>
 
                 <div class="form-group">
-                  <label>Active</label>
+                  <label><?= _ACTIVE ?></label>
                   <select class="form-control select2" id="commandActive" name="commandActive" style="width: 100%;">
-                    <option value="1" SELECTED>Yes</option>';
-                    <option value="0">No</option>';
+                    <option value="1" SELECTED><?= _YES ?></option>';
+                    <option value="0"><?= _NO ?></option>';
                   </select>
                 </div>
 
@@ -93,7 +93,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
               <div class="card-footer">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Command</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _CREATE_CMD ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -108,19 +108,14 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Variables</h3>
+                <h3 class="card-title"><?= _DISCORD_USEFUL_VARS ?></h3>
               </div>
               <!-- /.card-header -->
               
                 <div class="card-body">
 
                   <div class="form-group">
-                    Here is a list of internal variables:<br /><br />
-                    {1} - A custom argument for whatever you want<br />
-                    {2} - A custom argument for whatever you want (only works if the first is set)<br />
-                    {8ball} - Creates an 8ball with responses<br />
-                    {dice} - rolls a dice and returns a random value<br />
-                    {sender} - returns the command users display name<br />
+                    <?= _DISCORD_VARS_INFO ?>
                   </div>
 
                 </div>

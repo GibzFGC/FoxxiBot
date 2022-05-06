@@ -22,12 +22,12 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Version Information</h1>
+            <h1><?= _VERSION_INFO ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Version Information</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _VERSION_INFO ?></li>
             </ol>
           </div>
         </div>
@@ -59,19 +59,19 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Operating Version:
-                      <span class="float-right"><?php print PHP_OS; ?></span>
+                      <span class="float-right"><?php print getenv('OS_VERSION'); ?></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">.NET Framework Version:
-                      <span class="float-right">6.0</span>
+                      <span class="float-right"><?php print getenv('DOTNET_VERSION'); ?></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">PHP Version:
-                      <span class="float-right">8.1.1</span>
+                      <span class="float-right"><?php print phpversion(); ?></span>
                     </span>
                   </li>
 
@@ -114,7 +114,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Discord .NET Version &amp; License:
-                      <span class="float-right">3.5.0 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
+                      <span class="float-right">3.6.1 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
                        | <a target="_blank" href="https://github.com/discord-net/Discord.Net">Github</a></span>
                     </span>
                   </li>

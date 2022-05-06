@@ -10,12 +10,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FoxxiBot
@@ -38,7 +35,7 @@ namespace FoxxiBot
 
         private async Task<Models.Authorization> onRequest()
         {
-            while(listener.IsListening)
+            while (listener.IsListening)
             {
                 var ctx = await listener.GetContextAsync();
                 var req = ctx.Request;

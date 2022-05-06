@@ -53,6 +53,23 @@ if ($_REQUEST["v"] == "save") {
     $stmt->execute();
 
     // Check if value null
+    if (!isset($_POST["autoannouncechannel_status"])) {
+        $_POST["autoannouncechannel_status"] = "off";
+    }
+
+    $stmt->bindValue(':parameter', "AnnounceChannel_Status");
+    $stmt->bindValue(':value', $_POST["autoannouncechannel_status"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "AnnounceChannel");
+    $stmt->bindValue(':value', $_POST["discord_setannouncechannel"]);
+    $stmt->execute();
+
+    $stmt->bindValue(':parameter', "AnnounceChannel_Text");
+    $stmt->bindValue(':value', $_POST["announcechannel_text"]);
+    $stmt->execute();
+
+    // Check if value null
     if (!isset($_POST["streamchannel_status"])) {
         $_POST["streamchannel_status"] = "off";
     }

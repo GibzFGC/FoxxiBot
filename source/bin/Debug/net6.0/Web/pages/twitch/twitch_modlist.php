@@ -25,12 +25,12 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Whitelist / Blacklist Management</h1>
+            <h1><?= _MODERATION_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Whitelist / Blacklist Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _MODERATION_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -48,15 +48,15 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
 
             <div class="card">
               <div class="card-header">
-              <h3 class="card-title">Add a New Definition</h3>
+              <h3 class="card-title"><?= _MODERATION_DEFINITION ?></h3>
               </div>
               <!-- /.card-header -->
 
               <div class="card-body">
 
                   <div class="form-group">
-                    <label for="listName">Word / Text String</label>
-                    <input type="text" class="form-control" id="listName" name="listName" placeholder="Enter a Word or String here">
+                    <label for="listName"><?= _MODERATION_STRING ?></label>
+                    <input type="text" class="form-control" id="listName" name="listName" placeholder="<?= _MODERATION_STRING_PLACE ?>">
                     <span style="margin-top: 10px; background: #FF0000; padding: 10px; visibility: hidden;" id="commandNameError"></span>
                   </div>
 
@@ -69,7 +69,7 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
 
             <div class="card">
               <div class="card-header">
-              <h3 class="card-title">Select a List</h3>
+              <h3 class="card-title"><?= _MODERATION_LIST ?></h3>
               </div>
               <!-- /.card-header -->
 
@@ -77,15 +77,15 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
               <div class="card-body">
 
                 <div class="form-group">
-                    <label>Add to...</label>
+                    <label><?= _MODERATION_ADD ?></label>
                     <select class="form-control select2" id="listType" name="listType" style="width: 100%;">
-                      <option value="1" SELECTED>Whitelist</option>';
-                      <option value="0">Blacklist</option>';
+                      <option value="1" SELECTED><?= _WHITELIST ?></option>';
+                      <option value="0"><?= _BLACKLIST ?></option>';
                     </select>
                   </div>
 
                   <input type="hidden" id="submit" name="submit" value="submit">
-                  <button style="float: right;" type="submit" class="btn btn-sm btn-primary">Add to List</button>
+                  <button style="float: right;" type="submit" class="btn btn-sm btn-primary"><?= _MODERATION_ADD_LIST ?></button>
 
               </div>
               </form>
@@ -106,10 +106,10 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
               <div class="card-header">
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true" style="">Whitelist</a>
+                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true" style=""><?= _WHITELIST ?></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false" style="">Blacklist</a>
+                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false" style=""><?= _BLACKLIST ?></a>
                   </li>
                 </ul>
               </div>
@@ -123,8 +123,8 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
                     <table id="gb_datatable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th style="width: 65%;">Item</th>
-                        <th>Actions</th>
+                        <th style="width: 65%;"><?= _ITEM ?></th>
+                        <th><?= _ACTIONS ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -136,7 +136,7 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
                     <tr>
                       <td>". $w_item["item"] ."</td>
                       <td>
-                      <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=twitch&a=funcs&v=delete&id=$w_item[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                      <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=twitch&a=funcs&v=delete&id=$w_item[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                       </td>
                     </tr>
                 ";
@@ -153,8 +153,8 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
                   <table id="gb_datatable" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th style="width: 65%;">Item</th>
-                        <th>Actions</th>
+                        <th style="width: 65%;"><?= _ITEM ?></th>
+                        <th><?= _ACTIONS ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -166,7 +166,7 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
                     <tr>
                       <td>". $b_item["item"] ."</td>
                       <td>
-                        <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=twitch&a=funcs&v=delete&id=$b_item[id]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                        <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=twitch&a=funcs&v=delete&id=$b_item[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                       </td>
                     </tr>
                 ";

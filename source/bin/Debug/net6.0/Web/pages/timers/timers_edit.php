@@ -26,13 +26,13 @@ foreach($data as $edit)
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Editing a Timer: </h1>
+            <h1 class="m-0"><?= _TIMERS_EDIT ?> </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Timers</li>
-              <li class="breadcrumb-item active">Edit</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _TICKER ?></li>
+              <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -51,30 +51,30 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Timer Information</h3>
+                <h3 class="card-title"><?= _TIMERS_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="timerName">Name</label>
-                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="Enter Timer Name" value="<?php print $edit["name"]; ?>" required>
+                    <label for="timerName"><?= _NAME ?></label>
+                    <input type="text" class="form-control" id="timerName" name="timerName" placeholder="<?= _TIMERS_NAME_PLACE ?>" value="<?php print $edit["name"]; ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="timerResponse">Response</label>
-                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="Enter the response text here..." required><?php print $edit["response"]; ?></textarea>
+                    <label for="timerResponse"><?= _RESPONSE ?></label>
+                    <textarea class="form-control" rows="3"  id="timerResponse" name="timerResponse" placeholder="<?= _TIMERS_RESPONSE_PLACE ?>" required><?php print $edit["response"]; ?></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label>Active</label>
+                    <label><?= _ACTIVE ?></label>
                     <select class="form-control select2" id="timerActive" name="timerActive" style="width: 100%;">
                     <?php if($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED>No</option>";
-                      print "<option value=\"1\">Yes</option>";
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED>Yes</option>";
-                      print "<option value=\"0\">No</option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
                     ?>
                     </select>
@@ -86,7 +86,7 @@ foreach($data as $edit)
               <div class="card-footer">
               <input type="hidden" id="timerID" name="timerID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Update Timer</button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TIMERS_UPDATE ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -101,7 +101,7 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Information</h3>
+                <h3 class="card-title"><?= _TIMERS_USEFUL ?></h3>
               </div>
               <!-- /.card-header -->
               
@@ -109,10 +109,7 @@ foreach($data as $edit)
 
                   <div class="form-group">
                     <p>
-                      Timers are used to show a message every 15 minutes (set to prevent spam). Using these is useful for showing social media
-                      for example.
-                      <br /><br />
-                      We don't recommend using too many timers so that you don't over-bombard your viewers as they can chase them off.
+                      <?= _TIMERS_USEFUL_TEXT ?>
                     </p>
                   </div>
 

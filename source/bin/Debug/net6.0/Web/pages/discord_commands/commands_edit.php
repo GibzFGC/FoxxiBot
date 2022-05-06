@@ -30,9 +30,9 @@ foreach($data as $edit)
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Discord Commands</li>
-              <li class="breadcrumb-item active">Edit</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item"><?= _DISCORD_CMDS ?></li>
+              <li class="breadcrumb-item active"><?= _EDIT ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -51,13 +51,13 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Command Information</h3>
+                <h3 class="card-title"><?= _DISCORD_CMD_INFO ?></h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Name (without prefix)</label>
+                    <label for="exampleInputEmail1"><?= _DISCORD_CMD_NAME ?></label>
                     <input type="text" class="form-control" id="commandName" name="commandName" placeholder="Enter Command Name" value="<?php print $edit["name"]; ?>" required>
                   </div>
 
@@ -90,14 +90,14 @@ foreach($data as $edit)
                 </div>
 
                 <div class="form-group">
-                  <label>Active</label>
+                  <label><?= _ACTIVE ?></label>
                   <select class="form-control select" id="commandActive" name="commandActive" style="width: 100%;">
                   <?php if($edit["active"] == 0) {
-                      print "<option value=\"0\" SELECTED>No</option>";
-                      print "<option value=\"1\">Yes</option>";
+                      print "<option value=\"0\" SELECTED>". _NO ."</option>";
+                      print "<option value=\"1\">". _YES ."</option>";
                     } else {
-                      print "<option value=\"1\" SELECTED>Yes</option>";
-                      print "<option value=\"0\">No</option>";
+                      print "<option value=\"1\" SELECTED>". _YES ."</option>";
+                      print "<option value=\"0\">". _NO ."</option>";
                     }
                     ?>
                   </select>
@@ -109,7 +109,7 @@ foreach($data as $edit)
               <div class="card-footer">
               <input type="hidden" id="commandID" name="commandID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="toast_success btn btn-primary">Update Command</button>
+                <button style="float: right;" type="submit" class="toast_success btn btn-primary"><?= _UPDATE_CMD ?></button>
               </div>
             </div>
             <!-- /.card -->
@@ -124,7 +124,7 @@ foreach($data as $edit)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Useful Variables</h3>
+                <h3 class="card-title"><?= _DISCORD_USEFUL_VARS ?></h3>
                 
               </div>
               <!-- /.card-header -->
@@ -132,12 +132,7 @@ foreach($data as $edit)
                 <div class="card-body">
 
                 <div class="form-group">
-                    Here is a list of internal variables:<br /><br />
-                    {1} - A custom argument for whatever you want<br />
-                    {2} - A custom argument for whatever you want (only works if the first is set)<br />
-                    {8ball} - Creates an 8ball with responses<br />
-                    {dice} - rolls a dice and returns a random value<br />
-                    {sender} - returns the command users display name<br />
+                    <?= _DISCORD_VARS_INFO ?>
                   </div>
 
                 </div>

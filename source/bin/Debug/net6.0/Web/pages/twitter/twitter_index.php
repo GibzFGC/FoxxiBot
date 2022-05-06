@@ -24,12 +24,12 @@ $result = $PDO->query("SELECT * FROM gb_twitter_status");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Twitter Status Management</h1>
+            <h1><?= _TWITTER_STATUS_MNGMNT ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Twitter Status Management</li>
+              <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
+              <li class="breadcrumb-item active"><?= _TWITTER_STATUS_MNGMNT ?></li>
             </ol>
           </div>
         </div>
@@ -45,17 +45,17 @@ $result = $PDO->query("SELECT * FROM gb_twitter_status");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Here are your Twitter Live Statuses.</h3>
+                <h3 class="card-title"><?= _TWITTER_STATUS_YOURS ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Game</th>
-                    <th style="width: 45%;">Tweet</th>
-                    <th>Active</th>
-                    <th>Actions</th>
+                    <th><?= _GAME ?></th>
+                    <th style="width: 45%;"><?= _TWEET ?></th>
+                    <th><?=_ACTIVE ?></th>
+                    <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -75,11 +75,11 @@ $result = $PDO->query("SELECT * FROM gb_twitter_status");
 
                     if ($row["game"] != "null") {
               print "
-                      <a onclick=\"return confirm('Are you sure you want to delete this item?');\" href=\"$gfw[site_url]/index.php?p=twitter&a=funcs&v=delete&id=$row[game]\" class=\"btn btn-danger btn-sm\">Delete</a>
+                      <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=twitter&a=funcs&v=delete&id=$row[game]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
               ";
                     } else {
               print "
-                      <a style=\"color: #fff;\" href=\"#\" class=\"btn btn-sm\">Bot Controlled</a>
+                      <a style=\"color: #fff;\" href=\"#\" class=\"btn btn-sm\">". _BOT_CONTROLLED ."</a>
               ";
                     }
 
