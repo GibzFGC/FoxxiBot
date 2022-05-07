@@ -18,6 +18,7 @@ using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
+using TwitchLib.Communication.Events;
 using TwitchLib.Communication.Models;
 using TwitchLib.PubSub;
 
@@ -61,6 +62,7 @@ namespace FoxxiBot.TwitchBot
             client.OnMessageReceived += Client_OnMessageReceived;
             client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
+            client.OnDisconnected += Client_OnDisconnected;
             client.OnIncorrectLogin += Client_OnIncorrectLogin;
             client.OnRaidNotification += Client_OnRaidNotification;
             client.OnUserJoined += Client_UserJoined;
@@ -100,6 +102,13 @@ namespace FoxxiBot.TwitchBot
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+        }
+        private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
+        {
+            client.Connect();
+            Thread.Sleep(5000);
+            client.JoinChannel(Config.TwitchClientChannel);
+            refreshBotOauth();
         }
 
         private void pointsUpdate(object state)
@@ -489,11 +498,6 @@ namespace FoxxiBot.TwitchBot
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
                 return;
-            }
-
-            if (e.Command.CommandText == "test")
-            {
-                Discord_AutoLiveMessage();
             }
 
             //// == Twitter Commands == ////
