@@ -59,6 +59,7 @@ namespace FoxxiBot.TwitchBot
 
             client.OnLog += Client_OnLog;
             client.OnJoinedChannel += Client_OnJoinedChannel;
+            client.OnLeftChannel += Client_OnLeftChannel;
             client.OnMessageReceived += Client_OnMessageReceived;
             client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
@@ -103,12 +104,60 @@ namespace FoxxiBot.TwitchBot
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
         }
+
+        private void Client_OnLeftChannel(object sender, OnLeftChannelArgs e)
+        {
+            client.JoinChannel(Config.TwitchClientChannel);
+        }
+
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
-            client.Connect();
-            Thread.Sleep(5000);
-            client.JoinChannel(Config.TwitchClientChannel);
-            refreshBotOauth();
+
+            if (!client.IsConnected)
+            {
+                Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Connection Lost! Trying to Reconnect...", ConsoleColor.Blue);
+
+                while (!client.IsConnected)
+                {
+
+                    ConnectionCredentials credentials = new ConnectionCredentials(Config.TwitchClientUser, Config.TwitchClientOAuth);
+                    var clientOptions = new ClientOptions
+                    {
+                        MessagesAllowedInPeriod = 750,
+                        ThrottlingPeriod = TimeSpan.FromSeconds(30)
+                    };
+                    WebSocketClient customClient = new WebSocketClient(clientOptions);
+                    client = new TwitchClient(customClient);
+                    client.Initialize(credentials, Config.TwitchClientChannel);
+
+                    pubsub = new TwitchPubSub();
+
+                    client.OnLog += Client_OnLog;
+                    client.OnJoinedChannel += Client_OnJoinedChannel;
+                    client.OnLeftChannel += Client_OnLeftChannel;
+                    client.OnMessageReceived += Client_OnMessageReceived;
+                    client.OnNewSubscriber += Client_OnNewSubscriber;
+                    client.OnConnected += Client_OnConnected;
+                    client.OnDisconnected += Client_OnDisconnected;
+                    client.OnIncorrectLogin += Client_OnIncorrectLogin;
+                    client.OnRaidNotification += Client_OnRaidNotification;
+                    client.OnUserJoined += Client_UserJoined;
+                    client.OnUserLeft += Client_UserLeft;
+
+                    client.OnChatCommandReceived += Client_OnChatCommandReceived;
+
+                    pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
+                    pubsub.OnListenResponse += Pubsub_OnListenResponse;
+                    pubsub.OnStreamUp += Pubsub_OnStreamUp;
+                    pubsub.OnStreamDown += Pubsub_OnStreamDown;
+                    pubsub.OnFollow += PubSub_OnFollow;
+
+                    client.Connect();
+                    pubsub.Connect();
+
+                }
+            }
+
         }
 
         private void pointsUpdate(object state)
