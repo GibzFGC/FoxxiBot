@@ -232,7 +232,7 @@ namespace FoxxiBot.TwitchBot
                     while (rdr.Read())
                     {
                         // Send Message to Twitch
-                        client.SendMessage(Config.TwitchClientChannel, (string)rdr["response"]);
+                        client.SendMessage(Config.TwitchClientChannel, "/announce" + (string)rdr["response"]);
 
                         // Add 1 to current_row
                         current_row = current_row + 1;
@@ -463,11 +463,122 @@ namespace FoxxiBot.TwitchBot
 
             if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
             {
+                // Add a Command (command name | command text | command points cost)
+                if (e.Command.CommandText == "addcom")
+                {
+                    var split = e.Command.ArgumentsAsString.Split("|");
+                    int pointsVal;
+
+                    // Check if a Points value has been given
+                    if (split.Length < 3)
+                    {
+                        pointsVal = 0;
+                    }
+                    else
+                    {
+                        pointsVal = Convert.ToInt32(split[2]);
+                    }
+
+                    // Save the new command to the DB
+                    using var addcom = new SQLiteConnection(cs);
+                    addcom.Open();
+
+                    using var insertCmd = new SQLiteCommand(addcom);
+                    insertCmd.CommandText = "INSERT INTO gb_commands (name, response, points, permission, active) VALUES (@name, @response, @points, @permission, @active)";
+
+                    insertCmd.Parameters.AddWithValue("@name", "!" + split[0].Replace(" ", ""));
+                    insertCmd.Parameters.AddWithValue("@response", split[1]);
+                    insertCmd.Parameters.AddWithValue("@points", pointsVal);
+                    insertCmd.Parameters.AddWithValue("@permission", 0);
+                    insertCmd.Parameters.AddWithValue("@active", 1);
+
+                    insertCmd.Prepare();
+                    insertCmd.ExecuteNonQuery();
+
+                    addcom.Close();
+
+                    // Send message to Twitch Chat
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been added!");
+                }
+
+                // Edit a Command (command name | command text | command points cost)
+                if (e.Command.CommandText == "editcom")
+                {
+                    var split = e.Command.ArgumentsAsString.Split("|");
+                    int pointsVal;
+
+                    // Check if a Points value has been given
+                    if (split.Length < 3)
+                    {
+                        pointsVal = 0;
+                    }
+                    else
+                    {
+                        pointsVal = Convert.ToInt32(split[2]);
+                    }
+
+                    // Save the edited command to the DB
+                    using var editcom = new SQLiteConnection(cs);
+                    editcom.Open();
+
+                    using var updateCmd = new SQLiteCommand(editcom);
+
+                    updateCmd.CommandText = "UPDATE gb_commands SET response = @response, points = @points WHERE name = @name";
+
+                    updateCmd.Parameters.AddWithValue("@name", "!" + split[0].Replace(" ", ""));
+                    updateCmd.Parameters.AddWithValue("@response", split[1]);
+                    updateCmd.Parameters.AddWithValue("@points", pointsVal);
+                    updateCmd.Parameters.AddWithValue("@permission", 0);
+                    updateCmd.Parameters.AddWithValue("@active", 1);
+
+                    updateCmd.Prepare();
+                    updateCmd.ExecuteNonQuery();
+
+                    editcom.Close();
+
+                    // Send message to Twitch Chat
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been updated!");
+                }
+
+                // Delete a Command (command name)
+                if (e.Command.CommandText == "delcom")
+                {
+                    // Delete a Command from the DB
+                    using var delcom = new SQLiteConnection(cs);
+                    delcom.Open();
+
+                    using var deleteCmd = new SQLiteCommand(delcom);
+                    deleteCmd.CommandText = "DELETE FROM gb_commands WHERE name = @name";
+                    deleteCmd.Parameters.AddWithValue("@name", e.Command.ArgumentsAsString);
+
+                    deleteCmd.Prepare();
+                    deleteCmd.ExecuteNonQuery();
+
+                    delcom.Close();
+
+                    // Send message to Twitch Chat
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
+                }
+
                 // Link Permission Handler           
                 if (e.Command.CommandText == "permit")
                 {
                     var result = commands.commandPermitUser(e);
                     SendChatMessage(result);
+                    return;
+                }
+
+                // Test Command
+                if (e.Command.CommandText == "test")
+                {
+                    client.SendMessage(Config.TwitchClientChannel, "/announce " + "Testing");
+                }
+
+                // Link Permission Handler
+                if (e.Command.CommandText == "disconnect")
+                {
+                    SendChatMessage("GibbyAI will now close the Twitch Connection...");
+                    client.Disconnect();
                     return;
                 }
 
