@@ -72,7 +72,7 @@ namespace FoxxiBot.TwitchBot
 
             var data = await api.Helix.Users.GetUsersAsync(ids: new List<string> { user_id });
 
-            DateTime current_time = DateTime.Now;
+            DateTime current_time = DateTime.UtcNow;
             DateTime user_time = DateTime.Parse(data.Users[0].CreatedAt.ToString());
 
             TimeSpan timeDifference = current_time - user_time;
@@ -90,7 +90,7 @@ namespace FoxxiBot.TwitchBot
 
             Console.WriteLine(data.Follows[0].FollowedAt.ToString());
 
-            DateTime current_time = DateTime.Now;
+            DateTime current_time = DateTime.UtcNow;
             DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());
 
             TimeSpan timeDifference = current_time - user_time;
@@ -188,7 +188,7 @@ namespace FoxxiBot.TwitchBot
             {
                 var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
 
-                DateTime current_time = DateTime.Now;
+                DateTime current_time = DateTime.UtcNow;
                 DateTime user_time = DateTime.Parse(data.Streams[0].StartedAt.ToString());
 
                 TimeSpan timeDifference = current_time - user_time;

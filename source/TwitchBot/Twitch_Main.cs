@@ -568,12 +568,6 @@ namespace FoxxiBot.TwitchBot
                     return;
                 }
 
-                // Test Command
-                if (e.Command.CommandText == "test")
-                {
-                    client.SendMessage(Config.TwitchClientChannel, "/announce " + "Testing");
-                }
-
                 // Link Permission Handler
                 if (e.Command.CommandText == "disconnect")
                 {
