@@ -216,6 +216,7 @@ namespace FoxxiBot.TwitchBot
 
         private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+
             // if stream live, let timers play
             if (streamStatus == true)
             {
@@ -232,7 +233,7 @@ namespace FoxxiBot.TwitchBot
                     while (rdr.Read())
                     {
                         // Send Message to Twitch
-                        client.SendMessage(Config.TwitchClientChannel, "/announce" + (string)rdr["response"]);
+                        client.SendMessage(Config.TwitchClientChannel, "/announce " + (string)rdr["response"]);
 
                         // Add 1 to current_row
                         current_row = current_row + 1;
