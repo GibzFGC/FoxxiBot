@@ -14,6 +14,14 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+$options = array();
+
+$result = $PDO->query("SELECT * FROM gb_points_options");
+foreach($result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
+
 if ($_REQUEST["v"] == "save") {
 
     if ($_POST["commandName"] == "so" || $_POST["commandName"] == "quote" || $_POST["commandName"] == "accountage" || $_POST["commandName"] == "followage" || $_POST["commandName"] == "sound" || $_POST["commandName"] == "audio" || $_POST["commandName"] == "play") {
@@ -30,7 +38,13 @@ if ($_REQUEST["v"] == "save") {
         
         $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
-        $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+        
+        if ($options["points_active"] == "off") {
+            $stmt->bindValue(':commandPoints', 0);
+        } else {
+            $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+        }
+        
         $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();
@@ -59,7 +73,13 @@ if ($_REQUEST["v"] == "edit") {
         $stmt->bindValue(':commandID', $_POST["commandID"]);
         $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
-        $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+
+        if ($options["points_active"] == "off") {
+            $stmt->bindValue(':commandPoints', 0);
+        } else {
+            $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+        }
+
         $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
         $stmt->bindValue(':commandActive', $_POST["commandActive"]);
         $stmt->execute();
