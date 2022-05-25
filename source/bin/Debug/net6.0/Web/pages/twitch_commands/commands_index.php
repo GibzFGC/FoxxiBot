@@ -63,8 +63,52 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tbody>
 
                   <tr>
+                    <td>!addcom</td>
+                    <td>Lets the Broadcaster or a Moderator add a command via chat</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!editcom</td>
+                    <td>Lets the Broadcaster or a Moderator edit a command via chat</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>!delcom</td>
+                    <td>Lets the Broadcaster or a Moderator delete a command via chat</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
                     <td>!accountage</td>
                     <td>{user}, your account was created {creation_date}</td>
+                    <td>0</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!deaths</td>
+                    <td>Returns the amount of times the streamer has died (if being used)</td>
                     <td>0</td>
                     <td>Viewer</td>
                     <td>Active</td>
@@ -85,10 +129,65 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   </tr>
 
                   <tr>
+                    <td>!duel</td>
+                    <td>Let's viewers duel each other</td>
+                    <td>0</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!gamble</td>
+                    <td>Let's viewers gamble their bot points (if bot points active)</td>
+                    <td>0</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!giveaway [alias. gw]</td>
+                    <td>Enters a viewer into the giveaway (if active)</td>
+                    <td>0</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!permit</td>
+                    <td>Lets the Broadcaster or a Moderator permit someone to add a link in chat (if Twitch Moderation active)</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!raid</td>
+                    <td>This will return your custom raid message set in "Twitch Settings" and auto-raid the mentioned user</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
                     <td>!so</td>
                     <td>Check out my friend, {user}! they've been playing: {game}</td>
                     <td>0</td>
-                    <td>Viewer</td>
+                    <td>Moderator</td>
                     <td>Active</td>
                     <td>
                       <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
@@ -105,6 +204,17 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                       <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
                     </td>
                   </tr>
+
+                  <tr>
+                    <td>!tweet</td>
+                    <td>Allows the broadcaster to send a tweet from chat (if Twitter is active)</td>
+                    <td>0</td>
+                    <td>Viewer</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>                  
 
 <?php
   foreach($result as $row)

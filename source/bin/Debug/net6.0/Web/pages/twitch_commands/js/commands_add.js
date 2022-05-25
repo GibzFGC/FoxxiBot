@@ -3,7 +3,31 @@ function validityCheck(form) {
     // Check if name is a locked one
     var CommandName = form.commandName.value;
 
-    if (CommandName == "giveaway" || CommandName == "gw" || CommandName == "so" || CommandName == "deathcounter" || CommandName == "audio" || CommandName == "play" || CommandName == "sound" || CommandName == "accountage" || CommandName == "followage") {
+    // List of Bot Controlled Commands
+    const bot_controlled = [
+        'addcom',
+        'editcom',
+        'delcom',
+        'permit',
+        'raid',
+        'disconnect',
+        'accountage',
+        'deaths',
+        'followage',
+        'gw',
+        'giveaway',
+        'so',
+        'shoutout',
+        'sound',
+        'audio',
+        'play',
+        'duel',
+        'gamble',
+        'tweet'
+    ];
+
+    // Check if Command Name Reserved
+    if (bot_controlled.includes(CommandName)) {
         document.getElementById("commandNameError").innerHTML = "The Command Name given is a reserved one the bot uses <a id='commandNameErrorLink' href='#'><img width='12' height='12' src='main/templates/img/close.png' /></a>";
         
         document.getElementById('commandNameErrorLink').addEventListener('click',function(){

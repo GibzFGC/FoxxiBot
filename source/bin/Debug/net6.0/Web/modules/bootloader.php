@@ -23,6 +23,9 @@ require_once("constants.inc.php");
 // Load the Website Function File
 require_once("functions.inc.php");
 
+// Load the Commands Filter File
+require_once("commands_filter.inc.php");
+
 // Check if Website is in Development or Not:
 /* Set via settings.inc.php */
 if ($gfw["in_development"] == true) {
