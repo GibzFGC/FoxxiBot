@@ -237,6 +237,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Joined_Channel','{bot} has arrived, time for an awesome stream!!')";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('On_Raid_Message','We are raiding {user}, make sure to say hello!')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = "INSERT OR IGNORE INTO gb_twitch_options (parameter, value) VALUES('Partner_Status','off')";
             cmd.ExecuteNonQuery();
 

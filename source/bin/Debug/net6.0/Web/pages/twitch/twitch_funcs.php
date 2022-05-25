@@ -146,6 +146,10 @@ if ($_REQUEST["v"] == "settings") {
     $stmt->bindValue(':value', $_POST["joined_channel"]);
     $stmt->execute();
 
+    $stmt->bindValue(':parameter', "On_Raid_Message");
+    $stmt->bindValue(':value', $_POST["on_raid_message"]);
+    $stmt->execute();    
+
     $stmt->bindValue(':parameter', "Follow_Message");
     $stmt->bindValue(':value', $_POST["follow_message"]);
     $stmt->execute();

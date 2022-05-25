@@ -569,10 +569,24 @@ namespace FoxxiBot.TwitchBot
                     return;
                 }
 
+                // Let's Raid!
+                if (e.Command.CommandText == "raid")
+                {
+                    // Convert used variables
+                    Twitch_Variables variables = new Twitch_Variables();
+                    var var_string = variables.convertVariables(e.Command.ChatMessage.Message, twitchSQL.getOptions("On_Raid_Message"), e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
+
+                    // Send On Raid message
+                    SendChatMessage(var_string);
+
+                    // Bot starts the raid process
+                    SendChatMessage("/raid " + e.Command.ArgumentsAsString);
+                }
+
                 // Link Permission Handler
                 if (e.Command.CommandText == "disconnect")
                 {
-                    SendChatMessage("GibbyAI will now close the Twitch Connection...");
+                    SendChatMessage(Config.TwitchBotName + " will now close the Twitch Connection...");
                     client.Disconnect();
                     return;
                 }
