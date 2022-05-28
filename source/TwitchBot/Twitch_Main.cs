@@ -110,6 +110,12 @@ namespace FoxxiBot.TwitchBot
             client.JoinChannel(Config.TwitchClientChannel);
         }
 
+        public void Force_Disconnect()
+        {
+            // Force Discconect in Rare Circumstances
+            client.Reconnect();
+        }
+
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
 
@@ -192,6 +198,10 @@ namespace FoxxiBot.TwitchBot
 
                     // Commit all Data to SQL
                     this_transaction.Commit();
+
+                    // Close all connections
+                    this_transaction.Dispose();
+                    updateUser.Dispose();
                     con.Close();
 
                 }
@@ -258,12 +268,6 @@ namespace FoxxiBot.TwitchBot
 
         private static void refreshBotOauth()
         {
-
-            if (Config.TwitchClientRefresh.Length == 0 || Config.TwitchMC_ClientRefresh.Length == 0)
-            {
-                return;
-            }
-
             var api = new TwitchLib.Api.TwitchAPI();
             api.Settings.ClientId = Config.TwitchClientId;
 
@@ -280,6 +284,9 @@ namespace FoxxiBot.TwitchBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
+
+            // OAuth Check Complete
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Re-Authentication Complete", ConsoleColor.Blue);
         }
 
         private static void OauthCallback(object state)
@@ -500,6 +507,9 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been added!");
+
+                    // Close
+                    return;
                 }
 
                 // Edit a Command (command name | command text | command points cost)
@@ -539,6 +549,9 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been updated!");
+
+                    // Close
+                    return;
                 }
 
                 // Delete a Command (command name)
@@ -559,6 +572,9 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
+                    
+                    // Close
+                    return;
                 }
 
                 // Link Permission Handler           
@@ -581,6 +597,9 @@ namespace FoxxiBot.TwitchBot
 
                     // Bot starts the raid process
                     SendChatMessage("/raid " + e.Command.ArgumentsAsString);
+
+                    // Close
+                    return;
                 }
 
                 // Link Permission Handler
@@ -692,6 +711,9 @@ namespace FoxxiBot.TwitchBot
 
                     twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
                     SendChatMessage("The tweet has been sent!");
+
+                    // Close
+                    return;
                 }
             }
 
@@ -764,6 +786,8 @@ namespace FoxxiBot.TwitchBot
 
             con.Close();
 
+            // Close
+            return;
         }
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
