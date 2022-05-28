@@ -55,6 +55,9 @@ namespace FoxxiBot.DiscordBot
             client.Ready += Client_Ready;
             client.JoinedGuild += Client_JoinedGuild;
 
+            // When the Bot Disconnects
+            client.Disconnected += Client_Disconnected;
+
             // New / Leaving Discord Member
             client.UserJoined += Server_UserJoined;
             client.UserLeft += Server_UserLeft;
@@ -80,6 +83,15 @@ namespace FoxxiBot.DiscordBot
 
             // Wait infinitely so your bot actually stays connected.
             await Task.Delay(Timeout.Infinite);
+        }
+
+        private Task Client_Disconnected(Exception e)
+        {
+            TwitchBot.Twitch_Main twitch = new TwitchBot.Twitch_Main();
+            twitch.Force_Disconnect();
+
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Discord requires a re-connect, the bot Bot will also re-connect to Twitch to prevent issues", ConsoleColor.Blue);
+            return Task.CompletedTask;
         }
 
         // Service Handling (Singletons because only one server usage)

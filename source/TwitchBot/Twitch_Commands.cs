@@ -149,10 +149,6 @@ namespace FoxxiBot.TwitchBot
                 var value = Twitch_GetData.ShoutOut(data).GetAwaiter().GetResult();
                 return value;
             }
-            finally
-            {
-                Console.WriteLine("!so user not found!");
-            }
         }
 
         public string commandSound(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
