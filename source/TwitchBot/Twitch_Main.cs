@@ -110,12 +110,6 @@ namespace FoxxiBot.TwitchBot
             client.JoinChannel(Config.TwitchClientChannel);
         }
 
-        public void Force_Disconnect()
-        {
-            // Disconnect & Should Fire Client_OnDisconnected
-            client.Disconnect();
-        }
-
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
 
@@ -508,8 +502,6 @@ namespace FoxxiBot.TwitchBot
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been added!");
 
-                    // Close
-                    return;
                 }
 
                 // Edit a Command (command name | command text | command points cost)
@@ -550,8 +542,6 @@ namespace FoxxiBot.TwitchBot
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been updated!");
 
-                    // Close
-                    return;
                 }
 
                 // Delete a Command (command name)
@@ -573,8 +563,6 @@ namespace FoxxiBot.TwitchBot
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
                     
-                    // Close
-                    return;
                 }
 
                 // Link Permission Handler           
@@ -582,7 +570,6 @@ namespace FoxxiBot.TwitchBot
                 {
                     var result = commands.commandPermitUser(e);
                     SendChatMessage(result);
-                    return;
                 }
 
                 // Let's Raid!
@@ -597,9 +584,6 @@ namespace FoxxiBot.TwitchBot
 
                     // Bot starts the raid process
                     SendChatMessage("/raid " + e.Command.ArgumentsAsString);
-
-                    // Close
-                    return;
                 }
 
                 // Link Permission Handler
@@ -607,7 +591,6 @@ namespace FoxxiBot.TwitchBot
                 {
                     SendChatMessage(Config.TwitchBotName + " will now close the Twitch Connection...");
                     client.Disconnect();
-                    return;
                 }
 
             }
@@ -619,7 +602,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandAccountAge(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Deaths Handler
@@ -627,7 +609,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandDeaths(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Follow Age Handler
@@ -642,7 +623,6 @@ namespace FoxxiBot.TwitchBot
 
                 var result = commands.commandFollowAge(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Giveaway Handler
@@ -650,7 +630,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandGiveaway(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Shoutout Handler
@@ -658,7 +637,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandShoutout(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Sound Handler
@@ -666,7 +644,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandSound(e);
                 SendChatMessage(result);
-                return;
             }
 
             //// == Game Commands == ////
@@ -675,7 +652,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = games.commandDuel(e);
                 SendChatMessage(result);
-                return;
             }
 
             //// == Points Commands == ////
@@ -685,7 +661,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
-                return;
             }
 
             //// == Twitter Commands == ////
@@ -711,9 +686,6 @@ namespace FoxxiBot.TwitchBot
 
                     twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
                     SendChatMessage("The tweet has been sent!");
-
-                    // Close
-                    return;
                 }
             }
 
@@ -785,9 +757,6 @@ namespace FoxxiBot.TwitchBot
             }
 
             con.Close();
-
-            // Close
-            return;
         }
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)

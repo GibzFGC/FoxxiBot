@@ -21,6 +21,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
     <PackageReference Include="TwitchLib" Version="3.3.0" />
+    <PackageReference Include="TwitchLib.Client" Version="3.2.6-preview-68b54074c332c2df84025bb1798568ac16aafc66" />
   </ItemGroup>
 
   <ItemGroup>
