@@ -112,11 +112,8 @@ namespace FoxxiBot.TwitchBot
 
         public void Force_Disconnect()
         {
-            // Force Re-Connect in Rare Circumstances
-            client.Reconnect();
-
-            // Re-Join Streamers Channel
-            client.JoinChannel(Config.TwitchClientChannel);
+            // Disconnect & Should Fire Client_OnDisconnected
+            client.Disconnect();
         }
 
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
