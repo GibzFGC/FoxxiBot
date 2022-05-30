@@ -350,7 +350,7 @@ foreach($result as $row)
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <i class="nav-icon fas fa-stopwatch-20"></i>
               <p>
               <?= _COUNTDOWN ?>
                 <i class="fas fa-angle-left right"></i>
