@@ -57,12 +57,12 @@ foreach($data as $edit)
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label for="commandName">Countdown Title</label>
+                    <label for="commandName"><?= _COUNTDOWN_FORM_TITLE ?></label>
                     <input type="text" class="form-control" id="commandTitle" name="commandTitle" placeholder="Enter a Title for this timer" value="<?php print $edit["title"]; ?>" required>
                   </div>
 
                   <div class="form-group">
-                    <label for="datetime">Date / Time</label>
+                    <label for="datetime"><?= _COUNTDOWN_FORM_DATETIME ?></label>
                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                         <input type="text" id="commandDateTime" name="commandDateTime" class="form-control datetimepicker-input" value="<?php print $edit["timestamp"]; ?>" data-target="#reservationdatetime"/>
                         <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
@@ -76,7 +76,7 @@ foreach($data as $edit)
               <div class="card-footer">
                 <input type="hidden" id="commandID" name="commandID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary"><?= _CREATE_CMD ?></button>
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _COUNTDOWN_SAVE_CMD ?></button>
               </div>
             </div>
             <!-- /.card -->

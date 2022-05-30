@@ -231,6 +231,18 @@ define("_TWITTER_APISECRET_PLACE", "");
 define("_TWITTER_AUTOTWEET", "");
 define("_TWITTER_OPTIONAL", "");
 
+define("_COUNTDOWN", "");
+define("_COUNTDOWN_ADD", "");
+define("_COUNTDOWN_MNGMT", "");
+define("_COUNTDOWN_HEADING", "");
+define("_COUNTDOWN_ADD_TITLE", "");
+define("_COUNTDOWN_ADD_INFO", "");
+define("_COUNTDOWN_FORM_TITLE", "");
+define("_COUNTDOWN_FORM_DATETIME", "");
+define("_COUNTDOWN_SAVE_CMD", "");
+define("_COUNTDOWN_EDIT", "");
+define("_COUNTDOWN_EDIT_TITLE", "");
+
 define("_POINTS", "");
 define("_POINT_RANK", "");
 define("_POINT_REDEEM", "");
@@ -335,6 +347,7 @@ define("_ADD_CMD", "");
 define("_CREATE_CMD", "");
 define("_UPDATE", "");
 define("_UPDATE_CMD", "");
+define("_URL", "");
 define("_USERID", "");
 define("_DISPLAYNAME", "");
 define("_USERNAME", "");

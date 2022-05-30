@@ -52,10 +52,10 @@ $result = $PDO->query("SELECT * FROM gb_countdowns");
                 <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th style="width: 50%;">Title</th>
-                    <th>Time / Date</th>
-                    <th>URL</th>
+                    <th><?= _ID ?></th>
+                    <th style="width: 50%;"><?= _TITLE ?></th>
+                    <th><?= _DATE_TIME ?></th>
+                    <th><?= _URL ?></th>
                     <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>

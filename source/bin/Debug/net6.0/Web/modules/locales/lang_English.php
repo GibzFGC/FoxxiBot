@@ -246,7 +246,9 @@ define("_COUNTDOWN_MNGMT", "Countdown Management");
 define("_COUNTDOWN_HEADING", "Here are your current countdowns");
 define("_COUNTDOWN_ADD_TITLE", "Adding a Countdown");
 define("_COUNTDOWN_ADD_INFO", "Countdown Information");
-
+define("_COUNTDOWN_FORM_TITLE", "Countdown Title");
+define("_COUNTDOWN_FORM_DATETIME", "Date/Time");
+define("_COUNTDOWN_SAVE_CMD", "Save Countdown");
 define("_COUNTDOWN_EDIT", "Edit a Countdown");
 define("_COUNTDOWN_EDIT_TITLE", "Editing a Countdown");
 
@@ -357,6 +359,7 @@ define("_ADD_CMD", "Adding a Command");
 define("_CREATE_CMD", "Create Command");
 define("_UPDATE", "Update");
 define("_UPDATE_CMD", "Update Command");
+define("_URL", "URL");
 define("_USERID", "User ID");
 define("_DISPLAYNAME", "Display Name");
 define("_USERNAME", "Username");
