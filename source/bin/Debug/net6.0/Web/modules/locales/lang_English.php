@@ -240,6 +240,16 @@ define("_TWITTER_APISECRET_PLACE", "Enter Your Consumer Secret");
 define("_TWITTER_AUTOTWEET", "Live Auto-Tweet");
 define("_TWITTER_OPTIONAL", "This is an optional service if you want Twitter functionality.");
 
+define("_COUNTDOWN", "Countdown Timers");
+define("_COUNTDOWN_ADD", "Add a Countdown");
+define("_COUNTDOWN_MNGMT", "Countdown Management");
+define("_COUNTDOWN_HEADING", "Here are your current countdowns");
+define("_COUNTDOWN_ADD_TITLE", "Adding a Countdown");
+define("_COUNTDOWN_ADD_INFO", "Countdown Information");
+
+define("_COUNTDOWN_EDIT", "Edit a Countdown");
+define("_COUNTDOWN_EDIT_TITLE", "Editing a Countdown");
+
 define("_POINTS", "Points");
 define("_POINT_RANK", "Point Rankings");
 define("_POINT_REDEEM", "Point Redeems");

@@ -32,6 +32,8 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
   <link rel="stylesheet" href="<?php print $gfw['template_path']; ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php print $gfw['template_path']; ?>/plugins/fontawesome-free/css/all.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="<?php print $gfw['template_path']; ?>/plugins/daterangepicker/daterangepicker.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->

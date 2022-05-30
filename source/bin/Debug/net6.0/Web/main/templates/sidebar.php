@@ -352,6 +352,33 @@ foreach($result as $row)
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
+              <?= _COUNTDOWN ?>
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=countdowns&a=add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><?= _COUNTDOWN_ADD ?></p>
+                </a>
+              </li>              
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=countdowns" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><?= _MANAGEMENT ?></p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
               <?= _POINTS ?>
                 <i class="fas fa-angle-left right"></i>
               </p>
