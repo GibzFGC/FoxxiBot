@@ -39,6 +39,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_countdowns (id INTEGER PRIMARY KEY, title TEXT, datetime TEXT, timestamp TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_discord_channels (channel_id INTEGER PRIMARY KEY, channel_name TEXT, channel_type TEXT)";
             cmd.ExecuteNonQuery();
 
