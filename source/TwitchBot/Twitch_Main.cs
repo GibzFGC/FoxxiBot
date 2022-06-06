@@ -28,7 +28,7 @@ namespace FoxxiBot.TwitchBot
     public class Twitch_Main
     {
         public static TwitchClient client;
-        TwitchPubSub pubsub;
+        public static TwitchPubSub pubsub;
 
         private Timer oauthTimer = null;
         private Timer liveTimer = null;
@@ -107,6 +107,7 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnLeftChannel(object sender, OnLeftChannelArgs e)
         {
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Dropped Channel Connection! Trying to Reconnect...", ConsoleColor.Blue);
             client.JoinChannel(Config.TwitchClientChannel);
         }
 
@@ -194,8 +195,6 @@ namespace FoxxiBot.TwitchBot
                     this_transaction.Commit();
 
                     // Close all connections
-                    this_transaction.Dispose();
-                    updateUser.Dispose();
                     con.Close();
 
                 }
@@ -370,7 +369,7 @@ namespace FoxxiBot.TwitchBot
         private void Pubsub_OnStreamUp(object sender, TwitchLib.PubSub.Events.OnStreamUpArgs e)
         {
             // Tell the Streamer that the Steam is now Live
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}", ConsoleColor.Blue);
 
             // If Discord Auto Stream Message is Active, Send a Notification
             Discord_AutoLiveMessage();
@@ -618,7 +617,6 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.ChatMessage.IsBroadcaster)
                 {
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", You can't check yourself, silly goose!");
-                    return;
                 }
 
                 var result = commands.commandFollowAge(e);

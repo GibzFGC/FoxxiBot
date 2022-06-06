@@ -404,6 +404,10 @@ namespace FoxxiBot.DiscordBot
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("StreamChannel_Status");
 
+            // Define Discord Context
+            var Context = client.GetGuild(Convert.ToUInt64(Config.DiscordServerId));
+            if (Context == null) { return; }
+
             if (active == "on")
             {
 
@@ -429,10 +433,6 @@ namespace FoxxiBot.DiscordBot
 
                             if (data.Streams.Length >= 1)
                             {
-                                // Define Discord Context
-                                var Context = client.GetGuild(Convert.ToUInt64(Config.DiscordServerId));
-                                if (Context == null) { return; }
-
                                 // Get Promo / Stream Channel
                                 var channel = discordSQL.getOptions("StreamChannel");
 
@@ -458,7 +458,7 @@ namespace FoxxiBot.DiscordBot
 
                                 // Send Promo Message
                                 await Context.GetTextChannel(Convert.ToUInt64(channel))
-                                    .SendMessageAsync($"Go check out our friend, {data.Streams[0].UserName}. They're streaming {data.Streams[0].GameName} over @ {twitch_url}", false, eb.Build());
+                                .SendMessageAsync($"Go check out our friend, {data.Streams[0].UserName}. They're streaming {data.Streams[0].GameName} over @ {twitch_url}", false, eb.Build());
 
                                 // Set as Complete
                                 using var update = new SQLiteCommand(con);
