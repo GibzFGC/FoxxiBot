@@ -68,7 +68,6 @@ namespace FoxxiBot.TwitchBot
             client.OnRaidNotification += Client_OnRaidNotification;
             client.OnUserJoined += Client_UserJoined;
             client.OnUserLeft += Client_UserLeft;
-
             client.OnChatCommandReceived += Client_OnChatCommandReceived;
 
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
@@ -76,6 +75,7 @@ namespace FoxxiBot.TwitchBot
             pubsub.OnStreamUp += Pubsub_OnStreamUp;
             pubsub.OnStreamDown += Pubsub_OnStreamDown;
             pubsub.OnFollow += PubSub_OnFollow;
+            pubsub.OnRaidUpdateV2 += PubSub_OnRaidUpdateV2;
 
             client.Connect();
             pubsub.Connect();
@@ -103,6 +103,16 @@ namespace FoxxiBot.TwitchBot
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+        }
+
+        private void PubSub_OnRaidUpdateV2(object sender, TwitchLib.PubSub.Events.OnRaidUpdateV2Args e)
+        {
+                // Convert used variables
+                Twitch_Variables variables = new Twitch_Variables();
+                var var_string = variables.convertVariables(null, twitchSQL.getOptions("On_Raid_Message"), e.TargetDisplayName, e.TargetLogin);
+
+                // Send On Raid message
+                SendChatMessage(var_string);
         }
 
         private void Client_OnLeftChannel(object sender, OnLeftChannelArgs e)
@@ -322,6 +332,11 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnRaidNotification(object sender, OnRaidNotificationArgs e)
         {
+            // Save Data to Events & Notifications
+            SQLite.twitchSQL TwitchSQL = new SQLite.twitchSQL();
+            TwitchSQL.saveEvent("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString());
+            TwitchSQL.saveNotification("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString(), DateTime.Now.ToString());
+
             // Get Raid Message
             var raid_message = twitchSQL.getOptions("Raid_Message");
 
@@ -339,11 +354,6 @@ namespace FoxxiBot.TwitchBot
             // Mention it in Chat
             client.SendMessage(e.Channel, raid_message);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + raid_message);
-
-            // Save Data to Events & Notifications
-            SQLite.twitchSQL TwitchSQL = new SQLite.twitchSQL();
-            TwitchSQL.saveEvent("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString());
-            TwitchSQL.saveNotification("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString(), DateTime.Now.ToString());
         }
 
         private void PubSub_OnFollow(object sender, TwitchLib.PubSub.Events.OnFollowArgs e)
@@ -362,6 +372,7 @@ namespace FoxxiBot.TwitchBot
                 follow_message = follow_message.Replace("{user}", e.DisplayName.ToString());
             }
 
+            // Mention it in Chat
             client.SendMessage(Config.TwitchClientChannel, follow_message);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + follow_message);
         }
@@ -569,20 +580,6 @@ namespace FoxxiBot.TwitchBot
                 {
                     var result = commands.commandPermitUser(e);
                     SendChatMessage(result);
-                }
-
-                // Let's Raid!
-                if (e.Command.CommandText == "raid")
-                {
-                    // Convert used variables
-                    Twitch_Variables variables = new Twitch_Variables();
-                    var var_string = variables.convertVariables(e.Command.ChatMessage.Message, twitchSQL.getOptions("On_Raid_Message"), e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
-
-                    // Send On Raid message
-                    SendChatMessage(var_string);
-
-                    // Bot starts the raid process
-                    SendChatMessage("/raid " + e.Command.ArgumentsAsString);
                 }
 
                 // Link Permission Handler
