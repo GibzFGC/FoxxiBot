@@ -411,6 +411,33 @@ foreach($result as $row)
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-poll"></i>
+              <p>
+              Polls
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=polls&a=add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create a Poll</p>
+                </a>
+              </li>              
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=polls" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Polls</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-comment-dots"></i>
               <p>
               <?= _QUOTES ?>

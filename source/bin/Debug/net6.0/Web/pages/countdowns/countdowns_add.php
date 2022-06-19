@@ -59,7 +59,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   <div class="form-group">
                     <label for="datetime"><?= _COUNTDOWN_FORM_DATETIME ?></label>
                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                        <input type="text" id="commandDateTime" name="commandDateTime" class="form-control datetimepicker-input" data-target="#reservationdatetime"/>
+                        <input type="text" id="commandDateTime" name="commandDateTime" class="form-control datetimepicker-input" data-target="#reservationdatetime" required>
                         <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>

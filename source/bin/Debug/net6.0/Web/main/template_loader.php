@@ -62,6 +62,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/options_loader.php";
             }            
 
+            if ($page_loader == 'polls') {
+                $cpage = "pages/polls_loader.php";
+            }
+
             if ($page_loader == 'promo') {
                 $cpage = "pages/promo_loader.php";
             }
