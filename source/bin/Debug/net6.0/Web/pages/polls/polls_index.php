@@ -14,6 +14,14 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+$options = array();
+
+$opt_result = $PDO->query("SELECT * FROM gb_polls_options");
+foreach($opt_result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
+
 $result = $PDO->query("SELECT * FROM gb_polls");
 ?>
 
@@ -56,7 +64,7 @@ $result = $PDO->query("SELECT * FROM gb_polls");
                     <th style="width: 45%;"><?=_TITLE ?></th>
                     <th>Items</th>
                     <th><?=_URL ?></th>
-                    <th><?=_ACTIVE ?></th>
+                    <th>Status</th>
                     <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
@@ -71,10 +79,25 @@ $result = $PDO->query("SELECT * FROM gb_polls");
                     <td>". $row["title"] ."</td>
                     <td>&bull; ". $row["option1"] ."<br>&bull; ". $row["option2"] ."<br>&bull; ". $row["option3"] ."<br>&bull; ". $row["option4"] ."</td>
                     <td><a target='_blank' href='". $gfw['site_url'] . "/obs/polls/index.php?id=$row[id]'>View Poll</a></td>
+              ";
 
-                    <td>". boolean_return($row["active"]) ."</td>
+              if ($options["active_poll"] == $row["id"]) {
+                print "<td>Voting Started</td>";
+              } else {
+                print "<td>Currently Closed</td>";
+              }
+
+              print "
                     <td>
-                      <a href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=state&id=$row[id]\" class=\"btn btn-success btn-sm\">Activate</a>
+              ";
+
+              if ($options["active_poll"] == $row["id"]) {
+                print "<a href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=state&id=$row[id]\" class=\"btn btn-warning btn-sm\">De-Activate</a>";
+              } else {
+                print "<a href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=state&id=$row[id]\" class=\"btn btn-success btn-sm\">Activate</a>";
+              }
+
+              print "
                       <a onclick=\"return confirm('Are you sure you wish to clear all of this polls votes');\" href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=clear&id=$row[id]\" class=\"btn btn-info btn-sm\">Clear</a>
                     ";
 

@@ -86,14 +86,6 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label><?= _ACTIVE ?></label>
-                    <select class="form-control select2" id="pollActive" name="pollActive" style="width: 100%;">
-                      <option value="1" SELECTED><?= _YES ?></option>';
-                      <option value="0"><?= _NO ?></option>';
-                    </select>
-                  </div>
-
               </div>
               <!-- /.card-body -->
 

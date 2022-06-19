@@ -14,13 +14,21 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+$options = array();
+
+$opt_result = $PDO->query("SELECT * FROM gb_polls_options");
+foreach($opt_result as $row)
+{
+  $options[$row["parameter"]] = $row["value"];
+}
+
 if ($_REQUEST["v"] == "save") {
 
     $datetime = $_POST["commandDateTime"];
     $date_filter = new DateTime($datetime);
     $date_format = $date_filter->format("d M Y H:i:s");
 
-    $sql = 'INSERT INTO gb_polls (title, option1, option2, option3, option4, datetime, timestamp, active) VALUES (:title, :option1, :option2, :option3, :option4, :datetime, :timestamp, :active)' or die(print_r($PDO->errorInfo(), true));
+    $sql = 'INSERT INTO gb_polls (title, option1, option2, option3, option4, datetime, timestamp) VALUES (:title, :option1, :option2, :option3, :option4, :datetime, :timestamp)' or die(print_r($PDO->errorInfo(), true));
     $stmt = $PDO->prepare($sql);
     
     $stmt->bindValue(':title', $_POST["pollTitle"]);
@@ -30,7 +38,6 @@ if ($_REQUEST["v"] == "save") {
     $stmt->bindValue(':option4', $_POST["pollOption4"]);
     $stmt->bindValue(':datetime', $date_format);
     $stmt->bindValue(':timestamp', $datetime);
-    $stmt->bindValue(':active', $_POST["pollActive"]);
     $stmt->execute();
 
     // Redirect
@@ -41,6 +48,31 @@ if ($_REQUEST["v"] == "save") {
 
 if ($_REQUEST["v"] == "state") {
 
+    $sql = 'INSERT OR REPLACE INTO gb_polls_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
+    $stmt = $PDO->prepare($sql);
+
+    if ($options["active_poll"] == $_REQUEST["id"]) {
+        $stmt->bindValue(':parameter', "active_poll");
+        $stmt->bindValue(':value', 0);
+        $stmt->execute();
+
+        $stmt->bindValue(':parameter', "allow_voting");
+        $stmt->bindValue(':value', 0);
+        $stmt->execute();
+    } else {
+        $stmt->bindValue(':parameter', "active_poll");
+        $stmt->bindValue(':value', $_REQUEST["id"]);
+        $stmt->execute();
+
+        $stmt->bindValue(':parameter', "allow_voting");
+        $stmt->bindValue(':value', 1);
+        $stmt->execute();
+    }
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=polls&s=success";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 }
 
 if ($_REQUEST["v"] == "delete") {
