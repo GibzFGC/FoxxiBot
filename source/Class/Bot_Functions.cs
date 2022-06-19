@@ -153,7 +153,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_points_options (parameter, value) VALUES('points_increment', '10')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_polls (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, option1 TEXT, option2 TEXT, option3 TEXT, option4 TEXT, datetime TEXT, timestamp TEXT, active INTEGER)";
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_polls (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, option1 TEXT, option2 TEXT, option3 TEXT, option4 TEXT, datetime TEXT, timestamp TEXT)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_polls_options (parameter TEXT UNIQUE, value TEXT)";
