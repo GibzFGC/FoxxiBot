@@ -354,6 +354,11 @@ namespace FoxxiBot.TwitchBot
             // Mention it in Chat
             client.SendMessage(e.Channel, raid_message);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + raid_message);
+
+            // Instant Shoutout
+            Twitch_Commands commands = new Twitch_Commands();
+            var result = commands.raidShoutout(e);
+            SendChatMessage(result);
         }
 
         private void PubSub_OnFollow(object sender, TwitchLib.PubSub.Events.OnFollowArgs e)
@@ -657,6 +662,52 @@ namespace FoxxiBot.TwitchBot
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
             }
+
+            //// == Twitter Commands == ////
+            ///
+            // Poll
+            if (e.Command.CommandText == "poll")
+            {
+
+                if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+                {
+                    SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                    if (e.Command.ArgumentsAsString == "end")
+                    {
+                        pollSQL.updateOptions("active_poll", "0");
+                        pollSQL.updateOptions("allow_voting", "0");
+
+                        SendChatMessage("The poll has now closed, thank you for taking part!");
+                        return;
+                    }
+                    else
+                    {
+                        var result = pollSQL.pollData(e.Command.ArgumentsAsString);
+                        SendChatMessage(result);
+
+                        pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
+                        pollSQL.updateOptions("allow_voting", "1");
+                    }
+                }
+
+            }
+
+            // Voting
+            if (e.Command.CommandText == "vote")
+            {
+                SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                if (pollSQL.getOptions("allow_voting") == "0")
+                {
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", Sorry voting is currently closed!");
+                    return;
+                }
+
+                var result = commands.commandVoting(e);
+                SendChatMessage(result);
+            }
+
 
             //// == Twitter Commands == ////
             ///

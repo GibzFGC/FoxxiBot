@@ -58,7 +58,11 @@ namespace FoxxiBot.TwitchBot
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
             var data = await api.Helix.Search.SearchChannelsAsync(input);
-            Console.WriteLine(data.Channels[0].BroadcasterLogin);
+
+            if (data.Channels.Length == 0)
+            {
+                return "n/a";
+            }
 
             return data.Channels[0].BroadcasterLogin;
         }

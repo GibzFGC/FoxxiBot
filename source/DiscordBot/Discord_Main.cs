@@ -441,8 +441,8 @@ namespace FoxxiBot.DiscordBot
 
                                 // Repair Twitch Stupid Image Link
                                 StringBuilder builder = new StringBuilder(data.Streams[0].ThumbnailUrl);
-                                builder.Replace("{width}", "600");
-                                builder.Replace("{height}", "400");
+                                builder.Replace("{width}", "1920");
+                                builder.Replace("{height}", "1080");
 
                                 var eb = new EmbedBuilder();
                                 eb.WithColor(Color.Orange);

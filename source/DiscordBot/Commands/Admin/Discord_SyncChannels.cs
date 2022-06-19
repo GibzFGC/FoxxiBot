@@ -32,6 +32,8 @@ namespace FoxxiBot.DiscordBot.Commands.System
             public async Task syncChannelsasync()
             {
                 SQLite.discordSQL discordSQL = new SQLite.discordSQL();
+                await discordSQL.deleteAllChannels();
+
                 foreach (var channel in Context.Guild.Channels)
                 {
                     var channel_type = channel.GetChannelType();

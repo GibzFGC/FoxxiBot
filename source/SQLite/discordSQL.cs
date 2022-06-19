@@ -131,6 +131,20 @@ namespace FoxxiBot.SQLite
             return Task.CompletedTask;
         }
 
+        public Task deleteAllRoles()
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var insertCmd = new SQLiteCommand(con);
+
+            insertCmd.CommandText = $"DELETE FROM gb_discord_roles";
+            insertCmd.ExecuteNonQuery();
+
+            con.Close();
+            return Task.CompletedTask;
+        }
+
         public Task syncChannels(string id, string name, string type)
         {
             using var con = new SQLiteConnection(cs);
@@ -179,6 +193,20 @@ namespace FoxxiBot.SQLite
             using var insertCmd = new SQLiteCommand(con);
 
             insertCmd.CommandText = $"DELETE FROM gb_discord_channels WHERE channel_id='{id}'";
+            insertCmd.ExecuteNonQuery();
+
+            con.Close();
+            return Task.CompletedTask;
+        }
+
+        public Task deleteAllChannels()
+        {
+            using var con = new SQLiteConnection(cs);
+
+            con.Open();
+            using var insertCmd = new SQLiteCommand(con);
+
+            insertCmd.CommandText = $"DELETE FROM gb_discord_channels";
             insertCmd.ExecuteNonQuery();
 
             con.Close();

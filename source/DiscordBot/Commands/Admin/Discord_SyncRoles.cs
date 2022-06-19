@@ -31,6 +31,8 @@ namespace FoxxiBot.DiscordBot.Commands.System
             public async Task syncRolesasync()
             {
                 SQLite.discordSQL discordSQL = new SQLite.discordSQL();
+                await discordSQL.deleteAllRoles();
+
                 foreach (var role in Context.Guild.Roles)
                 {
                     await discordSQL.syncRoles(role.Id.ToString(), role.Name);

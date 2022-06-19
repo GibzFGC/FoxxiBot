@@ -139,20 +139,42 @@ namespace FoxxiBot.TwitchBot
 
             try
             {
+                // Get Shoutout Data
                 var data = Twitch_GetData.ShoutOut(normalize).GetAwaiter().GetResult();
+
+                // If User Doesn't Exist
+                if (data == "n/a")
+                {
+                    return "The requested user could not be found";
+                }
+
+                // Send Data to Twitch Chat
                 return data;
             }
             catch
             {
+                // Get Shoutout Data
                 var data = Twitch_GetData.displayNametoUserID(normalize).GetAwaiter().GetResult();
 
+                // If User Doesn't Exist
+                if (data == "n/a")
+                {
+                    return "The requested user could not be found";
+                }
+
+                // Send Data to Twitch Chat
                 var value = Twitch_GetData.ShoutOut(data).GetAwaiter().GetResult();
                 return value;
             }
-            finally
-            {
-                Console.WriteLine("!so user not found!");
-            }
+        }
+
+        public string raidShoutout(TwitchLib.Client.Events.OnRaidNotificationArgs e)
+        {
+            // split into args
+            var normalize = e.RaidNotification.Login.Replace("@", "");
+
+            var data = Twitch_GetData.ShoutOut(normalize).GetAwaiter().GetResult();
+            return data;
         }
 
         public string commandSound(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
@@ -225,6 +247,50 @@ namespace FoxxiBot.TwitchBot
             con.Close();
             return null;
 
+        }
+
+        public string commandVoting(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
+        {
+
+            SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+            string current_poll = pollSQL.getOptions("active_poll");
+            int voteCheck = pollSQL.voteCheck(e.Command.ChatMessage.Username, Convert.ToInt32(current_poll));
+
+            if (voteCheck == -1)
+            {
+                return "The voting process can't continue, there is a bug going on!";
+            }
+
+            if (voteCheck == 0)
+            {
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                // Process Users Vote
+                using var insertCmd = new SQLiteCommand(con);
+
+                insertCmd.CommandText = "INSERT OR IGNORE INTO gb_polls_votes(poll_id, user, value) VALUES (@poll_id, @user, @value)";
+
+                insertCmd.Parameters.AddWithValue("@poll_id", 1);
+                insertCmd.Parameters.AddWithValue("@user", e.Command.ChatMessage.Username);
+                insertCmd.Parameters.AddWithValue("@value", e.Command.ArgumentsAsString);
+
+                insertCmd.Prepare();
+                insertCmd.ExecuteNonQuery();
+
+                con.Close();
+
+                // Return Twitch Chat Message
+                return e.Command.ChatMessage.DisplayName + ", your vote has been tallied!";
+            }
+
+            if (voteCheck == 1)
+            {
+                // Return Twitch Chat Message
+                return e.Command.ChatMessage.DisplayName + ", you have already voted!";
+            }
+
+            return null;
         }
 
     }
