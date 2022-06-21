@@ -3,6 +3,10 @@ body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+#show_poll {
+  display: none;
+}
+
 section {
   border: 2px solid #FF9900;
   border-radius: 10px;
@@ -14,6 +18,12 @@ section {
   width: 60%;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.poll_time {
+  font-size: 12px;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
 
 .poll-option {

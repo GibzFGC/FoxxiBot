@@ -98,7 +98,8 @@ $result = $PDO->query("SELECT * FROM gb_polls");
               }
 
               print "
-                      <a onclick=\"return confirm('Are you sure you wish to clear all of this polls votes');\" href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=clear&id=$row[id]\" class=\"btn btn-info btn-sm\">Clear</a>
+                      <a href=\"$gfw[site_url]/index.php?p=polls&a=edit&id=$row[id]\" class=\"btn btn-info btn-sm\">Edit</a>
+                      <a onclick=\"return confirm('Are you sure you wish to clear all of this polls votes');\" href=\"$gfw[site_url]/index.php?p=polls&a=funcs&v=clear&id=$row[id]\" class=\"btn btn-default btn-sm\">Clear</a>
                     ";
 
                     print "

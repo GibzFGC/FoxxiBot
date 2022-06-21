@@ -13,6 +13,11 @@
 
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
+
+// Get Edit Data
+$data = $PDO->query("SELECT * FROM gb_polls WHERE id='$_REQUEST[id]' LIMIT 1");
+foreach($data as $edit)
+{
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -21,13 +26,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Creating a Poll</h1>
+            <h1 class="m-0">Editing a Poll</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
               <li class="breadcrumb-item">Polls</li>
-              <li class="breadcrumb-item active">Creating a Poll</li>
+              <li class="breadcrumb-item active">Editing a Poll</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,7 +40,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     </div>
     <!-- /.content-header -->
 
-    <form method="post" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=polls&a=funcs&v=save">
+    <form method="post" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=polls&a=funcs&v=edit">
 
     <!-- Main content -->
     <section class="content">
@@ -53,33 +58,33 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <div class="form-group">
                     <label for="pollTitle">Poll Title</label>
-                    <input type="text" class="form-control" id="pollTitle" name="pollTitle" placeholder="Give your poll a title" required>
+                    <input type="text" class="form-control" id="pollTitle" name="pollTitle" placeholder="Give your poll a title" value="<?php print $edit["title"]; ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="pollOption1">Option 1</label>
-                    <input type="text" class="form-control" id="pollOption1" name="pollOption1" placeholder="Give First Option" required>
+                    <input type="text" class="form-control" id="pollOption1" name="pollOption1" placeholder="Give First Option" value="<?php print $edit["option1"]; ?>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="pollOption2">Option 2</label>
-                    <input type="text" class="form-control" id="pollOption2" name="pollOption2" placeholder="Give Second Option" required>
+                    <input type="text" class="form-control" id="pollOption2" name="pollOption2" placeholder="Give Second Option" value="<?php print $edit["option2"]; ?>" required>
                   </div>
                   
                   <div class="form-group">
                     <label for="pollOption3">Option 3</label>
-                    <input type="text" class="form-control" id="pollOption3" name="pollOption3" placeholder="Give Third Option">
+                    <input type="text" class="form-control" id="pollOption3" name="pollOption3" placeholder="Give Third Option" value="<?php print $edit["option3"]; ?>">
                   </div>
                   
                   <div class="form-group">
                     <label for="pollOption4">Option 4</label>
-                    <input type="text" class="form-control" id="pollOption4" name="pollOption4" placeholder="Give Fourth Option">
+                    <input type="text" class="form-control" id="pollOption4" name="pollOption4" placeholder="Give Fourth Option" value="<?php print $edit["option4"]; ?>">
                   </div>                  
 
                   <div class="form-group">
                     <label for="datetime">Poll Completion Time</label>
                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                        <input type="text" id="commandDateTime" name="commandDateTime" class="form-control datetimepicker-input" data-target="#reservationdatetime" required>
+                        <input type="text" id="commandDateTime" name="commandDateTime" class="form-control datetimepicker-input" data-target="#reservationdatetime" value="<?php print $edit["datetime"]; ?>" required>
                         <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -90,8 +95,9 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
               <!-- /.card-body -->
 
               <div class="card-footer">
+                <input type="hidden" id="commandID" name="commandID" value="<?php print $_REQUEST["id"]; ?>">
                 <input type="hidden" id="submit" name="submit" value="submit">
-                <button style="float: right;" type="submit" class="btn btn-primary">Create Poll</button>
+                <button style="float: right;" type="submit" class="btn btn-primary">Update Poll</button>
               </div>
             </div>
             <!-- /.card -->
@@ -106,3 +112,4 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
   </div>
   <!-- /.content-wrapper -->
+  <?php } ?>

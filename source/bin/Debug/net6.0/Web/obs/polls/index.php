@@ -9,8 +9,9 @@
 
   <body>
 
-    <section>
+    <section id="show_poll">
       <h1 id="poll_title">Poll Question </h1>
+      <p class="poll_time" id="poll_time">Time Left</p>
       <div class="poll-option">
         <span id="poll_option_1" class="poll-option__label">Option 1</span>
         <table class="poll-option__result">
@@ -73,20 +74,39 @@
         <script type="text/javascript">
 
             var id = "<?php print $_REQUEST["id"]; ?>";
+            var datetime = null;
+
+            var pollID = 0;
+            var pollLive = 0;        
 
             function init_poll() {
 
-            // Load Data
+            // Load Poll Options Data
+            $.getJSON('/api.php?state=get&table=gb_polls_options&where=parameter:"allow_voting"', function(data) {
+                pollLive = data[0]["value"];
+
+                if (pollLive == 0) {
+                  $("#show_poll").fadeOut();
+                }
+
+                if (pollLive == 1) {
+                  $("#show_poll").fadeIn();
+                }
+            });
+
+            // Load Poll Data
             $.getJSON('/api.php?state=get&table=gb_polls&where=id:' + id, function(data) {
                 document.getElementById("poll_title").innerText = data[0]["title"];
 
                 document.getElementById("poll_option_1").innerText = "[1] " + data[0]["option1"];
                 document.getElementById("poll_option_2").innerText = "[2] " + data[0]["option2"];
                 document.getElementById("poll_option_3").innerText = "[3] " + data[0]["option3"];
-                document.getElementById("poll_option_4").innerText = "[4] " + data[0]["option4"];               
+                document.getElementById("poll_option_4").innerText = "[4] " + data[0]["option4"];    
+                
+                datetime = data[0]["datetime"];
             });
 
-            // Load Data
+            // Load Vote Data
             $.getJSON('/api.php?state=get&table=gb_polls_votes&where=poll_id:' + id, function(data) {
 
                 // Get JSON Vote Count
@@ -126,9 +146,33 @@
             });
           }
 
+          function countdown() {
+                const countdownDate = new Date(datetime);
+                const currentDate = new Date();
+
+                const totalSeconds = (countdownDate - currentDate) / 1000;
+
+                const days = Math.floor(totalSeconds / 3600 / 24);
+                const hours = Math.floor(totalSeconds / 3600) % 24;
+                const mins = Math.floor(totalSeconds / 60) % 60;
+                const seconds = Math.floor(totalSeconds) % 60;
+
+                if (formatTime(hours) <= "00" & formatTime(mins) <= "00" & formatTime(seconds) <= "00" ) {
+                  document.getElementById("poll_time").innerText = "Poll has Ended!";                 
+                } else {
+                  document.getElementById("poll_time").innerText = "Time Left: " + formatTime(hours) + " hours, " + formatTime(mins) + " mins, " + formatTime(seconds) + " secs";
+                }
+            }
+
+            function formatTime(time) {
+              return time < 10 ? `0${time}` : time;
+            }
+
         // initial call
+        countdown();
         init_poll();
         setInterval(init_poll, 1000);
+        setInterval(countdown, 1000);
 
         </script>
 

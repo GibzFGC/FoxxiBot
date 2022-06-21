@@ -46,6 +46,31 @@ if ($_REQUEST["v"] == "save") {
     echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 }
 
+if ($_REQUEST["v"] == "edit") {
+
+    $datetime = $_POST["commandDateTime"];
+    $date_filter = new DateTime($datetime);
+    $date_format = $date_filter->format("d M Y H:i:s");
+
+    $sql = "UPDATE gb_polls SET title = :title, option1 = :option1, option2 = :option2, option3 = :option3, option4 = :option4, datetime = :datetime, timestamp = :timestamp WHERE id = :commandID";
+    $stmt = $PDO->prepare($sql);
+
+    $stmt->bindValue(':commandID', $_POST["commandID"]);
+    $stmt->bindValue(':title', $_POST["pollTitle"]);
+    $stmt->bindValue(':option1', $_POST["pollOption1"]);
+    $stmt->bindValue(':option2', $_POST["pollOption2"]);
+    $stmt->bindValue(':option3', $_POST["pollOption3"]);
+    $stmt->bindValue(':option4', $_POST["pollOption4"]);
+    $stmt->bindValue(':datetime', $date_format);
+    $stmt->bindValue(':timestamp', $datetime);
+    $stmt->execute();
+
+    // Redirect
+    $URL="$gfw[site_url]/index.php?p=polls&s=success";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+}
+
 if ($_REQUEST["v"] == "state") {
 
     $sql = 'INSERT OR REPLACE INTO gb_polls_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));
