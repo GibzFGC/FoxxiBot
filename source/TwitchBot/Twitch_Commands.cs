@@ -271,7 +271,7 @@ namespace FoxxiBot.TwitchBot
 
                 insertCmd.CommandText = "INSERT OR IGNORE INTO gb_polls_votes(poll_id, user, value) VALUES (@poll_id, @user, @value)";
 
-                insertCmd.Parameters.AddWithValue("@poll_id", 1);
+                insertCmd.Parameters.AddWithValue("@poll_id", current_poll);
                 insertCmd.Parameters.AddWithValue("@user", e.Command.ChatMessage.Username);
                 insertCmd.Parameters.AddWithValue("@value", e.Command.ArgumentsAsString);
 
