@@ -14,37 +14,22 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
-// Load the Settings, Options & Constants File
-require_once("settings.inc.php");
-
-// Load the Website Constants File
-require_once("constants.inc.php");
-
-// Load the Website Function File
-require_once("functions.inc.php");
-
-// Load the Commands Filter File
-require_once("commands_filter.inc.php");
-
-// Check if Website is in Development or Not:
-/* Set via settings.inc.php */
-if ($gfw["in_development"] == true) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
- } else {
-    ini_set('display_errors', '0');
+if (!isset($_REQUEST['a'])) {
+    include("polls/polls_index.php");
 }
 
-// Check for Database Usage (MYSQL Supported):
-/* Set options and settings in settings.inc.php */
-if ($gfw["in_database"] == true) {
-    try {
-        $PDO = new PDO('sqlite:../Data/bot.db');
+if (isset($_REQUEST['a'])) {
+
+    if ($_REQUEST['a'] == "add") {
+        include("polls/polls_add.php");
     }
 
-    catch (PDOException $e) {
-        echo "ERROR: " . $e->getMessage();
+    if ($_REQUEST['a'] == "edit") {
+        include("polls/polls_edit.php");
     }
+
+    if ($_REQUEST['a'] == "funcs") {
+        include("polls/polls_funcs.php");
+    }
+
 }
-
-/* End of file */

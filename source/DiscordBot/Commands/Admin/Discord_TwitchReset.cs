@@ -10,14 +10,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Discord;
 using Discord.Commands;
 using System;
 using System.Threading.Tasks;
 
 namespace FoxxiBot.DiscordBot.Commands.System
 {
-    public class Discord_SyncChannels : ModuleBase<SocketCommandContext>
+    public class Discord_TwitchReset : ModuleBase<SocketCommandContext>
     {
 
         [RequireUserPermission(Discord.GuildPermission.Administrator)]
@@ -27,33 +26,26 @@ namespace FoxxiBot.DiscordBot.Commands.System
 
             string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
-            // ~system syncchannels
-            [Command("syncchannels", RunMode = RunMode.Async)]
-            public async Task syncChannelsasync()
+            // ~system twitchreset
+            [Command("twitchreset")]
+            public async Task twitchreset()
             {
+                TwitchBot.Twitch_Main.client.Disconnect();
+
                 SQLite.discordSQL discordSQL = new SQLite.discordSQL();
-                await discordSQL.deleteAllChannels();
-
-                foreach (var channel in Context.Guild.Channels)
-                {
-                    var channel_type = channel.GetChannelType();
-                    await discordSQL.syncChannels(channel.Id.ToString(), channel.Name, channel_type.Value.ToString());
-                }
-
                 var active = discordSQL.getOptions("BotChannel_Status");
 
                 if (active == "off")
                 {
-                    await ReplyAsync($"The channels have been synced to the database");
+                    await ReplyAsync("Reconnecting the Twitch Service...");
                 }
                 else
                 {
                     var channel = discordSQL.getOptions("BotChannel");
                     await Context.Client.GetGuild(Convert.ToUInt64(Config.DiscordServerId))
-                        .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync($"The channels have been synced to the database");
+                        .GetTextChannel(Convert.ToUInt64(channel)).SendMessageAsync($"Reconnecting the Twitch Service...");
                 }
             }
-
         }
 
     }

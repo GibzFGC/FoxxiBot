@@ -58,7 +58,11 @@ namespace FoxxiBot.TwitchBot
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
             var data = await api.Helix.Search.SearchChannelsAsync(input);
-            Console.WriteLine(data.Channels[0].BroadcasterLogin);
+
+            if (data.Channels.Length == 0)
+            {
+                return "n/a";
+            }
 
             return data.Channels[0].BroadcasterLogin;
         }
@@ -75,8 +79,17 @@ namespace FoxxiBot.TwitchBot
             DateTime current_time = DateTime.UtcNow;
             DateTime user_time = DateTime.Parse(data.Users[0].CreatedAt.ToString());
 
-            TimeSpan timeDifference = current_time - user_time;
-            return (Math.Floor(timeDifference.Days / 365.25) + " years " + Math.Floor((timeDifference.Days / 30.4167) % 12) + " months " + Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+            TimeSpan ts1 = new TimeSpan(current_time.Ticks);
+            TimeSpan ts2 = new TimeSpan(user_time.Ticks);
+
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+
+            return Convert.ToInt32(ts.Days / 365.25) + " years, " +
+                Convert.ToInt32(ts.Days / 30.4167 % 12) + " months, " +
+                Math.Floor(ts.Days / 365.25 % 1440) + " days, " +
+                ts.Hours + " hours, " +
+                ts.Minutes + " mins, " +
+                ts.Seconds + " secs";
         }
 
         public static async Task<string> getFollowAge(string user_id)
@@ -88,13 +101,20 @@ namespace FoxxiBot.TwitchBot
 
             var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id, toId: Config.TwitchMC_Id);
 
-            Console.WriteLine(data.Follows[0].FollowedAt.ToString());
-
             DateTime current_time = DateTime.UtcNow;
             DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());
 
-            TimeSpan timeDifference = current_time - user_time;
-            return (Math.Floor(timeDifference.Days / 365.25) + " years " + Math.Floor((timeDifference.Days / 30.4167) % 12) + " months " + Math.Floor(timeDifference.Days % 365.25) + " days " + timeDifference.Hours + " hours " + timeDifference.Minutes + " mins " + timeDifference.Seconds + " secs").ToString();
+            TimeSpan ts1 = new TimeSpan(current_time.Ticks);
+            TimeSpan ts2 = new TimeSpan(user_time.Ticks);
+
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+
+            return Convert.ToInt32(ts.Days / 365.25) + " years, " +
+                Convert.ToInt32(ts.Days / 30.4167 % 12) + " months, " +
+                ts.Days / 365.25 % 1440 + " days, " +
+                ts.Hours + " hours, " +
+                ts.Minutes + " mins, " +
+                ts.Seconds + " secs";
         }
 
         public static async Task<string> getFollows()

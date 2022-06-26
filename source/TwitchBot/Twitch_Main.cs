@@ -28,7 +28,7 @@ namespace FoxxiBot.TwitchBot
     public class Twitch_Main
     {
         public static TwitchClient client;
-        TwitchPubSub pubsub;
+        public static TwitchPubSub pubsub;
 
         private Timer oauthTimer = null;
         private Timer liveTimer = null;
@@ -68,7 +68,6 @@ namespace FoxxiBot.TwitchBot
             client.OnRaidNotification += Client_OnRaidNotification;
             client.OnUserJoined += Client_UserJoined;
             client.OnUserLeft += Client_UserLeft;
-
             client.OnChatCommandReceived += Client_OnChatCommandReceived;
 
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
@@ -76,6 +75,7 @@ namespace FoxxiBot.TwitchBot
             pubsub.OnStreamUp += Pubsub_OnStreamUp;
             pubsub.OnStreamDown += Pubsub_OnStreamDown;
             pubsub.OnFollow += PubSub_OnFollow;
+            pubsub.OnRaidUpdateV2 += PubSub_OnRaidUpdateV2;
 
             client.Connect();
             pubsub.Connect();
@@ -105,8 +105,19 @@ namespace FoxxiBot.TwitchBot
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
         }
 
+        private void PubSub_OnRaidUpdateV2(object sender, TwitchLib.PubSub.Events.OnRaidUpdateV2Args e)
+        {
+                // Convert used variables
+                Twitch_Variables variables = new Twitch_Variables();
+                var var_string = variables.convertVariables(null, twitchSQL.getOptions("On_Raid_Message"), e.TargetDisplayName, e.TargetLogin);
+
+                // Send On Raid message
+                SendChatMessage(var_string);
+        }
+
         private void Client_OnLeftChannel(object sender, OnLeftChannelArgs e)
         {
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Dropped Channel Connection! Trying to Reconnect...", ConsoleColor.Blue);
             client.JoinChannel(Config.TwitchClientChannel);
         }
 
@@ -192,6 +203,8 @@ namespace FoxxiBot.TwitchBot
 
                     // Commit all Data to SQL
                     this_transaction.Commit();
+
+                    // Close all connections
                     con.Close();
 
                 }
@@ -258,12 +271,6 @@ namespace FoxxiBot.TwitchBot
 
         private static void refreshBotOauth()
         {
-
-            if (Config.TwitchClientRefresh.Length == 0 || Config.TwitchMC_ClientRefresh.Length == 0)
-            {
-                return;
-            }
-
             var api = new TwitchLib.Api.TwitchAPI();
             api.Settings.ClientId = Config.TwitchClientId;
 
@@ -280,6 +287,9 @@ namespace FoxxiBot.TwitchBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
+
+            // OAuth Check Complete
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Re-Authentication Complete", ConsoleColor.Blue);
         }
 
         private static void OauthCallback(object state)
@@ -322,6 +332,11 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnRaidNotification(object sender, OnRaidNotificationArgs e)
         {
+            // Save Data to Events & Notifications
+            SQLite.twitchSQL TwitchSQL = new SQLite.twitchSQL();
+            TwitchSQL.saveEvent("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString());
+            TwitchSQL.saveNotification("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString(), DateTime.Now.ToString());
+
             // Get Raid Message
             var raid_message = twitchSQL.getOptions("Raid_Message");
 
@@ -340,10 +355,10 @@ namespace FoxxiBot.TwitchBot
             client.SendMessage(e.Channel, raid_message);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + raid_message);
 
-            // Save Data to Events & Notifications
-            SQLite.twitchSQL TwitchSQL = new SQLite.twitchSQL();
-            TwitchSQL.saveEvent("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString());
-            TwitchSQL.saveNotification("Raid", e.RaidNotification.DisplayName.ToString(), e.RaidNotification.MsgParamViewerCount.ToString(), DateTime.Now.ToString());
+            // Instant Shoutout
+            Twitch_Commands commands = new Twitch_Commands();
+            var result = commands.raidShoutout(e);
+            SendChatMessage(result);
         }
 
         private void PubSub_OnFollow(object sender, TwitchLib.PubSub.Events.OnFollowArgs e)
@@ -362,6 +377,7 @@ namespace FoxxiBot.TwitchBot
                 follow_message = follow_message.Replace("{user}", e.DisplayName.ToString());
             }
 
+            // Mention it in Chat
             client.SendMessage(Config.TwitchClientChannel, follow_message);
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + follow_message);
         }
@@ -369,7 +385,7 @@ namespace FoxxiBot.TwitchBot
         private void Pubsub_OnStreamUp(object sender, TwitchLib.PubSub.Events.OnStreamUpArgs e)
         {
             // Tell the Streamer that the Steam is now Live
-            Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + $"Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}");
+            Class.Bot_Functions.WriteColour($"{DateTime.Now}: {Config.TwitchBotName} [| Twitch] - Stream just went up! Play delay: {e.PlayDelay}, server time: {e.ServerTime}", ConsoleColor.Blue);
 
             // If Discord Auto Stream Message is Active, Send a Notification
             Discord_AutoLiveMessage();
@@ -500,6 +516,7 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been added!");
+
                 }
 
                 // Edit a Command (command name | command text | command points cost)
@@ -539,6 +556,7 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command !" + split[0] + " has been updated!");
+
                 }
 
                 // Delete a Command (command name)
@@ -559,6 +577,7 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
+                    
                 }
 
                 // Link Permission Handler           
@@ -566,15 +585,13 @@ namespace FoxxiBot.TwitchBot
                 {
                     var result = commands.commandPermitUser(e);
                     SendChatMessage(result);
-                    return;
                 }
 
                 // Link Permission Handler
                 if (e.Command.CommandText == "disconnect")
                 {
-                    SendChatMessage("GibbyAI will now close the Twitch Connection...");
+                    SendChatMessage(Config.TwitchBotName + " will now close the Twitch Connection...");
                     client.Disconnect();
-                    return;
                 }
 
             }
@@ -586,7 +603,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandAccountAge(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Deaths Handler
@@ -594,7 +610,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandDeaths(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Follow Age Handler
@@ -604,12 +619,10 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.ChatMessage.IsBroadcaster)
                 {
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", You can't check yourself, silly goose!");
-                    return;
                 }
 
                 var result = commands.commandFollowAge(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Giveaway Handler
@@ -617,7 +630,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandGiveaway(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Shoutout Handler
@@ -625,7 +637,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandShoutout(e);
                 SendChatMessage(result);
-                return;
             }
 
             // Sound Handler
@@ -633,7 +644,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = commands.commandSound(e);
                 SendChatMessage(result);
-                return;
             }
 
             //// == Game Commands == ////
@@ -642,7 +652,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = games.commandDuel(e);
                 SendChatMessage(result);
-                return;
             }
 
             //// == Points Commands == ////
@@ -652,8 +661,53 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
-                return;
             }
+
+            //// == Twitter Commands == ////
+            ///
+            // Poll
+            if (e.Command.CommandText == "poll")
+            {
+
+                if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+                {
+                    SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                    if (e.Command.ArgumentsAsString == "end")
+                    {
+                        pollSQL.updateOptions("active_poll", "0");
+                        pollSQL.updateOptions("allow_voting", "0");
+
+                        SendChatMessage("The poll has now closed, thank you for taking part!");
+                        return;
+                    }
+                    else
+                    {
+                        var result = pollSQL.pollData(e.Command.ArgumentsAsString);
+                        SendChatMessage(result);
+
+                        pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
+                        pollSQL.updateOptions("allow_voting", "1");
+                    }
+                }
+
+            }
+
+            // Voting
+            if (e.Command.CommandText == "vote")
+            {
+                SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                if (pollSQL.getOptions("allow_voting") == "0")
+                {
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", Sorry voting is currently closed!");
+                    return;
+                }
+
+                var result = commands.commandVoting(e);
+                SendChatMessage(result);
+            }
+
 
             //// == Twitter Commands == ////
             ///
@@ -749,7 +803,6 @@ namespace FoxxiBot.TwitchBot
             }
 
             con.Close();
-
         }
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)

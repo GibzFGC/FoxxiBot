@@ -73,7 +73,7 @@ namespace FoxxiBot.DiscordBot.Commands.Standard
                 else if (userAct is RichGame richGame)
                     embed.AddField("Activity", richGame.Name, true)
                         .AddField("Details", richGame.Details, true)
-                        .AddField("Playing Since", richGame.Timestamps?.Start.Value.ToString("hh:mm:ss tt") ?? "Unknown", true)
+                        .AddField("State", richGame.State, true)
                         .WithThumbnailUrl(richGame.SmallAsset?.GetImageUrl() ?? user.GetAvatarUrl())
                         .WithColor(Color.Gold);
                 else

@@ -350,6 +350,33 @@ foreach($result as $row)
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-stopwatch-20"></i>
+              <p>
+              <?= _COUNTDOWN ?>
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=countdowns&a=add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><?= _COUNTDOWN_ADD ?></p>
+                </a>
+              </li>              
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=countdowns" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><?= _MANAGEMENT ?></p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
               <?= _POINTS ?>
@@ -376,6 +403,33 @@ foreach($result as $row)
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p><?= _MANAGEMENT ?></p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-poll"></i>
+              <p>
+              Polls
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=polls&a=add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create a Poll</p>
+                </a>
+              </li>              
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=polls" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Polls</p>
                 </a>
               </li>
 

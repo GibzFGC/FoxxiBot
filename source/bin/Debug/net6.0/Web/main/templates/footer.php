@@ -45,6 +45,16 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 <script src="<?php print $gfw['template_path']; ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php print $gfw['template_path']; ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- InputMask -->
+<script src="<?php print $gfw['template_path']; ?>/plugins/moment/moment.min.js"></script>
+<script src="<?php print $gfw['template_path']; ?>/plugins/inputmask/jquery.inputmask.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="<?php print $gfw['template_path']; ?>/plugins/daterangepicker/daterangepicker.js"></script>
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php print $gfw['template_path']; ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 <!-- Bootstrap Switch -->
 <script src="<?php print $gfw['template_path']; ?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 

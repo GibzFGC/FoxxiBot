@@ -77,6 +77,11 @@ foreach($result as $row)
                   <input type="text" class="form-control" id="joined_channel" name="joined_channel" placeholder="<?= _TWITCH_SETTINGS_BOT_CHANNEL_MSG ?>" value="<?php print $options["Joined_Channel"]; ?>">
                 </div>                
 
+                <div class="form-group">
+                  <label>Our Raid Message</label>
+                  <input type="text" class="form-control" id="on_raid_message" name="on_raid_message" value="<?php print $options["On_Raid_Message"]; ?>">
+                </div>
+
               </div>
               <!-- /.card-body -->
 

@@ -20,7 +20,8 @@ if ($_REQUEST["v"] == "send") {
 
 if ($_REQUEST["v"] == "save") {
 
-    if ($_POST["commandName"] == "so" || $_POST["commandName"] == "quote" || $_POST["commandName"] == "age" || $_POST["commandName"] == "sound" || $_POST["commandName"] == "audio" || $_POST["commandName"] == "play") {
+    // Check if Bot Controlled Command
+    if (in_array($_POST["commandName"], $gfw["bot_discord_commands"])) {
 
         // Redirect
         $URL="$gfw[site_url]/index.php?p=discord_commands&s=error";
@@ -53,7 +54,8 @@ if ($_REQUEST["v"] == "save") {
 
 if ($_REQUEST["v"] == "edit") {
 
-    if ($_POST["commandName"] == "so" || $_POST["commandName"] == "quote" || $_POST["commandName"] == "age" || $_POST["commandName"] == "sound" || $_POST["commandName"] == "audio" || $_POST["commandName"] == "play") {
+    // Check if Bot Controlled Command
+    if (in_array($_POST["commandName"], $gfw["bot_discord_commands"])) {
 
         // Redirect
         $URL="$gfw[site_url]/index.php?p=discord_commands&s=error";

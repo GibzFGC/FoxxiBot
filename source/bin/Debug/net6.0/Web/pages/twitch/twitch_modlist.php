@@ -56,7 +56,7 @@ $blacklist = $PDO->query("SELECT * FROM gb_twitch_modlist WHERE allowed='0'");
 
                   <div class="form-group">
                     <label for="listName"><?= _MODERATION_STRING ?></label>
-                    <input type="text" class="form-control" id="listName" name="listName" placeholder="<?= _MODERATION_STRING_PLACE ?>">
+                    <input type="text" onkeypress="return event.charCode != 32" class="form-control" id="listName" name="listName" placeholder="<?= _MODERATION_STRING_PLACE ?>">
                     <span style="margin-top: 10px; background: #FF0000; padding: 10px; visibility: hidden;" id="commandNameError"></span>
                   </div>
 

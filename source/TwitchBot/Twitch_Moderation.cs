@@ -12,6 +12,7 @@
 
 using System;
 using System.Data.SQLite;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FoxxiBot.TwitchBot
@@ -25,16 +26,20 @@ namespace FoxxiBot.TwitchBot
         public bool checkBlacklist(string input)
         {
 
-            var split = input.Split(" ");
+            // Remove Extra Whitespace
+            string q = input;
+            string a = String.Join(" ", q.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+
+            var split = a.Split(" ");
 
             using var con = new SQLiteConnection(cs);
             con.Open();
 
-            foreach (var word in split)
+            foreach (string word in split)
             {
-                var stm = $"SELECT item FROM gb_twitch_modlist WHERE item='" + word + "' AND allowed='0'";
-
+                var stm = $"SELECT item FROM gb_twitch_modlist WHERE item LIKE @word AND allowed='0'";
                 using var cmd = new SQLiteCommand(stm, con);
+                cmd.Parameters.AddWithValue("@word", word + "%");
 
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
@@ -42,7 +47,6 @@ namespace FoxxiBot.TwitchBot
                 {
                     return true;
                 }
-
             }
 
             con.Close();
@@ -59,9 +63,10 @@ namespace FoxxiBot.TwitchBot
 
             foreach (var word in split)
             {
-                var stm = $"SELECT item FROM gb_twitch_modlist WHERE item='" + word + "' AND allowed='1'";
+                var stm = $"SELECT item FROM gb_twitch_modlist WHERE item LIKE @word AND allowed='1'";
 
                 using var cmd = new SQLiteCommand(stm, con);
+                cmd.Parameters.AddWithValue("@word", word + "%");
 
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
@@ -69,7 +74,6 @@ namespace FoxxiBot.TwitchBot
                 {
                     return true;
                 }
-
             }
 
             con.Close();
