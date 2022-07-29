@@ -46,6 +46,23 @@ namespace FoxxiBot.TwitchBot
             if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
             {
 
+                if (e.Command.ArgumentsAsString.Contains("set"))
+                {
+
+                    try
+                    {
+                        int setDeaths = Convert.ToInt32(e.Command.ArgumentsAsList[1]);
+
+                        twitchSQL.updateOptions("deathCounter", e.Command.ArgumentsAsList[1].ToString());
+                        return $"The streamer has died {e.Command.ArgumentsAsList[1]} time(s)";
+                    }
+                    catch
+                    {
+                        return "The given value was not an integer";
+                    }
+
+                }
+                    
                 if (e.Command.ArgumentsAsString == "add")
                 {
                     int deaths = Convert.ToInt32(twitchSQL.getOptions("deathCounter"));
