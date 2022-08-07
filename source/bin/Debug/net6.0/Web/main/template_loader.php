@@ -14,6 +14,11 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+if ($_REQUEST["p"] == "phpinfo") {
+    phpinfo( );
+    exit();
+}
+
 // Initial Checks
 if ($gfw["site_active"] == true) {
 
