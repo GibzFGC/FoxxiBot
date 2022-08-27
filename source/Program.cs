@@ -151,18 +151,18 @@ namespace FoxxiBot
                 }
                 else
                 {
-                    Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
                 }
 
                 // Create Discord Bot
-                if (Config.DiscordToken != null)
+                if (string.IsNullOrEmpty(Config.DiscordToken) || Config.DiscordToken == null || Config.DiscordToken == "")
                 {
-                    DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
-                    Discord.MainAsync().GetAwaiter().GetResult();
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
                 }
                 else
                 {
-                    Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
+                    DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
+                    Discord.MainAsync().GetAwaiter().GetResult();
                 }
 
                 // Check & Set Debug Mode
@@ -352,18 +352,18 @@ namespace FoxxiBot
             }
             else
             {
-                Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
             }
 
             // Create Discord Bot
-            if (Config.DiscordToken != null)
+            if (string.IsNullOrEmpty(Config.DiscordToken) || Config.DiscordToken == null || Config.DiscordToken == "")
             {
-                DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
-                Discord.MainAsync().GetAwaiter().GetResult();
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
             }
             else
             {
-                Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
+                DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
+                Discord.MainAsync().GetAwaiter().GetResult();
             }
 
             // prevent console from closing

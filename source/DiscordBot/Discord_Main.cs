@@ -404,12 +404,11 @@ namespace FoxxiBot.DiscordBot
             SQLite.discordSQL discordSQL = new SQLite.discordSQL();
             var active = discordSQL.getOptions("StreamChannel_Status");
 
-            // Define Discord Context
-            var Context = client.GetGuild(Convert.ToUInt64(Config.DiscordServerId));
-            if (Context == null) { return; }
-
             if (active == "on")
             {
+                // Define Discord Context
+                var Context = client.GetGuild(Convert.ToUInt64(Config.DiscordServerId));
+                if (Context == null) { return; }
 
                 // create twitch api instance
                 var api = new TwitchAPI();
