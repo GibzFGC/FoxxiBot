@@ -61,8 +61,9 @@ $result = $PDO->query("SELECT * FROM gb_polls");
                   <thead>
                   <tr>
                     <th><?=_ID ?></th>
-                    <th style="width: 45%;"><?=_TITLE ?></th>
+                    <th style="width: 30%;"><?=_TITLE ?></th>
                     <th>Items</th>
+                    <th>Poll Ends</th>
                     <th><?=_URL ?></th>
                     <th>Status</th>
                     <th><?= _ACTIONS ?></th>
@@ -78,6 +79,7 @@ $result = $PDO->query("SELECT * FROM gb_polls");
                     <td>". $row["id"] ."</td>
                     <td>". $row["title"] ."</td>
                     <td>&bull; ". $row["option1"] ."<br>&bull; ". $row["option2"] ."<br>&bull; ". $row["option3"] ."<br>&bull; ". $row["option4"] ."</td>
+                    <td>". $row["datetime"] ."</td>
                     <td><a target='_blank' href='". $gfw['site_url'] . "/obs/polls/index.php?id=$row[id]'>View Poll</a></td>
               ";
 
