@@ -139,9 +139,13 @@ namespace FoxxiBot
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
                 Console.WriteLine("");
-
+                
                 // Start Twitch Bot
-                if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+                if (string.IsNullOrEmpty(Config.TwitchClientId) && string.IsNullOrEmpty(Config.TwitchClientOAuth))
+                {
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                }
+                else
                 {
                     // Check Twitch Tokens
                     refreshBotOauth();
@@ -149,20 +153,16 @@ namespace FoxxiBot
                     // Start the Twitch Bot
                     Twitch_Main bot = new Twitch_Main();
                 }
-                else
-                {
-                    Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
-                }
 
                 // Create Discord Bot
-                if (Config.DiscordToken != null)
+                if (string.IsNullOrEmpty(Config.DiscordToken) || Config.DiscordToken == null || Config.DiscordToken == "")
+                {
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
+                }
+                else
                 {
                     DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
                     Discord.MainAsync().GetAwaiter().GetResult();
-                }
-                else
-                {
-                    Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
                 }
 
                 // Check & Set Debug Mode
@@ -346,24 +346,28 @@ namespace FoxxiBot
             Console.WriteLine("");
 
             // Start Twitch Bot
-            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+            if (string.IsNullOrEmpty(Config.TwitchClientId) && string.IsNullOrEmpty(Config.TwitchClientOAuth))
             {
-                Twitch_Main bot = new Twitch_Main();
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
             }
             else
             {
-                Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                // Check Twitch Tokens
+                refreshBotOauth();
+
+                // Start the Twitch Bot
+                Twitch_Main bot = new Twitch_Main();
             }
 
             // Create Discord Bot
-            if (Config.DiscordToken != null)
+            if (string.IsNullOrEmpty(Config.DiscordToken) || Config.DiscordToken == null || Config.DiscordToken == "")
             {
-                DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
-                Discord.MainAsync().GetAwaiter().GetResult();
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
             }
             else
             {
-                Console.Write(DateTime.Now + ": " + Config.TwitchBotName + " - Discord Layer De-Activated");
+                DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
+                Discord.MainAsync().GetAwaiter().GetResult();
             }
 
             // prevent console from closing
