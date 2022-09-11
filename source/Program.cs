@@ -139,19 +139,19 @@ namespace FoxxiBot
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
                 Console.WriteLine("");
-
+                
                 // Start Twitch Bot
-                if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+                if (string.IsNullOrEmpty(Config.TwitchClientId) && string.IsNullOrEmpty(Config.TwitchClientOAuth))
+                {
+                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                }
+                else
                 {
                     // Check Twitch Tokens
                     refreshBotOauth();
 
                     // Start the Twitch Bot
                     Twitch_Main bot = new Twitch_Main();
-                }
-                else
-                {
-                    Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
                 }
 
                 // Create Discord Bot
@@ -346,13 +346,17 @@ namespace FoxxiBot
             Console.WriteLine("");
 
             // Start Twitch Bot
-            if (Config.TwitchClientId != null && Config.TwitchClientOAuth != null)
+            if (string.IsNullOrEmpty(Config.TwitchClientId) && string.IsNullOrEmpty(Config.TwitchClientOAuth))
             {
-                Twitch_Main bot = new Twitch_Main();
+                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
             }
             else
             {
-                Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - Twitch Layer De-Activated");
+                // Check Twitch Tokens
+                refreshBotOauth();
+
+                // Start the Twitch Bot
+                Twitch_Main bot = new Twitch_Main();
             }
 
             // Create Discord Bot
