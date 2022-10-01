@@ -31,7 +31,7 @@ In order to compile it yourself, you'll need
 
 FoxxiBot requires that you set up a Twitch Account for it to use (if you don't have a bot account already). You can do this via a private browser window if you don't want to be logged out of your main account.
 
-The Bot also requires at least one of these to function or both if you intend to use both:
+The Bot also requires at least one of these to function. The Bot is for Twitch so it requires that at the least.
 - [Twitch Developer Application](https://dev.twitch.tv) 
 - [Discord Developer Application](https://discord.com/developers/applications)
 
