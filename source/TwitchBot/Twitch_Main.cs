@@ -16,6 +16,7 @@ using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
+using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
@@ -245,8 +246,8 @@ namespace FoxxiBot.TwitchBot
                 {
                     while (rdr.Read())
                     {
-                        // Send Message to Twitch
-                        client.SendMessage(Config.TwitchClientChannel, "/announce " + (string)rdr["response"]);
+                        // Send Announcement to Twitch
+                        client.Announce(Config.TwitchClientChannel, (string)rdr["response"]);
 
                         // Add 1 to current_row
                         current_row = current_row + 1;
