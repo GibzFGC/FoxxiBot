@@ -25,7 +25,7 @@ namespace FoxxiBot
     {
 
         // Set the Scopes for Twitch
-        private static List<string> botScopes = new List<string> { "chat:read", "whispers:read", "whispers:edit", "chat:edit", "channel:moderate", "channel:manage:broadcast", "channel:read:redemptions", "channel:read:subscriptions" };
+        private static List<string> botScopes = new List<string> { "chat:read", "whispers:read", "whispers:edit", "chat:edit", "channel:moderate", "channel:manage:broadcast", "channel:read:redemptions", "channel:read:subscriptions", "moderator:manage:announcements", "moderator:manage:banned_users", "moderator:manage:chat_messages", "moderator:manage:chat_settings" };
         private static List<string> broadcastScopes = new List<string> { "channel:manage:broadcast", "channel:edit:commercial", "channel:moderate", "channel:read:redemptions", "channel:read:subscriptions", "chat:read", "whispers:read" };
 
         static void Server()
