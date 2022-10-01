@@ -28,8 +28,10 @@ namespace FoxxiBot.WebServer
         private readonly string[] _IndexFiles = {
             "index.html",
             "index.htm",
+            "index.htmx",
             "default.html",
             "default.htm",
+            "default.htmx",
             "index.php",
             "default.php"
         };
@@ -56,6 +58,7 @@ namespace FoxxiBot.WebServer
             {".htc", "text/x-component"},
             {".htm", "text/html"},
             {".html", "text/html"},
+            {".htmx", "text/html"},
             {".ico", "image/x-icon"},
             {".img", "application/octet-stream"},
             {".iso", "application/octet-stream"},
