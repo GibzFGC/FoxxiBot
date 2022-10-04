@@ -138,6 +138,9 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnError(object sender, OnErrorEventArgs e)
         {
+            // Sends Error Message
+            Class.Bot_Functions.WriteColour($"Error: {Config.TwitchBotName} [| Twitch] - {e.Exception.Message}", ConsoleColor.Red);
+
             // Deactivate the Current Client & Service Hooks
             UnhookHandlers();
 
