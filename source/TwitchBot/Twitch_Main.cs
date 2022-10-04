@@ -12,6 +12,7 @@
 
 using System;
 using System.Data.SQLite;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
@@ -20,6 +21,7 @@ using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
+using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
 using TwitchLib.PubSub;
 
@@ -70,6 +72,7 @@ namespace FoxxiBot.TwitchBot
             client.OnUserJoined += Client_UserJoined;
             client.OnUserLeft += Client_UserLeft;
             client.OnChatCommandReceived += Client_OnChatCommandReceived;
+            client.OnError += Client_OnError;
 
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
             pubsub.OnListenResponse += Pubsub_OnListenResponse;
@@ -104,6 +107,42 @@ namespace FoxxiBot.TwitchBot
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+        }
+
+        private void UnhookHandlers()
+        {
+            client.OnLog -= Client_OnLog;
+            client.OnJoinedChannel -= Client_OnJoinedChannel;
+            client.OnLeftChannel -= Client_OnLeftChannel;
+            client.OnMessageReceived -= Client_OnMessageReceived;
+            client.OnNewSubscriber -= Client_OnNewSubscriber;
+            client.OnConnected -= Client_OnConnected;
+            client.OnDisconnected -= Client_OnDisconnected;
+            client.OnIncorrectLogin -= Client_OnIncorrectLogin;
+            client.OnRaidNotification -= Client_OnRaidNotification;
+            client.OnUserJoined -= Client_UserJoined;
+            client.OnUserLeft -= Client_UserLeft;
+            client.OnChatCommandReceived -= Client_OnChatCommandReceived;
+            client.OnError -= Client_OnError;
+
+            pubsub.OnPubSubServiceConnected -= Pubsub_OnPubSubServiceConnected;
+            pubsub.OnListenResponse -= Pubsub_OnListenResponse;
+            pubsub.OnStreamUp -= Pubsub_OnStreamUp;
+            pubsub.OnStreamDown -= Pubsub_OnStreamDown;
+            pubsub.OnFollow -= PubSub_OnFollow;
+            pubsub.OnRaidUpdateV2 -= PubSub_OnRaidUpdateV2;
+
+            client.Disconnect();
+            pubsub.Disconnect();
+        }
+
+        private void Client_OnError(object sender, OnErrorEventArgs e)
+        {
+            // Deactivate the Current Client & Service Hooks
+            UnhookHandlers();
+
+            // Start the Twitch Bot
+            Twitch_Main bot = new Twitch_Main();
         }
 
         private void PubSub_OnRaidUpdateV2(object sender, TwitchLib.PubSub.Events.OnRaidUpdateV2Args e)
@@ -588,7 +627,7 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(result);
                 }
 
-                // Link Permission Handler
+                // Disconnect Tester
                 if (e.Command.CommandText == "disconnect")
                 {
                     SendChatMessage(Config.TwitchBotName + " will now close the Twitch Connection...");
