@@ -171,7 +171,7 @@ namespace FoxxiBot.TwitchBot
             catch
             {
                 // Get Shoutout Data
-                var data = Twitch_GetData.displayNametoUserID(normalize).GetAwaiter().GetResult();
+                var data = Twitch_GetData.displayNametoUserLogin(normalize).GetAwaiter().GetResult();
 
                 // If User Doesn't Exist
                 if (data == "n/a")

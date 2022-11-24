@@ -64,6 +64,23 @@ namespace FoxxiBot.TwitchBot
                 return "n/a";
             }
 
+            return data.Channels[0].Id;
+        }
+
+        public static async Task<string> displayNametoUserLogin(string input)
+        {
+            // create twitch api instance
+            var api = new TwitchAPI();
+            api.Settings.ClientId = Config.TwitchClientId;
+            api.Settings.AccessToken = Config.TwitchClientOAuth;
+
+            var data = await api.Helix.Search.SearchChannelsAsync(input);
+
+            if (data.Channels.Length == 0)
+            {
+                return "n/a";
+            }
+
             return data.Channels[0].BroadcasterLogin;
         }
 
@@ -98,7 +115,7 @@ namespace FoxxiBot.TwitchBot
             int Minutes = Now.Subtract(dtPastYearDate).Minutes;
             int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            return String.Format("Age: {0} Year(s) {1} Month(s) {2} Day(s) {3} Hour(s) {4} Second(s)",
+            return String.Format("The account was created {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
                                 Years, Months, Days, Hours, Seconds);
         }
 
@@ -133,7 +150,7 @@ namespace FoxxiBot.TwitchBot
             int Minutes = Now.Subtract(dtPastYearDate).Minutes;
             int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            return String.Format("Age: {0} Year(s) {1} Month(s) {2} Day(s) {3} Hour(s) {4} Second(s)",
+            return String.Format($"The account followed this channel {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
                                 Years, Months, Days, Hours, Seconds);
         }
 

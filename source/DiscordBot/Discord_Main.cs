@@ -383,8 +383,13 @@ namespace FoxxiBot.DiscordBot
             foreach (var channel in Context.Channels)
             {
                 var channel_type = channel.GetChannelType();
-                await discordSQL.syncChannels(channel.Id.ToString(), channel.Name, channel_type.Value.ToString());
+
+                if (channel_type.HasValue)
+                {
+                    await discordSQL.syncChannels(channel.Id.ToString(), channel.Name, channel_type.Value.ToString());
+                }
             }
+
         }
 
         private async Task RolesListtSQL()
