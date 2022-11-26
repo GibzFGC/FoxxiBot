@@ -29,7 +29,7 @@ namespace FoxxiBot.WebServer
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries/php-8.1.9/php-cgi.exe";
+                phpDir = AppDomain.CurrentDomain.BaseDirectory + "Binaries/php/php-cgi.exe";
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
