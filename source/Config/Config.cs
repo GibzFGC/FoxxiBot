@@ -14,8 +14,9 @@ namespace FoxxiBot
 {
     public static class Config
     {
-        // Debug
+        // Debug & Software Specific
         public static string Debug = "false";
+        public static string Version = "1.0.6";
 
         // Webserver
         public static string WebserverIP = "";

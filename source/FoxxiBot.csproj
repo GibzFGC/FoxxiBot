@@ -9,24 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ddxgt50g.qk2~" />
-    <None Remove="DiscordBot\Commands\Images\Discord_Memes.cs~RF106b442.TMP" />
-    <None Remove="Program.cs~RFd96c85.TMP" />
+    <None Remove="Program.cs~RF376025.TMP" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="3.8.0" />
-    <PackageReference Include="Jint" Version="3.0.0-beta-2037" />
-    <PackageReference Include="linqtotwitter" Version="6.15.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Discord.Net" Version="3.9.0" />
+    <PackageReference Include="Jint" Version="3.0.0-beta-2044" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.116" />
-    <PackageReference Include="TwitchLib" Version="3.4.1" />
+    <PackageReference Include="TwitchLib" Version="3.5.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DiscordBot\Commands\Games\" />
-    <Folder Include="DiscordBot\Commands\Tests\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

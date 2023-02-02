@@ -64,6 +64,23 @@ namespace FoxxiBot.TwitchBot
                 return "n/a";
             }
 
+            return data.Channels[0].Id;
+        }
+
+        public static async Task<string> displayNametoUserLogin(string input)
+        {
+            // create twitch api instance
+            var api = new TwitchAPI();
+            api.Settings.ClientId = Config.TwitchClientId;
+            api.Settings.AccessToken = Config.TwitchClientOAuth;
+
+            var data = await api.Helix.Search.SearchChannelsAsync(input);
+
+            if (data.Channels.Length == 0)
+            {
+                return "n/a";
+            }
+
             return data.Channels[0].BroadcasterLogin;
         }
 
@@ -76,20 +93,30 @@ namespace FoxxiBot.TwitchBot
 
             var data = await api.Helix.Users.GetUsersAsync(ids: new List<string> { user_id });
 
-            DateTime current_time = DateTime.UtcNow;
-            DateTime user_time = DateTime.Parse(data.Users[0].CreatedAt.ToString());
+            DateTime Now = DateTime.Now;
+            int Years = new DateTime(DateTime.Now.Subtract(DateTime.Parse(data.Users[0].CreatedAt.ToString())).Ticks).Year - 1;
+            DateTime dtPastYearDate = DateTime.Parse(data.Users[0].CreatedAt.ToString()).AddYears(Years);
+            int Months = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                if (dtPastYearDate.AddMonths(i) == Now)
+                {
+                    Months = i;
+                    break;
+                }
+                else if (dtPastYearDate.AddMonths(i) >= Now)
+                {
+                    Months = i - 1;
+                    break;
+                }
+            }
+            int Days = Now.Subtract(dtPastYearDate.AddMonths(Months)).Days;
+            int Hours = Now.Subtract(dtPastYearDate).Hours;
+            int Minutes = Now.Subtract(dtPastYearDate).Minutes;
+            int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            TimeSpan ts1 = new TimeSpan(current_time.Ticks);
-            TimeSpan ts2 = new TimeSpan(user_time.Ticks);
-
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-
-            return Convert.ToInt32(ts.Days / 365.25) + " years, " +
-                Convert.ToInt32(ts.Days / 30.4167 % 12) + " months, " +
-                Math.Floor(ts.Days / 365.25 % 1440) + " days, " +
-                ts.Hours + " hours, " +
-                ts.Minutes + " mins, " +
-                ts.Seconds + " secs";
+            return String.Format("The account was created {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
+                                Years, Months, Days, Hours, Seconds);
         }
 
         public static async Task<string> getFollowAge(string user_id)
@@ -101,20 +128,30 @@ namespace FoxxiBot.TwitchBot
 
             var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id, toId: Config.TwitchMC_Id);
 
-            DateTime current_time = DateTime.UtcNow;
-            DateTime user_time = DateTime.Parse(data.Follows[0].FollowedAt.ToString());
+            DateTime Now = DateTime.Now;
+            int Years = new DateTime(DateTime.Now.Subtract(DateTime.Parse(data.Follows[0].FollowedAt.ToString())).Ticks).Year - 1;
+            DateTime dtPastYearDate = DateTime.Parse(data.Follows[0].FollowedAt.ToString()).AddYears(Years);
+            int Months = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                if (dtPastYearDate.AddMonths(i) == Now)
+                {
+                    Months = i;
+                    break;
+                }
+                else if (dtPastYearDate.AddMonths(i) >= Now)
+                {
+                    Months = i - 1;
+                    break;
+                }
+            }
+            int Days = Now.Subtract(dtPastYearDate.AddMonths(Months)).Days;
+            int Hours = Now.Subtract(dtPastYearDate).Hours;
+            int Minutes = Now.Subtract(dtPastYearDate).Minutes;
+            int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            TimeSpan ts1 = new TimeSpan(current_time.Ticks);
-            TimeSpan ts2 = new TimeSpan(user_time.Ticks);
-
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-
-            return Convert.ToInt32(ts.Days / 365.25) + " years, " +
-                Convert.ToInt32(ts.Days / 30.4167 % 12) + " months, " +
-                ts.Days / 365.25 % 1440 + " days, " +
-                ts.Hours + " hours, " +
-                ts.Minutes + " mins, " +
-                ts.Seconds + " secs";
+            return String.Format($"The account followed this channel {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
+                                Years, Months, Days, Hours, Seconds);
         }
 
         public static async Task<string> getFollows()

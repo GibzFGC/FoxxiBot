@@ -12,13 +12,16 @@
 
 using System;
 using System.Data.SQLite;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
+using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
+using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
 using TwitchLib.PubSub;
 
@@ -69,6 +72,7 @@ namespace FoxxiBot.TwitchBot
             client.OnUserJoined += Client_UserJoined;
             client.OnUserLeft += Client_UserLeft;
             client.OnChatCommandReceived += Client_OnChatCommandReceived;
+            client.OnError += Client_OnError;
 
             pubsub.OnPubSubServiceConnected += Pubsub_OnPubSubServiceConnected;
             pubsub.OnListenResponse += Pubsub_OnListenResponse;
@@ -103,6 +107,45 @@ namespace FoxxiBot.TwitchBot
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
             //oauthTimer = new Timer(OauthCallback, null, 0, 1800000);
+        }
+
+        private void UnhookHandlers()
+        {
+            client.OnLog -= Client_OnLog;
+            client.OnJoinedChannel -= Client_OnJoinedChannel;
+            client.OnLeftChannel -= Client_OnLeftChannel;
+            client.OnMessageReceived -= Client_OnMessageReceived;
+            client.OnNewSubscriber -= Client_OnNewSubscriber;
+            client.OnConnected -= Client_OnConnected;
+            client.OnDisconnected -= Client_OnDisconnected;
+            client.OnIncorrectLogin -= Client_OnIncorrectLogin;
+            client.OnRaidNotification -= Client_OnRaidNotification;
+            client.OnUserJoined -= Client_UserJoined;
+            client.OnUserLeft -= Client_UserLeft;
+            client.OnChatCommandReceived -= Client_OnChatCommandReceived;
+            client.OnError -= Client_OnError;
+
+            pubsub.OnPubSubServiceConnected -= Pubsub_OnPubSubServiceConnected;
+            pubsub.OnListenResponse -= Pubsub_OnListenResponse;
+            pubsub.OnStreamUp -= Pubsub_OnStreamUp;
+            pubsub.OnStreamDown -= Pubsub_OnStreamDown;
+            pubsub.OnFollow -= PubSub_OnFollow;
+            pubsub.OnRaidUpdateV2 -= PubSub_OnRaidUpdateV2;
+
+            client.Disconnect();
+            pubsub.Disconnect();
+        }
+
+        private void Client_OnError(object sender, OnErrorEventArgs e)
+        {
+            // Sends Error Message
+            Class.Bot_Functions.WriteColour($"Error: {Config.TwitchBotName} [| Twitch] - {e.Exception.Message}", ConsoleColor.Red);
+
+            // Deactivate the Current Client & Service Hooks
+            UnhookHandlers();
+
+            // Start the Twitch Bot
+            Twitch_Main bot = new Twitch_Main();
         }
 
         private void PubSub_OnRaidUpdateV2(object sender, TwitchLib.PubSub.Events.OnRaidUpdateV2Args e)
@@ -245,8 +288,8 @@ namespace FoxxiBot.TwitchBot
                 {
                     while (rdr.Read())
                     {
-                        // Send Message to Twitch
-                        client.SendMessage(Config.TwitchClientChannel, "/announce " + (string)rdr["response"]);
+                        // Send Announcement to Twitch
+                        client.Announce(Config.TwitchClientChannel, (string)rdr["response"]);
 
                         // Add 1 to current_row
                         current_row = current_row + 1;
@@ -389,48 +432,6 @@ namespace FoxxiBot.TwitchBot
 
             // If Discord Auto Stream Message is Active, Send a Notification
             Discord_AutoLiveMessage();
-
-            // If Twitter & LiveStatement is Active, Send a Tweet
-            SQLite.botSQL botSQL = new SQLite.botSQL();
-
-            if (botSQL.getOptions("twitter_features") == "on")
-            {
-
-                if (botSQL.getOptions("twitter_livestatement_status") == "on")
-                {
-                    // Check if Game has it's own Method
-                    using var con = new SQLiteConnection(cs);
-                    con.Open();
-
-                    // Get the currently played game
-                    var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
-
-                    // Start DB Search
-                    string stm = "SELECT * FROM gb_twitter_status WHERE game = '" + data.ToString() + "' OR game = 'null' AND active = 1 LIMIT 1";
-
-                    using var cmd = new SQLiteCommand(stm, con);
-                    using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-                    if (rdr.HasRows == true)
-                    {
-
-                        while (rdr.Read())
-                        {
-
-                            Twitch_Variables variables = new Twitch_Variables();
-                            var tweet_status = variables.convertVariables(null, rdr["tweet"].ToString(), null, null);
-
-                            Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-                            twitterAPI.sendTweet(tweet_status).GetAwaiter().GetResult();
-
-                        }
-
-                    }
-
-                    con.Close();
-                }
-
-            }
         }
 
         private void Pubsub_OnStreamDown(object sender, TwitchLib.PubSub.Events.OnStreamDownArgs e)
@@ -587,7 +588,7 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(result);
                 }
 
-                // Link Permission Handler
+                // Disconnect Tester
                 if (e.Command.CommandText == "disconnect")
                 {
                     SendChatMessage(Config.TwitchBotName + " will now close the Twitch Connection...");
@@ -706,33 +707,6 @@ namespace FoxxiBot.TwitchBot
 
                 var result = commands.commandVoting(e);
                 SendChatMessage(result);
-            }
-
-
-            //// == Twitter Commands == ////
-            ///
-            // Tweet Handler
-            if (e.Command.CommandText == "tweet")
-            {
-                if (e.Command.ChatMessage.IsBroadcaster)
-                {
-                    // Check if Twitter Features are Active
-                    SQLite.botSQL botSQL = new SQLite.botSQL();
-                    if (botSQL.getOptions("twitter_features") == "off")
-                    {
-                        SendChatMessage("The bot's Twitter Functionality is currently turned off");
-                        return;
-                    }
-
-                    // Twitter Confirmed Active, Let's Tweet!
-                    Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-
-                    Twitch_Variables variables = new Twitch_Variables();
-                    var var_string = variables.convertVariables(null, e.Command.ArgumentsAsString, null, null);
-
-                    twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
-                    SendChatMessage("The tweet has been sent!");
-                }
             }
 
             // If command not development defined, check users custom in SQLite
