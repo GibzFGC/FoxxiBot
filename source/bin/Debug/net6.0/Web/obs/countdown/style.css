@@ -3,19 +3,19 @@
 }
 
 body {
-    color: rgb(240, 229, 229);
+    color: #FFF;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    font-family: sans-serif;
+    font-family: "A Arang", sans-serif;
     margin: 0;
 }
 
 h1 {
     font-weight: normal;
-    font-size: 4rem;
-    margin-top: 5rem;
+    font-size: 60px;
+    margin-top: 10px;
 }
 
 .countdown-container {
