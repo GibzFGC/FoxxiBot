@@ -205,41 +205,6 @@ define("_PROMO_STREAMER_ADD_BTN", "Add Streamer to Promo");
 define("_PROMO_STREAMER_REGISTERED", "Here are the registered Streamers for Promo.");
 define("_PROMO_STREAMER_OFFLINE", "Currently Offline");
 
-define("_TWITTER", "Twitter");
-define("_TWITTER_GAME_STATUS", "Add a Game Live Status");
-define("_TWITTER_STATUS_LIST", "Twitter Status List");
-define("_TWITTER_SETTINGS", "Twitter Settings");
-define("_TWITTER_LIVE_ADD", "Adding a Twitter Live Status");
-define("_TWITTER_TWEET_INFO", "Tweet Information");
-define("_TWITTER_GAME_NAME", "Game Name (must match Twitch name)");
-define("_TWITTER_GAME_NAME_PLACE", "Enter a Game Title");
-define("_TWITTER_CONTENT", "Tweet Contents");
-define("_TWITTER_CONTENT_PLACE", "Enter the tweet text here...");
-define("_TWITTER_TWEET_CREATE", "Create Tweet");
-define("_TWITTER_TWEET_UPDATE", "Update Tweet");
-define("_TWITTER_USEFUL_VARS", "Useful Variables");
-define("_TWITTER_VARS_INFO", "Here is a list of internal variables:<br /><br />
-{link} - returns your Twitch stream url<br />
-{game} - returns the currently assigned Twitch game<br />
-{title} - returns the current Twitch stream title<br /><br />
-More might be added in future, recommend some!");
-define("_TWITTER_EDIT_STATUS", "Editing a Twitter Live Status");
-define("_TWITTER_STATUS_MNGMNT", "Twitter Status Management");
-define("_TWITTER_STATUS_YOURS", "Here are your Twitter Live Statuses.");
-define("_TWITTER_FEAT", "Twitter Features");
-define("_TWITTER_USERNAME", "Twitter Username");
-define("_TWITTER_USERNAME_PLACE", "Enter Your Twitter Username");
-define("_TWITTER_ACCESSTOKEN", "User Access Token");
-define("_TWITTER_ACCESSTOKEN_PLACE", "Enter Your User Token");
-define("_TWITTER_ACCESSSECRET", "User Access Secret");
-define("_TWITTER_ACCESSSECRET_PLACE", "Enter Your Application API Key Secret");
-define("_TWITTER_APIKEY", "Application API Key");
-define("_TWITTER_APIKEY_PLACE", "Enter Your Consumer Key");
-define("_TWITTER_APISECRET", "Application API Key Secret");
-define("_TWITTER_APISECRET_PLACE", "Enter Your Consumer Secret");
-define("_TWITTER_AUTOTWEET", "Live Auto-Tweet");
-define("_TWITTER_OPTIONAL", "This is an optional service if you want Twitter functionality.");
-
 define("_COUNTDOWN", "Countdown Timers");
 define("_COUNTDOWN_ADD", "Add a Countdown");
 define("_COUNTDOWN_MNGMT", "Countdown Management");
@@ -313,8 +278,6 @@ define("_BOT_SETTINGS_DEBUG_RESTART", "(requires a restart)");
 define("_BOT_SETTINGS_SIDEBAR", "Side Menu Settings");
 define("_BOT_SETTINGS_DISCORD_MENU", "Show Discord Menu");
 define("_BOT_SETTINGS_TWITCH_MENU", "Show Twitch Menu");
-define("_BOT_SETTINGS_TWITTER_MENU", "Show Twitter Menu");
-define("_BOT_SETTINGS_TOURN_MENU", "Show Tournament Menu");
 define("_BOT_SETTINGS_DISCORD_OPT", "Optional settings for Discord if you plan to use that side of the bot.");
 
 define("_HELP", "HELP & SUPPORT");
