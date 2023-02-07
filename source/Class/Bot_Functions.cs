@@ -222,6 +222,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_tournament_top8 (parameter TEXT UNIQUE, value TEXT)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_botlist (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
             cmd.ExecuteNonQuery();
 

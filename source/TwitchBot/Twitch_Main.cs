@@ -606,6 +606,13 @@ namespace FoxxiBot.TwitchBot
                     client.Disconnect();
                 }
 
+                // Update Bot List
+                if (e.Command.CommandText == "botlist")
+                {
+                    var data = commands.commandBotList();
+                    SendChatMessage(Config.TwitchBotName + ": " + data);
+                }
+
             }
 
             //// == User Commands == ////
