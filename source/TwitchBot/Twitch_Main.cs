@@ -476,6 +476,17 @@ namespace FoxxiBot.TwitchBot
             Twitch_Games games = new Twitch_Games();
             Twitch_Points points = new Twitch_Points();
 
+            //// == Check if User Blacklisted== ////
+            ///
+
+            var blocklist = Twitch_GetData.commandBlacklist(e.Command.ChatMessage.Username);
+            
+            if (blocklist == true)
+            {
+                SendChatMessage("The user: " + e.Command.ChatMessage.DisplayName + " has been banned from using chat commands from this bot");
+                return;
+            }
+
             //// == Admin Commands == ////
             //
 

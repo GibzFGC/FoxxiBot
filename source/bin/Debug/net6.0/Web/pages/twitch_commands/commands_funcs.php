@@ -30,6 +30,11 @@ if ($_REQUEST["v"] == "blacklist") {
     
         $stmt->bindValue(':username', $_POST["twitchName"]);
         $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&a=blacklist&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
     }
 
     if ($_REQUEST["d"] == "delete") {
@@ -38,6 +43,11 @@ if ($_REQUEST["v"] == "blacklist") {
         
         $stmt->bindValue(':commandID', $_REQUEST["id"]);
         $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&a=blacklist&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
     }
 
 }
