@@ -2,7 +2,7 @@
 <html lang="en" >
     <head>
       <meta charset="UTF-8">
-      <title>FoxxiBot | Countdown Timer</title>
+      <title>Countdown Timer</title>
       <link rel="stylesheet" href="./style.css">
     </head>
 
@@ -45,10 +45,10 @@
             });
 
             function countdown() {
-                const countdownDate = new Date(datetime);
+                const newYearsDate = new Date(datetime);
                 const currentDate = new Date();
 
-                const totalSeconds = (countdownDate - currentDate) / 1000;
+                const totalSeconds = (newYearsDate - currentDate) / 1000;
 
                 const days = Math.floor(totalSeconds / 3600 / 24);
                 const hours = Math.floor(totalSeconds / 3600) % 24;

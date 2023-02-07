@@ -111,27 +111,6 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('tournament_features','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_features','off')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_username','')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_usertoken','')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_usertokensecret','')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_consumerkey','')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_consumersecret','')";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_options (parameter, value) VALUES('twitter_livestatement_status','off')";
-            cmd.ExecuteNonQuery();
-
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value INTEGER)";
             cmd.ExecuteNonQuery();
 
@@ -355,12 +334,6 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitter_status (game TEXT UNIQUE, tweet TEXT, active INTEGER)";
-            cmd.ExecuteNonQuery();
-
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_twitter_status (game, tweet, active) VALUES('null', 'What to send to twitter if there is no game specified. Activate once you edit it for usage!', '0')";
             cmd.ExecuteNonQuery();
 
             // Commit all Data to SQL

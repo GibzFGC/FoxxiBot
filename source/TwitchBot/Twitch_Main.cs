@@ -432,48 +432,6 @@ namespace FoxxiBot.TwitchBot
 
             // If Discord Auto Stream Message is Active, Send a Notification
             Discord_AutoLiveMessage();
-
-            // If Twitter & LiveStatement is Active, Send a Tweet
-            SQLite.botSQL botSQL = new SQLite.botSQL();
-
-            if (botSQL.getOptions("twitter_features") == "on")
-            {
-
-                if (botSQL.getOptions("twitter_livestatement_status") == "on")
-                {
-                    // Check if Game has it's own Method
-                    using var con = new SQLiteConnection(cs);
-                    con.Open();
-
-                    // Get the currently played game
-                    var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
-
-                    // Start DB Search
-                    string stm = "SELECT * FROM gb_twitter_status WHERE game = '" + data.ToString() + "' OR game = 'null' AND active = 1 LIMIT 1";
-
-                    using var cmd = new SQLiteCommand(stm, con);
-                    using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-                    if (rdr.HasRows == true)
-                    {
-
-                        while (rdr.Read())
-                        {
-
-                            Twitch_Variables variables = new Twitch_Variables();
-                            var tweet_status = variables.convertVariables(null, rdr["tweet"].ToString(), null, null);
-
-                            Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-                            twitterAPI.sendTweet(tweet_status).GetAwaiter().GetResult();
-
-                        }
-
-                    }
-
-                    con.Close();
-                }
-
-            }
         }
 
         private void Pubsub_OnStreamDown(object sender, TwitchLib.PubSub.Events.OnStreamDownArgs e)
@@ -749,33 +707,6 @@ namespace FoxxiBot.TwitchBot
 
                 var result = commands.commandVoting(e);
                 SendChatMessage(result);
-            }
-
-
-            //// == Twitter Commands == ////
-            ///
-            // Tweet Handler
-            if (e.Command.CommandText == "tweet")
-            {
-                if (e.Command.ChatMessage.IsBroadcaster)
-                {
-                    // Check if Twitter Features are Active
-                    SQLite.botSQL botSQL = new SQLite.botSQL();
-                    if (botSQL.getOptions("twitter_features") == "off")
-                    {
-                        SendChatMessage("The bot's Twitter Functionality is currently turned off");
-                        return;
-                    }
-
-                    // Twitter Confirmed Active, Let's Tweet!
-                    Services.Twitter.Twitter_Main twitterAPI = new Services.Twitter.Twitter_Main();
-
-                    Twitch_Variables variables = new Twitch_Variables();
-                    var var_string = variables.convertVariables(null, e.Command.ArgumentsAsString, null, null);
-
-                    twitterAPI.sendTweet(var_string).GetAwaiter().GetResult();
-                    SendChatMessage("The tweet has been sent!");
-                }
             }
 
             // If command not development defined, check users custom in SQLite

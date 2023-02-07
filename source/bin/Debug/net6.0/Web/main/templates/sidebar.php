@@ -306,45 +306,6 @@ foreach($result as $row)
             </a>
           </li>          
           <?php } ?>
-          <?php if ($options["twitter_features"] == "on") { ?>
-          <li class="li_header"><?= _OTHER_SERVICE ?></li>
-          
-
-            <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fab fa-twitter"></i>
-              <p>
-              <?= _TWITTER ?>
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=add" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p><?= _TWITTER_GAME_STATUS ?></p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p><?= _TWITTER_STATUS_LIST ?></p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitter&a=settings" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p><?= _TWITTER_SETTINGS ?></p>
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-          <?php } ?>
 
           <li class="li_header"><?= _GLOBAL_FEAT ?></li>
 
