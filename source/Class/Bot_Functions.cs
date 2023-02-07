@@ -39,6 +39,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands_blacklist (id INTEGER PRIMARY KEY, username TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_countdowns (id INTEGER PRIMARY KEY, title TEXT, datetime TEXT, timestamp TEXT)";
             cmd.ExecuteNonQuery();
 
@@ -112,6 +115,9 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value INTEGER)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_blacklist (id INTEGER PRIMARY KEY, username TEXT)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_actions (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, recipient TEXT, action TEXT, points INTEGER, status INTEGER)";
