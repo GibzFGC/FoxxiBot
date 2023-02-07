@@ -18,9 +18,6 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 	$gfw["bot_config"] = file_get_contents("../Data/config.json");
 	$bot_obj = json_decode($gfw["bot_config"]);
 	
-	$gfw["Version"] = $bot_obj->Version;
-	$gfw["Debug"] = $bot_obj->Debug;
-
 	$gfw["Twitch_ClientID"] = $bot_obj->TwitchClientID;
 	$gfw["Twitch_ClientOAuth"] = $bot_obj->TwitchClientOAuth;
 	$gfw["Twitch_ClientUser"] = $bot_obj->TwitchClientUser;
@@ -79,7 +76,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     
 // Extra Website Settings
 	$gfw['current_year'] = date("Y");																		// Gets the current year from the server
-	$gfw['current_version'] = "1.5";																		// Current Bot Version
+	$gfw['current_version'] = "1.0.1r2";																	// Current Bot Version
 
 // Website Timezone
     date_default_timezone_set('Europe/London');																// Sets the default timezone for your website (change if needed)

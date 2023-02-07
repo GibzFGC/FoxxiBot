@@ -22,6 +22,26 @@ foreach($result as $row)
   $options[$row["parameter"]] = $row["value"];
 }
 
+if ($_REQUEST["v"] == "blacklist") {
+
+    if ($_REQUEST["d"] == "save") {
+        $sql = 'INSERT INTO gb_commands_blacklist (username) VALUES (:username)' or die(print_r($PDO->errorInfo(), true));
+        $stmt = $PDO->prepare($sql);
+    
+        $stmt->bindValue(':username', $_POST["twitchName"]);
+        $stmt->execute();
+    }
+
+    if ($_REQUEST["d"] == "delete") {
+        $sql = 'DELETE FROM gb_commands_blacklist WHERE id = :commandID';
+        $stmt = $PDO->prepare($sql);
+        
+        $stmt->bindValue(':commandID', $_REQUEST["id"]);
+        $stmt->execute();
+    }
+
+}
+
 if ($_REQUEST["v"] == "save") {
 
     // Check if Bot Controlled Command

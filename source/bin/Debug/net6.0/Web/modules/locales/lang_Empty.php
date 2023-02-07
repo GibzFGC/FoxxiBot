@@ -19,6 +19,29 @@ define("_WAITING_STREAM", "");
 define("_GLOBAL_FEAT", "");
 define("_OTHER_SERVICE", "");
 
+define("_TOURNAMENT_FEAT", "");
+define("_TOURNAMENT", "");
+define("_TOURNAMENT_SCORE", "");
+define("_TOURNAMENT_TOP", "");
+define("_TOURNAMENT_PLAYER", "");
+define("_TOURNAMENT_PLAYER_LIST", "");
+define("_TOURNAMENT_ROSTER", "");
+define("_TOURNAMENT_DELETE_PLAYER", "");
+define("_TOURNAMENT_SCOREBOARD", "");
+define("_TOURNAMENT_PLAYER1", "");
+define("_TOURNAMENT_EDIT_BTN", "");
+define("_TOURNAMENT_ADD_BTN", "");
+define("_TOURNAMENT_GROUP", "");
+define("_TOURNAMENT_GROUP_PLACE", "");
+define("_TOURNAMENT_PLAYERNAME", "");
+define("_TOURNAMENT_PLAYERNAME_PLACE", "");
+define("_TOURNAMENT_PLAYER_COUNTRY", "");
+define("_TOURNAMENT_PLAYER_COUNTRY_SELECT", "");
+define("_TOURNAMENT_PLAYER_COUNTRY_CODE", "");
+define("_TOURNAMENT_PLAYER_STATUS", "");
+define("_TOURNAMENT_PLAYER_STATUS_SET", "");
+define("_TOURNAMENT_SWAP", "");
+
 define("_TWITCH_SETTINGS", "");
 define("_TWITCH_SETTINGS_MAIN", "");
 define("_TWITCH_SETTINGS_PARTNER", "");
@@ -247,6 +270,7 @@ define("_BOT_SETTINGS_DEBUG_RESTART", "");
 define("_BOT_SETTINGS_SIDEBAR", "");
 define("_BOT_SETTINGS_DISCORD_MENU", "");
 define("_BOT_SETTINGS_TWITCH_MENU", "");
+define("_BOT_SETTINGS_TOURN_MENU", "");
 define("_BOT_SETTINGS_DISCORD_OPT", "");
 
 define("_HELP", "");

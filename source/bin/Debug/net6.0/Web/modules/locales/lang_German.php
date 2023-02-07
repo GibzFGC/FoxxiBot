@@ -274,6 +274,7 @@ define("_BOT_SETTINGS_DEBUG_RESTART", "(Erfordert einen Neustart)");
 define("_BOT_SETTINGS_SIDEBAR", "Seitenmen� Einstellungen"); 
 define("_BOT_SETTINGS_DISCORD_MENU", "Discord Men� anzeigen"); 
 define("_BOT_SETTINGS_TWITCH_MENU", "Twitch Men� anzeigen");
+define("_BOT_SETTINGS_TOURN_MENU", "Turnier Men  anzeigen");
 define("_BOT_SETTINGS_DISCORD_OPT", "Optionale Einstellungen f�r Discord, wenn du planst, diese Seite des Bots zu verwenden.");
 
 define("_HELP", "HILFE & SUPPORT");
