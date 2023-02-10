@@ -71,7 +71,6 @@ define("_TWITCH_CMD_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist 
 define("_TWITCH_CMD_BLACKLIST_ADD_BTN", "Blacklist User");
 define("_TWITCH_CMD_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
 
-
 define("_TWITCH_MODERATION", "Twitch Moderation");
 define("_TWITCH_MODERATION_EXPL", "Below you can manage how the bot will handle Twitch Moderation");
 define("_TWITCH_MODERATION_BL", "Blacklist Words / URLs");

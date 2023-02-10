@@ -58,6 +58,14 @@ define("_TWITCH_SETTINGS_STREAM_PRIMESUB", "");
 define("_TWITCH_SETTINGS_STREAM_PRIMESUB_PLACE", "");
 define("_TWITCH_SETTINGS_INFO", "");
 
+define("_TWITCH_CMD_BLACKLIST", "");
+define("_TWITCH_CMD_BLACKLIST_TITLE", "");
+define("_TWITCH_CMD_BLACKLIST_ADD", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_LABEL", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_TEXTBOX", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_BTN", "");
+define("_TWITCH_CMD_BLACKLIST_TABLE_HEADER", "");
+
 define("_TWITCH_FEAT", "");
 define("_TWITCH_DATA", "");
 define("_TWITCH_DATA_DELAY", "");
@@ -242,6 +250,14 @@ define("_POINTS_SET_COMPLETE", "");
 define("_POINTS_SET_INCOMPLETE", "");
 define("_POINTS_CONFIRM", "");
 define("_POINTS_COMPLETED", "");
+
+define("_POINT_BLACKLIST", "");
+define("_POINTS_BLACKLIST_TITLE", "");
+define("_POINTS_BLACKLIST_ADD", "");
+define("_POINTS_BLACKLIST_ADD_LABEL", "");
+define("_POINTS_BLACKLIST_ADD_TEXTBOX", "");
+define("_POINTS_BLACKLIST_ADD_BTN", "");
+define("_POINTS_BLACKLIST_TABLE_HEADER", "");
 
 define("_QUOTES", "");
 define("_QUOTES_ADD", "");
