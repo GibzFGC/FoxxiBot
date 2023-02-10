@@ -14,8 +14,9 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
-$result = $PDO->query("SELECT * FROM gb_points WHERE username NOT IN (SELECT username FROM gb_points_blacklist) AND username NOT IN (SELECT username FROM gb_twitch_botlist)");
+$result = $PDO->query("SELECT * FROM gb_points_blacklist");
 ?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -23,12 +24,13 @@ $result = $PDO->query("SELECT * FROM gb_points WHERE username NOT IN (SELECT use
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><?= _POINTS_RANKING ?></h1>
+            <h1><?= _POINTS_BLACKLIST_TITLE ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><?= _HOME ?></a></li>
-              <li class="breadcrumb-item active"><?= _POINTS_RANKING ?></li>
+              <li class="breadcrumb-item"><?= _CMDS ?></li>
+              <li class="breadcrumb-item active"><?= _POINTS_BLACKLIST_TITLE ?></li>
             </ol>
           </div>
         </div>
@@ -40,19 +42,47 @@ $result = $PDO->query("SELECT * FROM gb_points WHERE username NOT IN (SELECT use
 
     <div class="container-fluid">
         <div class="row">
+
+          <div class="col-12">
+          <form method="post" enctype="multipart/form-data" action="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=funcs&v=blacklist&d=save">
+
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"><?= _TWITCH_CMD_BLACKLIST_ADD ?></h3>
+              </div>
+              <!-- /.card-header -->
+                <div class="card-body">
+
+                  <div class="form-group">
+                    <label for="commandName"><?= _TWITCH_CMD_BLACKLIST_ADD_LABEL ?></label>
+                    <input type="text" class="form-control" id="twitchName" name="twitchName" placeholder="<?= _TWITCH_CMD_BLACKLIST_ADD_TEXTBOX ?>">
+                  </div>
+                </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <input type="hidden" id="submit" name="submit" value="submit">
+                <button style="float: right;" type="submit" class="btn btn-primary"><?= _TWITCH_CMD_BLACKLIST_ADD_BTN ?></button>
+              </div>
+            </div>
+            <!-- /.card -->
+
+            </form>
+          </div>
+
           <div class="col-12">
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><?= _POINTS_RANKING_TITLE ?></h3>
+                <h3 class="card-title"><?= _TWITCH_CMD_BLACKLIST_TABLE_HEADER ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="gb_points_rankings" class="table table-bordered table-hover">
+                <table id="gb_datatable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th><?= _USERNAME ?></th>
-                    <th><?= _POINTS ?></th>
                     <th><?= _ACTIONS ?></th>
                   </tr>
                   </thead>
@@ -64,10 +94,7 @@ $result = $PDO->query("SELECT * FROM gb_points WHERE username NOT IN (SELECT use
               print "
                   <tr>
                     <td>". $row["username"] ."</td>
-                    <td>". $row["value"] ."</td>
-                    <td>
-                      <a onclick=\"return confirm('". _DELETE_USER_POINTS . "');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=delete&id=$row[username]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>                    
-                    </td>
+                    <td><a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=points&a=funcs&v=blacklist&d=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a></td>
                   </tr>
               ";
   }

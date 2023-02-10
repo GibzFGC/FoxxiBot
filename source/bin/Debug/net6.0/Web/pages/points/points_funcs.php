@@ -14,6 +14,36 @@
 // Check for Secure Connection
 if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
+if ($_REQUEST["v"] == "blacklist") {
+
+    if ($_REQUEST["d"] == "save") {
+        $sql = 'INSERT INTO gb_points_blacklist (username) VALUES (:username)' or die(print_r($PDO->errorInfo(), true));
+        $stmt = $PDO->prepare($sql);
+    
+        $stmt->bindValue(':username', $_POST["twitchName"]);
+        $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=points&a=blacklist&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+    }
+
+    if ($_REQUEST["d"] == "delete") {
+        $sql = 'DELETE FROM gb_points_blacklist WHERE id = :commandID';
+        $stmt = $PDO->prepare($sql);
+        
+        $stmt->bindValue(':commandID', $_REQUEST["id"]);
+        $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=points&a=blacklist&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+    }
+
+}
+
 if ($_REQUEST["v"] == "save") {
 
     $sql = 'INSERT OR REPLACE INTO gb_points_options (parameter, value) VALUES (:parameter, :value)' or die(print_r($PDO->errorInfo(), true));

@@ -368,6 +368,13 @@ foreach($result as $row)
               </li>              
 
               <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points&a=blacklist" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><?= _POINT_BLACKLIST ?></p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=points" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p><?= _MANAGEMENT ?></p>

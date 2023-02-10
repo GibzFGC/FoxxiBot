@@ -257,6 +257,14 @@ define("_POINTS_SET_INCOMPLETE", "Set as Incomplete");
 define("_POINTS_CONFIRM", "Are you sure you want to refund this user their points?");
 define("_POINTS_COMPLETED", "Completed");
 
+define("_POINT_BLACKLIST", "Points Blacklist");
+define("_POINTS_BLACKLIST_TITLE", "Points Blacklist");
+define("_POINTS_BLACKLIST_ADD", "Add a User to the Blacklist");
+define("_POINTS_BLACKLIST_ADD_LABEL", "Add a User");
+define("_POINTS_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist here");
+define("_POINTS_BLACKLIST_ADD_BTN", "Blacklist User");
+define("_POINTS_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
+
 define("_QUOTES", "Quotes");
 define("_QUOTES_ADD", "Add a Quote");
 define("_QUOTES_ADDING", "Adding a Quote");
