@@ -301,7 +301,7 @@ namespace FoxxiBot.TwitchBot
             using var con = new SQLiteConnection(cs);
             con.Open();
 
-            string stm = "SELECT * FROM gb_points WHERE username = '" + userId + "' LIMIT 1";
+            string stm = "SELECT * FROM gb_points WHERE username = '" + userId + "' AND username NOT IN (SELECT username FROM gb_points_blacklist) AND username NOT IN (SELECT username FROM gb_twitch_botlist) LIMIT 1";
 
             using var cmd = new SQLiteCommand(stm, con);
             using SQLiteDataReader rdr = cmd.ExecuteReader();
@@ -312,6 +312,8 @@ namespace FoxxiBot.TwitchBot
                 {
                     return rdr["value"].ToString();
                 }
+            } else {
+                return "N/A";
             }
 
             con.Close();
