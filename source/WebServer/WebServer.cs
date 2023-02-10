@@ -147,12 +147,12 @@ namespace FoxxiBot.WebServer
         {
             using (HttpListener httpListener = new HttpListener())
             {
-                httpListener.Prefixes.Add($"http://localhost:{ _Port.ToString() }/");
-                httpListener.Prefixes.Add($"http://127.0.0.1:{ _Port.ToString() }/");
+                httpListener.Prefixes.Add($"http://localhost:{_Port.ToString()}/");
+                httpListener.Prefixes.Add($"http://127.0.0.1:{_Port.ToString()}/");
 
                 if (Config.WebserverIP != "" && Config.WebserverIP != null)
                 {
-                    httpListener.Prefixes.Add($"http://{ Config.WebserverIP }:{ _Port.ToString() }/");
+                    httpListener.Prefixes.Add($"http://{Config.WebserverIP}:{_Port.ToString()}/");
                 }
 
                 httpListener.Start();
