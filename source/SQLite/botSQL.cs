@@ -35,11 +35,11 @@ namespace FoxxiBot.SQLite
                 {
                     if (rdr["value"].ToString() == "on")
                     {
-                        Config.Debug = "true";
+                        Config.Debug = true;
                     }
                     else
                     {
-                        Config.Debug = "false";
+                        Config.Debug = false;
                     }
                 }
             }

@@ -356,6 +356,7 @@ namespace FoxxiBot.Class
         {
             Settings.Settings objSettings = new Settings.Settings();
             objSettings.Debug = Config.Debug;
+            objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
             objSettings.BotName = Config.TwitchBotName;

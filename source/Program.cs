@@ -109,7 +109,8 @@ namespace FoxxiBot
                     JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
 
                     // Set needed Values Internally
-                    Config.Debug = (string)o["Debug"];
+                    Config.Debug = (bool)o["Debug"];
+                    Config.WebserverSSL = (bool?)o["WebserverSSL"];
                     Config.WebserverIP = (string)o["WebserverIP"];
                     Config.WebserverPort = (string)o["WebserverPort"];
                     Config.TwitchBotName = (string)o["BotName"];
@@ -138,6 +139,14 @@ namespace FoxxiBot
                 // Start Web Server
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
+
+                if (Config.Debug == true)
+                {
+                    Console.WriteLine($"Server IP / URL: " + Config.WebserverIP);
+                    Console.WriteLine($"Server Port: " + Config.WebserverPort);
+                    Console.WriteLine($"Server Path: " + @AppDomain.CurrentDomain.BaseDirectory + "Web");
+                }
+
                 Console.WriteLine("");
                 
                 // Start Twitch Bot
@@ -176,6 +185,20 @@ namespace FoxxiBot
             {
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Let's Get Started", ConsoleColor.Cyan);
                 Console.WriteLine("");
+
+                // Start Web Server
+                Server();
+                Console.WriteLine("Server Layer: Server Started!");
+
+                if (Config.Debug == true)
+                {
+                    Console.WriteLine($"Server IP / URL: " + Config.WebserverIP);
+                    Console.WriteLine($"Server Port: " + Config.WebserverPort);
+                    Console.WriteLine($"Server Path: " + @AppDomain.CurrentDomain.BaseDirectory + "Web");
+                }
+
+                Console.WriteLine("");
+
                 Console.WriteLine("Let's set up the Bot's permissions to the Bot's Account on Twitch");
                 Console.WriteLine("");
 
@@ -315,6 +338,7 @@ namespace FoxxiBot
             // Save the Settings
             Settings.Settings objSettings = new Settings.Settings();
             objSettings.Debug = Config.Debug;
+            objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
             objSettings.BotName = Config.TwitchBotName;
