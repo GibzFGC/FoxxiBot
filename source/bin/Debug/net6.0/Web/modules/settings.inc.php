@@ -36,25 +36,13 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 		$gfw['bot_language'] = "English";
 	}
 
-
 // Set Website Path:-
-    /* (edit these settings as needed) */
-	$site_ip;																								// Stores the needed IP Address
-	$site_port;																								// Stores the needed Port Value
-
-	if ($bot_obj->WebserverIP) {
-		$site_ip =  $bot_obj->WebserverIP;
+    /* (edit this as needed to fit your environment) */
+	if ($bot_obj->WebserverSSL == null || $bot_obj->WebserverSSL == false) {
+		$gfw['site_url'] = "http://" . getenv('SERVER_NAME') . ":" . getenv('SERVER_PORT');	   	      		// Set the http url for the website (NO TRAILING SLASH!)
 	} else {
-		$site_ip = "localhost";
+		$gfw['site_url'] = "https://" . getenv('SERVER_NAME');	   	      									// Set the https url for the website (NO TRAILING SLASH!)
 	}
-	
-	if ($bot_obj->WebserverPort) {
-		$site_port =  $bot_obj->WebserverPort;
-	} else {
-		$site_port = "25000";
-	}
-
-	$gfw['site_url'] = "http://" . $site_ip . ":" . $site_port;					             	      		// Set the url for the website (NO TRAILING SLASH!)
 
 // Advanced Website Settings:-
     /* (please don't edit unless you know what you're doing) */
