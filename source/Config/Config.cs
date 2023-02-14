@@ -22,6 +22,7 @@ namespace FoxxiBot
         public static bool? WebserverSSL = false;
         public static string WebserverIP = "";
         public static string WebserverPort = "25000";
+        public static bool? ForceHTTPS = false;
 
         // Twitch - Bot Parameters
         public static string TwitchClientId = "";

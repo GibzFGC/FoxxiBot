@@ -113,6 +113,7 @@ namespace FoxxiBot
                     Config.WebserverSSL = (bool?)o["WebserverSSL"];
                     Config.WebserverIP = (string)o["WebserverIP"];
                     Config.WebserverPort = (string)o["WebserverPort"];
+                    Config.ForceHTTPS = (bool?)o["ForceHTTPS"];
                     Config.TwitchBotName = (string)o["BotName"];
                     Config.TwitchClientId = (string)o["TwitchClientID"];
                     Config.TwitchClientSecret = (string)o["TwitchClientSecret"];
@@ -341,6 +342,7 @@ namespace FoxxiBot
             objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
+            objSettings.ForceHTTPS = Config.ForceHTTPS;
             objSettings.BotName = Config.TwitchBotName;
             objSettings.TwitchClientID = Config.TwitchClientId;
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;

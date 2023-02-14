@@ -19,6 +19,7 @@ namespace FoxxiBot.Settings
         public bool? WebserverSSL { get; set; }
         public string WebserverIP { get; set; }
         public string WebserverPort { get; set; }
+        public bool? ForceHTTPS { get; set; }
 
         // Bot & Twitch Main Settings
         public string BotName { get; set; }

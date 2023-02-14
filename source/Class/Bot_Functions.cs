@@ -359,6 +359,7 @@ namespace FoxxiBot.Class
             objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
+            objSettings.ForceHTTPS = Config.ForceHTTPS;
             objSettings.BotName = Config.TwitchBotName;
             objSettings.TwitchClientID = Config.TwitchClientId;
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;
