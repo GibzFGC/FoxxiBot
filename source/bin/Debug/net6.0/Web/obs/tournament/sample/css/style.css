@@ -38,8 +38,8 @@ body {
 #p1Score {
 	color: #FFF;
 	position:absolute;
-	left:43px;
-	top:28px;
+	left:47px;
+	top:27px;
 	width:47px;
 	font-size:25px;
 	text-align:center;
@@ -47,8 +47,8 @@ body {
 #p2Score {
 	color: #FFF;
 	position:absolute;
-	left:1104px;
-	top:28px;
+	left:1101px;
+	top:27px;
 	width:47px;
 	font-size:25px;
 	text-align:center;
@@ -87,7 +87,7 @@ body {
 #tournamentRound {
 	position:absolute;
 	color: #FFF;
-	left:506px;
+	left:504px;
 	top:34px;
 	height: 34px;
 	width:185px;
