@@ -10,9 +10,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Esprima.Ast;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace FoxxiBot
@@ -21,10 +23,25 @@ namespace FoxxiBot
     {
         private HttpListener listener;
 
-        public OAuth(string uri)
+        public OAuth()
         {
             listener = new HttpListener();
-            listener.Prefixes.Add(uri);
+
+            if (string.IsNullOrEmpty(Config.WebserverPort))
+            {
+                listener.Prefixes.Add($"http://localhost:25000/");
+                listener.Prefixes.Add($"http://127.0.0.1:25000/");
+            } else
+            {
+                listener.Prefixes.Add($"http://localhost:{Config.WebserverPort}/");
+                listener.Prefixes.Add($"http://127.0.0.1:{Config.WebserverPort}/");
+            }
+        }
+
+        public string OauthClose()
+        {
+            listener.Abort();
+            return "OAuth Complete, Closing...";
         }
 
         public async Task<Models.Authorization> Listen()
