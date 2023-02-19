@@ -37,7 +37,6 @@ namespace FoxxiBot.WebServer
                 phpDir = "/usr/bin/php-cgi8.1";
             }
 
-
             var documentRootPath = AppDomain.CurrentDomain.BaseDirectory + "Web/";
             var scriptFilePath = Path.GetFullPath(filename);
             var scriptFileName = Path.GetFileName(filename);
@@ -55,8 +54,10 @@ namespace FoxxiBot.WebServer
 
             process.StartInfo.EnvironmentVariables.Add("OS_VERSION", RuntimeInformation.OSDescription);
             process.StartInfo.EnvironmentVariables.Add("DOTNET_VERSION", Environment.Version.ToString());
+            process.StartInfo.EnvironmentVariables.Add("SERVER_NAME", Config.WebserverIP);
+            process.StartInfo.EnvironmentVariables.Add("SERVER_PORT", Config.WebserverPort);
             process.StartInfo.EnvironmentVariables.Add("HTTP_REQUEST", httpListenerContext.Request.HttpMethod.ToString() + " " + httpListenerContext.Request.Url.PathAndQuery + " " + "HTTP/1.1");
-            process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", "http://localhost:" + Config.WebserverPort);
+            process.StartInfo.EnvironmentVariables.Add("HTTP_HOST", Config.WebserverIP +":" + Config.WebserverPort);
             process.StartInfo.EnvironmentVariables.Add("GATEWAY_INTERFACE", "CGI/1.1");
             process.StartInfo.EnvironmentVariables.Add("SERVER_PROTOCOL", "HTTP/1.1");
             process.StartInfo.EnvironmentVariables.Add("REDIRECT_STATUS", httpListenerContext.Response.StatusCode.ToString());

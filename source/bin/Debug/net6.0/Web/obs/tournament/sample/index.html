@@ -56,7 +56,7 @@
 				var items = [];
 
 				// Load Data
-				$.getJSON('/api.php?state=get&table=gb_tournament_scoreboard', function(data) {
+				$.getJSON('http://localhost:25000/api.php?state=get&table=gb_tournament_scoreboard', function(data) {
 					
 					items = data;
 					var newItems = {};
@@ -105,7 +105,7 @@
 						}
 
 						if (key.includes("Country")) {
-							value = '<img src="../../SHARED/GoSquared/cropped/iso/64shiny/'+ getCountry(value).toUpperCase() +'.png" width="78" height="64">';
+							value = '<img src="../../SHARED/GoSquared/cropped/iso/64shiny/'+ getCountry(value) +'.png" width="78" height="64">';
 						}
 
 						if ($("#"+key).html() != value) {

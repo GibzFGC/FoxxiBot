@@ -12,9 +12,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -147,12 +149,27 @@ namespace FoxxiBot.WebServer
         {
             using (HttpListener httpListener = new HttpListener())
             {
-                httpListener.Prefixes.Add($"http://localhost:{ _Port.ToString() }/");
-                httpListener.Prefixes.Add($"http://127.0.0.1:{ _Port.ToString() }/");
 
-                if (Config.WebserverIP != "" && Config.WebserverIP != null)
+                if (Config.WebserverSSL == null || Config.WebserverSSL == false)
                 {
-                    httpListener.Prefixes.Add($"http://{ Config.WebserverIP }:{ _Port.ToString() }/");
+                    httpListener.Prefixes.Add($"http://localhost:{_Port.ToString()}/");
+                    httpListener.Prefixes.Add($"http://127.0.0.1:{_Port.ToString()}/");
+
+                    if (Config.WebserverIP != "" && Config.WebserverIP != null)
+                    {
+                        httpListener.Prefixes.Add($"http://{Config.WebserverIP}:{_Port.ToString()}/");
+                    }
+                }
+
+                if (Config.WebserverSSL == true)
+                {
+                    httpListener.Prefixes.Add($"https://localhost:{_Port.ToString()}/");
+                    httpListener.Prefixes.Add($"https://127.0.0.1:{_Port.ToString()}/");
+
+                    if (Config.WebserverIP != "" && Config.WebserverIP != null)
+                    {
+                        httpListener.Prefixes.Add($"https://{Config.WebserverIP}:{_Port.ToString()}/");
+                    }
                 }
 
                 httpListener.Start();
@@ -201,11 +218,19 @@ namespace FoxxiBot.WebServer
             {
                 fileName = GetRequestedFileName(httpListenerContext.Request);
                 string filePath = fileName == null ? null : Path.Combine(_RootDirectory, fileName);
+
+                // For Path / File Testing
+                if (Config.Debug == true)
+                {
+                    Console.WriteLine("File Path: " + filePath + "\nFile Name: " + fileName + "\nDirectory: " + _RootDirectory);
+                }
+
                 if (filePath == null || !File.Exists(filePath))
                 {
                     httpListenerResponse.StatusCode = (int)HttpStatusCode.NotFound;
                     return;
                 }
+
                 ReturnFile(filePath, httpListenerContext);
             }
             catch (Exception ex)
@@ -217,6 +242,15 @@ namespace FoxxiBot.WebServer
             }
             finally
             {
+                fileName = GetRequestedFileName(httpListenerContext.Request);
+                string filePath = fileName == null ? null : Path.Combine(_RootDirectory, fileName);
+
+                // For Path / File Testing
+                if (Config.Debug == true)
+                {
+                    Console.WriteLine("File Path: " + filePath + "\nFile Name: " + fileName + "\nDirectory: " + _RootDirectory);
+                }
+
                 httpListenerResponse.OutputStream.Close();
             }
         }

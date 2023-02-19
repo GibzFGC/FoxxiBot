@@ -15,12 +15,14 @@ namespace FoxxiBot
     public static class Config
     {
         // Debug & Software Specific
-        public static string Debug = "false";
+        public static bool Debug = false;
         public static string Version = "1.0.6";
 
         // Webserver
+        public static bool? WebserverSSL = false;
         public static string WebserverIP = "";
         public static string WebserverPort = "25000";
+        public static bool? ForceHTTPS = false;
 
         // Twitch - Bot Parameters
         public static string TwitchClientId = "";
@@ -43,7 +45,7 @@ namespace FoxxiBot
         public static string DiscordToken = "";
         public static string DiscordPrefix = "!";
 
-        public static string BotLang = "en";
+        public static string BotLang = "English";
 
     }
 }

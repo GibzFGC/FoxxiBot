@@ -63,6 +63,14 @@ define("_TWITCH_CMD_EDIT", "Editing a Command");
 define("_TWITCH_CMD_MNGMNT", "Twitch Commands Management");
 define("_TWITCH_CMD_YOURS", "Here are your Twitch Commands.");
 
+define("_TWITCH_CMD_BLACKLIST", "Blacklist");
+define("_TWITCH_CMD_BLACKLIST_TITLE", "Commands Blacklist");
+define("_TWITCH_CMD_BLACKLIST_ADD", "Add a User to the Blacklist");
+define("_TWITCH_CMD_BLACKLIST_ADD_LABEL", "Add a User");
+define("_TWITCH_CMD_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist here");
+define("_TWITCH_CMD_BLACKLIST_ADD_BTN", "Blacklist User");
+define("_TWITCH_CMD_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
+
 define("_TWITCH_MODERATION", "Twitch Moderation");
 define("_TWITCH_MODERATION_EXPL", "Below you can manage how the bot will handle Twitch Moderation");
 define("_TWITCH_MODERATION_BL", "Blacklist Words / URLs");
@@ -248,6 +256,14 @@ define("_POINTS_SET_INCOMPLETE", "Set as Incomplete");
 define("_POINTS_CONFIRM", "Are you sure you want to refund this user their points?");
 define("_POINTS_COMPLETED", "Completed");
 
+define("_POINT_BLACKLIST", "Points Blacklist");
+define("_POINTS_BLACKLIST_TITLE", "Points Blacklist");
+define("_POINTS_BLACKLIST_ADD", "Add a User to the Blacklist");
+define("_POINTS_BLACKLIST_ADD_LABEL", "Add a User");
+define("_POINTS_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist here");
+define("_POINTS_BLACKLIST_ADD_BTN", "Blacklist User");
+define("_POINTS_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
+
 define("_QUOTES", "Quotes");
 define("_QUOTES_ADD", "Add a Quote");
 define("_QUOTES_ADDING", "Adding a Quote");
@@ -278,6 +294,7 @@ define("_BOT_SETTINGS_DEBUG_RESTART", "(requires a restart)");
 define("_BOT_SETTINGS_SIDEBAR", "Side Menu Settings");
 define("_BOT_SETTINGS_DISCORD_MENU", "Show Discord Menu");
 define("_BOT_SETTINGS_TWITCH_MENU", "Show Twitch Menu");
+define("_BOT_SETTINGS_TOURN_MENU", "Show Tournament Menu");
 define("_BOT_SETTINGS_DISCORD_OPT", "Optional settings for Discord if you plan to use that side of the bot.");
 
 define("_HELP", "HELP & SUPPORT");

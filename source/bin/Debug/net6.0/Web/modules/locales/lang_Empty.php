@@ -19,6 +19,29 @@ define("_WAITING_STREAM", "");
 define("_GLOBAL_FEAT", "");
 define("_OTHER_SERVICE", "");
 
+define("_TOURNAMENT_FEAT", "");
+define("_TOURNAMENT", "");
+define("_TOURNAMENT_SCORE", "");
+define("_TOURNAMENT_TOP", "");
+define("_TOURNAMENT_PLAYER", "");
+define("_TOURNAMENT_PLAYER_LIST", "");
+define("_TOURNAMENT_ROSTER", "");
+define("_TOURNAMENT_DELETE_PLAYER", "");
+define("_TOURNAMENT_SCOREBOARD", "");
+define("_TOURNAMENT_PLAYER1", "");
+define("_TOURNAMENT_EDIT_BTN", "");
+define("_TOURNAMENT_ADD_BTN", "");
+define("_TOURNAMENT_GROUP", "");
+define("_TOURNAMENT_GROUP_PLACE", "");
+define("_TOURNAMENT_PLAYERNAME", "");
+define("_TOURNAMENT_PLAYERNAME_PLACE", "");
+define("_TOURNAMENT_PLAYER_COUNTRY", "");
+define("_TOURNAMENT_PLAYER_COUNTRY_SELECT", "");
+define("_TOURNAMENT_PLAYER_COUNTRY_CODE", "");
+define("_TOURNAMENT_PLAYER_STATUS", "");
+define("_TOURNAMENT_PLAYER_STATUS_SET", "");
+define("_TOURNAMENT_SWAP", "");
+
 define("_TWITCH_SETTINGS", "");
 define("_TWITCH_SETTINGS_MAIN", "");
 define("_TWITCH_SETTINGS_PARTNER", "");
@@ -34,6 +57,14 @@ define("_TWITCH_SETTINGS_STREAM_SUB_PLACE", "");
 define("_TWITCH_SETTINGS_STREAM_PRIMESUB", "");
 define("_TWITCH_SETTINGS_STREAM_PRIMESUB_PLACE", "");
 define("_TWITCH_SETTINGS_INFO", "");
+
+define("_TWITCH_CMD_BLACKLIST", "");
+define("_TWITCH_CMD_BLACKLIST_TITLE", "");
+define("_TWITCH_CMD_BLACKLIST_ADD", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_LABEL", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_TEXTBOX", "");
+define("_TWITCH_CMD_BLACKLIST_ADD_BTN", "");
+define("_TWITCH_CMD_BLACKLIST_TABLE_HEADER", "");
 
 define("_TWITCH_FEAT", "");
 define("_TWITCH_DATA", "");
@@ -220,6 +251,14 @@ define("_POINTS_SET_INCOMPLETE", "");
 define("_POINTS_CONFIRM", "");
 define("_POINTS_COMPLETED", "");
 
+define("_POINT_BLACKLIST", "");
+define("_POINTS_BLACKLIST_TITLE", "");
+define("_POINTS_BLACKLIST_ADD", "");
+define("_POINTS_BLACKLIST_ADD_LABEL", "");
+define("_POINTS_BLACKLIST_ADD_TEXTBOX", "");
+define("_POINTS_BLACKLIST_ADD_BTN", "");
+define("_POINTS_BLACKLIST_TABLE_HEADER", "");
+
 define("_QUOTES", "");
 define("_QUOTES_ADD", "");
 define("_QUOTES_ADDING", "");
@@ -247,6 +286,7 @@ define("_BOT_SETTINGS_DEBUG_RESTART", "");
 define("_BOT_SETTINGS_SIDEBAR", "");
 define("_BOT_SETTINGS_DISCORD_MENU", "");
 define("_BOT_SETTINGS_TWITCH_MENU", "");
+define("_BOT_SETTINGS_TOURN_MENU", "");
 define("_BOT_SETTINGS_DISCORD_OPT", "");
 
 define("_HELP", "");

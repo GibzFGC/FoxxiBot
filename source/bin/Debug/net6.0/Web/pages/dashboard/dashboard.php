@@ -194,7 +194,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
           <div class="col-md-4">
           <?php print '
-            <iframe frameBorder="0" src="https://www.twitch.tv/embed/'. $gfw["Twitch_BroadcasterChannel"] .'/chat?darkpopout&parent=localhost"
+            <iframe frameBorder="0" src="https://www.twitch.tv/embed/'. $gfw["Twitch_BroadcasterChannel"] .'/chat?darkpopout&parent=' . getenv("SERVER_NAME") . '"
               width="100%",
               height="440",
               sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals">

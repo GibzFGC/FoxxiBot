@@ -39,6 +39,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands_blacklist (id INTEGER PRIMARY KEY, username TEXT)";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_countdowns (id INTEGER PRIMARY KEY, title TEXT, datetime TEXT, timestamp TEXT)";
             cmd.ExecuteNonQuery();
 
@@ -112,6 +115,9 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points (username TEXT UNIQUE, value INTEGER)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_blacklist (id INTEGER PRIMARY KEY, username TEXT)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_points_actions (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, recipient TEXT, action TEXT, points INTEGER, status INTEGER)";
@@ -214,6 +220,9 @@ namespace FoxxiBot.Class
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_tournament_top8 (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_botlist (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, user TEXT, viewers TEXT)";
@@ -347,8 +356,10 @@ namespace FoxxiBot.Class
         {
             Settings.Settings objSettings = new Settings.Settings();
             objSettings.Debug = Config.Debug;
+            objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
+            objSettings.ForceHTTPS = Config.ForceHTTPS;
             objSettings.BotName = Config.TwitchBotName;
             objSettings.TwitchClientID = Config.TwitchClientId;
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;

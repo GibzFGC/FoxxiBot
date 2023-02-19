@@ -7,9 +7,8 @@ const bttvEmoteCache = {
   data: { global: [] },
   urlTemplate: '//cdn.betterttv.net/emote/{{id}}/{{image}}' };
 
-
 const krakenBase = 'https://api.twitch.tv/kraken/';
-const krakenClientID = '9ugz055sov2030fnhy3gwd8yajjf85';
+const krakenClientID = $botAuth;
 
 const chatFilters = [
 // '\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF', // Partial Latin-1 Supplement
@@ -65,7 +64,7 @@ if (testing) {
       reconnect: true,
       secure: true },
 
-    channels: ['gibbyvs'] });
+    channels: [$botChannel] });
 
   addListeners();
   client.connect();

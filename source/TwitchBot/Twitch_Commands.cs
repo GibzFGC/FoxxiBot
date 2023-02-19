@@ -10,9 +10,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Discord;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Data.SQLite;
-
+using System.Net.Http;
+using System.Net.Http.Headers;
 namespace FoxxiBot.TwitchBot
 {
     internal class Twitch_Commands
@@ -20,6 +24,61 @@ namespace FoxxiBot.TwitchBot
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
         SQLite.twitchSQL twitchSQL = new SQLite.twitchSQL();
+
+        public string commandBotList()
+        {
+
+            // Get HTTP Data
+            var url = $"https://api.twitchinsights.net/v1/bots/all";
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(url);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                // If no results Found
+                if (result.Length == 0)
+                {
+                    return "Sorry, the bot list could not be updated at this time...";
+                }
+
+                // Get number of items
+                dynamic o = JsonConvert.DeserializeObject(result);
+
+                // If command not development defined, check users custom in SQLite
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using (var transaction = con.BeginTransaction())
+                {
+                    var command = con.CreateCommand();
+                    command.CommandText = "INSERT or IGNORE INTO gb_twitch_botlist (username) VALUES (@username)";
+
+                    var parameter = command.CreateParameter();
+                    parameter.ParameterName = "@username";
+                    command.Parameters.Add(parameter);
+
+                    // Insert a lot of data
+                    foreach (var item in o.bots)
+                    {
+                        parameter.Value = item[0];
+                        command.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
+
+                con.Close();
+                return "The Twitch bot list has been updated";
+            }
+
+            return "Sorry, the bot list could not be updated at this time...";
+        }
 
         public string commandAccountAge(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {

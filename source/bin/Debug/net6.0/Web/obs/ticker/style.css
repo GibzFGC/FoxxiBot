@@ -25,16 +25,14 @@
     }
   }
   .ticker-wrap {
-    font-family: "Danley Regular";
-    font-size: 20px;
     position: fixed;
     bottom: 0;
     width: 100%;
     overflow: hidden;
     height: 4rem;
+    background-color: rgba(0, 0, 0, 0.9);
     padding-left: 100%;
     box-sizing: content-box;
-    text-transform: uppercase;
   }
   .ticker-wrap .ticker {
     display: inline-block;
@@ -55,6 +53,7 @@
   .ticker-wrap .ticker__item {
     display: inline-block;
     padding: 0 2rem;
+    font-size: 2rem;
     color: white;
   }
   

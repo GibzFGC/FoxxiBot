@@ -109,9 +109,11 @@ namespace FoxxiBot
                     JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
 
                     // Set needed Values Internally
-                    Config.Debug = (string)o["Debug"];
+                    Config.Debug = (bool)o["Debug"];
+                    Config.WebserverSSL = (bool?)o["WebserverSSL"];
                     Config.WebserverIP = (string)o["WebserverIP"];
                     Config.WebserverPort = (string)o["WebserverPort"];
+                    Config.ForceHTTPS = (bool?)o["ForceHTTPS"];
                     Config.TwitchBotName = (string)o["BotName"];
                     Config.TwitchClientId = (string)o["TwitchClientID"];
                     Config.TwitchClientSecret = (string)o["TwitchClientSecret"];
@@ -138,6 +140,14 @@ namespace FoxxiBot
                 // Start Web Server
                 Server();
                 Console.WriteLine("Server Layer: Server Started!");
+
+                if (Config.Debug == true)
+                {
+                    Console.WriteLine($"Server IP / URL: " + Config.WebserverIP);
+                    Console.WriteLine($"Server Port: " + Config.WebserverPort);
+                    Console.WriteLine($"Server Path: " + @AppDomain.CurrentDomain.BaseDirectory + "Web");
+                }
+
                 Console.WriteLine("");
                 
                 // Start Twitch Bot
@@ -176,6 +186,7 @@ namespace FoxxiBot
             {
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Let's Get Started", ConsoleColor.Cyan);
                 Console.WriteLine("");
+
                 Console.WriteLine("Let's set up the Bot's permissions to the Bot's Account on Twitch");
                 Console.WriteLine("");
 
@@ -194,7 +205,12 @@ namespace FoxxiBot
 
                 Console.WriteLine("");
 
-                Console.WriteLine("Please enter your Redirect URL");
+                Console.WriteLine("Please enter the Redirect Port for your Local or Server setup");
+                string TwitchClientPort = Console.ReadLine();
+
+                Console.WriteLine("");
+
+                Console.WriteLine("Please enter the Local / Server Twitch Redirect URL");
                 string TwitchClientRedirect = Console.ReadLine();
 
                 Console.WriteLine("");
@@ -216,6 +232,7 @@ namespace FoxxiBot
 
                 // Set needed Values Internally
                 Config.TwitchBotName = BotName;
+                Config.WebserverPort = TwitchClientPort;
                 Config.TwitchClientId = TwitchClientID;
                 Config.TwitchClientSecret = TwitchClientSecret;
                 Config.TwitchRedirectUri = TwitchClientRedirect;
@@ -242,7 +259,7 @@ namespace FoxxiBot
             bot_api.Settings.ClientId = Config.TwitchClientId;
 
             // start local web server
-            var server = new OAuth(Config.TwitchRedirectUri);
+            var server = new OAuth();
 
             // print out auth url
             Console.WriteLine("The following URL is for your Bot account so please make sure you're logged in on that!");
@@ -315,8 +332,10 @@ namespace FoxxiBot
             // Save the Settings
             Settings.Settings objSettings = new Settings.Settings();
             objSettings.Debug = Config.Debug;
+            objSettings.WebserverSSL = Config.WebserverSSL;
             objSettings.WebserverIP = Config.WebserverIP;
             objSettings.WebserverPort = Config.WebserverPort;
+            objSettings.ForceHTTPS = Config.ForceHTTPS;
             objSettings.BotName = Config.TwitchBotName;
             objSettings.TwitchClientID = Config.TwitchClientId;
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;
@@ -338,6 +357,9 @@ namespace FoxxiBot
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
+
+            // Stop Auth Server
+            server.OauthClose();
 
             // Start Web Server
             Server();

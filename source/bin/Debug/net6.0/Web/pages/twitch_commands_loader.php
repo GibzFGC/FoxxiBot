@@ -28,6 +28,10 @@ if (isset($_REQUEST['a'])) {
         include("twitch_commands/commands_edit.php");
     }
 
+    if ($_REQUEST['a'] == "blacklist") {
+        include("twitch_commands/commands_blacklist.php");
+    }
+
     if ($_REQUEST['a'] == "funcs") {
         include("twitch_commands/commands_funcs.php");
     }

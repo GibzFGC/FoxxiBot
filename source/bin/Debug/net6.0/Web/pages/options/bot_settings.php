@@ -141,19 +141,6 @@ foreach($result as $row)
                 </div>
 
                 <div class="form-group">
-                  <label><?= _BOT_SETTINGS_TWITTER_MENU ?></label>
-                    <div style="float: right;">
-                    <?php
-                    if ($options["twitter_features"] == "off") {
-                    print '<input type="checkbox" name="twitter_features" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    } else {
-                      print '<input type="checkbox" name="twitter_features" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                    }
-                    ?>
-                  </div>
-                </div>
-
-                <div class="form-group">
                   <label><?= _BOT_SETTINGS_TOURN_MENU ?></label>
                     <div style="float: right;">
                     <?php
