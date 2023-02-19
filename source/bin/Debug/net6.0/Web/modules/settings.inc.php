@@ -38,10 +38,16 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
 // Set Website Path:-
     /* (edit this as needed to fit your environment) */
-	if ($bot_obj->WebserverSSL == null || $bot_obj->WebserverSSL == false) {
-		$gfw['site_url'] = "http://" . getenv('SERVER_NAME') . ":" . getenv('SERVER_PORT');	   	      		// Set the http url for the website (NO TRAILING SLASH!)
-	} else {
+	if ($bot_obj->WebserverSSL == true) {
 		$gfw['site_url'] = "https://" . getenv('SERVER_NAME');	   	      									// Set the https url for the website (NO TRAILING SLASH!)
+	}
+
+	if ($bot_obj->WebserverSSL == null || $bot_obj->WebserverSSL == false) {
+		if ($bot_obj->ForceHTTPS == null || $bot_obj->ForceHTTPS == false) {
+			$gfw['site_url'] = "http://" . getenv('SERVER_NAME') . ":" . getenv('SERVER_PORT');	   	      	// Set the http url for the website (NO TRAILING SLASH!)
+		} else {
+			$gfw['site_url'] = "https://" . getenv('SERVER_NAME');	   	    								// Set the https url for the website (NO TRAILING SLASH!)
+		}
 	}
 
 // Advanced Website Settings:-
@@ -64,7 +70,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     
 // Extra Website Settings
 	$gfw['current_year'] = date("Y");																		// Gets the current year from the server
-	$gfw['current_version'] = "1.0.1r2";																	// Current Bot Version
+	$gfw['current_version'] = "1.0.7";																		// Current Bot Version
 
 // Website Timezone
     date_default_timezone_set('Europe/London');																// Sets the default timezone for your website (change if needed)

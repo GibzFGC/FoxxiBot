@@ -28,7 +28,6 @@ function setAudio(audio) {
 		src: [audio],
 		autoplay: true,
 		loop: false,
-		volume: 0.5,
 	});
 }
 

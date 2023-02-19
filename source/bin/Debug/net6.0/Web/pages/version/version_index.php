@@ -53,7 +53,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Bot Version:
-                      <span class="float-right">1.0.6</span>
+                      <span class="float-right"><?php print $gfw['current_version']; ?></span>
                     </span>
                   </li>
 
