@@ -14,6 +14,11 @@
 // Define Secure Connection
 define("G_FW", true);
 
+/**
+ * Template Engine changes begin at the root level.
+ * The decisions define what approach to go with.
+ */
+
 // Load the Bootstrap Loader
 require_once("modules/bootloader.php");
 
