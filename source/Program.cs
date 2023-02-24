@@ -12,10 +12,12 @@
 
 using FoxxiBot.SQLite;
 using FoxxiBot.TwitchBot;
+using FoxxiBot.WebServer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -46,6 +48,9 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
+            // Check for Crash, Reload if needed
+            try
+            {
             // Set Application Title
             Console.Title = $"FoxxiBot {Config.Version} :: Started @ " + DateTime.Now.ToString("F");
 
@@ -244,6 +249,25 @@ namespace FoxxiBot
                 // Begin the Verification / OAuth Phase
                 MainAsync().GetAwaiter().GetResult();
             }
+
+            }
+            catch (Exception ex)
+            {
+                RestartApplication(ex);
+            }
+
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            RestartApplication(e.Exception);
+        }
+
+        private static void RestartApplication(Exception ex)
+        {
+            // log exception somewhere, EventLog is one option
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
+            Environment.Exit(1);
         }
 
         static async Task MainAsync()

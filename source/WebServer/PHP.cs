@@ -15,6 +15,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.Unicode;
 
 namespace FoxxiBot.WebServer
 {
@@ -136,8 +138,14 @@ namespace FoxxiBot.WebServer
 
         public Stream GenerateStreamFromString(string s)
         {
+            if (Config.Debug == true)
+            {
+                Console.WriteLine("Output:");
+                Console.WriteLine(s);
+            }
+
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
             writer.Write(s);
             writer.Flush();
             stream.Position = 0;
