@@ -385,6 +385,31 @@ namespace FoxxiBot.Class
             return Task.CompletedTask;
         }
 
+        // Save Error Log
+        public static void ErrorLog(string ex)
+        {
+            // Write to Log File
+            string path = @AppDomain.CurrentDomain.BaseDirectory + "/Data/error.log";
+            DateTime now = DateTime.Now;
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
+            else
+            {
+                // Write to existing file
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
+        }
+
         // Change the Colour of ConsoleText
         public static void WriteColour(string message, ConsoleColor color)
         {

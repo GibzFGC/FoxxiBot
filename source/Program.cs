@@ -264,20 +264,10 @@ namespace FoxxiBot
             RestartApplication(e.Exception);
         }
 
-        private static void RestartApplication(Exception ex)
+        public static void RestartApplication(Exception ex)
         {
             // Write Log File
-            string path = @AppDomain.CurrentDomain.BaseDirectory + "/Data/error.log";
-            DateTime now = DateTime.Now;
-
-            if (!File.Exists(path))
-            {
-                // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    sw.WriteLine(now.ToString("F") + ": " + ex.Message.ToString());
-                }
-            }
+            Class.Bot_Functions.ErrorLog(ex.Message.ToString());
 
             // Attempt to Restart the Bot on Windows
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

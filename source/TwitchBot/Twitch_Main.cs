@@ -12,7 +12,10 @@
 
 using System;
 using System.Data.SQLite;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
@@ -490,8 +493,43 @@ namespace FoxxiBot.TwitchBot
             //// == Admin Commands == ////
             //
 
+            if (e.Command.ChatMessage.IsBroadcaster)
+            {
+
+                // Close the Bot
+                if (e.Command.CommandText == "stop")
+                {
+                    // Write to Log File
+                    Class.Bot_Functions.ErrorLog("Bot Stopped by " + e.Command.ChatMessage.DisplayName);
+
+                    // Close the current instance
+                    Console.WriteLine("");
+                    Console.WriteLine("The bot is shutting down, it will automatically close in 5 seconds...");
+                    Thread.Sleep(5000);
+                    System.Environment.Exit(1);
+                }
+
+                // Restart the Bot
+                if (e.Command.CommandText == "restart")
+                {
+                    // Write to Log File
+                    Class.Bot_Functions.ErrorLog("Restarted by " + e.Command.ChatMessage.DisplayName);
+
+                    // Attempt to Restart the Bot on Windows
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
+                    }
+
+                    // Close the current instance
+                    Environment.Exit(1);
+                }
+
+            }
+
             if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
             {
+
                 // Add a Command (command name | command text | command points cost)
                 if (e.Command.CommandText == "addcom")
                 {
