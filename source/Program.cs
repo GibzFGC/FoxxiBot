@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace FoxxiBot
@@ -265,8 +266,26 @@ namespace FoxxiBot
 
         private static void RestartApplication(Exception ex)
         {
+            // Write Log File
+            string path = @AppDomain.CurrentDomain.BaseDirectory + "/Data/error.log";
+            DateTime now = DateTime.Now;
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.Message.ToString());
+                }
+            }
+
+            // Attempt to Restart the Bot on Windows
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
+            }
+
             // log exception somewhere, EventLog is one option
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
             Environment.Exit(1);
         }
 
