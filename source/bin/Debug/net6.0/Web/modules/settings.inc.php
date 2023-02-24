@@ -42,7 +42,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 		$gfw['site_url'] = "https://" . getenv('SERVER_NAME');	   	      									// Set the https url for the website (NO TRAILING SLASH!)
 	}
 
-	if ($bot_obj->WebserverSSL == false) {
+	if ($bot_obj->WebserverSSL == null || $bot_obj->WebserverSSL == false) {
 		if ($bot_obj->ForceHTTPS == null || $bot_obj->ForceHTTPS == false) {
 			$gfw['site_url'] = "http://" . getenv('SERVER_NAME') . ":" . getenv('SERVER_PORT');	   	      	// Set the http url for the website (NO TRAILING SLASH!)
 		} else {
