@@ -31,7 +31,9 @@ function ratio() {
     $('#ratio').text(winRatio);
 }
 
-function reset() {
+function reset_all() {
+    console.log("Resetting...");
+
     wins = 0;
     losses = 0;
     winRatio = "-";

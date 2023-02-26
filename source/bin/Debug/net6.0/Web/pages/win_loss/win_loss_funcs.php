@@ -23,14 +23,29 @@ if ($_REQUEST["v"] == "save") {
         // Prepare to Insert Data
         $stmt = $PDO->prepare($sql);
 
+        // Check if value null
+        if (!isset($_POST["wins"])) {
+            $_POST["wins"] = "0";
+        }
+
         // Insert Table Info
         $stmt->bindValue(':parameter', "wins");
         $stmt->bindValue(':value', $_POST["wins"]);
         $stmt->execute();
 
+        // Check if value null
+        if (!isset($_POST["losses"])) {
+            $_POST["losses"] = "0";
+        }
+
         $stmt->bindValue(':parameter', "losses");
         $stmt->bindValue(':value', $_POST["losses"]);
         $stmt->execute();
+
+        // Check if value null
+        if (!isset($_POST["ratio"])) {
+            $_POST["ratio"] = "-";
+        }
 
         $stmt->bindValue(':parameter', "ratio");
         $stmt->bindValue(':value', $_POST["ratio"]);

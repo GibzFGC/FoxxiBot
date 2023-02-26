@@ -66,6 +66,7 @@ foreach($result as $row)
                     <?= _WIN_LOSS_WINS ?>: <span class="badge badge-success" name="wins" id="wins"> <?php print $results["wins"]; ?> </span>
                     </h3>
                     </div>
+
                     <div class="col-3 text-center">
                     <h3 class="h3">
                     <?= _WIN_LOSS_LOSSES ?>: <span class="badge badge-danger" name="losses" id="losses"> <?php print $results["losses"]; ?> </span>
@@ -93,7 +94,7 @@ foreach($result as $row)
                     <button class="btn btn-danger btn-block btn-sm" onclick="loss();"> <?= _WIN_LOSS_LOSS_BTN ?> </button>
                     </div>
                     <div class="col-2">
-                    <button class="btn btn-warning btn-block btn-sm" onclick="reset();"> <?= _WIN_LOSS_RESET_BTN ?> </button>
+                    <button class="btn btn-warning btn-block btn-sm" onclick="reset_all();"> <?= _WIN_LOSS_RESET_BTN ?> </button>
                     </div>
                 </div>
 
