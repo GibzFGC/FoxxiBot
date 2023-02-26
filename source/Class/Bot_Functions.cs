@@ -345,6 +345,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_win_loss (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
             // Commit all Data to SQL
             this_transaction.Commit();
 

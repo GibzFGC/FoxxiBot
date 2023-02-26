@@ -438,6 +438,15 @@ foreach($result as $row)
             </ul>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php print $gfw["site_url"]; ?>/index.php?p=win_loss" class="nav-link">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+              <?= _WIN_LOSS ?>
+              </p>
+            </a>
+          </li>        
+
           <li class="li_header"><?= _BOT_MANAGEMENT ?></li>
 
           <li class="nav-item">

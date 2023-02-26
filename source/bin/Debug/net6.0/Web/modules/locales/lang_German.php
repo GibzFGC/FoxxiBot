@@ -63,6 +63,14 @@ define("_TWITCH_CMD_EDIT", "Einen Befehl bearbeiten");
 define("_TWITCH_CMD_MNGMNT", "Twitch-Befehlsverwaltung");
 define("_TWITCH_CMD_YOURS", "Hier sind deine Twitch-Befehle.");
 
+define("_TWITCH_CMD_BLACKLIST", "Blacklist");
+define("_TWITCH_CMD_BLACKLIST_TITLE", "Commands Blacklist");
+define("_TWITCH_CMD_BLACKLIST_ADD", "Add a User to the Blacklist");
+define("_TWITCH_CMD_BLACKLIST_ADD_LABEL", "Add a User");
+define("_TWITCH_CMD_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist here");
+define("_TWITCH_CMD_BLACKLIST_ADD_BTN", "Blacklist User");
+define("_TWITCH_CMD_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
+
 define("_TWITCH_MODERATION", "Twitch-Moderation");
 define("_TWITCH_MODERATION_EXPL", "Im Folgenden kannst du festlegen, wie der Bot mit der Twitch-Moderation umgehen soll");
 define("_TWITCH_MODERATION_BL", "Unerlaubte W�rter / URLs");
@@ -244,6 +252,14 @@ define("_POINTS_SET_COMPLETE", "Als vollst�ndig eingestellt");
 define("_POINTS_SET_INCOMPLETE", "Als unvollst�ndig eingestellt");
 define("_POINTS_CONFIRM", "Bist du sicher, dass du diesem Nutzer seine Punkte zur�ckerstatten m�chtest?"); 
 define("_POINTS_COMPLETED", "Abgeschlossen");
+
+define("_POINT_BLACKLIST", "Points Blacklist");
+define("_POINTS_BLACKLIST_TITLE", "Points Blacklist");
+define("_POINTS_BLACKLIST_ADD", "Add a User to the Blacklist");
+define("_POINTS_BLACKLIST_ADD_LABEL", "Add a User");
+define("_POINTS_BLACKLIST_ADD_TEXTBOX", "Add the User you wish to Blacklist here");
+define("_POINTS_BLACKLIST_ADD_BTN", "Blacklist User");
+define("_POINTS_BLACKLIST_TABLE_HEADER", "Here are your Blacklisted Users");
 
 define("_QUOTES", "Zitate");
 define("_QUOTES_ADD", "Ein Zitat hinzuf�gen"); 

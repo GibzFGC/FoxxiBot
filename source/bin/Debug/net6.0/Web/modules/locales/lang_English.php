@@ -283,6 +283,14 @@ define("_QUOTE_UPDATE", "Update Quote");
 define("_QUOTE_MNGMNT", "Quotes Management");
 define("_QUOTE_YOURS", "Here are your Quotes");
 
+define("_WIN_LOSS", "Wins & Losses");
+define("_WIN_LOSS_WINS", "Wins");
+define("_WIN_LOSS_LOSSES", "Losses");
+define("_WIN_LOSS_WIN_RATIO", "Win Ratio");
+define("_WIN_LOSS_WIN_BTN", "Win");
+define("_WIN_LOSS_LOSS_BTN", "Loss");
+define("_WIN_LOSS_RESET_BTN", "Reset");
+
 define("_BOT_MANAGEMENT", "BOT MANAGEMENT");
 define("_SETTINGS", "Settings");
 define("_PLUGINS", "Plugins");

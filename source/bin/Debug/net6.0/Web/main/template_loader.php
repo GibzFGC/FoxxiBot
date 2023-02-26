@@ -115,6 +115,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/plugins_loader.php";
             }
 
+            if ($page_loader == 'win_loss') {
+                $cpage = "pages/win_loss_loader.php";
+            }
+
             if ($page_loader == 'version') {
                 $cpage = "pages/version_loader.php";
             }
