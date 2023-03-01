@@ -83,38 +83,18 @@
 
 		.box {
 			position: relative;
-			width: 1920px;
-			height: 100px;
+			width: 340px;
+			height: 80px;
 			background-color: #000;
 			color: #fff;
 			opacity: .5;
-		}
-
-		.box::before {
-			content: '';
-    		position: absolute;
-    		top: 0; left: 0; right: 0;
-    		height: 100px;
-    		background: linear-gradient(
-        		rgba(163, 182, 245, 1),
-        		rgba(163, 182, 245, 0)
-    		);
+			border-bottom-left-radius: 15px;
 		}
 		
 		.text {
-			width: 100%;
-			height: 100%;
 			position: absolute;
-			top: 10px;
-			left: 0;
-		}
-		
-		.ratio {
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			top: 40px;
-			left: 0;
+			top: 12px;
+			left: 12px;
 		}
 	</style>
 
@@ -123,7 +103,7 @@
 
 	<div class="box"></div>
 
-	<div class="text row justify-content-sm-center">
+	<div class="text row">
 		<div class="col-3 text-center">
 			<h3 class="h3">
 			Wins: <span class="badge badge-success" name="wins" id="wins"> 0 </span>
@@ -136,12 +116,10 @@
 			</h3>
 		</div>
 
-		<div class="ratio row justify-content-sm-center">
-			<div class="col-6 text-center">
-			<h3 class="h1">
+		<div class="col-3 text-center">
+			<h3 class="h3">
 			Ratio: <span class="badge badge-info" name="ratio" id="ratio"> - </span>
 			</h3>
-			</div>
 		</div>
 	</div>
 
