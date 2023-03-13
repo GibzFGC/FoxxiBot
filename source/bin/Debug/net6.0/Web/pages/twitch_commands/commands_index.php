@@ -63,6 +63,28 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                   <tbody>
 
                   <tr>
+                    <td>!stop</td>
+                    <td>Shuts the bot down gracefully</td>
+                    <td>0</td>
+                    <td>Broadcaster</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!restart</td>
+                    <td>Attempts to restart the bot</td>
+                    <td>0</td>
+                    <td>Broadcaster</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
                     <td>!addcom</td>
                     <td>Lets the Broadcaster or a Moderator add a command via chat</td>
                     <td>0</td>
@@ -94,6 +116,39 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                       <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
                     </td>
                   </tr>
+
+                  <tr>
+                    <td>!botlist</td>
+                    <td>Updates the list of known Twitch Bots in the Bot (used to lock bots out)</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!win</td>
+                    <td>Adds a Win to the Win/Loss Counter Widget</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!loss</td>
+                    <td>Adds a Loss to the Win/Loss Counter Widget</td>
+                    <td>0</td>
+                    <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>                  
 
                   <tr>
                     <td>!accountage</td>
@@ -166,6 +221,17 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                     <td>Lets the Broadcaster or a Moderator permit someone to add a link in chat (if Twitch Moderation active)</td>
                     <td>0</td>
                     <td>Moderator</td>
+                    <td>Active</td>
+                    <td>
+                      <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>!vote</td>
+                    <td>Let's viewers vote in polls</td>
+                    <td>0</td>
+                    <td>Viewer</td>
                     <td>Active</td>
                     <td>
                       <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>

@@ -3,15 +3,68 @@
 
     <head>
         <title>FoxxiBot | Sound Widget</title>
+        <style>
+            #logger {
+                display:none;
+                background: #333;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                height: 200px;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                margin:0;
+                padding: 10px;
+            }
+            .log-boolean,
+            .log-undefined {color: magenta;}
+            .log-object,
+            .log-string {color: orange;}
+            .log-number {color: cyan;}
+        </style>
     </head>
 
     <body onLoad="init()">
-
+        <pre id="logger"></pre>
 
         <!-- jQuery -->
         <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
         <!-- Howler Audio -->
         <script src="js/howler.min.js"></script>
 		<script src="js/sounds.js"></script>
+        <script>
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('debug') && searchParams.get('debug') === "true") {
+                $("#logger").show();
+            }
+            (function (logger) {
+                console.old = console.log;
+                console.log = function () {
+                    var output = "", arg, i;
+
+                    for (i = 0; i < arguments.length; i++) {
+                        arg = arguments[i];
+                        output += "<span class=\"log-" + (typeof arg) + "\">";
+
+                        if (
+                            typeof arg === "object" &&
+                            typeof JSON === "object" &&
+                            typeof JSON.stringify === "function"
+                        ) {
+                            output += JSON.stringify(arg);
+                        } else {
+                            output += arg;
+                        }
+
+                        output += "</span>&nbsp;";
+                    }
+
+                    logger.innerHTML += output + "<br>";
+                    logger.scrollTop = logger.scrollHeight;
+                    console.old.apply(undefined, arguments);
+                };
+            })(document.getElementById("logger"));
+        </script>
     </body>
 </html>
