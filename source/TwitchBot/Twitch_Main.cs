@@ -651,6 +651,47 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(Config.TwitchBotName + ": " + data);
                 }
 
+                // Poll
+                if (e.Command.CommandText == "poll")
+                {
+
+                    if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+                    {
+                        SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                        if (e.Command.ArgumentsAsString == "end")
+                        {
+                            pollSQL.updateOptions("active_poll", "0");
+                            pollSQL.updateOptions("allow_voting", "0");
+
+                            SendChatMessage("The poll has now closed, thank you for taking part!");
+                            return;
+                        }
+                        else
+                        {
+                            var result = pollSQL.pollData(e.Command.ArgumentsAsString);
+                            SendChatMessage(result);
+
+                            pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
+                            pollSQL.updateOptions("allow_voting", "1");
+                        }
+                    }
+
+                }
+
+                // Win Loss Count
+                if (e.Command.CommandText == "win")
+                {
+                    commands.win_loss("win");
+                    SendChatMessage(Config.TwitchBotName + ": " + "A Win has been added to the board");
+                }
+
+                if (e.Command.CommandText == "loss")
+                {
+                    commands.win_loss("loss");
+                    SendChatMessage(Config.TwitchBotName + ": " + "A Loss has been added to the board");
+                }
+
             }
 
             //// == User Commands == ////
@@ -718,36 +759,6 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
-            }
-
-            //// == Twitter Commands == ////
-            ///
-            // Poll
-            if (e.Command.CommandText == "poll")
-            {
-
-                if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
-                {
-                    SQLite.pollSQL pollSQL = new SQLite.pollSQL();
-
-                    if (e.Command.ArgumentsAsString == "end")
-                    {
-                        pollSQL.updateOptions("active_poll", "0");
-                        pollSQL.updateOptions("allow_voting", "0");
-
-                        SendChatMessage("The poll has now closed, thank you for taking part!");
-                        return;
-                    }
-                    else
-                    {
-                        var result = pollSQL.pollData(e.Command.ArgumentsAsString);
-                        SendChatMessage(result);
-
-                        pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
-                        pollSQL.updateOptions("allow_voting", "1");
-                    }
-                }
-
             }
 
             // Voting

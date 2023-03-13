@@ -19,6 +19,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchLib.PubSub.Models.Responses;
 
 namespace FoxxiBot.WebServer
 {
@@ -136,6 +137,7 @@ namespace FoxxiBot.WebServer
             _ServerThread = new Thread(Listen);
             _ServerThread.Start();
         }
+        
         public void Dispose()
         {
             lock (_LockObjectDispose)
@@ -325,6 +327,9 @@ namespace FoxxiBot.WebServer
             int nbytes;
             while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                 outputStream.Write(buffer, 0, nbytes);
+
+            // Properly Close the Session
+            outputStream.Dispose();
         }
 
         private string GetContentType(string filePath)

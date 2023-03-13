@@ -158,6 +158,9 @@ namespace FoxxiBot.WebServer
             int nbytes;
             while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                 outputStream.Write(buffer, 0, nbytes);
+
+            // Properly Close the Session
+            outputStream.Dispose();
         }
 
     }

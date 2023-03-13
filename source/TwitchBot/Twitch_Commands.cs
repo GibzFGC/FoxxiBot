@@ -11,12 +11,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Discord;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Data.SQLite;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Numerics;
+
 namespace FoxxiBot.TwitchBot
 {
     internal class Twitch_Commands
@@ -367,6 +370,55 @@ namespace FoxxiBot.TwitchBot
             }
 
             return null;
+        }
+
+        public void win_loss(string type)
+        {
+            // Update SQL Database
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+
+            // Process New Win/Loss Data
+            using var updateCmd = new SQLiteCommand(con);
+
+            // Set Win Math
+            if (type == "win")
+            {
+                string win_stm = "UPDATE gb_win_loss SET value = value + 1 WHERE parameter = 'wins'";
+
+                using var updateWins = new SQLiteCommand(win_stm, con);
+                updateWins.Prepare();
+                updateWins.ExecuteNonQuery();
+            }
+            
+            // Set Loss Math
+            if (type == "loss")
+            {
+                string loss_stm = "UPDATE gb_win_loss SET value = value + 1 WHERE parameter = 'losses'";
+
+                // Start a local transaction
+                using var updateLosses = new SQLiteCommand(loss_stm, con);
+                updateLosses.Prepare();
+                updateLosses.ExecuteNonQuery();
+            }
+
+            // Update Ratio Win/Loss Values
+            SQLite.winlossSQL winlossSQL = new SQLite.winlossSQL();
+            int wins = Convert.ToInt32(winlossSQL.getOptions("wins"));
+            int losses = Convert.ToInt32(winlossSQL.getOptions("losses"));
+
+            // Update Ratio
+            int math = wins * 100 / (wins + losses);
+            Console.WriteLine(math);
+
+            string ratio_stm = "UPDATE gb_win_loss SET value = '" + math + '%' + "' WHERE parameter = 'ratio'";
+
+            // Start a local transaction
+            using var updateRatio = new SQLiteCommand(ratio_stm, con);
+            updateRatio.Prepare();
+            updateRatio.ExecuteNonQuery();
+
+            con.Close();
         }
 
     }
