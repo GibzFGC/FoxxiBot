@@ -73,16 +73,30 @@
     <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
 
+            var apikey;
             var id = "<?php print $_REQUEST["id"]; ?>";
             var datetime = null;
 
             var pollID = 0;
             var pollLive = 0;        
 
+            function api_key() {
+                let searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('key')) {
+                    apikey = searchParams.get("key");
+                } else {
+                    console.log("API Key Error");
+                    return;
+                }
+            }
+
+            // Check API Key
+            api_key();
+
             function init_poll() {
 
             // Load Poll Options Data
-            $.getJSON('/api.php?state=get&table=gb_polls_options&where=parameter:"allow_voting"', function(data) {
+            $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_polls_options&where=parameter:"allow_voting"', function(data) {
                 pollLive = data[0]["value"];
 
                 if (pollLive == 0) {
@@ -95,7 +109,7 @@
             });
 
             // Load Poll Data
-            $.getJSON('/api.php?state=get&table=gb_polls&where=id:' + id, function(data) {
+            $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_polls&where=id:' + id, function(data) {
                 document.getElementById("poll_title").innerText = data[0]["title"];
 
                 document.getElementById("poll_option_1").innerText = "[1] " + data[0]["option1"];

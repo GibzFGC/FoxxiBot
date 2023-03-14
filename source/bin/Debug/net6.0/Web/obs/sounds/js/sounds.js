@@ -1,10 +1,22 @@
 var xmlhttp = new XMLHttpRequest();
+// String to hold API Key
+var apikey;
 // Boolean to determine playing state
 var isPlaying = false;
 // Boolean to determine timer state
 var timerPaused = false;
 // Boolean to determine update state
 var doUpdate = false;
+
+function api_key() {
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('key')) {
+        apikey = searchParams.get("key");
+    } else {
+        console.log("API Key Error");
+        return;
+    }
+}
 
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
@@ -19,8 +31,8 @@ function pollHandler() {
 }
 
 function loadSounds() {
-    // Load Data
-    $.getJSON('/api.php?state=get&table=gb_sounds_queue&order="id"&order_state=asc&limit=1', function (data) {
+     // Load Data
+    $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_sounds_queue&order="id"&order_state=asc&limit=1', function (data) {
         playSoundFromQueue(data);
     });
 }
@@ -69,7 +81,7 @@ function playSoundFromQueue(data) {
 // Perform SQL Delete on Viewed
 function deletePlayed(id) {
     $.ajax({
-        type: "POST", url: "/api.php?state=delete&table=gb_sounds_queue&column=id&value=" + id, success: function () {
+        type: "POST", url: "/api.php?key="+ apikey +"&state=delete&table=gb_sounds_queue&column=id&value=" + id, success: function () {
             console.log("Info: Deleted SQL Row " + id);
         }
     });
@@ -77,6 +89,9 @@ function deletePlayed(id) {
 
 function init() {
     xmlhttp.overrideMimeType('application/json');
+
+    // Check API Key
+    api_key();
 
     var timeout = this.window.setInterval(function () {
         if (!timerPaused) pollHandler();

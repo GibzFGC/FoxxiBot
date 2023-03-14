@@ -1,8 +1,19 @@
 var xmlhttp = new XMLHttpRequest();	
-    
+var apikey;
+
 var animating = false;
 var doUpdate = false;
 var isPlaying = false;
+
+function api_key() {
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('key')) {
+        apikey = searchParams.get("key");
+    } else {
+        console.log("API Key Error");
+        return;
+    }
+}
 
 // Set Audio File
 function setAudio(audio) {
@@ -13,6 +24,9 @@ function setAudio(audio) {
 
 function init() {
 	xmlhttp.overrideMimeType('application/json');
+
+    // Check API Key
+    api_key();
 
 	var timeout = this.window.setInterval(function() {
 		pollHandler();
@@ -33,7 +47,7 @@ function isEmpty(obj) {
 
 function loadEvents() {
 	// Load Data
-	$.getJSON('/api.php?state=get&table=gb_twitch_events&order="id"&order_state=asc&limit=1', function(data) {
+	$.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_twitch_events&order="id"&order_state=asc&limit=1', function(data) {
 
 	if (!isEmpty(data)) {
 		if (document.getElementById('json').innerHTML !== data[0]["type"] + " - " + data[0]["user"]) {
@@ -50,7 +64,7 @@ function loadEvents() {
 function deletePlayed(id) {
 	$.ajax({
 		type: "POST",
-		url: "/api.php?state=delete&table=gb_twitch_events&column=id&value=" + id,
+		url: "/api.php?key="+ apikey +"&state=delete&table=gb_twitch_events&column=id&value=" + id,
 		success: function()
 		{
 		  console.log("Info: Deleted SQL Row " + id);

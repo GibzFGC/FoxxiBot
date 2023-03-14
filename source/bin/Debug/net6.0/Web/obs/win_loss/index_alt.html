@@ -19,14 +19,28 @@
 	<script type="text/javascript">
 		
 			var xmlhttp = new XMLHttpRequest();	
-		
+			var apikey;
+
 			var animating = false;
 			var doUpdate = false;
 			
+			function api_key() {
+				let searchParams = new URLSearchParams(window.location.search);
+				if (searchParams.has('key')) {
+					apikey = searchParams.get("key");
+				} else {
+					console.log("API Key Error");
+					return;
+				}
+			}
+
 			function init() {
 
 				xmlhttp.overrideMimeType('application/json');
 				
+				// Check API Key
+				api_key();
+
 				var timeout = this.window.setInterval(function() {
 					pollHandler();
 				}, 250);
@@ -47,7 +61,7 @@
 				var items = [];
 
 				// Load Data
-				$.getJSON('http://localhost:25000/api.php?state=get&table=gb_win_loss', function(data) {
+				$.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_win_loss', function(data) {
 					
 					items = data;
 					var newItems = {};

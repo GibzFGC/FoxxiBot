@@ -13,14 +13,28 @@
         <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
 		    var xmlhttp = new XMLHttpRequest();	
-		
+            var apikey;
+
             var animating = false;
             var doUpdate = false;
         
+            function api_key() {
+                let searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('key')) {
+                    apikey = searchParams.get("key");
+                } else {
+                    console.log("API Key Error");
+                    return;
+                }
+            }
+
             function init() {
 
                 xmlhttp.overrideMimeType('application/json');
             
+                // Check API Key
+                api_key();
+
                 var timeout = this.window.setInterval(function() {
                     pollHandler();
                 }, 250);
@@ -37,7 +51,7 @@
 
             function loadGame() {
                 // Load Data
-                $.getJSON('/api.php?state=get&table=gb_options&where=parameter:"game_title" LIMIT 1', function(data) {
+                $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_options&where=parameter:"game_title" LIMIT 1', function(data) {
                     var game = document.getElementById('game_title');
                     game.innerHTML = data[0]["value"];
                 });
