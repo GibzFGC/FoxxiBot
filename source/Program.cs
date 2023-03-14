@@ -488,13 +488,13 @@ namespace FoxxiBot
         }
         public static string GenerateAPIKey()
         {
-            var randomNumber = new byte[32];
+            var randomNumber = new byte[16];
             string apid = "";
 
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
-                apid = Convert.ToBase64String(randomNumber);
+                apid = Convert.ToHexString(randomNumber);
             }
 
             return apid;
