@@ -10,6 +10,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using FoxxiBot.Class;
 using FoxxiBot.SQLite;
 using FoxxiBot.TwitchBot;
 using FoxxiBot.WebServer;
@@ -20,6 +21,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace FoxxiBot
@@ -138,9 +140,22 @@ namespace FoxxiBot
                     Config.DiscordPrefix = (string)o["DiscordPrefix"];
 
                     Config.BotLang = (string)o["BotLang"];
+                    Config.APIKey =  (string)o["APIKey"];
 
                     // Close the File
                     reader.Close();
+                }
+
+                // Check if API Key Exists
+                if (string.IsNullOrEmpty(Config.APIKey))
+                {
+                    var Data = GenerateAPIKey();
+                    Console.WriteLine("Web Panel API Key: " + Data);
+                    Config.APIKey = Data;
+
+                    // Save the new JSON Data
+                    Class.Bot_Functions functions = new Class.Bot_Functions();
+                    functions.SaveConfig().GetAwaiter().GetResult();
                 }
 
                 // Start Web Server
@@ -152,7 +167,8 @@ namespace FoxxiBot
                     Console.WriteLine($"Server IP / URL: " + Config.WebserverIP);
                     Console.WriteLine($"Server Port: " + Config.WebserverPort);
                     Console.WriteLine($"Server Path: " + @AppDomain.CurrentDomain.BaseDirectory + "Web");
-                }
+                    Console.WriteLine("Web Panel API Key: " + Config.APIKey);
+                    }
 
                 Console.WriteLine("");
                 
@@ -387,6 +403,7 @@ namespace FoxxiBot
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
             objSettings.BotLang = Config.BotLang;
+            objSettings.APIKey = Config.APIKey;
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
@@ -468,6 +485,19 @@ namespace FoxxiBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
+        }
+        public static string GenerateAPIKey()
+        {
+            var randomNumber = new byte[32];
+            string apid = "";
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                apid = Convert.ToBase64String(randomNumber);
+            }
+
+            return apid;
         }
 
     }

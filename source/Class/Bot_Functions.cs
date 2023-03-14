@@ -381,6 +381,7 @@ namespace FoxxiBot.Class
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
             objSettings.BotLang = Config.BotLang;
+            objSettings.APIKey = Config.APIKey;
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
