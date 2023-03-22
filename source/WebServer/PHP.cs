@@ -47,9 +47,10 @@ namespace FoxxiBot.WebServer
             process = new Process();
             process.StartInfo.FileName = this.phpDir;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.Arguments = "-q \"" + filename + "\"";
+            process.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" \"" + filename + "\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardError = true;
             process.StartInfo.UseShellExecute = false;
 
             process.StartInfo.EnvironmentVariables.Clear();
@@ -145,7 +146,7 @@ namespace FoxxiBot.WebServer
             }
 
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
             writer.Write(s);
             writer.Flush();
             stream.Position = 0;

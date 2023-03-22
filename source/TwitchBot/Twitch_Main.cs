@@ -266,8 +266,13 @@ namespace FoxxiBot.TwitchBot
             SQLite.botSQL gameSQL = new SQLite.botSQL();
             var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
 
+            // If Game Changed
             if (gameTitle != data.ToString())
             {
+                // Tell the Console Game Updated
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [Game Updated] - " + data.ToString(), ConsoleColor.Yellow);
+
+                // Update Game in the DB
                 gameTitle = data.ToString();
                 gameSQL.updateOptions("game_title", data.ToString());
             }
