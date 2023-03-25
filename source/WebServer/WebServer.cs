@@ -12,14 +12,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TwitchLib.PubSub.Models.Responses;
 
 namespace FoxxiBot.WebServer
 {
@@ -302,6 +299,7 @@ namespace FoxxiBot.WebServer
                     WriteInputStreamToResponse(input, httpListenerResponse.OutputStream);
                     httpListenerResponse.StatusCode = (int)HttpStatusCode.OK;
                     httpListenerResponse.OutputStream.Flush();
+                    httpListenerResponse.OutputStream.Dispose();
                 }
             }
         }

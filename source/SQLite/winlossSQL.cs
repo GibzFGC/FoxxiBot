@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Data.SQLite;
 
 namespace FoxxiBot.SQLite

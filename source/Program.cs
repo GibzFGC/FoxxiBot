@@ -10,10 +10,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using FoxxiBot.Class;
 using FoxxiBot.SQLite;
 using FoxxiBot.TwitchBot;
-using FoxxiBot.WebServer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -200,9 +198,6 @@ namespace FoxxiBot
                 // Check & Set Debug Mode
                 SQLite.botSQL botSQL = new SQLite.botSQL();
                 botSQL.debugMode();
-
-                // prevent console from closing
-                Console.ReadLine();
             }
             else
             {
@@ -441,9 +436,6 @@ namespace FoxxiBot
                 DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
                 Discord.MainAsync().GetAwaiter().GetResult();
             }
-
-            // prevent console from closing
-            Console.ReadLine();
         }
 
         private static string getAuthorizationCodeUrl(string clientId, string redirectUri, List<string> scopes)

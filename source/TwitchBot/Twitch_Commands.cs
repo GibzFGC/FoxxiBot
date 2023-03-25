@@ -10,15 +10,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Discord;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Data.SQLite;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Numerics;
 
 namespace FoxxiBot.TwitchBot
 {
@@ -400,6 +396,33 @@ namespace FoxxiBot.TwitchBot
                 using var updateLosses = new SQLiteCommand(loss_stm, con);
                 updateLosses.Prepare();
                 updateLosses.ExecuteNonQuery();
+            }
+
+            // Reset the Counter
+            if (type == "reset")
+            {
+                // Reset Wins Column
+                string rwin_stm = "UPDATE gb_win_loss SET value = 0 WHERE parameter = 'wins'";
+
+                using var resetWins = new SQLiteCommand(rwin_stm, con);
+                resetWins.Prepare();
+                resetWins.ExecuteNonQuery();
+
+                // Reset Losses Column
+                string rloss_stm = "UPDATE gb_win_loss SET value = 0 WHERE parameter = 'losses'";
+
+                // Start a local transaction
+                using var resetLosses = new SQLiteCommand(rloss_stm, con);
+                resetLosses.Prepare();
+                resetLosses.ExecuteNonQuery();
+
+                // Reset Ratio Column
+                string rratio_stm = "UPDATE gb_win_loss SET value = '-' WHERE parameter = 'ratio'";
+
+                // Start a local transaction
+                using var resetRatio = new SQLiteCommand(rratio_stm, con);
+                resetRatio.Prepare();
+                resetRatio.ExecuteNonQuery();
             }
 
             // Update Ratio Win/Loss Values

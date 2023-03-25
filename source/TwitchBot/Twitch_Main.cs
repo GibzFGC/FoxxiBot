@@ -13,8 +13,6 @@
 using System;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Threading;
 using TwitchLib.Client;
@@ -24,7 +22,6 @@ using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
-using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
 using TwitchLib.PubSub;
 
@@ -632,7 +629,7 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
-                    
+
                 }
 
                 // Link Permission Handler           
@@ -685,18 +682,26 @@ namespace FoxxiBot.TwitchBot
                 }
 
                 // Win Loss Count
-                if (e.Command.CommandText == "win")
+                if (e.Command.CommandText == "wl")
                 {
-                    commands.win_loss("win");
-                    SendChatMessage(Config.TwitchBotName + ": " + "A Win has been added to the board");
-                }
+                    if (e.Command.ArgumentsAsString == "win")
+                    {
+                        commands.win_loss("win");
+                        SendChatMessage(Config.TwitchBotName + ": " + "A Win has been added to the board");
+                    }
 
-                if (e.Command.CommandText == "loss")
-                {
-                    commands.win_loss("loss");
-                    SendChatMessage(Config.TwitchBotName + ": " + "A Loss has been added to the board");
-                }
+                    if (e.Command.ArgumentsAsString == "loss")
+                    {
+                        commands.win_loss("loss");
+                        SendChatMessage(Config.TwitchBotName + ": " + "A Loss has been added to the board");
+                    }
 
+                    if (e.Command.ArgumentsAsString == "reset")
+                    {
+                        commands.win_loss("reset");
+                        SendChatMessage(Config.TwitchBotName + ": " + "The current count has been added to the board");
+                    }
+                }
             }
 
             //// == User Commands == ////
