@@ -102,7 +102,8 @@ namespace FoxxiBot.TwitchBot
             pointsTimer = new Timer(pointsUpdate, null, 0, 300000);
 
             // Start Live Check Timer
-            liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
+            liveTimer = new Timer(streamLiveCallBack, null, 0, 10000);
+            //liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
@@ -699,7 +700,7 @@ namespace FoxxiBot.TwitchBot
                     if (e.Command.ArgumentsAsString == "reset")
                     {
                         commands.win_loss("reset");
-                        SendChatMessage(Config.TwitchBotName + ": " + "The current count has been added to the board");
+                        SendChatMessage(Config.TwitchBotName + ": " + "The counters have been reset");
                     }
                 }
             }

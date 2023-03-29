@@ -425,21 +425,25 @@ namespace FoxxiBot.TwitchBot
                 resetRatio.ExecuteNonQuery();
             }
 
-            // Update Ratio Win/Loss Values
-            SQLite.winlossSQL winlossSQL = new SQLite.winlossSQL();
-            int wins = Convert.ToInt32(winlossSQL.getOptions("wins"));
-            int losses = Convert.ToInt32(winlossSQL.getOptions("losses"));
+            if (type != "reset") {
 
-            // Update Ratio
-            int math = wins * 100 / (wins + losses);
-            Console.WriteLine(math);
+                // Update Ratio Win/Loss Values
+                SQLite.winlossSQL winlossSQL = new SQLite.winlossSQL();
+                int wins = Convert.ToInt32(winlossSQL.getOptions("wins"));
+                int losses = Convert.ToInt32(winlossSQL.getOptions("losses"));
 
-            string ratio_stm = "UPDATE gb_win_loss SET value = '" + math + '%' + "' WHERE parameter = 'ratio'";
+                // Update Ratio
+                int math = wins * 100 / (wins + losses);
+                //Console.WriteLine(math);
 
-            // Start a local transaction
-            using var updateRatio = new SQLiteCommand(ratio_stm, con);
-            updateRatio.Prepare();
-            updateRatio.ExecuteNonQuery();
+                string ratio_stm = "UPDATE gb_win_loss SET value = '" + math + '%' + "' WHERE parameter = 'ratio'";
+
+                // Start a local transaction
+                using var updateRatio = new SQLiteCommand(ratio_stm, con);
+                updateRatio.Prepare();
+                updateRatio.ExecuteNonQuery();
+
+            }
 
             con.Close();
         }
