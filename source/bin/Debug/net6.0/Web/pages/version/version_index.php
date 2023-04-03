@@ -106,29 +106,22 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   </li>
 
                   <li class="nav-item">
-                    <span class="nav-link">LinqtoTwitter Version &amp; License:
-                      <span class="float-right">6.15.0| <a target="_blank" href="https://github.com/CoreTweet/CoreTweet/blob/master/LICENSE">MIT License</a>
-                       | <a target="_blank" href="https://github.com/CoreTweet/CoreTweet">Github</a></span>
-                    </span>
-                  </li>
-
-                  <li class="nav-item">
                     <span class="nav-link">Discord .NET Version &amp; License:
-                      <span class="float-right">3.7.2 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
+                      <span class="float-right">3.10.0 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
                        | <a target="_blank" href="https://github.com/discord-net/Discord.Net">Github</a></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">Jint Version &amp; License:
-                      <span class="float-right">3.0.0-beta-2037 | <a target="_blank" href="https://github.com/sebastienros/jint/blob/main/LICENSE.txt">BSD 2-Clause License</a>
+                      <span class="float-right">3.0.0-beta-2044 | <a target="_blank" href="https://github.com/sebastienros/jint/blob/main/LICENSE.txt">BSD 2-Clause License</a>
                        | <a target="_blank" href="https://github.com/JamesNK/Newtonsoft.Json">Github</a></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">Newtonsoft JSON Version &amp; License:
-                      <span class="float-right">13.0.1 | <a target="_blank" href="https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md">MIT License</a>
+                      <span class="float-right">13.0.3 | <a target="_blank" href="https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md">MIT License</a>
                        | <a target="_blank" href="https://github.com/sebastienros/jint">Github</a></span>
                     </span>
                   </li>
@@ -142,7 +135,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                   
                   <li class="nav-item">
                     <span class="nav-link">TwitchLib Version &amp; License:
-                      <span class="float-right">3.4.1 | <a target="_blank" href="https://github.com/TwitchLib/TwitchLib/blob/master/LICENSE">MIT License</a>
+                      <span class="float-right">3.5.3 | <a target="_blank" href="https://github.com/TwitchLib/TwitchLib/blob/master/LICENSE">MIT License</a>
                        | <a target="_blank" href="https://github.com/TwitchLib/TwitchLib">Github</a></span>
                     </span>
                   </li>
