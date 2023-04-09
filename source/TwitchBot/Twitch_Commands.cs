@@ -82,7 +82,7 @@ namespace FoxxiBot.TwitchBot
         public string commandAccountAge(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
             var data = Twitch_GetData.getAccountAge(e.Command.ChatMessage.UserId).GetAwaiter().GetResult();
-            return e.Command.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago";
+            return e.Command.ChatMessage.DisplayName + ", your account was created " + data.ToString() + " ago";
         }
 
         public string commandPermitUser(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
