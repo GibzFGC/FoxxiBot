@@ -36,6 +36,33 @@ namespace FoxxiBot.Class
             // Start a local transaction
             this_transaction = con.BeginTransaction();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_betting (id INTEGER PRIMARY KEY, username TEXT UNIQUE, bet_option TEXT, bet_points TEXT)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_betting_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('betting_active','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_win_percentage','20%')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_info','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_running','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_option_1','win')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_option_2','loss')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_winner','')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 

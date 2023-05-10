@@ -188,7 +188,6 @@ namespace FoxxiBot.SQLite
 
         public void pointsChange(string username, decimal value)
         {
-
             using var con = new SQLiteConnection(cs);
 
             con.Open();

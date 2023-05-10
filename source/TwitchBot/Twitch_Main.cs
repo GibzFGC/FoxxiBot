@@ -481,6 +481,7 @@ namespace FoxxiBot.TwitchBot
             Twitch_Commands commands = new Twitch_Commands();
             Twitch_Games games = new Twitch_Games();
             Twitch_Points points = new Twitch_Points();
+            Twitch_Betting betting = new Twitch_Betting();
 
             //// == Check if User Blacklisted== ////
             ///
@@ -770,6 +771,53 @@ namespace FoxxiBot.TwitchBot
             {
                 var result = points.commandGamblePoints(e);
                 SendChatMessage(result);
+            }
+
+            //// == Betting Commands == ////
+            ///
+            // Betting Handler
+            if (e.Command.CommandText == "bet")
+            {
+
+                if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+                {
+
+                    if (e.Command.ArgumentsAsList[0] == "start")
+                    {
+                        var result = betting.initBet();
+                        SendChatMessage(result);
+                        return;
+                    }
+
+                    if (e.Command.ArgumentsAsList[0] == "result")
+                    {
+
+                        if (e.Command.ArgumentsAsList[1] != string.Empty)
+                        {
+                            var result = betting.finishBet(e);
+                            SendChatMessage(result);
+                            return;
+                        }
+                        else
+                        {
+                            SendChatMessage(e.Command.ChatMessage.DisplayName + ", no result was provided!");
+                            return;
+                        }
+
+                    }
+
+                }
+
+                if (e.Command.ArgumentsAsList.Count > 0)
+                {
+                    var result = betting.commandBetPoints(e);
+                    SendChatMessage(result);
+                }
+                else
+                {
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", No vote option or points value was provided!");
+                }
+
             }
 
             // Voting

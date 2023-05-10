@@ -368,6 +368,13 @@ namespace FoxxiBot.TwitchBot
             return null;
         }
 
+        public void commandBetting()
+        {
+
+
+
+        }
+
         public void win_loss(string type)
         {
             // Update SQL Database
