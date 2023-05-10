@@ -318,6 +318,26 @@ foreach($result as $row)
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-trophy"></i>
+              <p>
+                Betting
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+              <a href="<?php print $gfw["site_url"]; ?>/index.php?p=betting" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Management</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-stopwatch-20"></i>
               <p>
               <?= _COUNTDOWN ?>

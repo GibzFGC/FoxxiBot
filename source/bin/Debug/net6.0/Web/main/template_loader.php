@@ -47,6 +47,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/audio_loader.php";
             }
 
+            if ($page_loader == 'betting') {
+                $cpage = "pages/betting_loader.php";
+            }
+
             if ($page_loader == 'countdowns') {
                 $cpage = "pages/countdowns_loader.php";
             }
