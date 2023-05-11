@@ -31,7 +31,20 @@ namespace FoxxiBot.TwitchBot
 
         private void betTimer_Handler(object state)
         {
+
             if (betState == 1)
+            {
+                // Send Bet Last Chance Message
+                Twitch_Main.client.SendMessage(Config.TwitchClientChannel, "1 minute left to vote!");
+            }
+
+            if (betState == 2)
+            {
+                // Send Bet Last Chance Message
+                Twitch_Main.client.SendMessage(Config.TwitchClientChannel, "Betting will end in 30 seconds!");
+            }
+            
+            if (betState == 3)
             {
                 // Console Message
                 Console.WriteLine("The current bet has ended");
@@ -46,8 +59,8 @@ namespace FoxxiBot.TwitchBot
                 betTimer.Change(Timeout.Infinite, Timeout.Infinite);
             }
 
-            // Set to State 1 after 2 Mins
-            betState = 1;
+            // Set to State after 30 Seconds
+            betState = betState + 1;
         }
 
         public string initBet()
@@ -56,7 +69,7 @@ namespace FoxxiBot.TwitchBot
             betState = 0;
 
             // Start Betting Timer (2 minutes)
-            betTimer = new Timer(betTimer_Handler, null, 0, 120000);
+            betTimer = new Timer(betTimer_Handler, null, 0, 30000);
 
             // Set Bet as Running
             betSQL.updateOptions("bet_running", "on");
@@ -149,23 +162,36 @@ namespace FoxxiBot.TwitchBot
 
                 while (rdr.Read())
                 {
+
                     // Calculate New Points Based on Percentage
                     int userBet = Convert.ToInt32((string)rdr["bet_points"]);
 
                     int percentComplete = (int)Math.Round((double)(percentage / userBet) * 100);
                     int finalScore = userBet + percentComplete;
 
-                    // Save the New Points Value
-                    using var updateCmd = new SQLiteCommand(con);
+                    // Manage SQL Mass Updating
+                    using (var transaction = con.BeginTransaction())
+                    {
 
-                    updateCmd.CommandText = "UPDATE gb_points SET value = value + @value WHERE username = @username";
+                        // Save the New Points Value
+                        using var updateCmd = new SQLiteCommand(con);
 
-                    updateCmd.Parameters.AddWithValue("@username", rdr["username"].ToString());
-                    updateCmd.Parameters.AddWithValue("@value", finalScore);
+                        updateCmd.CommandText = "UPDATE gb_points SET value = value + @value WHERE username = @username";
 
-                    updateCmd.Prepare();
-                    updateCmd.ExecuteNonQuery();
+                        updateCmd.Parameters.AddWithValue("@username", rdr["username"].ToString());
+                        updateCmd.Parameters.AddWithValue("@value", finalScore);
+
+                        updateCmd.Prepare();
+                        updateCmd.ExecuteNonQuery();
+
+                        // Commit a LOT of Data
+                        transaction.Commit();
+                    }
+
                 }
+
+                // Close Existing SQL
+                con.Close();
 
             }
             else

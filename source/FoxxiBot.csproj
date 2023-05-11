@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Program.cs~RF376025.TMP" />
+    <None Remove="TwitchBot\Twitch_Betting.cs~RF41ea63.TMP" />
     <None Remove="WebServer\WebServer.cs~RF22747e.TMP" />
   </ItemGroup>
 

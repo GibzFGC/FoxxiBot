@@ -45,7 +45,7 @@ namespace FoxxiBot.Class
             cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('betting_active','off')";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_win_percentage','20%')";
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES ('bet_win_percentage','20')";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_info','')";
