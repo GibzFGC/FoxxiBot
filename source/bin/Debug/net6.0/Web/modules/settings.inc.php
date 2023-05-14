@@ -70,7 +70,7 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
     
 // Extra Website Settings
 	$gfw['current_year'] = date("Y");																		// Gets the current year from the server
-	$gfw['current_version'] = "1.0.7";																		// Current Bot Version
+	$gfw['current_version'] = "1.0.8";																		// Current Bot Version
 
 // Website Timezone
     date_default_timezone_set('Europe/London');																// Sets the default timezone for your website (change if needed)
