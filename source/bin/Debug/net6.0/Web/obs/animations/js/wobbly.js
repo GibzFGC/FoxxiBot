@@ -1,10 +1,24 @@
 var xmlhttp = new XMLHttpRequest();
+var apikey;
 
 var doUpdate = false;
 var isPlaying = false;
 
+function api_key() {
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('key')) {
+        apikey = searchParams.get("key");
+    } else {
+        console.log("API Key Error");
+        return;
+    }
+}
+
 function init() {
     xmlhttp.overrideMimeType('application/json');
+
+    // Check API Key
+    api_key();
 
     var timeout = this.window.setInterval(function() {
         pollHandler();
@@ -27,7 +41,7 @@ function isEmpty(obj) {
 function updatePlayed(id) {
 	$.ajax({
 		type: "POST",
-		url: "/api.php?state=send&table=gb_points_actions&column=status&value=1&id=id&position=" + id,
+		url: "/api.php?key="+ apikey +"&state=send&table=gb_points_actions&column=status&value=1&id=id&position=" + id,
 		success: function()
 		{
 		  console.log("Info: Updated SQL Row " + id);

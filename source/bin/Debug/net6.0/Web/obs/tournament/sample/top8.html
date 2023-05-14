@@ -30,14 +30,28 @@
 			var dbfields = createFieldIDs(c_rounds, c_matches, c_players, c_data, c_singlematchList);
 
 			var xmlhttp = new XMLHttpRequest();	
-		
+			var apikey;
+
 			var animating = false;
 			var doUpdate = false;
 			
+			function api_key() {
+				let searchParams = new URLSearchParams(window.location.search);
+				if (searchParams.has('key')) {
+					apikey = searchParams.get("key");
+				} else {
+					console.log("API Key Error");
+					return;
+				}
+			}
+
 			function init() {
 
 				xmlhttp.overrideMimeType('application/json');
 				
+				// Check API Key
+				api_key();
+
 				var timeout = this.window.setInterval(function() {
 					pollHandler();
 				}, 250);
@@ -89,7 +103,7 @@
 				var items = [];
 
 				// Load Data
-				$.getJSON('/api.php?state=get&table=gb_tournament_top8', function(data) {
+				$.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_tournament_top8', function(data) {
 					
 					items = data;
 					var newItems = {};

@@ -12,7 +12,8 @@
 
 using System;
 using System.Data.SQLite;
-using System.Reflection.Metadata.Ecma335;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
@@ -21,7 +22,6 @@ using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
-using TwitchLib.Communication.Interfaces;
 using TwitchLib.Communication.Models;
 using TwitchLib.PubSub;
 
@@ -102,7 +102,8 @@ namespace FoxxiBot.TwitchBot
             pointsTimer = new Timer(pointsUpdate, null, 0, 300000);
 
             // Start Live Check Timer
-            liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
+            liveTimer = new Timer(streamLiveCallBack, null, 0, 10000);
+            //liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
@@ -263,8 +264,13 @@ namespace FoxxiBot.TwitchBot
             SQLite.botSQL gameSQL = new SQLite.botSQL();
             var data = Twitch_GetData.getGame().GetAwaiter().GetResult();
 
+            // If Game Changed
             if (gameTitle != data.ToString())
             {
+                // Tell the Console Game Updated
+                Class.Bot_Functions.WriteColour(DateTime.Now + ": [Game Updated] - " + data.ToString(), ConsoleColor.Yellow);
+
+                // Update Game in the DB
                 gameTitle = data.ToString();
                 gameSQL.updateOptions("game_title", data.ToString());
             }
@@ -475,6 +481,7 @@ namespace FoxxiBot.TwitchBot
             Twitch_Commands commands = new Twitch_Commands();
             Twitch_Games games = new Twitch_Games();
             Twitch_Points points = new Twitch_Points();
+            Twitch_Betting betting = new Twitch_Betting();
 
             //// == Check if User Blacklisted== ////
             ///
@@ -490,8 +497,43 @@ namespace FoxxiBot.TwitchBot
             //// == Admin Commands == ////
             //
 
+            if (e.Command.ChatMessage.IsBroadcaster)
+            {
+
+                // Close the Bot
+                if (e.Command.CommandText == "stop")
+                {
+                    // Write to Log File
+                    Class.Bot_Functions.ErrorLog("Bot Stopped by " + e.Command.ChatMessage.DisplayName);
+
+                    // Close the current instance
+                    Console.WriteLine("");
+                    Console.WriteLine("The bot is shutting down, it will automatically close in 5 seconds...");
+                    Thread.Sleep(5000);
+                    System.Environment.Exit(1);
+                }
+
+                // Restart the Bot
+                if (e.Command.CommandText == "restart")
+                {
+                    // Write to Log File
+                    Class.Bot_Functions.ErrorLog("Restarted by " + e.Command.ChatMessage.DisplayName);
+
+                    // Attempt to Restart the Bot on Windows
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
+                    }
+
+                    // Close the current instance
+                    Environment.Exit(1);
+                }
+
+            }
+
             if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
             {
+
                 // Add a Command (command name | command text | command points cost)
                 if (e.Command.CommandText == "addcom")
                 {
@@ -589,7 +631,7 @@ namespace FoxxiBot.TwitchBot
 
                     // Send message to Twitch Chat
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", the Command " + e.Command.ArgumentsAsString + " has been deleted!");
-                    
+
                 }
 
                 // Link Permission Handler           
@@ -613,6 +655,55 @@ namespace FoxxiBot.TwitchBot
                     SendChatMessage(Config.TwitchBotName + ": " + data);
                 }
 
+                // Poll
+                if (e.Command.CommandText == "poll")
+                {
+
+                    if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
+                    {
+                        SQLite.pollSQL pollSQL = new SQLite.pollSQL();
+
+                        if (e.Command.ArgumentsAsString == "end")
+                        {
+                            pollSQL.updateOptions("active_poll", "0");
+                            pollSQL.updateOptions("allow_voting", "0");
+
+                            SendChatMessage("The poll has now closed, thank you for taking part!");
+                            return;
+                        }
+                        else
+                        {
+                            var result = pollSQL.pollData(e.Command.ArgumentsAsString);
+                            SendChatMessage(result);
+
+                            pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
+                            pollSQL.updateOptions("allow_voting", "1");
+                        }
+                    }
+
+                }
+
+                // Win Loss Count
+                if (e.Command.CommandText == "wl")
+                {
+                    if (e.Command.ArgumentsAsString == "win")
+                    {
+                        commands.win_loss("win");
+                        SendChatMessage(Config.TwitchBotName + ": " + "A Win has been added to the board");
+                    }
+
+                    if (e.Command.ArgumentsAsString == "loss")
+                    {
+                        commands.win_loss("loss");
+                        SendChatMessage(Config.TwitchBotName + ": " + "A Loss has been added to the board");
+                    }
+
+                    if (e.Command.ArgumentsAsString == "reset")
+                    {
+                        commands.win_loss("reset");
+                        SendChatMessage(Config.TwitchBotName + ": " + "The counters have been reset");
+                    }
+                }
             }
 
             //// == User Commands == ////
@@ -682,32 +773,49 @@ namespace FoxxiBot.TwitchBot
                 SendChatMessage(result);
             }
 
-            //// == Twitter Commands == ////
+            //// == Betting Commands == ////
             ///
-            // Poll
-            if (e.Command.CommandText == "poll")
+            // Betting Handler
+            if (e.Command.CommandText == "bet")
             {
 
                 if (e.Command.ChatMessage.IsBroadcaster || e.Command.ChatMessage.IsModerator)
                 {
-                    SQLite.pollSQL pollSQL = new SQLite.pollSQL();
 
-                    if (e.Command.ArgumentsAsString == "end")
+                    if (e.Command.ArgumentsAsList[0] == "start")
                     {
-                        pollSQL.updateOptions("active_poll", "0");
-                        pollSQL.updateOptions("allow_voting", "0");
-
-                        SendChatMessage("The poll has now closed, thank you for taking part!");
+                        var result = betting.initBet();
+                        SendChatMessage(result);
                         return;
                     }
-                    else
-                    {
-                        var result = pollSQL.pollData(e.Command.ArgumentsAsString);
-                        SendChatMessage(result);
 
-                        pollSQL.updateOptions("active_poll", e.Command.ArgumentsAsString);
-                        pollSQL.updateOptions("allow_voting", "1");
+                    if (e.Command.ArgumentsAsList[0] == "result")
+                    {
+
+                        if (e.Command.ArgumentsAsList[1] != string.Empty)
+                        {
+                            var result = betting.finishBet(e);
+                            SendChatMessage(result);
+                            return;
+                        }
+                        else
+                        {
+                            SendChatMessage(e.Command.ChatMessage.DisplayName + ", no result was provided!");
+                            return;
+                        }
+
                     }
+
+                }
+
+                if (e.Command.ArgumentsAsList.Count > 0)
+                {
+                    var result = betting.commandBetPoints(e);
+                    SendChatMessage(result);
+                }
+                else
+                {
+                    SendChatMessage(e.Command.ChatMessage.DisplayName + ", No vote option or points value was provided!");
                 }
 
             }

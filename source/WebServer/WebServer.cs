@@ -12,11 +12,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -136,6 +134,7 @@ namespace FoxxiBot.WebServer
             _ServerThread = new Thread(Listen);
             _ServerThread.Start();
         }
+        
         public void Dispose()
         {
             lock (_LockObjectDispose)
@@ -300,6 +299,7 @@ namespace FoxxiBot.WebServer
                     WriteInputStreamToResponse(input, httpListenerResponse.OutputStream);
                     httpListenerResponse.StatusCode = (int)HttpStatusCode.OK;
                     httpListenerResponse.OutputStream.Flush();
+                    httpListenerResponse.OutputStream.Dispose();
                 }
             }
         }
@@ -325,6 +325,9 @@ namespace FoxxiBot.WebServer
             int nbytes;
             while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                 outputStream.Write(buffer, 0, nbytes);
+
+            // Properly Close the Session
+            outputStream.Dispose();
         }
 
         private string GetContentType(string filePath)

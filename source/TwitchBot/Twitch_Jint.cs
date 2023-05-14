@@ -150,9 +150,6 @@ namespace FoxxiBot.TwitchBot
                 js.SetValue("botCommand", twitch_msg);
                 js.SetValue("twitch_eData", e.Command.ChatMessage);
 
-                // Twitter Declarations
-                //js.SetValue("twitterAPi", TypeReference.CreateTypeReference(js, typeof(CoreTweet.)));
-
                 // Run the Plugin
                 js.Execute(script);
             }

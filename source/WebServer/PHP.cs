@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace FoxxiBot.WebServer
 {
@@ -45,9 +46,10 @@ namespace FoxxiBot.WebServer
             process = new Process();
             process.StartInfo.FileName = this.phpDir;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.Arguments = "-q \"" + filename + "\"";
+            process.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" \"" + filename + "\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardError = true;
             process.StartInfo.UseShellExecute = false;
 
             process.StartInfo.EnvironmentVariables.Clear();
@@ -136,8 +138,14 @@ namespace FoxxiBot.WebServer
 
         public Stream GenerateStreamFromString(string s)
         {
+            if (Config.Debug == true)
+            {
+                Console.WriteLine("Output:");
+                Console.WriteLine(s);
+            }
+
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
             writer.Write(s);
             writer.Flush();
             stream.Position = 0;
@@ -150,6 +158,9 @@ namespace FoxxiBot.WebServer
             int nbytes;
             while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                 outputStream.Write(buffer, 0, nbytes);
+
+            // Properly Close the Session
+            outputStream.Dispose();
         }
 
     }

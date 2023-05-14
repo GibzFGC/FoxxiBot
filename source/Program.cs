@@ -16,7 +16,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace FoxxiBot
@@ -46,6 +49,9 @@ namespace FoxxiBot
 
         static void Main(string[] args)
         {
+            // Check for Crash, Reload if needed
+            try
+            {
             // Set Application Title
             Console.Title = $"FoxxiBot {Config.Version} :: Started @ " + DateTime.Now.ToString("F");
 
@@ -132,9 +138,22 @@ namespace FoxxiBot
                     Config.DiscordPrefix = (string)o["DiscordPrefix"];
 
                     Config.BotLang = (string)o["BotLang"];
+                    Config.APIKey =  (string)o["APIKey"];
 
                     // Close the File
                     reader.Close();
+                }
+
+                // Check if API Key Exists
+                if (string.IsNullOrEmpty(Config.APIKey))
+                {
+                    var Data = GenerateAPIKey();
+                    Console.WriteLine("Web Panel API Key: " + Data);
+                    Config.APIKey = Data;
+
+                    // Save the new JSON Data
+                    Class.Bot_Functions functions = new Class.Bot_Functions();
+                    functions.SaveConfig().GetAwaiter().GetResult();
                 }
 
                 // Start Web Server
@@ -146,7 +165,8 @@ namespace FoxxiBot
                     Console.WriteLine($"Server IP / URL: " + Config.WebserverIP);
                     Console.WriteLine($"Server Port: " + Config.WebserverPort);
                     Console.WriteLine($"Server Path: " + @AppDomain.CurrentDomain.BaseDirectory + "Web");
-                }
+                    Console.WriteLine("Web Panel API Key: " + Config.APIKey);
+                    }
 
                 Console.WriteLine("");
                 
@@ -178,9 +198,6 @@ namespace FoxxiBot
                 // Check & Set Debug Mode
                 SQLite.botSQL botSQL = new SQLite.botSQL();
                 botSQL.debugMode();
-
-                // prevent console from closing
-                Console.ReadLine();
             }
             else
             {
@@ -244,6 +261,33 @@ namespace FoxxiBot
                 // Begin the Verification / OAuth Phase
                 MainAsync().GetAwaiter().GetResult();
             }
+
+            }
+            catch (Exception ex)
+            {
+                RestartApplication(ex);
+            }
+
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            RestartApplication(e.Exception);
+        }
+
+        public static void RestartApplication(Exception ex)
+        {
+            // Write Log File
+            Class.Bot_Functions.ErrorLog(ex.Message.ToString());
+
+            // Attempt to Restart the Bot on Windows
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "/FoxxiBot.exe");
+            }
+
+            // log exception somewhere, EventLog is one option
+            Environment.Exit(1);
         }
 
         static async Task MainAsync()
@@ -354,6 +398,7 @@ namespace FoxxiBot
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
             objSettings.BotLang = Config.BotLang;
+            objSettings.APIKey = Config.APIKey;
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
@@ -391,9 +436,6 @@ namespace FoxxiBot
                 DiscordBot.Discord_Main Discord = new DiscordBot.Discord_Main();
                 Discord.MainAsync().GetAwaiter().GetResult();
             }
-
-            // prevent console from closing
-            Console.ReadLine();
         }
 
         private static string getAuthorizationCodeUrl(string clientId, string redirectUri, List<string> scopes)
@@ -435,6 +477,19 @@ namespace FoxxiBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
+        }
+        public static string GenerateAPIKey()
+        {
+            var randomNumber = new byte[16];
+            string apid = "";
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                apid = Convert.ToHexString(randomNumber);
+            }
+
+            return apid;
         }
 
     }

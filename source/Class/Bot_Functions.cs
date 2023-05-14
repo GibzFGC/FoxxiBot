@@ -36,6 +36,33 @@ namespace FoxxiBot.Class
             // Start a local transaction
             this_transaction = con.BeginTransaction();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_betting (id INTEGER PRIMARY KEY, username TEXT UNIQUE, bet_option TEXT, bet_points TEXT)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_betting_options (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('betting_active','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES ('bet_win_percentage','20')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_info','')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_running','off')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_option_1','win')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_option_2','loss')";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT OR IGNORE INTO gb_betting_options (parameter, value) VALUES('bet_winner','')";
+            cmd.ExecuteNonQuery();
+
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_commands (id INTEGER PRIMARY KEY, name TEXT, response TEXT, points INTEGER, permission INTEGER, active INTEGER)";
             cmd.ExecuteNonQuery();
 
@@ -345,6 +372,9 @@ namespace FoxxiBot.Class
             cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_twitch_watchlist (username TEXT UNIQUE)";
             cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"CREATE TABLE IF NOT EXISTS gb_win_loss (parameter TEXT UNIQUE, value TEXT)";
+            cmd.ExecuteNonQuery();
+
             // Commit all Data to SQL
             this_transaction.Commit();
 
@@ -378,11 +408,37 @@ namespace FoxxiBot.Class
             objSettings.DiscordPrefix = Config.DiscordPrefix;
 
             objSettings.BotLang = Config.BotLang;
+            objSettings.APIKey = Config.APIKey;
 
             string objjsonData = JsonConvert.SerializeObject(objSettings);
             File.WriteAllText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json", objjsonData);
 
             return Task.CompletedTask;
+        }
+
+        // Save Error Log
+        public static void ErrorLog(string ex)
+        {
+            // Write to Log File
+            string path = @AppDomain.CurrentDomain.BaseDirectory + "/Data/error.log";
+            DateTime now = DateTime.Now;
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
+            else
+            {
+                // Write to existing file
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
         }
 
         // Change the Colour of ConsoleText

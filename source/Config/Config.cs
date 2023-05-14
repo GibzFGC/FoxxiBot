@@ -46,6 +46,7 @@ namespace FoxxiBot
         public static string DiscordPrefix = "!";
 
         public static string BotLang = "English";
+        public static string APIKey = "";
 
     }
 }

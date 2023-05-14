@@ -19,6 +19,23 @@ define("G_FW", true);
 // Load the Bootstrap Loader
 require_once("modules/bootloader.php");
 
+// I no API Key Given
+if (!isset($_REQUEST["key"])) {
+    print "No API Key Provided!";
+    return;
+}
+
+// Check API Key
+if (isset($_REQUEST["key"])) {
+
+    if ($_REQUEST["key"] != $bot_obj->APIKey)
+    {
+        print "The Provided API Key is Wrong!";
+        return;
+    }
+
+}
+
 // Connect to the SQLite Database
 try {
     $PDO = new PDO('sqlite:../Data/bot.db');

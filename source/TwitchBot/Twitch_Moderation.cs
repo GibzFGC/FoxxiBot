@@ -12,7 +12,6 @@
 
 using System;
 using System.Data.SQLite;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FoxxiBot.TwitchBot

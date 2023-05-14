@@ -18,14 +18,28 @@
 
     <script type="text/javascript">    
         var xmlhttp = new XMLHttpRequest();	
-    
+        var apikey;
+
         var animating = false;
         var doUpdate = false;
     
+        function api_key() {
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('key')) {
+                apikey = searchParams.get("key");
+            } else {
+                console.log("API Key Error");
+                return;
+            }
+        }
+
         function init() {
 
             xmlhttp.overrideMimeType('application/json');
         
+            // Check API Key
+            api_key();
+
             var timeout = this.window.setInterval(function() {
                 pollHandler();
             }, 250);
@@ -42,7 +56,7 @@
 
         function loadEvents() {
             // Load Data
-            $.getJSON('/api.php?state=get&table=gb_twitch_notifications&order="id"&order_state=desc&limit=6', function(data) {
+            $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_twitch_notifications&order="id"&order_state=desc&limit=6', function(data) {
                 var event = document.getElementById('events');
 
                 if (document.getElementById('json').innerHTML !== data[0]["type"] + " - " + data[0]["user"]) {

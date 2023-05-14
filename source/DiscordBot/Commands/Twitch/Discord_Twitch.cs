@@ -10,13 +10,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Discord;
 using Discord.Commands;
 using FoxxiBot.TwitchBot;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace FoxxiBot.DiscordBot.Commands.Images

@@ -10,13 +10,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Discord;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Data.SQLite;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 namespace FoxxiBot.TwitchBot
 {
     internal class Twitch_Commands
@@ -83,7 +82,7 @@ namespace FoxxiBot.TwitchBot
         public string commandAccountAge(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
             var data = Twitch_GetData.getAccountAge(e.Command.ChatMessage.UserId).GetAwaiter().GetResult();
-            return e.Command.ChatMessage.DisplayName + " your account was created " + data.ToString() + " ago";
+            return e.Command.ChatMessage.DisplayName + ", your account was created " + data.ToString() + " ago";
         }
 
         public string commandPermitUser(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
@@ -367,6 +366,93 @@ namespace FoxxiBot.TwitchBot
             }
 
             return null;
+        }
+
+        public void commandBetting()
+        {
+
+
+
+        }
+
+        public void win_loss(string type)
+        {
+            // Update SQL Database
+            using var con = new SQLiteConnection(cs);
+            con.Open();
+
+            // Process New Win/Loss Data
+            using var updateCmd = new SQLiteCommand(con);
+
+            // Set Win Math
+            if (type == "win")
+            {
+                string win_stm = "UPDATE gb_win_loss SET value = value + 1 WHERE parameter = 'wins'";
+
+                using var updateWins = new SQLiteCommand(win_stm, con);
+                updateWins.Prepare();
+                updateWins.ExecuteNonQuery();
+            }
+            
+            // Set Loss Math
+            if (type == "loss")
+            {
+                string loss_stm = "UPDATE gb_win_loss SET value = value + 1 WHERE parameter = 'losses'";
+
+                // Start a local transaction
+                using var updateLosses = new SQLiteCommand(loss_stm, con);
+                updateLosses.Prepare();
+                updateLosses.ExecuteNonQuery();
+            }
+
+            // Reset the Counter
+            if (type == "reset")
+            {
+                // Reset Wins Column
+                string rwin_stm = "UPDATE gb_win_loss SET value = 0 WHERE parameter = 'wins'";
+
+                using var resetWins = new SQLiteCommand(rwin_stm, con);
+                resetWins.Prepare();
+                resetWins.ExecuteNonQuery();
+
+                // Reset Losses Column
+                string rloss_stm = "UPDATE gb_win_loss SET value = 0 WHERE parameter = 'losses'";
+
+                // Start a local transaction
+                using var resetLosses = new SQLiteCommand(rloss_stm, con);
+                resetLosses.Prepare();
+                resetLosses.ExecuteNonQuery();
+
+                // Reset Ratio Column
+                string rratio_stm = "UPDATE gb_win_loss SET value = '-' WHERE parameter = 'ratio'";
+
+                // Start a local transaction
+                using var resetRatio = new SQLiteCommand(rratio_stm, con);
+                resetRatio.Prepare();
+                resetRatio.ExecuteNonQuery();
+            }
+
+            if (type != "reset") {
+
+                // Update Ratio Win/Loss Values
+                SQLite.winlossSQL winlossSQL = new SQLite.winlossSQL();
+                int wins = Convert.ToInt32(winlossSQL.getOptions("wins"));
+                int losses = Convert.ToInt32(winlossSQL.getOptions("losses"));
+
+                // Update Ratio
+                int math = wins * 100 / (wins + losses);
+                //Console.WriteLine(math);
+
+                string ratio_stm = "UPDATE gb_win_loss SET value = '" + math + '%' + "' WHERE parameter = 'ratio'";
+
+                // Start a local transaction
+                using var updateRatio = new SQLiteCommand(ratio_stm, con);
+                updateRatio.Prepare();
+                updateRatio.ExecuteNonQuery();
+
+            }
+
+            con.Close();
         }
 
     }

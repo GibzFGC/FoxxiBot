@@ -39,10 +39,13 @@
             var datetime = null;
 
             // Load Data
-            $.getJSON('/api.php?state=get&table=gb_countdowns&where=id:' + id, function(data) {
-                datetime = data[0]["datetime"];
-                document.getElementById("countdown_title").innerText = data[0]["title"];
-            });
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('key')) {
+                $.getJSON('/api.php?key='+ searchParams.get("key") +'state=get&table=gb_countdowns&where=id:' + id, function(data) {
+                    datetime = data[0]["datetime"];
+                    document.getElementById("countdown_title").innerText = data[0]["title"];
+                });
+            }
 
             function countdown() {
                 const countdownDate = new Date(datetime);

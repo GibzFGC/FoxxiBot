@@ -275,6 +275,14 @@ define("_QUOTE_UPDATE", "");
 define("_QUOTE_MNGMNT", "");
 define("_QUOTE_YOURS", "");
 
+define("_WIN_LOSS", "");
+define("_WIN_LOSS_WINS", "");
+define("_WIN_LOSS_LOSSES", "");
+define("_WIN_LOSS_WIN_RATIO", "");
+define("_WIN_LOSS_WIN_BTN", "");
+define("_WIN_LOSS_LOSS_BTN", "");
+define("_WIN_LOSS_RESET_BTN", "");
+
 define("_BOT_MANAGEMENT", "");
 define("_SETTINGS", "");
 define("_PLUGINS", "");

@@ -47,6 +47,10 @@ if ($gfw["site_active"] == true) {
                 $cpage = "pages/audio_loader.php";
             }
 
+            if ($page_loader == 'betting') {
+                $cpage = "pages/betting_loader.php";
+            }
+
             if ($page_loader == 'countdowns') {
                 $cpage = "pages/countdowns_loader.php";
             }
@@ -113,6 +117,10 @@ if ($gfw["site_active"] == true) {
 
             if ($page_loader == 'plugins') {
                 $cpage = "pages/plugins_loader.php";
+            }
+
+            if ($page_loader == 'win_loss') {
+                $cpage = "pages/win_loss_loader.php";
             }
 
             if ($page_loader == 'version') {

@@ -115,7 +115,7 @@ namespace FoxxiBot.TwitchBot
             int Minutes = Now.Subtract(dtPastYearDate).Minutes;
             int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            return String.Format("The account was created {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
+            return String.Format("{0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s)",
                                 Years, Months, Days, Hours, Seconds);
         }
 
@@ -150,7 +150,7 @@ namespace FoxxiBot.TwitchBot
             int Minutes = Now.Subtract(dtPastYearDate).Minutes;
             int Seconds = Now.Subtract(dtPastYearDate).Seconds;
 
-            return String.Format($"The account followed this channel {0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s) ago",
+            return String.Format("{0} Year(s), {1} Month(s), {2} Day(s), {3} Hour(s), {4} Second(s)",
                                 Years, Months, Days, Hours, Seconds);
         }
 
