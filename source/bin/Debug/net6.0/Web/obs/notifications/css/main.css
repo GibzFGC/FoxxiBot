@@ -48,3 +48,22 @@ body {
     background-repeat: no-repeat;
     height: 282px;
 }
+
+#logger {
+    display:none;
+    background: #333;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin:0;
+    padding: 10px;
+}
+.log-boolean,
+.log-undefined {color: magenta;}
+.log-object,
+.log-string {color: orange;}
+.log-number {color: cyan;}

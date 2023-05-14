@@ -7,7 +7,7 @@
     </head>
 
     <body onLoad="init()">
-
+        <pre id="logger"></pre>
         <div id="game_title"><!-- Game Title Here --></div>
 
         <script src="../SHARED/js/jquery-3.6.0.min.js"></script>
@@ -15,6 +15,7 @@
 		    var xmlhttp = new XMLHttpRequest();	
             var apikey;
 
+            var gameTitle = null;
             var animating = false;
             var doUpdate = false;
         
@@ -28,6 +29,10 @@
                 }
             }
 
+            function isEmpty(obj) {
+                return Object.keys(obj).length === 0;
+            }
+
             function init() {
 
                 xmlhttp.overrideMimeType('application/json');
@@ -37,7 +42,7 @@
 
                 var timeout = this.window.setInterval(function() {
                     pollHandler();
-                }, 250);
+                }, 1000);
 
             }
         
@@ -45,6 +50,7 @@
             {
             doUpdate = true;
             if (!animating && doUpdate) {
+                console.log("Waiting for a Game Update");
                 loadGame();
               }
             }
@@ -52,10 +58,55 @@
             function loadGame() {
                 // Load Data
                 $.getJSON('/api.php?key='+ apikey +'&state=get&table=gb_options&where=parameter:"game_title" LIMIT 1', function(data) {
-                    var game = document.getElementById('game_title');
-                    game.innerHTML = data[0]["value"];
+                    getGameData(data);
                 });
             }
+
+            function getGameData(data) {
+                if (isEmpty(data)) return false;
+
+                if (gameTitle != data[0]["value"]) {
+                    gameTitle = data[0]["value"];
+                    console.log("Game Updated: " + data[0]["value"]);
+
+                    var game = document.getElementById('game_title');
+                    game.innerHTML = data[0]["value"];
+                }
+
+                return true;
+            }
+
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('debug') && searchParams.get('debug') === "true") {
+                $("#logger").show();
+            }
+            (function (logger) {
+                console.old = console.log;
+                console.log = function () {
+                    var output = "", arg, i;
+
+                    for (i = 0; i < arguments.length; i++) {
+                        arg = arguments[i];
+                        output += "<span class=\"log-" + (typeof arg) + "\">";
+
+                        if (
+                            typeof arg === "object" &&
+                            typeof JSON === "object" &&
+                            typeof JSON.stringify === "function"
+                        ) {
+                            output += JSON.stringify(arg);
+                        } else {
+                            output += arg;
+                        }
+
+                        output += "</span>&nbsp;";
+                    }
+
+                    logger.innerHTML += output + "<br>";
+                    logger.scrollTop = logger.scrollHeight;
+                    console.old.apply(undefined, arguments);
+                };
+            })(document.getElementById("logger"));
         </script>
 
     </body>
