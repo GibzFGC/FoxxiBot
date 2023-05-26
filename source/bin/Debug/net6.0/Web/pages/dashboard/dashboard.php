@@ -75,8 +75,8 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
                     <!-- /.col -->
                     <div class="col-sm-4">
                       <div class="description-block">
-                        <h5 id="total_views" class="description-header"><?= _LOADING ?></h5>
-                        <span class="description-text"><?= _VIEWS ?></span>
+                        <h5 id="broadcaster_type" class="description-header"><?= _LOADING ?></h5>
+                        <span class="description-text"><?= _BROADCASTER_TYPE ?></span>
                       </div>
                       <!-- /.description-block -->
                     </div>

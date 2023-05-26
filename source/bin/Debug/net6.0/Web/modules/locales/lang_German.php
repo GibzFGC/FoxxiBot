@@ -13,7 +13,7 @@ define("_MANAGEMENT", "Verwaltung");
 define("_BROADCASTER", "LIVESTREAMER");
 define("_FOLLOWS", "FOLLOWS");
 define("_FOLLOWS_LATEST", "Neueste Follower"); 
-define("_VIEWS", "ANSICHTEN");
+define("_BROADCASTER_TYPE", "RUNDFUNKSTATUS");
 define("_EVENTS_LATEST", "Neueste Ereignisse");
 define("_WAITING_STREAM", "Warten auf den n�chsten Stream!");
 define("_GLOBAL_FEAT", "GLOBALE FUNKTIONEN"); 
