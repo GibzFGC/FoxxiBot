@@ -10,6 +10,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using FoxxiBot.DiscordBot;
 using System;
 using System.Data.SQLite;
 using System.Diagnostics;
@@ -506,16 +507,19 @@ namespace FoxxiBot.TwitchBot
                     // Write to Log File
                     Class.Bot_Functions.ErrorLog("Bot Stopped by " + e.Command.ChatMessage.DisplayName);
 
-                    Console.Write("---");
+                    // Begin Shutdown Process
+                    Console.WriteLine("");
+                    Console.WriteLine("---");
                     Console.Write("Shutting down in ");
                     for (int a = 5; a >= 0; a--)
                     {
                         Console.CursorLeft = 20;
-                        Console.Write("{0} ", a);    // Add space to make sure to override previous contents
-                        System.Threading.Thread.Sleep(1000);
+                        Console.Write("{0}", a);    // Add space to make sure to override previous contents
+                        Thread.Sleep(1000);
                     }
 
-                    System.Environment.Exit(1);
+                    // Close Bot Instance
+                    Environment.Exit(1);
                 }
 
                 // Restart the Bot

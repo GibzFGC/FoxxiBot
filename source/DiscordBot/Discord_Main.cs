@@ -29,7 +29,7 @@ namespace FoxxiBot.DiscordBot
 {
     public class Discord_Main
     {
-        private static DiscordSocketClient client;
+        public static DiscordSocketClient client;
         private CommandService commands;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
