@@ -501,15 +501,20 @@ namespace FoxxiBot.TwitchBot
             {
 
                 // Close the Bot
-                if (e.Command.CommandText == "stop")
+                if (e.Command.CommandText == "shutdown")
                 {
                     // Write to Log File
                     Class.Bot_Functions.ErrorLog("Bot Stopped by " + e.Command.ChatMessage.DisplayName);
 
-                    // Close the current instance
-                    Console.WriteLine("");
-                    Console.WriteLine("The bot is shutting down, it will automatically close in 5 seconds...");
-                    Thread.Sleep(5000);
+                    Console.Write("---");
+                    Console.Write("Shutting down in ");
+                    for (int a = 5; a >= 0; a--)
+                    {
+                        Console.CursorLeft = 20;
+                        Console.Write("{0} ", a);    // Add space to make sure to override previous contents
+                        System.Threading.Thread.Sleep(1000);
+                    }
+
                     System.Environment.Exit(1);
                 }
 
@@ -652,7 +657,7 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.CommandText == "botlist")
                 {
                     var data = commands.commandBotList();
-                    SendChatMessage(Config.TwitchBotName + ": " + data);
+                    SendChatMessage(data);
                 }
 
                 // Poll
@@ -689,19 +694,19 @@ namespace FoxxiBot.TwitchBot
                     if (e.Command.ArgumentsAsString == "win")
                     {
                         commands.win_loss("win");
-                        SendChatMessage(Config.TwitchBotName + ": " + "A Win has been added to the board");
+                        SendChatMessage("A Win has been added to the board");
                     }
 
                     if (e.Command.ArgumentsAsString == "loss")
                     {
                         commands.win_loss("loss");
-                        SendChatMessage(Config.TwitchBotName + ": " + "A Loss has been added to the board");
+                        SendChatMessage("A Loss has been added to the board");
                     }
 
                     if (e.Command.ArgumentsAsString == "reset")
                     {
                         commands.win_loss("reset");
-                        SendChatMessage(Config.TwitchBotName + ": " + "The counters have been reset");
+                        SendChatMessage("The counters have been reset");
                     }
                 }
             }
