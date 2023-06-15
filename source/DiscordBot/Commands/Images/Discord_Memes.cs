@@ -12,6 +12,7 @@
 
 using Discord;
 using Discord.Commands;
+using Discord.Net;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
@@ -31,20 +32,15 @@ namespace FoxxiBot.DiscordBot.Commands.Images
         public async Task DogSync()
         {
 
-            // Define an Array of searchable items
-            string[] list = new string[] { "memes", "bonehurtingjuice", "surrealmemes", "meirl", "me_irl", "funny" };
-
-            // Get a random Array value
-            Random rnd = new Random();
-            int index = rnd.Next(list.Length);
-
             // Get HTTP Data
-            var url = $"https://imgur.com/r/{list[index]}/hot.json";
+            var url = $"";
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync(url).Result;
+
+            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
 
             if (response.IsSuccessStatusCode)
             {
@@ -59,20 +55,16 @@ namespace FoxxiBot.DiscordBot.Commands.Images
 
                 // Get number of items
                 JObject o = JObject.Parse(result);
-                int count = o["data"].Count();
-
-                // Ger random from JSON Count
-                Random json_rnd = new Random();
-                int selected = json_rnd.Next(count);
+                Console.WriteLine(o);
 
                 var eb = new EmbedBuilder();
                 eb.WithColor(Color.Orange);
-                eb.WithImageUrl($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                eb.WithImageUrl($"");
                 eb.WithTimestamp(DateTimeOffset.Now);
 
-                if ((string)o["data"][selected]["ext"] == ".mp4")
+                if ((string)o["data"]["ext"] == ".mp4")
                 {
-                    await ReplyAsync($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                    await ReplyAsync($"");
                 }
                 else
                 {

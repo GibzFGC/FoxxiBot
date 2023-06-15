@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="3.10.0" />
-    <PackageReference Include="Jint" Version="3.0.0-beta-2044" />
+    <PackageReference Include="Jint" Version="3.0.0-beta-2049" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.116" />
