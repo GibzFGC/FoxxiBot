@@ -29,18 +29,16 @@ namespace FoxxiBot.DiscordBot.Commands.Images
         [Summary
         ("Returns a random meme from the server")]
         [Alias("memes")]
-        public async Task DogSync()
+        public async Task MemeSync()
         {
 
             // Get HTTP Data
-            var url = $"";
+            var url = $"https://meme-api.com/gimme";
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync(url).Result;
-
-            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
 
             if (response.IsSuccessStatusCode)
             {
@@ -59,18 +57,10 @@ namespace FoxxiBot.DiscordBot.Commands.Images
 
                 var eb = new EmbedBuilder();
                 eb.WithColor(Color.Orange);
-                eb.WithImageUrl($"");
+                eb.WithImageUrl($"{(string)o["url"]}");
                 eb.WithTimestamp(DateTimeOffset.Now);
 
-                if ((string)o["data"]["ext"] == ".mp4")
-                {
-                    await ReplyAsync($"");
-                }
-                else
-                {
-                    await ReplyAsync(embed: eb.Build());
-                }
-
+                await ReplyAsync(embed: eb.Build());
             }
             else
             {
