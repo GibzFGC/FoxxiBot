@@ -44,11 +44,23 @@ var twitch = window.setInterval(function() {
   // Get Users Profile Image & View Count
   api.get('users', { search: { id: TwitchChannelID } })
   .then(response => {
+      console.log(response);
       document.getElementById("twitch_profile_url").src = response["data"][0].profileImageUrl;
       document.getElementById("twitch_profile_sidebar").src = response["data"][0].profileImageUrl;
       document.getElementById("dashboard_displayname").innerHTML = response["data"][0].displayName;
       document.getElementById("twitch_profile_name").innerHTML = response["data"][0].displayName;
-      document.getElementById("total_views").innerHTML = response["data"][0].viewCount;
+
+      if (response["data"][0].broadcasterType == "") {
+        document.getElementById("broadcaster_type").innerHTML = "Not Affiliate / Partner";
+      }
+
+      if (response["data"][0].broadcasterType == "affiliate") {
+        document.getElementById("broadcaster_type").innerHTML = "Twitch Affiliate";
+      }
+
+      if (response["data"][0].broadcasterType == "partner") {
+        document.getElementById("broadcaster_type").innerHTML = "Twitch Partner";
+      }
   })
 
   // Get Users Total Followers

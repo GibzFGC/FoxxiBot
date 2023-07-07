@@ -107,14 +107,14 @@ if (!defined("G_FW") or !constant("G_FW")) die("Direct access not allowed!");
 
                   <li class="nav-item">
                     <span class="nav-link">Discord .NET Version &amp; License:
-                      <span class="float-right">3.10.0 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
+                      <span class="float-right">3.11.0 | <a target="_blank" href="https://github.com/discord-net/Discord.Net/blob/dev/LICENSE">MIT License</a>
                        | <a target="_blank" href="https://github.com/discord-net/Discord.Net">Github</a></span>
                     </span>
                   </li>
 
                   <li class="nav-item">
                     <span class="nav-link">Jint Version &amp; License:
-                      <span class="float-right">3.0.0-beta-2044 | <a target="_blank" href="https://github.com/sebastienros/jint/blob/main/LICENSE.txt">BSD 2-Clause License</a>
+                      <span class="float-right">3.0.0-beta-2049 | <a target="_blank" href="https://github.com/sebastienros/jint/blob/main/LICENSE.txt">BSD 2-Clause License</a>
                        | <a target="_blank" href="https://github.com/JamesNK/Newtonsoft.Json">Github</a></span>
                     </span>
                   </li>

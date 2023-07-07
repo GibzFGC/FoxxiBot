@@ -31,14 +31,14 @@ namespace FoxxiBot.DiscordBot.Commands.Images
         {
 
             // Define an Array of searchable items
-            string[] list = new string[] { "cat", "cats", "catpics", "kitten", "kittens", "catpictures", "cursedcats", "angrycatpics", "CatsInSinks", "JellyBeanToes", "CatReactionGifs" };
+            string[] list = new string[] { "cute", "dark", "male", "female", "sleepy", "wet", "cuddles", "fluffy", "gaming", "licking", "pleasing", "playful" };
 
             // Get a random Array value
             Random rnd = new Random();
             int index = rnd.Next(list.Length);
 
             // Get HTTP Data
-            var url = $"https://imgur.com/r/{list[index]}/hot.json";
+            var url = $"https://cataas.com/cat/{list[index]}?json=true";
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
@@ -56,28 +56,16 @@ namespace FoxxiBot.DiscordBot.Commands.Images
                     return;
                 }
 
-                // Get number of items
+                // Set JSON Object
                 JObject o = JObject.Parse(result);
-                int count = o["data"].Count();
 
-                // Ger random from JSON Count
-                Random json_rnd = new Random();
-                int selected = json_rnd.Next(count);
-
+                // Build Discord Embed
                 var eb = new EmbedBuilder();
                 eb.WithColor(Color.Orange);
-                eb.WithImageUrl($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                eb.WithImageUrl($"https://cataas.com/{(string)o["url"]}");
                 eb.WithTimestamp(DateTimeOffset.Now);
 
-                if ((string)o["data"][selected]["ext"] == ".mp4")
-                {
-                    await ReplyAsync($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
-                }
-                else
-                {
-                    await ReplyAsync(embed: eb.Build());
-                }
-
+                await ReplyAsync(embed: eb.Build());
             }
             else
             {

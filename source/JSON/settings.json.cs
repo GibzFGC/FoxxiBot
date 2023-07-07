@@ -30,6 +30,7 @@ namespace FoxxiBot.Settings
 
         // Twitch Bot Account Info
         public string TwitchClientUser { get; set; }
+        public string TwitchBotId { get; set; }
         public string TwitchClientOAuth { get; set; }
         public string TwitchClientRefresh { get; set; }
         public string TwitchClientDisplayName { get; set; }

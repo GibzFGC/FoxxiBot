@@ -31,15 +31,8 @@ namespace FoxxiBot.DiscordBot.Commands.Images
         public async Task DogSync()
         {
 
-            // Define an Array of searchable items
-            string[] list = new string[] { "dog", "puppy", "puppies", "RarePuppers", "Zoomies", "DogsWithJobs", "Barkour", "WhatsWrongWithYourDog" };
-
-            // Get a random Array value
-            Random rnd = new Random();
-            int index = rnd.Next(list.Length);
-
             // Get HTTP Data
-            var url = $"https://imgur.com/r/{list[index]}/hot.json";
+            var url = $"https://random.dog/woof.json";
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
@@ -57,22 +50,19 @@ namespace FoxxiBot.DiscordBot.Commands.Images
                     return;
                 }
 
-                // Get number of items
+                // Set JSON Object
                 JObject o = JObject.Parse(result);
-                int count = o["data"].Count();
 
-                // Ger random from JSON Count
-                Random json_rnd = new Random();
-                int selected = json_rnd.Next(count);
-
+                // Build Discord Embed
                 var eb = new EmbedBuilder();
                 eb.WithColor(Color.Orange);
-                eb.WithImageUrl($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                eb.WithImageUrl($"{(string)o["url"]}");
                 eb.WithTimestamp(DateTimeOffset.Now);
 
-                if ((string)o["data"][selected]["ext"] == ".mp4")
+                string dog_url = (string)o["url"];
+                if (dog_url.Contains(".mp4"))
                 {
-                    await ReplyAsync($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                    await ReplyAsync($"{(string)o["url"]}");
                 }
                 else
                 {

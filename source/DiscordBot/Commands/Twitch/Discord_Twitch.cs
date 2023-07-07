@@ -31,7 +31,19 @@ namespace FoxxiBot.DiscordBot.Commands.Images
                 var username = Twitch_GetData.displayNametoUserID(user).GetAwaiter().GetResult();
                 var data = Twitch_GetData.getAccountAge(username).GetAwaiter().GetResult();
 
-                await ReplyAsync($"{data}");
+                await ReplyAsync($"{user} joined Twitch {data}");
+
+            }
+
+            // ~twitch age <user>
+            [Command("followers")]
+            public async Task GetFollowers([Remainder] string user)
+            {
+
+                var username = Twitch_GetData.displayNametoUserID(user).GetAwaiter().GetResult();
+                var data = Twitch_GetData.getAccountAge(username).GetAwaiter().GetResult();
+
+                await ReplyAsync($"{user} joined Twitch {data}");
 
             }
 

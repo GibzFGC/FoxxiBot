@@ -13,7 +13,7 @@ define("_MANAGEMENT", "Management");
 define("_BROADCASTER", "BROADCASTER");
 define("_FOLLOWS", "FOLLOWS");
 define("_FOLLOWS_LATEST", "Latest Followers");
-define("_VIEWS", "VIEWS");
+define("_BROADCASTER_TYPE", "STATUS");
 define("_EVENTS_LATEST", "Latest Events");
 define("_WAITING_STREAM", "Waiting for next stream!");
 define("_GLOBAL_FEAT", "GLOBAL FEATURES");

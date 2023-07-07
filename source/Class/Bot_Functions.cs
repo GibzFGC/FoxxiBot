@@ -396,6 +396,7 @@ namespace FoxxiBot.Class
             objSettings.TwitchClientRedirect = Config.TwitchRedirectUri;
             objSettings.TwitchClientChannel = Config.TwitchClientChannel;
             objSettings.TwitchClientUser = Config.TwitchClientUser;
+            objSettings.TwitchBotId = Config.TwitchBotId;
             objSettings.TwitchClientOAuth = Config.TwitchClientOAuth;
             objSettings.TwitchClientRefresh = Config.TwitchClientRefresh;
 

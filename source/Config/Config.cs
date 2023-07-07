@@ -30,6 +30,8 @@ namespace FoxxiBot
         public static string TwitchClientSecret = "";
 
         public static string TwitchBotName = "FoxxiBot";
+        public static string TwitchClientDisplayName = "";
+        public static string TwitchBotId = "";
         public static string TwitchClientUser = "";
         public static string TwitchClientChannel = "";
         public static string TwitchClientOAuth = "";
@@ -37,6 +39,7 @@ namespace FoxxiBot
 
         // Twitch - User Parameters
         public static string TwitchMC_Id = "";
+        public static string TwitchBroadcasterDisplayName = "";
         public static string TwitchMC_ClientOAuth = "";
         public static string TwitchMC_ClientRefresh = "";
 

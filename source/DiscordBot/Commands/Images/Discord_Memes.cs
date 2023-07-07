@@ -12,6 +12,7 @@
 
 using Discord;
 using Discord.Commands;
+using Discord.Net;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
@@ -24,68 +25,92 @@ namespace FoxxiBot.DiscordBot.Commands.Images
     public class Discord_Memes : ModuleBase<SocketCommandContext>
     {
 
-        [Command("meme")]
-        [Summary
-        ("Returns a random meme from the server")]
+        [Group("meme")]
+        [Summary("Returns a random anime image from the server")]
         [Alias("memes")]
-        public async Task DogSync()
+        public class MemeModule : ModuleBase<SocketCommandContext>
         {
-
-            // Define an Array of searchable items
-            string[] list = new string[] { "memes", "bonehurtingjuice", "surrealmemes", "meirl", "me_irl", "funny" };
-
-            // Get a random Array value
-            Random rnd = new Random();
-            int index = rnd.Next(list.Length);
-
-            // Get HTTP Data
-            var url = $"https://imgur.com/r/{list[index]}/hot.json";
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-            if (response.IsSuccessStatusCode)
+            // ~meme
+            [Command]
+            public async Task MemeSync()
             {
-                var result = response.Content.ReadAsStringAsync().Result;
 
-                // If no Images Found
-                if (result.Length == 0)
+                // Get HTTP Data
+                var url = $"https://meme-api.com/gimme";
+
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = client.GetAsync(url).Result;
+
+                if (response.IsSuccessStatusCode)
                 {
-                    await ReplyAsync($"Sorry, something went wrong. Please try again!");
-                    return;
-                }
+                    var result = response.Content.ReadAsStringAsync().Result;
 
-                // Get number of items
-                JObject o = JObject.Parse(result);
-                int count = o["data"].Count();
+                    // If no Images Found
+                    if (result.Length == 0)
+                    {
+                        await ReplyAsync($"Sorry, something went wrong. Please try again!");
+                        return;
+                    }
 
-                // Ger random from JSON Count
-                Random json_rnd = new Random();
-                int selected = json_rnd.Next(count);
+                    // Get number of items
+                    JObject o = JObject.Parse(result);
 
-                var eb = new EmbedBuilder();
-                eb.WithColor(Color.Orange);
-                eb.WithImageUrl($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
-                eb.WithTimestamp(DateTimeOffset.Now);
+                    var eb = new EmbedBuilder();
+                    eb.WithColor(Color.Orange);
+                    eb.WithImageUrl($"{(string)o["url"]}");
+                    eb.WithTimestamp(DateTimeOffset.Now);
 
-                if ((string)o["data"][selected]["ext"] == ".mp4")
-                {
-                    await ReplyAsync($"https://imgur.com/{(string)o["data"][selected]["hash"]}{(string)o["data"][selected]["ext"]}");
+                    await ReplyAsync(embed: eb.Build());
                 }
                 else
                 {
-                    await ReplyAsync(embed: eb.Build());
+                    await ReplyAsync($"Sorry, I couldn't pull a meme image at the moment. Maybe the server is down.");
                 }
 
             }
-            else
+
+            // ~meme get <tags>
+            [Command("get")]
+            public async Task GetMeme([Remainder] string tags)
             {
-                await ReplyAsync($"Sorry, I couldn't pull a meme image at the moment. Maybe the server is down.");
+
+                // Get HTTP Data
+                var url = $"https://meme-api.com/gimme/{tags}";
+
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = client.GetAsync(url).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+
+                    // If no Images Found
+                    if (result.Length == 0)
+                    {
+                        await ReplyAsync($"Sorry, something went wrong. Please try again!");
+                        return;
+                    }
+
+                    // Get number of items
+                    JObject o = JObject.Parse(result);
+
+                    var eb = new EmbedBuilder();
+                    eb.WithColor(Color.Orange);
+                    eb.WithImageUrl($"{(string)o["url"]}");
+                    eb.WithTimestamp(DateTimeOffset.Now);
+
+                    await ReplyAsync(embed: eb.Build());
+                }
+                else
+                {
+                    await ReplyAsync($"Sorry, I couldn't pull a meme image at the moment. Maybe the server is down.");
+                }
             }
 
         }
-
     }
 }

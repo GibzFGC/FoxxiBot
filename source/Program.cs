@@ -126,6 +126,8 @@ namespace FoxxiBot
                     Config.TwitchRedirectUri = (string)o["TwitchClientRedirect"];
                     Config.TwitchClientChannel = (string)o["TwitchClientChannel"];
                     Config.TwitchClientUser = (string)o["TwitchClientUser"];
+                    Config.TwitchBotId = (string)o["TwitchBotId"];
+
                     Config.TwitchClientOAuth = (string)o["TwitchClientOAuth"];
                     Config.TwitchClientRefresh = (string)o["TwitchClientRefresh"];
 
@@ -370,6 +372,8 @@ namespace FoxxiBot
             Config.TwitchClientRefresh = bot_refresh.RefreshToken;
 
             Config.TwitchMC_Id = broadcast_user.Id;
+            Config.TwitchBotId = bot_user.Id;
+
             Config.TwitchMC_ClientOAuth = broadcast_refresh.AccessToken;
             Config.TwitchMC_ClientRefresh = broadcast_refresh.RefreshToken;
 
@@ -385,7 +389,9 @@ namespace FoxxiBot
             objSettings.TwitchClientSecret = Config.TwitchClientSecret;
             objSettings.TwitchClientRedirect = Config.TwitchRedirectUri;
             objSettings.TwitchClientChannel = Config.TwitchClientChannel;
+
             objSettings.TwitchClientUser = Config.TwitchClientUser;
+            objSettings.TwitchBotId = Config.TwitchBotId;
             objSettings.TwitchClientOAuth = Config.TwitchClientOAuth;
             objSettings.TwitchClientRefresh = Config.TwitchClientRefresh;
 

@@ -5,7 +5,7 @@ function validityCheck(form) {
 
     // List of Bot Controlled Commands
     const bot_controlled = [
-        'stop',
+        'shutdown',
         'restart',
         'addcom',
         'editcom',
@@ -28,6 +28,10 @@ function validityCheck(form) {
         'play',
         'duel',
         'gamble',
+        'poll',
+        'bet',
+        'vote',
+
     ];
 
     // Check if Command Name Reserved
