@@ -16,6 +16,9 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
+using TwitchLib.Api;
+using TwitchLib.Api.Helix;
+using TwitchLib.Api.Interfaces;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
@@ -32,6 +35,7 @@ namespace FoxxiBot.TwitchBot
     public class Twitch_Main
     {
         public static TwitchClient client;
+        public static TwitchAPI twitchAPI;
         public static TwitchPubSub pubsub;
 
         private Timer oauthTimer = null;
@@ -91,6 +95,7 @@ namespace FoxxiBot.TwitchBot
 
             // Start Bot Timer
             System.Timers.Timer timer = new System.Timers.Timer();
+            //timer.Interval = 20000; FOR TESTING
             timer.Interval = 900000;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
@@ -295,8 +300,15 @@ namespace FoxxiBot.TwitchBot
                 {
                     while (rdr.Read())
                     {
+                        // API Hook
+                        var api = new TwitchAPI();
+                        api.Settings.ClientId = Config.TwitchClientId;
+
                         // Send Announcement to Twitch
-                        client.Announce(Config.TwitchClientChannel, (string)rdr["response"]);
+                        api.Helix.Chat.SendChatAnnouncementAsync(Config.TwitchMC_Id, Config.TwitchBotId, (string)rdr["response"], null, Config.TwitchClientOAuth);
+
+                        // Send Announcement to Twitch
+                        //client.SendMessage(Config.TwitchClientChannel, (string)rdr["response"]);
 
                         // Add 1 to current_row
                         current_row = current_row + 1;
