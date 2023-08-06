@@ -11,10 +11,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using FoxxiBot.DiscordBot;
+using Jint.Native;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text.Json.Nodes;
 using System.Threading;
 using TwitchLib.Api;
 using TwitchLib.Api.Helix;
@@ -856,6 +860,7 @@ namespace FoxxiBot.TwitchBot
                 SendChatMessage(result);
             }
 
+
             // If command not development defined, check users custom in SQLite
             using var con = new SQLiteConnection(cs);
             con.Open();
@@ -911,8 +916,24 @@ namespace FoxxiBot.TwitchBot
 
                         // Perform the Command
                         Twitch_Variables variables = new Twitch_Variables();
-                        var var_string = variables.convertVariables(e.Command.ChatMessage.Message, (string)rdr["response"], e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
-                        SendChatMessage(var_string);
+
+                        // Check if JSON or just a Normal Message
+                        try
+                        {
+                            JToken.Parse((string)rdr["response"]);
+                            dynamic jsonObj = JsonConvert.DeserializeObject((string)rdr["response"]);
+                            
+                            foreach (string obj in jsonObj)
+                            {
+                                var var_string = variables.convertVariables(e.Command.ChatMessage.Message, obj, e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
+                                SendChatMessage(var_string);
+                            }
+                        }
+                        catch (JsonReaderException ex)
+                        {
+                            var var_string = variables.convertVariables(e.Command.ChatMessage.Message, (string)rdr["response"], e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
+                            SendChatMessage(var_string);
+                        }
                     }
                 }
             }
