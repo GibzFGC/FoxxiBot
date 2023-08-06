@@ -288,12 +288,37 @@ $result = $PDO->query("SELECT * FROM gb_commands");
               print "
                   <tr>
                     <td>". $row["name"] ."</td>
-                    <td>". $row["response"] ."</td>
+              ";
+
+              if (isJson($row["response"])) {
+                $multi_data = json_decode($row["response"]);
+                print "<td>";
+                
+                foreach ($multi_data as $value) {
+                  if ($value != "") {
+                    print $value . "<br>";
+                  }
+                }
+                
+                print "</td>";
+
+              } else {
+                print "<td>". $row["response"] ."</td>";
+              }
+              
+              print "
                     <td>". $row["points"] ."</td>
                     <td>". twitchPerms($row["permission"]) ."</td>
                     <td>". boolean_return($row["active"]) ."</td>
-                    <td>
-                      <a href=\"$gfw[site_url]/index.php?p=twitch_commands&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>
+                    <td>";
+
+                    if (isJson($row["response"])) {
+                      print "<a href=\"$gfw[site_url]/index.php?p=twitch_commands&a=edit_multi&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>";
+                    } else {
+                      print "<a href=\"$gfw[site_url]/index.php?p=twitch_commands&a=edit&id=$row[id]\" class=\"btn btn-warning btn-sm\">Edit</a>";
+                    }
+
+                    print "
                       <a onclick=\"return confirm('". _DELETE_MSG ."');\" href=\"$gfw[site_url]/index.php?p=twitch_commands&a=funcs&v=delete&id=$row[id]\" class=\"btn btn-danger btn-sm\">". _DELETE ."</a>
                     </td>
                   </tr>

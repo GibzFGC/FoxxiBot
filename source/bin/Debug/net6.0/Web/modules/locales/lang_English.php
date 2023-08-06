@@ -41,10 +41,23 @@ define("_TWITCH_DATA_DELAY", "(There might be a slight delay...)");
 
 define("_TWITCH_CMDS", "Twitch Commands");
 define("_TWITCH_ADD_CMD", "Add a Command");
+define("_TWITCH_ADD_MULTI_CMD", "Add a Multi-Message Command");
 define("_TWITCH_CMD_INFO", "Command Information");
 define("_TWITCH_CMD_NAME", "Name (without !)");
 define("_TWITCH_CMD_NAME_PLACE", "Enter Command Name");
 define("_TWITCH_CMD_RESPONSE", "Enter the response text here...");
+
+define("_TWITCH_CMD_RESPONSE_1", "Enter the first bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_2", "Enter the second bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_3", "Enter the third bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_4", "Enter the fourth bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_5", "Enter the fifth bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_6", "Enter the sixth bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_7", "Enter the seventh bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_8", "Enter the eigth bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_9", "Enter the ninth bot line for chat here...");
+define("_TWITCH_CMD_RESPONSE_10", "Enter the tenth bot line for chat here...");
+
 define("_TWITCH_CMD_USEFUL_VARS", "Useful Variables");
 define("_TWITCH_CMD_VARS_INFO", "Here is a list of internal variables:<br /><br />
 {1} - A custom argument for whatever you want<br />
@@ -60,6 +73,7 @@ define("_TWITCH_CMD_VARS_INFO", "Here is a list of internal variables:<br /><br 
 {user} - returns the targeted user in the message<br />
 {views} - returns the overall views of your channel");
 define("_TWITCH_CMD_EDIT", "Editing a Command");
+define("_TWITCH_CMD_EDIT_MULTI", "Editing a Multi-Message Command");
 define("_TWITCH_CMD_MNGMNT", "Twitch Commands Management");
 define("_TWITCH_CMD_YOURS", "Here are your Twitch Commands.");
 
@@ -337,6 +351,18 @@ define("_DATE_TIME", "Date / Time");
 define("_UPTIME", "Uptime");
 define("_TITLE", "Title");
 define("_RESPONSE", "Response");
+
+define("_RESPONSE_1", "Message #1");
+define("_RESPONSE_2", "Message #2");
+define("_RESPONSE_3", "Message #3");
+define("_RESPONSE_4", "Message #4");
+define("_RESPONSE_5", "Message #5");
+define("_RESPONSE_6", "Message #6");
+define("_RESPONSE_7", "Message #7");
+define("_RESPONSE_8", "Message #8");
+define("_RESPONSE_9", "Message #9");
+define("_RESPONSE_10", "Message #10");
+
 define("_GAME", "Game");
 define("_SAVE_SETTINGS", "Save Settings");
 define("_SAVE_DATA", "Save Data");

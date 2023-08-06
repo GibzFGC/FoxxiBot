@@ -24,8 +24,16 @@ if (isset($_REQUEST['a'])) {
         include("twitch_commands/commands_add.php");
     }
 
+    if ($_REQUEST['a'] == "multi") {
+        include("twitch_commands/commands_multi_add.php");
+    }
+
     if ($_REQUEST['a'] == "edit") {
         include("twitch_commands/commands_edit.php");
+    }
+
+    if ($_REQUEST['a'] == "edit_multi") {
+        include("twitch_commands/commands_multi_edit.php");
     }
 
     if ($_REQUEST['a'] == "blacklist") {

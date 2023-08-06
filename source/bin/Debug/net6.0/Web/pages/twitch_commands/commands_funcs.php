@@ -87,6 +87,57 @@ if ($_REQUEST["v"] == "save") {
     }
 }
 
+if ($_REQUEST["v"] == "save_multi") {
+
+    // Check if Bot Controlled Command
+    if (in_array($_POST["commandName"], $gfw["bot_twitch_commands"])) {
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&s=error";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+    } else {
+
+        $sql = 'INSERT INTO gb_commands (name, response, points, permission, active) VALUES (:commandName, :commandResponse, :commandPoints, :commandPermissions, :commandActive)' or die(print_r($PDO->errorInfo(), true));
+        $stmt = $PDO->prepare($sql);
+
+
+        $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
+
+        $new_message = array(
+            "message_1" => $_POST['commandResponse1'],
+            "message_2" => $_POST['commandResponse2'],
+            "message_3" => $_POST['commandResponse3'],
+            "message_4" => $_POST['commandResponse4'],
+            "message_5" => $_POST['commandResponse5'],
+            "message_6" => $_POST['commandResponse6'],
+            "message_7" => $_POST['commandResponse7'],
+            "message_8" => $_POST['commandResponse8'],
+            "message_9" => $_POST['commandResponse9'],
+            "message_10" => $_POST['commandResponse10']
+         );
+
+        $encoded_data = json_encode($new_message, JSON_PRETTY_PRINT);
+        $stmt->bindValue(':commandResponse', $encoded_data);
+        
+        if ($options["points_active"] == "off") {
+            $stmt->bindValue(':commandPoints', 0);
+        } else {
+            $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+        }
+        
+        $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
+        $stmt->bindValue(':commandActive', $_POST["commandActive"]);
+        $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+    }
+}
+
 if ($_REQUEST["v"] == "edit") {
 
     // Check if Bot Controlled Command
@@ -106,6 +157,57 @@ if ($_REQUEST["v"] == "edit") {
         $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
         $stmt->bindValue(':commandResponse', $_POST["commandResponse"]);
 
+        if ($options["points_active"] == "off") {
+            $stmt->bindValue(':commandPoints', 0);
+        } else {
+            $stmt->bindValue(':commandPoints', $_POST["commandPoints"]);
+        }
+
+        $stmt->bindValue(':commandPermissions', $_POST["commandPermissions"]);
+        $stmt->bindValue(':commandActive', $_POST["commandActive"]);
+        $stmt->execute();
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&s=success";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+    }
+}
+
+if ($_REQUEST["v"] == "edit_multi") {
+
+    // Check if Bot Controlled Command
+    if (in_array($_POST["commandName"], $gfw["bot_twitch_commands"])) {
+
+        // Redirect
+        $URL="$gfw[site_url]/index.php?p=twitch_commands&s=error";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+    } else {
+
+        $sql = "UPDATE gb_commands SET name = :commandName, response = :commandResponse, points = :commandPoints, permission = :commandPermissions, active = :commandActive WHERE id = :commandID";
+        $stmt = $PDO->prepare($sql);
+
+        $stmt->bindValue(':commandID', $_POST["commandID"]);
+        $stmt->bindValue(':commandName', "!" . $_POST["commandName"]);
+
+        $new_message = array(
+            "message_1" => $_POST['commandResponse1'],
+            "message_2" => $_POST['commandResponse2'],
+            "message_3" => $_POST['commandResponse3'],
+            "message_4" => $_POST['commandResponse4'],
+            "message_5" => $_POST['commandResponse5'],
+            "message_6" => $_POST['commandResponse6'],
+            "message_7" => $_POST['commandResponse7'],
+            "message_8" => $_POST['commandResponse8'],
+            "message_9" => $_POST['commandResponse9'],
+            "message_10" => $_POST['commandResponse10']
+         );
+
+        $encoded_data = json_encode($new_message, JSON_PRETTY_PRINT);
+        $stmt->bindValue(':commandResponse', $encoded_data);
+        
         if ($options["points_active"] == "off") {
             $stmt->bindValue(':commandPoints', 0);
         } else {
