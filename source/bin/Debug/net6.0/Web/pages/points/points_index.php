@@ -66,7 +66,7 @@ foreach($result as $row)
 
                 <div class="form-group">
                     <label for="points_username"><?= _USERNAME ?></label>
-                    <input type="text" class="form-control" id="points_username" name="points_username" placeholder="<?= _SEARCH_USERNAME ?>" autocomplete="off" required>
+                    <input type="text" class="form-control" id="points_username" name="points_username" data-key="<?php print $bot_obj->APIKey; ?>" placeholder="<?= _SEARCH_USERNAME ?>" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
