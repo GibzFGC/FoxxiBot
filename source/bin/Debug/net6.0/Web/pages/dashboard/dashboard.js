@@ -44,7 +44,6 @@ var twitch = window.setInterval(function() {
   // Get Users Profile Image & View Count
   api.get('users', { search: { id: TwitchChannelID } })
   .then(response => {
-      console.log(response);
       document.getElementById("twitch_profile_url").src = response["data"][0].profileImageUrl;
       document.getElementById("twitch_profile_sidebar").src = response["data"][0].profileImageUrl;
       document.getElementById("dashboard_displayname").innerHTML = response["data"][0].displayName;
@@ -64,8 +63,9 @@ var twitch = window.setInterval(function() {
   })
 
   // Get Users Total Followers
-  api.get('users/follows', { search: { to_id: TwitchChannelID, first: 8 } })
+  api.get('channels/followers', { search: { broadcaster_id: TwitchChannelID, first: 8 } })
   .then(response => {
+    console.log(response);
       document.getElementById("total_follows").innerHTML = response.total;
 
       document.getElementById("follower_list").innerHTML ="";
@@ -76,7 +76,7 @@ var twitch = window.setInterval(function() {
         var output = date.getDate() + "\\" +  (date.getMonth()+1) + "\\" + date.getFullYear();
 
         // Final List Send
-        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=event&type=Follower&views=0&name='+ response["data"][follow_list].fromName +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> <a style="color: #fff;" target="_blank" href="https://www.twitch.tv/'+ response["data"][follow_list].fromName +'">' + response["data"][follow_list].fromName +'</a><span class="float-right">'+ output +'</span></span></li>';
+        document.getElementById("follower_list").innerHTML += '<li class="nav-item"><span class="nav-link"><a style="margin-right: 10px;" href=\"/index.php?p=notifications&a=funcs&v=event&type=Follower&views=0&name='+ response["data"][follow_list].userLogin +'\" class=\"follow-sync btn btn-primary btn-sm\">Play</a> <a style="color: #fff;" target="_blank" href="https://www.twitch.tv/'+ response["data"][follow_list].userLogin +'">' + response["data"][follow_list].userName +'</a><span class="float-right">'+ output +'</span></span></li>';
       }
 
   })
