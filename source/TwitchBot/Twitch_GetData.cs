@@ -126,11 +126,11 @@ namespace FoxxiBot.TwitchBot
             api.Settings.ClientId = Config.TwitchClientId;
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Users.GetUsersFollowsAsync(fromId: user_id, toId: Config.TwitchMC_Id);
+            var data = await api.Helix.Channels.GetChannelFollowersAsync(broadcasterId: Config.TwitchMC_Id, userId: user_id);
 
             DateTime Now = DateTime.Now;
-            int Years = new DateTime(DateTime.Now.Subtract(DateTime.Parse(data.Follows[0].FollowedAt.ToString())).Ticks).Year - 1;
-            DateTime dtPastYearDate = DateTime.Parse(data.Follows[0].FollowedAt.ToString()).AddYears(Years);
+            int Years = new DateTime(DateTime.Now.Subtract(DateTime.Parse(data.Data[0].FollowedAt.ToString())).Ticks).Year - 1;
+            DateTime dtPastYearDate = DateTime.Parse(data.Data[0].FollowedAt.ToString()).AddYears(Years);
             int Months = 0;
             for (int i = 1; i <= 12; i++)
             {
@@ -267,7 +267,13 @@ namespace FoxxiBot.TwitchBot
             // search for user
             var user = await api.Helix.Users.GetUsersAsync(null, logins: new List<string> { userId }, Config.TwitchClientOAuth);
 
+            // Get Channel Information
             var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
+
+            // Shoutout from ID to API
+            // await api.Helix.Chat.SendShoutoutAsync(fromBroadcasterId: Config.TwitchMC_Id, toBroadcasterId: channel.Data[0].BroadcasterId, moderatorId: Config.TwitchBotId, Config.TwitchClientOAuth);
+
+            // Sent Shoutout in Chat
             return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: " + channel.Data[0].GameName + " @ http://twitch.tv/" + user.Users[0].Login;
         }
 

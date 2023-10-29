@@ -929,7 +929,7 @@ namespace FoxxiBot.TwitchBot
                                 SendChatMessage(var_string);
                             }
                         }
-                        catch (JsonReaderException ex)
+                        catch (JsonReaderException)
                         {
                             var var_string = variables.convertVariables(e.Command.ChatMessage.Message, (string)rdr["response"], e.Command.ChatMessage.DisplayName, e.Command.ChatMessage.Username);
                             SendChatMessage(var_string);
