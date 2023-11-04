@@ -30,6 +30,11 @@ function boolean_return($input) {
     }
 }
 
+function isJson($string) {
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE;
+ }
+
 function Redirect($url, $permanent = false)
 {
     header('Location: ' . $url, true, $permanent ? 301 : 302);

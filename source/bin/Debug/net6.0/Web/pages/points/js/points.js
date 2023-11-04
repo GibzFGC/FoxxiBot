@@ -22,7 +22,7 @@ $(document).ready(function() {
 		events: {
 			search: function (qry, callback) {
 			$.ajax(
-				'/api.php?state=get&table=gb_points&where=username LIKE "' + $('#points_username').val() + '%"',
+				'/api.php?key=' + $("#points_username").data("key") + '&state=get&table=gb_points&where=username LIKE "' + $('#points_username').val() + '%"',
 				{
 					data: { 'username': qry}
 				}

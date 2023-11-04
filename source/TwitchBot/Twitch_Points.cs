@@ -70,7 +70,7 @@ namespace FoxxiBot.TwitchBot
                         twitchSQL.pointsChange(e.Command.ChatMessage.Username, final_points);
 
                         // Num is Even
-                        return "Oh no!, you gambled everything and lost all your points!";
+                        return $"Oh no!, you gambled everything and lost all {points} of your points!";
 
                     }
                 }

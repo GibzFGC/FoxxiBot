@@ -122,6 +122,13 @@ foreach($result as $row)
               </li>
 
               <li class="nav-item">
+                <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch_commands&a=multi" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add a Multi-Message Command</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="<?php print $gfw["site_url"]; ?>/index.php?p=twitch_commands&a=blacklist" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p><?= _TWITCH_CMD_BLACKLIST ?></p>
@@ -172,7 +179,7 @@ foreach($result as $row)
               <?= _GIVEAWAY ?>
               </p>
             </a>
-          </li>          
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

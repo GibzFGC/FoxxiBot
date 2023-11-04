@@ -16,7 +16,7 @@ namespace FoxxiBot
     {
         // Debug & Software Specific
         public static bool Debug = false;
-        public static string Version = "1.0.8";
+        public static string Version = "1.0.10";
 
         // Webserver
         public static bool? WebserverSSL = false;

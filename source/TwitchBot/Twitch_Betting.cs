@@ -102,7 +102,6 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.ArgumentsAsList.Count > 0)
                 {
 
-                    int n;
                     int points = Convert.ToInt32(Twitch_GetData.userPoints(e.Command.ChatMessage.Username));
                     string bet_option = e.Command.ArgumentsAsList[0];
                     string bet_points = e.Command.ArgumentsAsList[1];
