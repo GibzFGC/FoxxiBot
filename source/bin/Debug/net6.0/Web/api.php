@@ -1,5 +1,3 @@
-<!-- Don't edit the following file if you don't know what you're doing! -->
-
 <?php
 // Copyright (C) 2020-2022 FoxxiBot
 // This program is free software: you can redistribute it and/or modify
