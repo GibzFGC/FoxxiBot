@@ -10,16 +10,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Jint.Native;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
+using TwitchLib.PubSub.Models.Responses;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FoxxiBot.WebServer
 {
-
     class PHP
     {
         private string phpDir;
@@ -124,43 +129,14 @@ namespace FoxxiBot.WebServer
                     }
                     else
                     {
-                        using (Stream input = GenerateStreamFromString(process.StandardOutput.ReadToEnd()))
-                        {
-                            WriteInputStreamToResponse(input, httpListenerResponse.OutputStream);
-                        }
+                        byte[] response = Encoding.UTF8.GetBytes(line + Environment.NewLine);
+                        httpListenerResponse.OutputStream.WriteAsync(response, 0, response.Length);
                     }
                 }
             }
 
             process.WaitForExit();
             process.Close();
-        }
-
-        public Stream GenerateStreamFromString(string s)
-        {
-            if (Config.Debug == true)
-            {
-                Console.WriteLine("Output:");
-                Console.WriteLine(s);
-            }
-
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
-
-        private void WriteInputStreamToResponse(Stream inputStream, Stream outputStream)
-        {
-            byte[] buffer = new byte[1024 * 16];
-            int nbytes;
-            while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                outputStream.Write(buffer, 0, nbytes);
-
-            // Properly Close the Session
-            outputStream.Dispose();
         }
 
     }

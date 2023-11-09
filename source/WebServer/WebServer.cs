@@ -282,12 +282,14 @@ namespace FoxxiBot.WebServer
 
                 PHP php = new PHP(filePath, queryString, requestBody, httpListenerContext);
                 php.getPHPOutput(filePath, requestBody, httpListenerContext, httpListenerResponse);
+
             }
             else
             {
 
                 using (Stream input = new FileStream(filePath, FileMode.Open))
                 {
+
                     HttpListenerResponse httpListenerResponse = httpListenerContext.Response;
                     httpListenerResponse.ContentType = GetContentType(filePath);
                     httpListenerResponse.ContentLength64 = input.Length;
@@ -300,6 +302,7 @@ namespace FoxxiBot.WebServer
                     httpListenerResponse.StatusCode = (int)HttpStatusCode.OK;
                     httpListenerResponse.OutputStream.Flush();
                     httpListenerResponse.OutputStream.Dispose();
+
                 }
             }
         }
@@ -325,7 +328,7 @@ namespace FoxxiBot.WebServer
             int nbytes;
             while ((nbytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                 outputStream.Write(buffer, 0, nbytes);
-
+            
             // Properly Close the Session
             outputStream.Dispose();
         }
