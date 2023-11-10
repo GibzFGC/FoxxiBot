@@ -10,23 +10,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using FoxxiBot.DiscordBot;
-using Jint.Native;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text.Json.Nodes;
 using System.Threading;
 using TwitchLib.Api;
-using TwitchLib.Api.Helix;
-using TwitchLib.Api.Interfaces;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
-using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
@@ -46,6 +40,8 @@ namespace FoxxiBot.TwitchBot
         private Timer liveTimer = null;
         private Timer pointsTimer = null;
         private string gameTitle = null;
+
+        private bool chat_intro = false;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
 
@@ -112,8 +108,8 @@ namespace FoxxiBot.TwitchBot
             pointsTimer = new Timer(pointsUpdate, null, 0, 300000);
 
             // Start Live Check Timer
-            liveTimer = new Timer(streamLiveCallBack, null, 0, 10000);
-            //liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
+            //liveTimer = new Timer(streamLiveCallBack, null, 0, 10000);
+            liveTimer = new Timer(streamLiveCallBack, null, 0, 60000);
 
             // Start OAuth Timer -- every 3 hours, 30 mins
             oauthTimer = new Timer(OauthCallback, null, 0, 12600000);
@@ -177,6 +173,9 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
+
+            // Write to Log File
+            Class.Bot_Functions.ErrorLog(DateTime.Now + ": " + e.GetType() + ": " + e.ToString());
 
             if (!client.IsConnected)
             {
@@ -464,11 +463,22 @@ namespace FoxxiBot.TwitchBot
 
         private void Client_OnIncorrectLogin(object sender, OnIncorrectLoginArgs e)
         {
+
+            // Write to Log File
+            Class.Bot_Functions.ErrorLog(DateTime.Now + ": "+ e.GetType() + ": " + e.ToString());
+
+            // Write to Console Window
             Console.WriteLine(e.Exception);
         }
 
         private void Client_OnLog(object sender, OnLogArgs e)
         {
+            if (Config.Debug == true)
+            {
+                // Write to Twitch Log File
+                Class.Bot_Functions.TwitchLog($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}");
+            }
+
             Class.Bot_Functions.WriteColour($"{e.DateTime.ToString()}: {Config.TwitchBotName} [| Twitch] - {e.Data}", ConsoleColor.Blue);
         }
 
@@ -488,7 +498,24 @@ namespace FoxxiBot.TwitchBot
             }
 
             Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + joined_message);
-            client.SendMessage(e.Channel, joined_message);
+
+            // Check if Bot was already ran, if so -- no more room join messages while running
+            if (chat_intro == false)
+            {
+                client.SendMessage(e.Channel, joined_message);
+                chat_intro = true;
+            }
+            else
+            {
+                // Write to Log File
+                Class.Bot_Functions.ErrorLog(DateTime.Now + ": Something went wrong and I've re-joined your channel");
+
+                // If Debug active, then show channel re-join message
+                if (Config.Debug)
+                {
+                    client.SendMessage(e.Channel, "Something went wrong and I've re-joined the channel");
+                }
+            }
         }
 
         private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
@@ -521,7 +548,7 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.CommandText == "shutdown")
                 {
                     // Write to Log File
-                    Class.Bot_Functions.ErrorLog("Bot Stopped by " + e.Command.ChatMessage.DisplayName);
+                    Class.Bot_Functions.ErrorLog(DateTime.Now + ": Bot Stopped by " + e.Command.ChatMessage.DisplayName);
 
                     // Begin Shutdown Process
                     Console.WriteLine("");
@@ -542,7 +569,7 @@ namespace FoxxiBot.TwitchBot
                 if (e.Command.CommandText == "restart")
                 {
                     // Write to Log File
-                    Class.Bot_Functions.ErrorLog("Restarted by " + e.Command.ChatMessage.DisplayName);
+                    Class.Bot_Functions.ErrorLog(DateTime.Now + ": Restarted by " + e.Command.ChatMessage.DisplayName);
 
                     // Attempt to Restart the Bot on Windows
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -755,9 +782,11 @@ namespace FoxxiBot.TwitchBot
                 {
                     SendChatMessage(e.Command.ChatMessage.DisplayName + ", You can't check yourself, silly goose!");
                 }
-
-                var result = commands.commandFollowAge(e);
-                SendChatMessage(result);
+                else
+                {
+                    var result = commands.commandFollowAge(e);
+                    SendChatMessage(result);
+                }
             }
 
             // Giveaway Handler

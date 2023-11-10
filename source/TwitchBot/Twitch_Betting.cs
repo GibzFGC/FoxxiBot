@@ -23,7 +23,6 @@ namespace FoxxiBot.TwitchBot
     {
         // Set Bet Timer
         private Timer betTimer = null;
-        private Timer betReminder = null;
         private int betState = 0;
 
         string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";

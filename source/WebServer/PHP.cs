@@ -129,6 +129,8 @@ namespace FoxxiBot.WebServer
                     }
                     else
                     {
+                        httpListenerResponse.ContentType = "text/html";
+
                         byte[] response = Encoding.UTF8.GetBytes(line + Environment.NewLine);
                         httpListenerResponse.OutputStream.WriteAsync(response, 0, response.Length);
                     }

@@ -417,6 +417,31 @@ namespace FoxxiBot.Class
             return Task.CompletedTask;
         }
 
+        // Save Twitch Log
+        public static void TwitchLog(string ex)
+        {
+            // Write to Log File
+            string path = @AppDomain.CurrentDomain.BaseDirectory + "/Data/twitch.log";
+            DateTime now = DateTime.Now;
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
+            else
+            {
+                // Write to existing file
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(now.ToString("F") + ": " + ex.ToString());
+                }
+            }
+        }
+
         // Save Error Log
         public static void ErrorLog(string ex)
         {
