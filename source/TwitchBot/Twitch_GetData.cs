@@ -29,24 +29,36 @@ namespace FoxxiBot.TwitchBot
             api.Settings.ClientId = Config.TwitchClientId;
             api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
-            if (data.Streams.Length == 0)
+            // Try Getting Live Stream Status
+            try
             {
-                // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Offline");
+                var data = await api.Helix.Streams.GetStreamsAsync(userIds: new List<string> { Config.TwitchMC_Id });
+                if (data.Streams.Length == 0)
+                {
+                    // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Offline");
 
+                    SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
+                    discordSQL.updateOptions("stream_status", "0");
+
+                    return false;
+                }
+                else
+                {
+                    // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Live");
+
+                    SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
+                    discordSQL.updateOptions("stream_status", "1");
+
+                    return true;
+                }
+
+            }
+            catch // Depreciate if HTTP Connection is Denied
+            {
                 SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
                 discordSQL.updateOptions("stream_status", "0");
 
                 return false;
-            }
-            else
-            {
-                // Console.WriteLine(DateTime.Now + ": " + Config.TwitchBotName + " - " + "Stream is now Live");
-
-                SQLite.twitchSQL discordSQL = new SQLite.twitchSQL();
-                discordSQL.updateOptions("stream_status", "1");
-
-                return true;
             }
         }
 
@@ -156,55 +168,90 @@ namespace FoxxiBot.TwitchBot
 
         public static async Task<string> getFollows()
         {
-            // create twitch api instance
-            var api = new TwitchLib.Api.TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
-            api.Settings.AccessToken = Config.TwitchClientOAuth;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchLib.Api.TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
+                api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Users.GetUsersFollowsAsync(toId: Config.TwitchMC_Id);
-            return data.TotalFollows.ToString();
+                var data = await api.Helix.Users.GetUsersFollowsAsync(toId: Config.TwitchMC_Id);
+                return data.TotalFollows.ToString();
+            }
+            catch
+            {
+                return "Could not get the follow count";
+            }
         }
 
         public static async Task<string> getViews()
         {
-            // create twitch api instance
-            var api = new TwitchLib.Api.TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
-            api.Settings.AccessToken = Config.TwitchClientOAuth;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchLib.Api.TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
+                api.Settings.AccessToken = Config.TwitchClientOAuth;
 
-            var data = await api.Helix.Users.GetUsersAsync(ids: new List<string> { Config.TwitchMC_Id }, null, Config.TwitchClientOAuth);
-            return data.Users[0].ViewCount.ToString();
+                var data = await api.Helix.Users.GetUsersAsync(ids: new List<string> { Config.TwitchMC_Id }, null, Config.TwitchClientOAuth);
+                return data.Users[0].ViewCount.ToString();
+            }
+            catch
+            {
+                return "Could not get the view count";
+            }
         }
 
         public static async Task<string> getGame()
         {
-            // create twitch api instance
-            var api = new TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
 
-            var data = await api.Helix.Channels.GetChannelInformationAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
-            return data.Data[0].GameName;
+                var data = await api.Helix.Channels.GetChannelInformationAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
+                return data.Data[0].GameName;
+            }
+            catch
+            {
+                return "Could not get the Game Title";
+            }
         }
 
         public static async Task<string> getTitle()
         {
-            // create twitch api instance
-            var api = new TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
 
-            var data = await api.Helix.Channels.GetChannelInformationAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
-            return data.Data[0].Title;
+                var data = await api.Helix.Channels.GetChannelInformationAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
+                return data.Data[0].Title;
+            }
+            catch
+            {
+                return "Could not get the Stream Title";
+            }
         }
 
         // Tags unused, not documented well to implement
         public static async Task<string> getTags()
         {
-            // create twitch api instance
-            var api = new TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
 
-            var data = await api.Helix.Streams.GetStreamTagsAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
-            return data.Data[0].TagId;
+                var data = await api.Helix.Streams.GetStreamTagsAsync(Config.TwitchMC_Id, Config.TwitchClientOAuth);
+                return data.Data[0].TagId;
+            }
+            catch
+            {
+                return "Could not get the Stream Tags";
+            }
         }
 
         public static async Task<string> searchGames(string input)
@@ -260,21 +307,28 @@ namespace FoxxiBot.TwitchBot
 
         public static async Task<string> ShoutOut(string userId)
         {
-            // create twitch api instance
-            var api = new TwitchAPI();
-            api.Settings.ClientId = Config.TwitchClientId;
+            try
+            {
+                // create twitch api instance
+                var api = new TwitchAPI();
+                api.Settings.ClientId = Config.TwitchClientId;
 
-            // search for user
-            var user = await api.Helix.Users.GetUsersAsync(null, logins: new List<string> { userId }, Config.TwitchClientOAuth);
+                // search for user
+                var user = await api.Helix.Users.GetUsersAsync(null, logins: new List<string> { userId }, Config.TwitchClientOAuth);
 
-            // Get Channel Information
-            var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
+                // Get Channel Information
+                var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
 
-            // Shoutout from ID to API
-            // await api.Helix.Chat.SendShoutoutAsync(fromBroadcasterId: Config.TwitchMC_Id, toBroadcasterId: channel.Data[0].BroadcasterId, moderatorId: Config.TwitchBotId, Config.TwitchClientOAuth);
+                // Shoutout from ID to API
+                // await api.Helix.Chat.SendShoutoutAsync(fromBroadcasterId: Config.TwitchMC_Id, toBroadcasterId: channel.Data[0].BroadcasterId, moderatorId: Config.TwitchBotId, Config.TwitchClientOAuth);
 
-            // Sent Shoutout in Chat
-            return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: " + channel.Data[0].GameName + " @ http://twitch.tv/" + user.Users[0].Login;
+                // Sent Shoutout in Chat
+                return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: " + channel.Data[0].GameName + " @ http://twitch.tv/" + user.Users[0].Login;
+            }
+            catch
+            {
+                return "Failed to return the shoutout information";
+            }
         }
 
         public static bool commandBlacklist(string username)
