@@ -137,6 +137,9 @@ namespace FoxxiBot.WebServer
                 }
             }
 
+            httpListenerContext.Response.Close();
+            httpListenerResponse.Close();
+
             process.WaitForExit();
             process.Close();
         }
