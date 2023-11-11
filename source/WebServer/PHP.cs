@@ -93,7 +93,6 @@ namespace FoxxiBot.WebServer
 
         public void getPHPOutput(string filePath, byte[] requestBody, HttpListenerContext httpListenerContext, HttpListenerResponse httpListenerResponse)
         {
-
             process.Start();
 
             var index = httpListenerContext.Request.RawUrl.IndexOf("?");
@@ -129,7 +128,7 @@ namespace FoxxiBot.WebServer
                     }
                     else
                     {
-                        httpListenerResponse.ContentType = "text/html";
+                        // httpListenerResponse.ContentType = "text/html";
 
                         byte[] response = Encoding.UTF8.GetBytes(line + Environment.NewLine);
                         httpListenerResponse.OutputStream.WriteAsync(response, 0, response.Length);
@@ -137,9 +136,15 @@ namespace FoxxiBot.WebServer
                 }
             }
 
+            // Flush and Dispose Current Elements
+            httpListenerResponse.OutputStream.Flush();
+            httpListenerResponse.OutputStream.Dispose();
+            
+            // Close Session
             httpListenerContext.Response.Close();
             httpListenerResponse.Close();
 
+            // Close Process Thread
             process.WaitForExit();
             process.Close();
         }
