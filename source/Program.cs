@@ -62,15 +62,15 @@ namespace FoxxiBot
             Class.Bot_Integrity Bot_Intrgrity = new Class.Bot_Integrity();
 
             // If Plugins SQLite doesn't exist
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db"))
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "plugins.db"))
             {
                 // Create the Database File
-                var pnFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data/plugins.db");
+                var pnFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "plugins.db");
                 pnFile.Close();
             }
 
             // If Bot SQLite doesn't exist
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "bot.db"))
             {
                 // Confirm DB File Found
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - Database file found. Checking for Updates...]", ConsoleColor.Yellow);
@@ -87,7 +87,7 @@ namespace FoxxiBot
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": [" + Config.TwitchBotName + " - No Database file found. Creating now...]", ConsoleColor.Yellow);
 
                 // Create the Database File
-                var dbFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db");
+                var dbFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "bot.db");
                 dbFile.Close();
 
                 // Create the Tables & Default Data
@@ -99,18 +99,30 @@ namespace FoxxiBot
             }
 
             // If config JSON exists
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data/config.json"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "config.json"))
             {
+                // Delete Old Backups
+                string[] files = Directory.GetFiles(@AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "Backups");
+
+                foreach (string file in files)
+                {
+                    FileInfo fi = new FileInfo(file);
+                    if (fi.CreationTime < DateTime.Now.AddDays(-5))
+                    {
+                        fi.Delete();
+                    }
+                }
+
                 // SQLite Backup
                 DateTime localDate = DateTime.Now;
-                File.Copy(@AppDomain.CurrentDomain.BaseDirectory + "Data/bot.db", @AppDomain.CurrentDomain.BaseDirectory + "Data/Backups/bot.backup." + localDate.ToString("ddMMyyyy.HHmmss") + ".db", true);
+                File.Copy(@AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "bot.db", @AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "Backups" + Path.DirectorySeparatorChar + "bot.backup." + localDate.ToString("ddMMyyyy.HHmmss") + ".db", true);
 
                 // Initialize Twitch
                 Class.Bot_Functions.WriteColour(DateTime.Now + ": Welcome to [FoxxiBot]. Loading your Settings...", ConsoleColor.Cyan);
                 Console.WriteLine("");
 
                 // Load from JSON
-                using (StreamReader reader = File.OpenText(@AppDomain.CurrentDomain.BaseDirectory + "Data/config.json"))
+                using (StreamReader reader = File.OpenText(@AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "config.json"))
                 {
                     JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
 
@@ -198,7 +210,7 @@ namespace FoxxiBot
                 }
 
                 // Check & Set Debug Mode
-                SQLite.botSQL botSQL = new SQLite.botSQL();
+                botSQL botSQL = new SQLite.botSQL();
                 botSQL.debugMode();
             }
             else
@@ -483,6 +495,7 @@ namespace FoxxiBot
             // Save the new JSON Data
             Class.Bot_Functions functions = new Class.Bot_Functions();
             functions.SaveConfig().GetAwaiter().GetResult();
+
         }
         public static string GenerateAPIKey()
         {

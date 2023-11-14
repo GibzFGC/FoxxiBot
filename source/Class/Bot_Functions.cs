@@ -22,7 +22,7 @@ namespace FoxxiBot.Class
     public class Bot_Functions
     {
 
-        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/Data/bot.db";
+        string cs = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "bot.db";
 
         public Task CreateTables()
         {
@@ -382,6 +382,24 @@ namespace FoxxiBot.Class
             return Task.CompletedTask;
         }
 
+        // Backup Folder Clean-Up
+        public Task Clean_Backup()
+        {
+            string bk_dir = @AppDomain.CurrentDomain.BaseDirectory + "Data" + Path.DirectorySeparatorChar + "Backups";
+
+            string[] files = Directory.GetFiles(bk_dir);
+
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                if (fi.LastAccessTimeUtc < DateTime.Now.AddDays(-2))
+                    fi.Delete();
+            }
+
+            return Task.CompletedTask;
+        }
+
+        // Save the Bot Config Data to JSON
         public Task SaveConfig()
         {
             Settings.Settings objSettings = new Settings.Settings();
