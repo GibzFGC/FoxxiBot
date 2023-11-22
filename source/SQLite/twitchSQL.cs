@@ -163,22 +163,7 @@ namespace FoxxiBot.SQLite
             {
                 while (rdr.Read())
                 {
-
-                    // Set a JSON Array
-                    JArray array = new JArray();
-
-                    // Encode as JSON
-                    array.Add(new JObject()
-                {
-                    { "uid", rdr["uid"].ToString() },
-                    { "username", rdr["username"].ToString() },
-                    { "display_name", rdr["display_name"].ToString() }
-                });
-
-                    JObject o = new JObject();
-                    o["data"] = array;
-
-                    return o.ToString();
+                    return rdr["display_name"].ToString();
                 }
             }
 

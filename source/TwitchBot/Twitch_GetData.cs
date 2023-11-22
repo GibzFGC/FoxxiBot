@@ -307,8 +307,6 @@ namespace FoxxiBot.TwitchBot
 
         public static async Task<string> ShoutOut(string userId)
         {
-            try
-            {
                 // create twitch api instance
                 var api = new TwitchAPI();
                 api.Settings.ClientId = Config.TwitchClientId;
@@ -319,16 +317,8 @@ namespace FoxxiBot.TwitchBot
                 // Get Channel Information
                 var channel = await api.Helix.Channels.GetChannelInformationAsync(broadcasterId: user.Users[0].Id, Config.TwitchClientOAuth);
 
-                // Shoutout from ID to API
-                // await api.Helix.Chat.SendShoutoutAsync(fromBroadcasterId: Config.TwitchMC_Id, toBroadcasterId: channel.Data[0].BroadcasterId, moderatorId: Config.TwitchBotId, Config.TwitchClientOAuth);
-
                 // Sent Shoutout in Chat
                 return "Check out my friend, " + channel.Data[0].BroadcasterName + "! they've been playing: " + channel.Data[0].GameName + " @ http://twitch.tv/" + user.Users[0].Login;
-            }
-            catch
-            {
-                return "Failed to return the shoutout information";
-            }
         }
 
         public static bool commandBlacklist(string username)

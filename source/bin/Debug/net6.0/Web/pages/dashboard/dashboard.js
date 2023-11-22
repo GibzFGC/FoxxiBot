@@ -65,7 +65,6 @@ var twitch = window.setInterval(function() {
   // Get Users Total Followers
   api.get('channels/followers', { search: { broadcaster_id: TwitchChannelID, first: 8 } })
   .then(response => {
-    console.log(response);
       document.getElementById("total_follows").innerHTML = response.total;
 
       document.getElementById("follower_list").innerHTML ="";

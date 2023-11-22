@@ -11,6 +11,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Data.SQLite;
 using System.Net.Http;
@@ -160,6 +161,15 @@ namespace FoxxiBot.TwitchBot
 
         public string commandGiveaway(TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
+
+            if (e.Command.ArgumentsAsString == "winner")
+            {
+                var data = twitchSQL.giveawayWinner();
+
+                twitchSQL.updateOptions("Giveaway_Winner", data);
+
+                return "You have won the giveaway, " + data + "!";
+            }
 
             // Is Giveaway Active?
             if (twitchSQL.getOptions("Giveaway_Status") == "on")

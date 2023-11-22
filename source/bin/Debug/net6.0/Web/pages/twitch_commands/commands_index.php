@@ -280,7 +280,7 @@ $result = $PDO->query("SELECT * FROM gb_commands");
                     <td>
                       <a style="color: #fff;" href="#" class="btn btn-sm">Bot Controlled</a>
                     </td>
-                  </tr>                  
+                  </tr>
 
 <?php
   foreach($result as $row)
